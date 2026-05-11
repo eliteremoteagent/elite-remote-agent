@@ -1,1 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>How It Works — Elite Remote Agent</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --black:#050810;--dark:#0C1020;--dark2:#131828;--card:#0F1525;
+  --gold:#D4A843;--gold2:#F0C060;--gold-dim:rgba(212,168,67,0.1);
+  --white:#FFFFFF;--muted:#8892A4;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
+  --green:#2ECC71;--red:#E74C3C;--blue:#3498DB;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Manrope',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--black);}
+::-webkit-scrollbar-thumb{background:rgba(212,168,67,0.2);border-radius:2px;}
 
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.1rem 3rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);backdrop-filter:blur(20px);background:rgba(5,8,16,0.85);}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:3px;color:var(--gold);cursor:pointer;text-decoration:none;}
+.logo small{display:block;font-family:'Manrope',sans-serif;font-size:0.45rem;letter-spacing:4px;color:rgba(255,255,255,0.3);text-transform:uppercase;}
+.nav-links{display:flex;gap:2rem;align-items:center;}
+.nav-link{color:rgba(255,255,255,0.45);font-size:0.8rem;font-weight:500;cursor:pointer;transition:color 0.2s;text-decoration:none;}
+.nav-link:hover,.nav-link.active{color:var(--gold);}
+.nav-btns{display:flex;gap:0.6rem;}
+.btn-ghost{padding:0.45rem 1.1rem;border:1px solid rgba(255,255,255,0.12);border-radius:6px;background:transparent;color:rgba(255,255,255,0.6);font-family:'Manrope',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+.btn-gold{padding:0.5rem 1.4rem;border-radius:6px;background:var(--gold);color:var(--black);font-family:'Manrope',sans-serif;font-size:0.8rem;font-weight:800;cursor:pointer;border:none;transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-1px);}
+
+/* HERO */
+.page-hero{padding:8rem 3rem 5rem;text-align:center;position:relative;overflow:hidden;}
+.ph-glow{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(ellipse,rgba(212,168,67,0.06) 0%,transparent 65%);pointer-events:none;}
+.ph-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(212,168,67,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(212,168,67,0.02) 1px,transparent 1px);background-size:60px 60px;}
+.ph-content{position:relative;z-index:1;}
+.ph-tag{display:inline-flex;align-items:center;gap:0.5rem;background:var(--gold-dim);border:1px solid rgba(212,168,67,0.2);border-radius:30px;padding:0.35rem 0.875rem;margin-bottom:1.25rem;}
+.ph-tag span{font-size:0.68rem;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;}
+.ph-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,5.5rem);letter-spacing:2px;line-height:1;margin-bottom:1rem;}
+.ph-h1 span{color:var(--gold);}
+.ph-sub{color:rgba(255,255,255,0.5);font-size:0.95rem;max-width:560px;margin:0 auto 2.5rem;line-height:1.8;}
+.ph-tabs{display:flex;gap:0.25rem;background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:40px;padding:0.3rem;display:inline-flex;margin-bottom:0;}
+.ph-tab{padding:0.5rem 1.5rem;border-radius:30px;font-size:0.8rem;font-weight:700;cursor:pointer;transition:all 0.25s;color:rgba(255,255,255,0.4);border:none;background:transparent;font-family:'Manrope',sans-serif;}
+.ph-tab.active{background:var(--gold);color:var(--black);}
+
+/* SECTIONS */
+.section{padding:5rem 3rem;}
+.section.dark{background:var(--dark);}
+.section.darker{background:var(--dark2);}
+.sec-label{font-size:0.65rem;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;text-align:center;}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3rem);text-align:center;letter-spacing:1px;margin-bottom:0.75rem;line-height:1;}
+.sec-title span{color:var(--gold);}
+.sec-sub{text-align:center;color:rgba(255,255,255,0.45);font-size:0.875rem;max-width:520px;margin:0 auto 3.5rem;line-height:1.75;}
+.max{max-width:1000px;margin:0 auto;}
+
+/* PAIN vs SOLUTION */
+.pvs{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:900px;margin:0 auto 3rem;}
+.pvs-col{border-radius:16px;padding:2rem;}
+.pvs-col.pain{background:rgba(231,76,60,0.06);border:1px solid rgba(231,76,60,0.15);}
+.pvs-col.solution{background:rgba(46,204,113,0.06);border:1px solid rgba(46,204,113,0.15);}
+.pvs-header{display:flex;align-items:center;gap:0.6rem;margin-bottom:1.25rem;}
+.pvs-icon{font-size:1.4rem;}
+.pvs-title{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:1px;}
+.pvs-col.pain .pvs-title{color:#E74C3C;}
+.pvs-col.solution .pvs-title{color:var(--green);}
+.pvs-item{display:flex;align-items:flex-start;gap:0.5rem;padding:0.4rem 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.82rem;line-height:1.5;}
+.pvs-item:last-child{border-bottom:none;}
+.pvs-col.pain .pvs-item{color:rgba(255,255,255,0.55);}
+.pvs-col.solution .pvs-item{color:rgba(255,255,255,0.65);}
+.pvs-x{color:#E74C3C;font-weight:800;flex-shrink:0;margin-top:1px;}
+.pvs-check{color:var(--green);font-weight:800;flex-shrink:0;margin-top:1px;}
+
+/* STEPS */
+.steps-wrap{max-width:900px;margin:0 auto;}
+.step-row{display:flex;gap:2rem;align-items:flex-start;margin-bottom:3rem;position:relative;}
+.step-row:not(:last-child)::after{content:'';position:absolute;left:28px;top:60px;bottom:-3rem;width:2px;background:linear-gradient(180deg,rgba(212,168,67,0.3),transparent);}
+.step-num-wrap{flex-shrink:0;}
+.step-num{width:56px;height:56px;border-radius:50%;background:var(--gold-dim);border:2px solid rgba(212,168,67,0.3);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--gold);letter-spacing:1px;position:relative;z-index:1;}
+.step-content{flex:1;padding-top:0.75rem;}
+.step-tag{font-size:0.62rem;font-weight:800;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.3rem;}
+.step-title{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:1px;margin-bottom:0.5rem;}
+.step-desc{color:rgba(255,255,255,0.5);font-size:0.85rem;line-height:1.75;margin-bottom:0.875rem;}
+.step-details{display:flex;flex-wrap:wrap;gap:0.5rem;}
+.sd-item{display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:20px;padding:0.25rem 0.75rem;}
+.sd-check{color:var(--green);font-size:0.7rem;}
+
+/* WHO IT'S FOR */
+.who-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem;max-width:900px;margin:0 auto;}
+.who-card{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:1.75rem;transition:all 0.25s;}
+.who-card:hover{border-color:rgba(212,168,67,0.3);transform:translateY(-3px);}
+.wc-icon{font-size:2rem;margin-bottom:0.875rem;}
+.wc-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;margin-bottom:0.5rem;}
+.wc-desc{font-size:0.78rem;color:rgba(255,255,255,0.45);line-height:1.65;margin-bottom:1rem;}
+.wc-items{display:flex;flex-direction:column;gap:0.3rem;}
+.wci{font-size:0.75rem;color:rgba(255,255,255,0.55);display:flex;align-items:flex-start;gap:0.4rem;line-height:1.4;}
+.wci::before{content:'→';color:var(--gold);flex-shrink:0;font-size:0.7rem;margin-top:1px;}
+
+/* VA TYPES */
+.va-types{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;max-width:900px;margin:0 auto;}
+.vt-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:1.25rem;transition:all 0.2s;cursor:default;}
+.vt-card:hover{border-color:rgba(212,168,67,0.25);transform:translateY(-2px);}
+.vt-icon{font-size:1.5rem;margin-bottom:0.5rem;}
+.vt-title{font-weight:800;font-size:0.875rem;margin-bottom:0.3rem;}
+.vt-desc{font-size:0.72rem;color:rgba(255,255,255,0.4);line-height:1.5;}
+.vt-tags{display:flex;flex-wrap:wrap;gap:0.3rem;margin-top:0.6rem;}
+.vt-tag{font-size:0.62rem;font-weight:600;padding:0.15rem 0.45rem;border-radius:4px;background:var(--gold-dim);color:var(--gold);border:1px solid rgba(212,168,67,0.15);}
+
+/* VETTING */
+.vetting-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:900px;margin:0 auto 2rem;}
+.vs-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:1.5rem;text-align:center;transition:all 0.2s;}
+.vs-card:hover{border-color:rgba(212,168,67,0.2);}
+.vs-num{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--gold);letter-spacing:2px;line-height:1;margin-bottom:0.4rem;}
+.vs-icon{font-size:1.5rem;margin-bottom:0.6rem;}
+.vs-title{font-weight:800;font-size:0.875rem;margin-bottom:0.4rem;}
+.vs-desc{font-size:0.75rem;color:rgba(255,255,255,0.4);line-height:1.6;}
+.vetting-note{max-width:600px;margin:0 auto;text-align:center;background:rgba(46,204,113,0.06);border:1px solid rgba(46,204,113,0.15);border-radius:12px;padding:1.25rem;}
+.vn-text{font-size:0.82rem;color:rgba(255,255,255,0.6);line-height:1.7;}
+.vn-text strong{color:var(--green);}
+
+/* ABOUT SECTION */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;max-width:900px;margin:0 auto;align-items:center;}
+.about-text .sec-label{text-align:left;}
+.about-text .sec-title{text-align:left;font-size:2rem;}
+.about-text .sec-sub{text-align:left;margin-left:0;}
+.about-story{font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.85;margin-bottom:1.25rem;}
+.about-story strong{color:var(--white);}
+.about-mission{background:var(--gold-dim);border:1px solid rgba(212,168,67,0.2);border-radius:12px;padding:1.25rem;margin-bottom:1.25rem;}
+.am-label{font-size:0.62rem;font-weight:800;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem;}
+.am-text{font-size:0.82rem;color:rgba(255,255,255,0.65);line-height:1.6;font-style:italic;}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.as-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem;text-align:center;}
+.as-num{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--gold);letter-spacing:1px;}
+.as-label{font-size:0.65rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+.about-visual{position:relative;}
+.av-main{background:linear-gradient(145deg,var(--dark2),var(--card));border:1px solid var(--border);border-radius:20px;padding:2rem;position:relative;}
+.av-tag{font-size:0.6rem;font-weight:800;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:1rem;}
+.av-name{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1px;margin-bottom:0.25rem;}
+.av-role{font-size:0.75rem;color:rgba(255,255,255,0.4);margin-bottom:1.25rem;}
+.av-items{display:flex;flex-direction:column;gap:0.5rem;}
+.av-item{display:flex;align-items:center;gap:0.6rem;font-size:0.78rem;color:rgba(255,255,255,0.55);}
+.av-check{color:var(--green);font-weight:800;}
+.av-float{position:absolute;top:-1rem;right:-1rem;background:var(--gold);color:var(--black);border-radius:12px;padding:0.75rem 1rem;font-size:0.72rem;font-weight:800;text-align:center;box-shadow:0 8px 25px rgba(212,168,67,0.3);}
+.av-float-num{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;display:block;letter-spacing:1px;}
+
+/* VALUES */
+.values-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;max-width:900px;margin:0 auto;}
+.val-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:1.5rem;transition:all 0.25s;}
+.val-card:hover{border-color:rgba(212,168,67,0.2);transform:translateY(-2px);}
+.val-icon{font-size:1.5rem;margin-bottom:0.6rem;}
+.val-title{font-weight:800;font-size:0.875rem;color:var(--gold);margin-bottom:0.4rem;}
+.val-desc{font-size:0.78rem;color:rgba(255,255,255,0.45);line-height:1.65;}
+
+/* TESTIMONIALS */
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:900px;margin:0 auto;}
+.tc{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:1.75rem;transition:all 0.25s;}
+.tc:hover{border-color:rgba(212,168,67,0.2);transform:translateY(-3px);}
+.tc-stars{color:var(--gold);font-size:0.85rem;letter-spacing:2px;margin-bottom:0.875rem;}
+.tc-quote{font-size:0.8rem;color:rgba(255,255,255,0.55);line-height:1.75;margin-bottom:1.25rem;font-style:italic;}
+.tc-author{display:flex;align-items:center;gap:0.75rem;}
+.tc-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.75rem;color:var(--black);flex-shrink:0;}
+.tc-name{font-size:0.8rem;font-weight:700;}
+.tc-title{font-size:0.65rem;color:rgba(255,255,255,0.35);}
+
+/* COMPARISON */
+.compare-table{max-width:860px;margin:0 auto;border-radius:16px;overflow:hidden;border:1px solid var(--border);}
+.ct-header{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;background:var(--dark2);border-bottom:1px solid var(--border);}
+.ct-col-head{padding:1rem 1.25rem;font-size:0.72rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;}
+.ct-col-head.era{color:var(--gold);}
+.ct-col-head.other{color:rgba(255,255,255,0.3);}
+.ct-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;border-bottom:1px solid var(--border);background:var(--card);}
+.ct-row:last-child{border-bottom:none;}
+.ct-row:hover{background:rgba(255,255,255,0.01);}
+.ct-cell{padding:0.875rem 1.25rem;font-size:0.78rem;display:flex;align-items:center;}
+.ct-cell.feature{color:rgba(255,255,255,0.65);font-weight:500;}
+.ct-yes{color:var(--green);font-weight:800;font-size:0.85rem;}
+.ct-no{color:rgba(255,255,255,0.2);font-size:0.85rem;}
+.ct-maybe{color:var(--muted);font-size:0.75rem;}
+
+/* CTA */
+.cta-section{padding:7rem 3rem;text-align:center;position:relative;overflow:hidden;}
+.cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(212,168,67,0.06) 0%,transparent 65%);pointer-events:none;}
+.cta-content{position:relative;z-index:1;}
+.cta-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4rem);letter-spacing:2px;line-height:1.05;margin-bottom:1rem;}
+.cta-h span{color:var(--gold);}
+.cta-sub{color:rgba(255,255,255,0.45);font-size:0.9rem;max-width:460px;margin:0 auto 2.5rem;line-height:1.75;}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-cta-primary{padding:0.95rem 2.5rem;border-radius:8px;background:var(--gold);color:var(--black);font-family:'Manrope',sans-serif;font-size:0.95rem;font-weight:800;cursor:pointer;border:none;transition:all 0.25s;text-decoration:none;display:inline-flex;align-items:center;}
+.btn-cta-primary:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 12px 35px rgba(212,168,67,0.3);}
+.btn-cta-secondary{padding:0.95rem 2.5rem;border-radius:8px;background:transparent;color:rgba(255,255,255,0.7);font-family:'Manrope',sans-serif;font-size:0.95rem;font-weight:600;cursor:pointer;border:2px solid rgba(255,255,255,0.12);transition:all 0.25s;text-decoration:none;display:inline-flex;align-items:center;}
+.btn-cta-secondary:hover{border-color:var(--gold);color:var(--gold);}
+
+/* FOOTER */
+footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;background:var(--black);}
+.foot-logo{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--gold);letter-spacing:3px;}
+.foot-links{display:flex;gap:1.75rem;flex-wrap:wrap;}
+.foot-link{font-size:0.72rem;color:rgba(255,255,255,0.3);cursor:pointer;transition:color 0.2s;text-decoration:none;}
+.foot-link:hover{color:var(--gold);}
+.foot-copy{font-size:0.68rem;color:rgba(255,255,255,0.18);}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--dark2);border:1px solid rgba(212,168,67,0.25);color:white;padding:0.875rem 1.25rem;border-radius:10px;font-size:0.8rem;font-weight:600;z-index:999;transform:translateX(160%);transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);display:flex;align-items:center;gap:0.5rem;max-width:300px;}
+.toast.show{transform:translateX(0);}
+.tdot{width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+
+/* TABS CONTENT */
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+  .section{padding:3.5rem 1.5rem;}
+  .page-hero{padding:6rem 1.5rem 3.5rem;}
+  .pvs{grid-template-columns:1fr;}
+  .about-grid{grid-template-columns:1fr;}
+  .vetting-steps{grid-template-columns:1fr;}
+  .test-grid{grid-template-columns:1fr;}
+  .ct-col-head,.ct-cell{padding:0.6rem 0.75rem;font-size:0.68rem;}
+  .cta-section{padding:4rem 1.5rem;}
+  footer{padding:2rem 1.5rem;flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"><div class="tdot"></div><span id="tmsg"></span></div>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="index.html">Elite Remote Agent<small>Pre-Screened. Trained. Ready.</small></a>
+  <div class="nav-links">
+    <a class="nav-link active" href="how-it-works.html">How It Works</a>
+    <a class="nav-link" href="index.html#portals">Portals</a>
+    <a class="nav-link" href="index.html#pricing">Pricing</a>
+    <a class="nav-link" href="apply.html">For VAs</a>
+  </div>
+  <div class="nav-btns">
+    <a class="btn-ghost" href="dashboard.html">Log In</a>
+    <a class="btn-gold" href="checkout.html">Start Free →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="ph-glow"></div>
+  <div class="ph-grid"></div>
+  <div class="ph-content">
+    <div class="ph-tag"><span>Simple. Fast. Proven.</span></div>
+    <h1 class="ph-h1">Everything You Need<br/>To Know About<br/><span>Elite Remote Agent</span></h1>
+    <p class="ph-sub">How we work, who we are, why we're different, and exactly what happens from the moment you sign up to your first VA being fully onboarded.</p>
+    <div class="ph-tabs">
+      <button class="ph-tab active" onclick="showTab('how')">How It Works</button>
+      <button class="ph-tab" onclick="showTab('about')">About Us</button>
+      <button class="ph-tab" onclick="showTab('compare')">Why ERA</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ HOW IT WORKS TAB ═══ -->
+<div class="tab-content active" id="tab-how">
+
+  <!-- PAIN vs SOLUTION -->
+  <div class="section dark">
+    <div class="sec-label">The Problem We Solve</div>
+    <h2 class="sec-title">You're Running a Business.<br/><span>Not a Staffing Agency.</span></h2>
+    <p class="sec-sub">Most VA platforms dump unvetted strangers on you and wish you luck. We built something completely different.</p>
+    <div class="pvs">
+      <div class="pvs-col pain">
+        <div class="pvs-header"><span class="pvs-icon">😤</span><div class="pvs-title">The Old Way</div></div>
+        <div class="pvs-item"><span class="pvs-x">✗</span>Post on Upwork. Get 200 applications. Waste 10 hours interviewing.</div>
+        <div class="pvs-item"><span class="pvs-x">✗</span>Hire someone. Spend 3 weeks training them from scratch.</div>
+        <div class="pvs-item"><span class="pvs-x">✗</span>They ghost you after 2 months. Start over.</div>
+        <div class="pvs-item"><span class="pvs-x">✗</span>Pay a placement agency $3,000–$8,000 per hire.</div>
+        <div class="pvs-item"><span class="pvs-x">✗</span>No system. No accountability. No backup plan.</div>
+        <div class="pvs-item"><span class="pvs-x">✗</span>VA doesn't know what a CRM is. Or real estate. Or your industry.</div>
+      </div>
+      <div class="pvs-col solution">
+        <div class="pvs-header"><span class="pvs-icon">✅</span><div class="pvs-title">The ERA Way</div></div>
+        <div class="pvs-item"><span class="pvs-check">✓</span>Browse pre-screened, trained VAs in minutes. Not weeks.</div>
+        <div class="pvs-item"><span class="pvs-check">✓</span>Every VA already knows your CRM, tools, and industry workflows.</div>
+        <div class="pvs-item"><span class="pvs-check">✓</span>VA not working out? Replace them instantly. Same day.</div>
+        <div class="pvs-item"><span class="pvs-check">✓</span>One flat monthly subscription. Zero placement fees. Ever.</div>
+        <div class="pvs-item"><span class="pvs-check">✓</span>KPI tracking, SOP sharing, and training all in one place.</div>
+        <div class="pvs-item"><span class="pvs-check">✓</span>Hire in 48 hours. Not 48 days.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP BY STEP -->
+  <div class="section">
+    <div class="sec-label">The Process</div>
+    <h2 class="sec-title">From Sign Up to<br/><span>Fully Onboarded VA</span></h2>
+    <p class="sec-sub">Here's exactly what happens from the moment you subscribe to your first VA plugging into your business.</p>
+    <div class="steps-wrap">
+
+      <div class="step-row">
+        <div class="step-num-wrap"><div class="step-num">01</div></div>
+        <div class="step-content">
+          <div class="step-tag">First 5 Minutes</div>
+          <div class="step-title">Subscribe & Get Instant Access</div>
+          <div class="step-desc">Choose your plan — Starter, Growth, or Elite Team — and get immediate access to the full platform. No waiting period. No approval process. You're in the moment your payment clears.</div>
+          <div class="step-details">
+            <span class="sd-item"><span class="sd-check">✓</span>Instant platform access</span>
+            <span class="sd-item"><span class="sd-check">✓</span>No contracts</span>
+            <span class="sd-item"><span class="sd-check">✓</span>Cancel anytime</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-wrap"><div class="step-num">02</div></div>
+        <div class="step-content">
+          <div class="step-tag">Minutes 5–30</div>
+          <div class="step-title">Browse Pre-Screened VA Profiles</div>
+          <div class="step-desc">Every VA on the platform has already been background-checked, trained in real estate and business operations, and rated by previous clients. Filter by specialty, CRM experience, rate, and availability. Listen to their voice recordings. Read their actual resumes.</div>
+          <div class="step-details">
+            <span class="sd-item"><span class="sd-check">✓</span>Voice recordings</span>
+            <span class="sd-item"><span class="sd-check">✓</span>Verified resumes</span>
+            <span class="sd-item"><span class="sd-check">✓</span>CRM proficiency ratings</span>
+            <span class="sd-item"><span class="sd-check">✓</span>Real client reviews</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-wrap"><div class="step-num">03</div></div>
+        <div class="step-content">
+          <div class="step-tag">Same Day</div>
+          <div class="step-title">Send a Hire Offer in One Click</div>
+          <div class="step-desc">Found your VA? Hit Hire Now. No back and forth. No rate negotiating. No contracts to sign between you and the VA. Your offer goes out immediately and your VA confirms within hours.</div>
+          <div class="step-details">
+            <span class="sd-item"><span class="sd-check">✓</span>One click hiring</span>
+            <span class="sd-item"><span class="sd-check">✓</span>No negotiating</span>
+            <span class="sd-item"><span class="sd-check">✓</span>Instant confirmation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-wrap"><div class="step-num">04</div></div>
+        <div class="step-content">
+          <div class="step-tag">Within 24–48 Hours</div>
+          <div class="step-title">Your VA Gets Onboarded to Your Systems</div>
+          <div class="step-desc">Your VA completes your onboarding training, gets access to your CRM, and starts working. Growth and Elite clients get guided onboarding support from our team. Elite clients get done-for-you onboarding managed entirely by your dedicated account manager.</div>
+          <div class="step-details">
+            <span class="sd-item"><span class="sd-check">✓</span>CRM access setup</span>
+            <span class="sd-item"><span class="sd-check">✓</span>Training assigned</span>
+            <span class="sd-item"><span class="sd-check">✓</span>SOP review</span>
+            <span class="sd-item"><span class="sd-check">✓</span>Day 1 ready</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-wrap"><div class="step-num">05</div></div>
+        <div class="step-content">
+          <div class="step-tag">Ongoing</div>
+          <div class="step-title">Track, Scale, and Replace With Confidence</div>
+          <div class="step-desc">Monitor your VA's KPIs from your dashboard. Share SOPs directly. Assign new training. Add more VAs as you grow. And if anything ever isn't right — replace your VA instantly with zero extra cost. Unlimited replacements on every plan.</div>
+          <div class="step-details">
+            <span class="sd-item"><span class="sd-check">✓</span>Live KPI dashboard</span>
+            <span class="sd-item"><span class="sd-check">✓</span>SOP sharing</span>
+            <span class="sd-item"><span class="sd-check">✓</span>Unlimited replacements</span>
+            <span class="sd-item"><span class="sd-check">✓</span>Hire more anytime</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- WHO IT'S FOR -->
+  <div class="section dark">
+    <div class="sec-label">Who This Is For</div>
+    <h2 class="sec-title">Built For People Who Are<br/><span>Serious About Scaling</span></h2>
+    <p class="sec-sub">Elite Remote Agent isn't for everyone. It's built for professionals who know their time is worth more than the tasks eating it.</p>
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="wc-icon">🏡</div>
+        <div class="wc-title">Solo Real Estate Agents</div>
+        <div class="wc-desc">You're doing $20/hr admin work on a $500/hr schedule. One VA changes everything.</div>
+        <div class="wc-items">
+          <div class="wci">Stop doing your own follow-ups</div>
+          <div class="wci">Get a TC so deals don't fall through</div>
+          <div class="wci">Finally have consistent social media</div>
+          <div class="wci">Work your database instead of ignoring it</div>
+        </div>
+      </div>
+      <div class="who-card">
+        <div class="wc-icon">🏢</div>
+        <div class="wc-title">Real Estate Team Leaders</div>
+        <div class="wc-desc">Your agents need support but hiring US staff is too expensive. ERA is your answer.</div>
+        <div class="wc-items">
+          <div class="wci">ISAs calling leads while agents focus on closings</div>
+          <div class="wci">TC coordinating every transaction</div>
+          <div class="wci">Admin keeping the back office running</div>
+          <div class="wci">Marketing keeping your brand visible</div>
+        </div>
+      </div>
+      <div class="who-card">
+        <div class="wc-icon">💼</div>
+        <div class="wc-title">Business Owners</div>
+        <div class="wc-desc">Med spas, law firms, mortgage companies, insurance agencies — if admin is eating your day, ERA fixes it.</div>
+        <div class="wc-items">
+          <div class="wci">Industry-trained VAs who know your tools</div>
+          <div class="wci">Client follow-ups that actually happen</div>
+          <div class="wci">Scheduling, reporting, and inbox managed</div>
+          <div class="wci">Scale without adding US payroll</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VA TYPES -->
+  <div class="section">
+    <div class="sec-label">Our VA Specialties</div>
+    <h2 class="sec-title">Every Role Your<br/><span>Business Needs</span></h2>
+    <p class="sec-sub">We don't do generalist VAs. Every ERA VA is trained and certified in a specific role before they appear on our platform.</p>
+    <div class="va-types">
+      <div class="vt-card"><div class="vt-icon">📋</div><div class="vt-title">Transaction Coordinator</div><div class="vt-desc">Contract to close. Every detail. Nothing falls through.</div><div class="vt-tags"><span class="vt-tag">Dotloop</span><span class="vt-tag">Skyslope</span></div></div>
+      <div class="vt-card"><div class="vt-icon">📞</div><div class="vt-title">ISA / Lead Qualifier</div><div class="vt-desc">Cold calls, warm follow-ups, and appointment setting.</div><div class="vt-tags"><span class="vt-tag">Mojo</span><span class="vt-tag">REDX</span></div></div>
+      <div class="vt-card"><div class="vt-icon">📱</div><div class="vt-title">Marketing VA</div><div class="vt-desc">Listings, social media, email campaigns, and brand content.</div><div class="vt-tags"><span class="vt-tag">Canva</span><span class="vt-tag">Later</span></div></div>
+      <div class="vt-card"><div class="vt-icon">🗂️</div><div class="vt-title">CRM Specialist</div><div class="vt-desc">Automations, smart lists, follow-up sequences, database cleanup.</div><div class="vt-tags"><span class="vt-tag">FUB</span><span class="vt-tag">GHL</span></div></div>
+      <div class="vt-card"><div class="vt-icon">📅</div><div class="vt-title">Executive Admin</div><div class="vt-desc">Calendar, inbox, vendors, reporting. Your right hand.</div><div class="vt-tags"><span class="vt-tag">Notion</span><span class="vt-tag">Slack</span></div></div>
+      <div class="vt-card"><div class="vt-icon">🏥</div><div class="vt-title">Industry Specialist</div><div class="vt-desc">Med spa, legal, insurance, mortgage, and e-commerce trained.</div><div class="vt-tags"><span class="vt-tag">Clio</span><span class="vt-tag">Jane</span></div></div>
+    </div>
+  </div>
+
+  <!-- VETTING -->
+  <div class="section dark">
+    <div class="sec-label">Our Vetting Process</div>
+    <h2 class="sec-title">Not Just Anyone Gets<br/><span>On This Platform</span></h2>
+    <p class="sec-sub">Less than 20% of applicants make it through our screening process. Here's exactly what every ERA VA goes through before you ever see their profile.</p>
+    <div class="vetting-steps">
+      <div class="vs-card">
+        <div class="vs-num">01</div>
+        <div class="vs-icon">📋</div>
+        <div class="vs-title">Application & Background Check</div>
+        <div class="vs-desc">Full application with work history, education, CRM proficiency, English level, and identity verification. Background check on every applicant.</div>
+      </div>
+      <div class="vs-card">
+        <div class="vs-num">02</div>
+        <div class="vs-icon">🎯</div>
+        <div class="vs-title">Skills Assessment & Mock Task</div>
+        <div class="vs-desc">Role-specific task test. ISAs do a live mock call. TCs walk through a transaction scenario. Marketing VAs submit a sample deliverable. No shortcuts.</div>
+      </div>
+      <div class="vs-card">
+        <div class="vs-num">03</div>
+        <div class="vs-icon">🎤</div>
+        <div class="vs-title">Live Interview & Scoring Rubric</div>
+        <div class="vs-desc">Our team interviews every applicant using a 100-point scoring rubric covering CRM knowledge, communication quality, industry experience, and professionalism.</div>
+      </div>
+    </div>
+    <div class="vetting-note">
+      <div class="vn-text">Only VAs who score <strong>80 or above</strong> on our rubric are approved to appear on the platform. Every profile you see has earned their spot. <strong>There are no shortcuts and no exceptions.</strong></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ ABOUT TAB ═══ -->
+<div class="tab-content" id="tab-about">
+
+  <div class="section dark">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="sec-label">Our Story</div>
+        <h2 class="sec-title" style="text-align:left;font-size:2rem;">Built By Someone Who<br/><span>Felt This Pain Firsthand</span></h2>
+        <p class="about-story">Elite Remote Agent was born out of frustration. As a real estate agent and business owner, our founder <strong>James Burbank</strong> spent years watching talented professionals drown in admin work — following up leads at midnight, missing transactions because nobody was coordinating, and paying $50,000+ for US staff when the work could be done better, faster, and more reliably by a trained remote professional.</p>
+        <p class="about-story">After building and running his own VA operations through <strong>Divine Growth Remote Agent VA</strong>, James saw the gap — there was no platform that combined genuine pre-screening, real estate specific training, and a simple subscription model that made hiring feel as easy as ordering from Amazon.</p>
+        <p class="about-story">So we built it. <strong>Elite Remote Agent</strong> is the platform we wished existed — and we built it for agents, team leaders, and business owners who are serious about scaling.</p>
+        <div class="about-mission">
+          <div class="am-label">Our Mission</div>
+          <div class="am-text">"To give every real estate agent and business owner access to world-class remote talent — without the guesswork, the wasted time, or the outrageous fees."</div>
+        </div>
+        <div class="about-stats">
+          <div class="as-item"><div class="as-num">500+</div><div class="as-label">Vetted VAs</div></div>
+          <div class="as-item"><div class="as-num">98%</div><div class="as-label">Retention Rate</div></div>
+          <div class="as-item"><div class="as-num">48hr</div><div class="as-label">Avg Hire Time</div></div>
+          <div class="as-item"><div class="as-num">$0</div><div class="as-label">Placement Fees</div></div>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="av-main">
+          <div class="av-float"><span class="av-float-num">500+</span>Pre-Screened VAs</div>
+          <div class="av-tag">Elite Remote Agent</div>
+          <div class="av-name">James Burbank</div>
+          <div class="av-role">Founder · Real Estate Agent · eXp Realty</div>
+          <div class="av-items">
+            <div class="av-item"><span class="av-check">✓</span>Active producing real estate agent</div>
+            <div class="av-item"><span class="av-check">✓</span>Director of Operations — Divine Growth VA</div>
+            <div class="av-item"><span class="av-check">✓</span>Built and managed VA teams for 5+ years</div>
+            <div class="av-item"><span class="av-check">✓</span>eXp Realty team leader — Phoenix, AZ</div>
+            <div class="av-item"><span class="av-check">✓</span>Airbnb host — West Valley Oasis</div>
+            <div class="av-item"><span class="av-check">✓</span>Knows exactly what agents need from a VA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VALUES -->
+  <div class="section">
+    <div class="sec-label">What We Stand For</div>
+    <h2 class="sec-title">Our Core <span>Values</span></h2>
+    <p class="sec-sub">These aren't words on a wall. They're the decisions we make every day.</p>
+    <div class="values-grid">
+      <div class="val-card"><div class="val-icon">🏆</div><div class="val-title">Excellence Only</div><div class="val-desc">Less than 20% of VA applicants make our platform. We'd rather have fewer VAs and every single one be exceptional than have volume without quality.</div></div>
+      <div class="val-card"><div class="val-icon">🤝</div><div class="val-title">Zero Exploitation</div><div class="val-desc">Our VAs are paid fairly. We charge clients a platform fee — not a cut of the VA's rate. VAs keep 100% of what clients pay them directly.</div></div>
+      <div class="val-card"><div class="val-icon">⚡</div><div class="val-title">Speed Matters</div><div class="val-desc">Every day you wait to hire is a day your leads go cold, your transactions go uncoordinated, and your business goes unmarketed. We move fast.</div></div>
+      <div class="val-card"><div class="val-icon">🔄</div><div class="val-title">No Risk Hiring</div><div class="val-desc">Unlimited replacements on every plan. If it doesn't work out — for any reason — we make it right immediately. No questions, no fees, no drama.</div></div>
+      <div class="val-card"><div class="val-icon">📚</div><div class="val-title">Always Training</div><div class="val-desc">The real estate and business world changes constantly. We update our training library continuously so every ERA VA stays ahead of the curve.</div></div>
+      <div class="val-card"><div class="val-icon">💡</div><div class="val-title">Built By Practitioners</div><div class="val-desc">Our founder is an active real estate agent. We know what agents actually need from a VA because we ARE agents. Not a tech company pretending to understand your world.</div></div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div class="section dark">
+    <div class="sec-label">Real Results</div>
+    <h2 class="sec-title">What Clients Are <span>Saying</span></h2>
+    <div class="test-grid">
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-quote">"I hired my first VA through Elite Remote Agent and within two weeks she was running my entire transaction pipeline. I closed 3 more deals that month because I stopped doing TC work myself."</div>
+        <div class="tc-author"><div class="tc-av" style="background:var(--gold);">SK</div><div><div class="tc-name">Sarah K.</div><div class="tc-title">Real Estate Agent · Phoenix, AZ</div></div></div>
+      </div>
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-quote">"I was burning out running my med spa and trying to manage patient follow-ups myself. My VA from ERA handles all of it now. I got 12 hours back every week immediately."</div>
+        <div class="tc-author"><div class="tc-av" style="background:var(--green);">DM</div><div><div class="tc-name">Dr. Marcus L.</div><div class="tc-title">Med Spa Owner · Scottsdale, AZ</div></div></div>
+      </div>
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-quote">"Other platforms sent me people I had to train from scratch. ERA sent me a VA who already knew Follow Up Boss, understood real estate, and hit the ground running day one."</div>
+        <div class="tc-author"><div class="tc-av" style="background:var(--blue);">TR</div><div><div class="tc-name">Tom R.</div><div class="tc-title">Team Leader · eXp Realty</div></div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ COMPARE TAB ═══ -->
+<div class="tab-content" id="tab-compare">
+
+  <div class="section dark">
+    <div class="sec-label">Why Choose ERA</div>
+    <h2 class="sec-title">How We Stack Up<br/><span>Against The Alternatives</span></h2>
+    <p class="sec-sub">We're not the only option out there. Here's an honest comparison so you can make the right decision for your business.</p>
+    <div class="compare-table">
+      <div class="ct-header">
+        <div class="ct-col-head">Feature</div>
+        <div class="ct-col-head era">Elite Remote Agent</div>
+        <div class="ct-col-head other">Upwork / Fiverr</div>
+        <div class="ct-col-head other">OnlineJobs.ph</div>
+      </div>
+      <div class="ct-row"><div class="ct-cell feature">Pre-screened & vetted VAs</div><div class="ct-cell"><span class="ct-yes">✓ Always</span></div><div class="ct-cell"><span class="ct-no">✗ Never</span></div><div class="ct-cell"><span class="ct-no">✗ Never</span></div></div>
+      <div class="ct-row"><div class="ct-cell feature">Real estate industry training</div><div class="ct-cell"><span class="ct-yes">✓ Included</span></div><div class="ct-cell"><span class="ct-no">✗ None</span></div><div class="ct-cell"><span class="ct-no">✗ None</span></div></div>
+      <div class="ct-row"><div class="ct-cell feature">Voice recordings to preview</div><div class="ct-cell"><span class="ct-yes">✓ Every VA</span></div><div class="ct-cell"><span class="ct-maybe">Sometimes</span></div><div class="ct-cell"><span class="ct-no">✗ Rarely</span></div></div>
+      <div class="ct-row"><div class="ct-cell feature">Unlimited replacements</div><div class="ct-cell"><span class="ct-yes">✓ All plans</span></div><div class="ct-cell"><span class="ct-no">✗ Start over</span></div><div class="ct-cell"><span class="ct-no">✗ Start over</span></div></div>
+      <div class="ct-row"><div class="ct-cell feature">Placement fees</div><div class="ct-cell"><span class="ct-yes">✓ $0 always</span></div><div class="ct-cell"><span class="ct-no">✗ 20% fee</span></div><div class="ct-cell"><span class="ct-maybe">$69–$199/mo</span></div></div>
+      <div class="ct-row"><div class="ct-cell feature">KPI & SOP dashboard</div><div class="ct-cell"><span class="ct-yes">✓ Built in</span></div><div class="ct-cell"><span class="ct-no">✗ None</span></div><div class="ct-cell"><span class="ct-no">✗ None</span></div></div>
+      <div class="ct-row"><div class="ct-cell feature">Training library</div><div class="ct-cell"><span class="ct-yes">✓ Included</span></div><div class="ct-cell"><span class="ct-no">✗ None</span></div><div class="ct-cell"><span class="ct-no">✗ None</span></div></div>
+      <div class="ct-row"><div class="ct-cell feature">Avg time to hire</div><div class="ct-cell"><span class="ct-yes">✓ 48 hours</span></div><div class="ct-cell"><span class="ct-maybe">1–3 weeks</span></div><div class="ct-cell"><span class="ct-maybe">2–4 weeks</span></div></div>
+      <div class="ct-row"><div class="ct-cell feature">CRM-specific experience</div><div class="ct-cell"><span class="ct-yes">✓ Verified</span></div><div class="ct-cell"><span class="ct-maybe">Self-reported</span></div><div class="ct-cell"><span class="ct-maybe">Self-reported</span></div></div>
+      <div class="ct-row"><div class="ct-cell feature">Dedicated account manager</div><div class="ct-cell"><span class="ct-yes">✓ Elite plan</span></div><div class="ct-cell"><span class="ct-no">✗ None</span></div><div class="ct-cell"><span class="ct-no">✗ None</span></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-label">The Math</div>
+    <h2 class="sec-title">What Does It Actually <span>Cost?</span></h2>
+    <p class="sec-sub">Let's be honest about the real cost of every option.</p>
+    <div class="pvs" style="max-width:860px;">
+      <div class="pvs-col pain" style="background:rgba(231,76,60,0.04);">
+        <div class="pvs-header"><span class="pvs-icon">💸</span><div class="pvs-title">US In-Office Hire</div></div>
+        <div class="pvs-item"><span class="pvs-x">$</span>Salary: $38,000–$55,000/yr</div>
+        <div class="pvs-item"><span class="pvs-x">$</span>Benefits: +$8,000–$15,000/yr</div>
+        <div class="pvs-item"><span class="pvs-x">$</span>Payroll taxes: +$5,000–$8,000/yr</div>
+        <div class="pvs-item"><span class="pvs-x">$</span>Recruiting fee: +$3,000–$8,000 one time</div>
+        <div class="pvs-item"><span class="pvs-x">$</span>Training time: 3–6 weeks</div>
+        <div style="margin-top:1rem;padding-top:0.75rem;border-top:1px solid rgba(231,76,60,0.2);font-weight:800;font-size:0.9rem;color:#E74C3C;">Total Year 1: $54,000–$86,000</div>
+      </div>
+      <div class="pvs-col solution">
+        <div class="pvs-header"><span class="pvs-icon">✅</span><div class="pvs-title">Elite Remote Agent</div></div>
+        <div class="pvs-item"><span class="pvs-check">$</span>Subscription: $97–$597/mo</div>
+        <div class="pvs-item"><span class="pvs-check">$</span>VA rate: $6–$12/hr (paid direct)</div>
+        <div class="pvs-item"><span class="pvs-check">$</span>Placement fee: $0</div>
+        <div class="pvs-item"><span class="pvs-check">$</span>Training: included</div>
+        <div class="pvs-item"><span class="pvs-check">$</span>Replacements: unlimited, free</div>
+        <div style="margin-top:1rem;padding-top:0.75rem;border-top:1px solid rgba(46,204,113,0.2);font-weight:800;font-size:0.9rem;color:var(--green);">Total Year 1: $13,000–$22,000</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-glow"></div>
+  <div class="cta-content">
+    <h2 class="cta-h">Ready to Stop<br/><span>Doing It All Yourself?</span></h2>
+    <p class="cta-sub">Your first Elite Remote Agent is browsable right now. Hire in 48 hours. No placement fees. No contracts. Cancel anytime.</p>
+    <div class="cta-btns">
+      <a class="btn-cta-primary" href="checkout.html">Subscribe Now →</a>
+      <a class="btn-cta-secondary" href="apply.html">I'm a VA — Apply Here</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">Elite Remote Agent</div>
+  <div class="foot-links">
+    <a class="foot-link" href="index.html">Home</a>
+    <a class="foot-link" href="how-it-works.html">How It Works</a>
+    <a class="foot-link" href="checkout.html">Pricing</a>
+    <a class="foot-link" href="apply.html">For VAs</a>
+    <a class="foot-link" href="dashboard.html">Client Login</a>
+    <a class="foot-link" href="#">Privacy Policy</a>
+    <a class="foot-link" href="#">Terms</a>
+  </div>
+  <div class="foot-copy">© 2026 Elite Remote Agent. All rights reserved.</div>
+</footer>
+
+<script>
+function fire(msg){
+  const t=document.getElementById('toast');
+  document.getElementById('tmsg').textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3500);
+}
+
+function showTab(tab){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.ph-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// Animate on scroll
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}
+  });
+},{threshold:0.1});
+
+document.querySelectorAll('.who-card,.val-card,.tc,.vt-card,.vs-card').forEach(el=>{
+  el.style.opacity='0';
+  el.style.transform='translateY(20px)';
+  el.style.transition='opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
