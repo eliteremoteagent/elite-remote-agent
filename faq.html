@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FAQ — Elite Remote Agent</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Manrope',sans-serif;background:#050810;color:#fff;min-height:100vh;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.07);backdrop-filter:blur(20px);background:rgba(5,8,16,0.9);}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:3px;color:#D4A843;text-decoration:none;}
+.btn-gold{padding:0.5rem 1.25rem;border-radius:6px;background:#D4A843;color:#050810;font-family:'Manrope',sans-serif;font-size:0.8rem;font-weight:800;cursor:pointer;border:none;text-decoration:none;display:inline-flex;align-items:center;}
+.hero{padding:7rem 2rem 3rem;text-align:center;background:#0C1020;}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:3rem;letter-spacing:2px;margin-bottom:0.5rem;}
+.hero h1 span{color:#D4A843;}
+.hero p{color:rgba(255,255,255,0.45);font-size:0.875rem;margin-bottom:1.5rem;}
+.search-box{display:flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.04);border:1.5px solid rgba(255,255,255,0.12);border-radius:10px;padding:0.65rem 1rem;max-width:460px;margin:0 auto;}
+.search-box input{background:transparent;border:none;outline:none;font-family:'Manrope',sans-serif;font-size:0.85rem;color:#fff;width:100%;}
+.wrap{max-width:760px;margin:0 auto;padding:3rem 2rem 5rem;}
+.cats{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:2rem;justify-content:center;}
+.cat{padding:0.38rem 1rem;border-radius:20px;font-size:0.72rem;font-weight:700;cursor:pointer;border:1.5px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.4);background:transparent;transition:all 0.2s;}
+.cat.on{border-color:#D4A843;color:#D4A843;background:rgba(212,168,67,0.1);}
+.group{margin-bottom:2rem;}
+.group-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;color:#D4A843;margin-bottom:0.875rem;}
+.item{border:1px solid rgba(255,255,255,0.07);border-radius:10px;margin-bottom:0.5rem;overflow:hidden;background:#0F1525;cursor:pointer;transition:border-color 0.2s;}
+.item:hover{border-color:rgba(212,168,67,0.2);}
+.item.open{border-color:rgba(212,168,67,0.3);}
+.q{padding:1rem 1.25rem;font-weight:700;font-size:0.83rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;line-height:1.4;}
+.item.open .q{color:#D4A843;}
+.arrow{color:#8892A4;font-size:0.7rem;flex-shrink:0;transition:transform 0.25s;}
+.item.open .arrow{transform:rotate(180deg);color:#D4A843;}
+.a{padding:0 1.25rem;max-height:0;overflow:hidden;transition:all 0.3s ease;font-size:0.8rem;color:rgba(255,255,255,0.5);line-height:1.75;}
+.item.open .a{max-height:300px;padding:0 1.25rem 1rem;}
+.a strong{color:#fff;}
+.a a{color:#D4A843;text-decoration:none;}
+.cta{background:rgba(212,168,67,0.06);border:1px solid rgba(212,168,67,0.15);border-radius:14px;padding:2.5rem;text-align:center;margin-top:2rem;}
+.cta h2{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:1px;margin-bottom:0.5rem;}
+.cta h2 span{color:#D4A843;}
+.cta p{font-size:0.82rem;color:rgba(255,255,255,0.4);margin-bottom:1.25rem;line-height:1.65;}
+.cta-btns{display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;}
+.btn-out{padding:0.7rem 1.75rem;border-radius:8px;font-family:'Manrope',sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;border:1.5px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.6);background:transparent;text-decoration:none;display:inline-flex;align-items:center;}
+footer{padding:2rem;border-top:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.foot-logo{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:#D4A843;letter-spacing:3px;}
+.foot-links{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.foot-link{font-size:0.7rem;color:rgba(255,255,255,0.3);text-decoration:none;}
+.foot-link:hover{color:#D4A843;}
+.foot-copy{font-size:0.65rem;color:rgba(255,255,255,0.18);}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="index.html">Elite Remote Agent</a>
+  <a class="btn-gold" href="checkout.html">Start Free →</a>
+</nav>
+<div class="hero">
+  <h1>Frequently Asked <span>Questions</span></h1>
+  <p>Can't find your answer? <a href="contact.html" style="color:#D4A843;">Book a free demo</a> and we'll answer everything live.</p>
+  <div class="search-box"><span style="color:rgba(255,255,255,0.2)">🔍</span><input placeholder="Search questions..." oninput="searchFAQ(this.value)"/></div>
+</div>
+<div class="wrap">
+  <div class="cats">
+    <button class="cat on" onclick="filterCat('all',this)">All Questions</button>
+    <button class="cat" onclick="filterCat('start',this)">Getting Started</button>
+    <button class="cat" onclick="filterCat('hiring',this)">Hiring VAs</button>
+    <button class="cat" onclick="filterCat('pricing',this)">Pricing</button>
+    <button class="cat" onclick="filterCat('platform',this)">Platform</button>
+    <button class="cat" onclick="filterCat('vas',this)">Our VAs</button>
+    <button class="cat" onclick="filterCat('forvas',this)">For VAs</button>
+  </div>
+  <div id="faqWrap">
+  <div class="group" data-cat="start">
+    <div class="group-title">🚀 Getting Started</div>
+    <div class="item" onclick="toggle(this)"><div class="q">What is Elite Remote Agent and how does it work?<span class="arrow">▼</span></div><div class="a">Elite Remote Agent is a subscription-based VA hiring platform built for real estate agents and business owners. Pay one flat monthly fee to browse, interview, and hire unlimited pre-screened, industry-trained virtual assistants. No placement fees. No contracts. <strong>Browse → Hire → Scale.</strong></div></div>
+    <div class="item" onclick="toggle(this)"><div class="q">How quickly can I get my first VA working?<span class="arrow">▼</span></div><div class="a">Most clients hire their first VA within 48 hours of subscribing. Some do it the same day. Once you send a hire offer, your VA confirms within hours and begins onboarding into your systems immediately.</div></div>
+    <div class="item" onclick="toggle(this)"><div class="q">Do I need any technical skills to use the platform?<span class="arrow">▼</span></div><div class="a">None. If you can use a website, you can use ERA. Browse profiles, listen to voice recordings, click Hire Now. That's all you need to do.</div></div>
+    <div class="item" onclick="toggle(this)"><div class="q">Is there a demo I can watch first?<span class="arrow">▼</span></div><div class="a">Yes. <a href="contact.html">Book a free 20-minute demo call</a> and we'll walk you through the platform live, show you real VA profiles, and help you figure out which VA role makes the biggest impact. No pressure, no obligation.</div></div>
+    <div class="item" onclick="toggle(this)"><div class="q">What types of businesses does ERA work for?<span class="arrow">▼</span></div><div class="a">ERA has two portals. The <strong>Real Estate Portal</strong> serves solo agents, team leaders, and brokerages. The <strong>Business Portal</strong> serves med spas, law firms, insurance agencies, mortgage companies, e-commerce stores, and more.</div></div>
+  </div>
+  <div class="group" data-cat="hiring">
+    <div class="group-title">👥 Hiring VAs</div>
+    <div class="item" onclick="toggle(this)"><div class="q">How many VAs can I hire?<span class="arrow">▼</span></div><div class="a"><strong>Unlimited on every plan.</strong> All ERA plans give you full access to browse, interview, and hire as many VAs as your business needs. No per-hire fees, no limits, no extra charges.</div></div>
+    <div class="item" onclick="toggle(this)"><div class="q">What if my VA isn't the right fit?<span class="arrow">▼</span></div><div class="a">Replace them. Every plan includes <strong>unlimited VA replacements</strong>. If a VA isn't working out for any reason, hire a replacement immediately at zero extra cost. No questions, no fees.</div></div>
+    <div class="item" onclick="toggle(this)"><div class="q">Can I interview a VA before hiring?<span class="arrow">▼</span></div><div class="a">Yes. Listen to voice recordings and watch mock call videos before sending a hire offer. You can also request a live Zoom interview with any VA before committing.</div></div>
+    <div class="item" onclick="toggle(this)"><div class="q">Do I pay the VA directly or through the platform?<span class="arrow">▼</span></div><div class="a">You pay your VA directly at their agreed hourly rate. The ERA subscription is separate. <strong>We never take a cut of your VA's rate.</strong></div></div>
+    <div class="item" onclick="toggle(this)"><div class="q">What happens if my VA quits or becomes unavailable?<span class="arrow">▼</span></div><div class="a">Browse the platform and hire a replacement immediately. Because all ERA VAs are pre-trained, your new VA gets up to speed much faster than starting from scratch.</div></div>
+  </div>
+  <div class="group" data-cat="pricing">
+    <div class="group-title">💳 Pricing & Billing</div>
+    <div class="item" onclick="toggle(this)"><div class="q">How much does Elite Remote Agent cost?<span class="arrow">▼</span></div><div class="a">ERA has three plans: <strong>Starter at $97/month</strong>, <strong>Growth at $247/month</strong>, and <strong>Elite Team at $597/month</strong>. Annual billing saves you 2 months free. All plans include unlimited VA access with zero placement fees.</div></div>
+    <div class="item" onclick="toggle(this)"><div class="q">Are there any placement fees or hidden costs?<span class="arrow">▼</span></div><div class="a"><strong>Zero placement fees. Ever.</strong> You pay your flat monthly subscription and you pay your VA directly at their hourly rate. No finder's fees, no per-hire charges, no hidden costs.</div></div>
+    <div class="item" onclick="toggle(this)"><div class="q">Can I cancel anytime?<span class="arrow">▼</span></div><div class="a">Yes. No contracts, no cancellation fees, no lock-in. Cancel from your account dashboard at any time. Access continues until the end of your current billing period.</div></div>
+    <div class="item" onclick="toggle(this)"><div class="q">Can I upgrade or downgrade my plan?<span class="arrow">▼</span></div><div class="a">Yes. Upgrade anytime — takes effect immediately. Downgrade anytime — takes effect at your next billing cycle. Manage from your account billing page.</div></div>
+    <div class="item" onclick="toggle(this)"><div class="q">How does annual billing work?<span class="arrow">▼</span></div><div class="a">Annual billing charges your card once for the full year — equivalent to <strong>2 months free (17% savings)</strong>. Starter annual: $1,046/yr. Growth annual: $2,662/yr. Elite annual: $6,448/yr.</div></div>
+  </div>
+  <div class="group" data-cat="platform">
+    <div class="group-title">🖥️ The Platform</div>
+    <div class="item" onclick="toggle(this)"><div class="q">What's the difference between the three plans?<span class="arrow">▼</span></div><div class="a"><strong>All plans include unlimited VA access, hiring, and replacements.</strong> Starter gives you the platform with email support. Growth adds the full training library, KPI dashboard, SOP templates, and monthly strategy calls. Elite adds a dedicated account manager, done-for-you onboarding, and weekly strategy calls.</div></div>
+    <div class="item" onclick="toggle(this)"><div class="q">What is the training library?<span class="arrow">▼</span></div><div class="a">The training library (Growth and Elite) is a collection of video courses, Loom walkthroughs, and document templates covering real estate operations, CRM management, cold calling scripts, and more. You can also upload your own training content and assign it directly to your VAs.</div></div>
+    <div class="item" onclick="toggle(this)"><div class="q">Is there a mobile app?<span class="arrow">▼</span></div><div class="a">The ERA platform is fully mobile-responsive and works perfectly on any smartphone browser. A dedicated iOS and Android app is currently in development for 2026.</div></div>
+  </div>
+  <div class="group" data-cat="vas">
+    <div class="group-title">⭐ About Our VAs</div>
+    <div class="item" onclick="toggle(this)"><div class="q">Where are your VAs located?<span class="arrow">▼</span></div><div class="a">The majority of ERA VAs are based in the Philippines, which has a strong track record of providing English-fluent, highly educated virtual assistants to US businesses. All VAs are vetted for English proficiency, US business knowledge, and professional reliability.</div></div>
+    <div class="item" onclick="toggle(this)"><div class="q">What does "pre-screened" actually mean?<span class="arrow">▼</span></div><div class="a">Every ERA VA goes through 3 steps: <strong>(1)</strong> Application and background check. <strong>(2)</strong> Skills assessment and role-specific mock task. <strong>(3)</strong> Live interview scored on a 100-point rubric. Only VAs scoring 80+ are approved. Less than 20% of applicants make it.</div></div>
+    <div class="item" onclick="toggle(this)"><div class="q">Are the VAs trained in real estate specifically?<span class="arrow">▼</span></div><div class="a">Yes. Every ERA VA completes our real estate or business training curriculum before appearing on the platform. They know what a listing appointment is, what contract-to-close means, and how to work a CRM database — before day one.</div></div>
+    <div class="item" onclick="toggle(this)"><div class="q">What are typical hourly rates?<span class="arrow">▼</span></div><div class="a">ERA VA rates typically range from <strong>$6–$12 per hour</strong> depending on specialty and experience. Transaction coordinators and senior specialists: $8–$12/hr. General admin and social media VAs: $6–$8/hr. All rates are shown clearly on every VA profile.</div></div>
+  </div>
+  <div class="group" data-cat="forvas">
+    <div class="group-title">🙋 For VAs</div>
+    <div class="item" onclick="toggle(this)"><div class="q">How do I apply to join ERA as a VA?<span class="arrow">▼</span></div><div class="a">Visit our <a href="apply.html">VA application page</a> and complete our 5-step profile builder. Submit your info, experience, CRM skills, voice recording, and resume. Our team reviews every application within 48 hours.</div></div>
+    <div class="item" onclick="toggle(this)"><div class="q">Is it free to apply and join as a VA?<span class="arrow">▼</span></div><div class="a"><strong>100% free. Always.</strong> ERA charges clients a subscription — never VAs. No application fees, no platform fees, no cuts from your hourly rate. You keep everything your client pays you.</div></div>
+    <div class="item" onclick="toggle(this)"><div class="q">How long does the application process take?<span class="arrow">▼</span></div><div class="a">The application takes 15–20 minutes. Our team reviews within 48 hours. If approved, you'll receive your profile link and be live on the platform within 3–5 business days.</div></div>
+  </div>
+  </div>
+  <div class="cta">
+    <h2>Still Have <span>Questions?</span></h2>
+    <p>Book a free 20-minute demo call and we'll answer everything live — personalized to your specific business.</p>
+    <div class="cta-btns">
+      <a class="btn-gold" href="contact.html">Book a Free Demo →</a>
+      <a class="btn-out" href="checkout.html">Just Start Browsing</a>
+    </div>
+  </div>
+</div>
+<footer>
+  <div class="foot-logo">Elite Remote Agent</div>
+  <div class="foot-links">
+    <a class="foot-link" href="index.html">Home</a>
+    <a class="foot-link" href="vas.html">Browse VAs</a>
+    <a class="foot-link" href="checkout.html">Pricing</a>
+    <a class="foot-link" href="contact.html">Contact</a>
+    <a class="foot-link" href="privacy.html">Privacy Policy</a>
+    <a class="foot-link" href="terms.html">Terms</a>
+  </div>
+  <div class="foot-copy">© 2026 Elite Remote Agent. All rights reserved.</div>
+</footer>
+<script>
+function toggle(el){el.classList.toggle('open');}
+function filterCat(cat,btn){
+  document.querySelectorAll('.cat').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.group').forEach(g=>{g.style.display=(cat==='all'||g.dataset.cat===cat)?'block':'none';});
+}
+function searchFAQ(q){
+  q=q.toLowerCase();
+  let found=0;
+  document.querySelectorAll('.item').forEach(item=>{
+    const match=!q||item.textContent.toLowerCase().includes(q);
+    item.style.display=match?'block':'none';
+    if(match)found++;
+  });
+  document.querySelectorAll('.group').forEach(g=>{
+    const vis=[...g.querySelectorAll('.item')].some(i=>i.style.display!=='none');
+    g.style.display=vis?'block':'none';
+  });
+}
+</script>
+</body>
+</html>
