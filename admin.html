@@ -1,1 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ERA — Admin Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --black:#050810;--dark:#0C1020;--dark2:#131828;--card:#0F1525;
+  --gold:#D4A843;--gold2:#F0C060;--gold-dim:rgba(212,168,67,0.1);
+  --white:#FFFFFF;--muted:#8892A4;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
+  --green:#2ECC71;--green-dim:rgba(46,204,113,0.1);
+  --red:#E74C3C;--red-dim:rgba(231,76,60,0.1);
+  --blue:#3498DB;--blue-dim:rgba(52,152,219,0.1);
+  --orange:#F39C12;--sidebar:220px;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Manrope',sans-serif;background:var(--dark);color:var(--white);min-height:100vh;display:flex;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--black);}
+::-webkit-scrollbar-thumb{background:rgba(212,168,67,0.2);border-radius:2px;}
 
+/* LOGIN */
+.login-screen{position:fixed;inset:0;background:var(--black);display:flex;align-items:center;justify-content:center;z-index:999;flex-direction:column;}
+.login-screen.hidden{display:none;}
+.login-logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--gold);letter-spacing:3px;margin-bottom:0.25rem;}
+.login-sub{font-size:0.68rem;color:rgba(255,255,255,0.3);letter-spacing:3px;text-transform:uppercase;margin-bottom:2.5rem;}
+.login-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2.5rem;width:100%;max-width:380px;}
+.login-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1px;margin-bottom:0.25rem;}
+.login-desc{font-size:0.75rem;color:rgba(255,255,255,0.35);margin-bottom:1.75rem;}
+.lf{display:block;font-size:0.68rem;font-weight:700;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.35rem;}
+.li{width:100%;padding:0.7rem 1rem;background:rgba(255,255,255,0.04);border:1.5px solid var(--border2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:0.85rem;color:var(--white);outline:none;margin-bottom:1rem;transition:border-color 0.2s;}
+.li:focus{border-color:var(--gold);}
+.li::placeholder{color:rgba(255,255,255,0.2);}
+.btn-login{width:100%;padding:0.85rem;border-radius:8px;background:var(--gold);color:var(--black);font-family:'Manrope',sans-serif;font-weight:800;font-size:0.9rem;cursor:pointer;border:none;transition:all 0.2s;margin-top:0.5rem;}
+.btn-login:hover{background:var(--gold2);transform:translateY(-1px);}
+.login-hint{font-size:0.7rem;color:rgba(255,255,255,0.2);text-align:center;margin-top:1rem;}
+
+/* SIDEBAR */
+.sidebar{width:var(--sidebar);background:var(--black);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:50;}
+.sb-logo{padding:1.5rem 1.25rem 1rem;border-bottom:1px solid var(--border);}
+.sb-logo-text{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--gold);letter-spacing:2px;line-height:1;}
+.sb-logo-sub{font-size:0.45rem;color:rgba(255,255,255,0.25);letter-spacing:3px;text-transform:uppercase;font-family:'Manrope',sans-serif;margin-top:2px;}
+.sb-admin{display:flex;align-items:center;gap:0.6rem;padding:0.875rem 1.25rem;border-bottom:1px solid var(--border);margin-bottom:0.5rem;}
+.sb-av{width:32px;height:32px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.75rem;color:var(--black);flex-shrink:0;}
+.sb-admin-name{font-size:0.78rem;font-weight:700;color:var(--white);}
+.sb-admin-role{font-size:0.62rem;color:rgba(255,255,255,0.35);}
+.sb-nav{flex:1;padding:0.5rem 0.75rem;overflow-y:auto;}
+.sb-section{font-size:0.58rem;font-weight:800;color:rgba(255,255,255,0.2);letter-spacing:2px;text-transform:uppercase;padding:0.75rem 0.5rem 0.35rem;margin-top:0.5rem;}
+.sb-item{display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.75rem;border-radius:8px;cursor:pointer;transition:all 0.2s;margin-bottom:0.15rem;position:relative;}
+.sb-item:hover{background:rgba(255,255,255,0.04);}
+.sb-item.active{background:var(--gold-dim);border:1px solid rgba(212,168,67,0.15);}
+.sb-item-icon{font-size:0.95rem;width:20px;text-align:center;flex-shrink:0;}
+.sb-item-label{font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.55);}
+.sb-item.active .sb-item-label{color:var(--gold);}
+.sb-item:hover .sb-item-label{color:var(--white);}
+.sb-badge{margin-left:auto;background:var(--red);color:white;font-size:0.6rem;font-weight:800;padding:0.15rem 0.45rem;border-radius:10px;min-width:18px;text-align:center;}
+.sb-badge.gold{background:var(--gold);color:var(--black);}
+.sb-badge.green{background:var(--green);color:white;}
+.sb-footer{padding:1rem 1.25rem;border-top:1px solid var(--border);}
+.sb-logout{font-size:0.72rem;color:rgba(255,255,255,0.25);cursor:pointer;display:flex;align-items:center;gap:0.4rem;transition:color 0.2s;}
+.sb-logout:hover{color:var(--red);}
+
+/* MAIN */
+.main{margin-left:var(--sidebar);flex:1;min-height:100vh;display:flex;flex-direction:column;}
+.topbar{background:var(--black);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:40;}
+.tb-title{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:1px;}
+.tb-right{display:flex;align-items:center;gap:1rem;}
+.tb-search{display:flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:8px;padding:0.45rem 0.875rem;}
+.tb-search input{background:transparent;border:none;outline:none;font-family:'Manrope',sans-serif;font-size:0.78rem;color:var(--white);width:180px;}
+.tb-search input::placeholder{color:rgba(255,255,255,0.2);}
+.tb-notif{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;font-size:0.9rem;}
+.notif-dot{position:absolute;top:6px;right:6px;width:7px;height:7px;border-radius:50%;background:var(--red);border:1.5px solid var(--black);}
+.tb-date{font-size:0.72rem;color:rgba(255,255,255,0.3);}
+
+/* PAGE */
+.page{display:none;padding:2rem;flex:1;}
+.page.active{display:block;}
+
+/* STAT CARDS */
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.75rem;}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.25rem;position:relative;overflow:hidden;transition:all 0.2s;}
+.stat-card:hover{border-color:rgba(212,168,67,0.2);transform:translateY(-2px);}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.stat-card.gold::before{background:linear-gradient(90deg,var(--gold),var(--gold2));}
+.stat-card.green::before{background:linear-gradient(90deg,var(--green),#27AE60);}
+.stat-card.blue::before{background:linear-gradient(90deg,var(--blue),#2980B9);}
+.stat-card.red::before{background:linear-gradient(90deg,var(--red),#C0392B);}
+.stat-icon{font-size:1.4rem;margin-bottom:0.75rem;}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:1px;line-height:1;margin-bottom:2px;}
+.stat-card.gold .stat-num{color:var(--gold);}
+.stat-card.green .stat-num{color:var(--green);}
+.stat-card.blue .stat-num{color:var(--blue);}
+.stat-card.red .stat-num{color:var(--red);}
+.stat-label{font-size:0.72rem;color:rgba(255,255,255,0.4);font-weight:600;}
+.stat-change{font-size:0.68rem;font-weight:700;margin-top:0.4rem;}
+.stat-change.up{color:var(--green);}
+.stat-change.dn{color:var(--red);}
+
+/* SECTION HEADER */
+.sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:1px;}
+.sec-actions{display:flex;gap:0.5rem;}
+.btn-sm{padding:0.4rem 0.875rem;border-radius:6px;font-family:'Manrope',sans-serif;font-size:0.75rem;font-weight:700;cursor:pointer;border:none;transition:all 0.2s;letter-spacing:0.3px;}
+.btn-sm.gold{background:var(--gold);color:var(--black);}
+.btn-sm.outline{background:transparent;border:1.5px solid var(--border2);color:rgba(255,255,255,0.6);}
+.btn-sm.green{background:var(--green);color:white;}
+.btn-sm.red{background:var(--red);color:white;}
+.btn-sm.blue{background:var(--blue);color:white;}
+.btn-sm:hover{filter:brightness(1.1);transform:translateY(-1px);}
+
+/* TABLE */
+.table-wrap{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:1.5rem;}
+.table-filters{padding:1rem 1.25rem;border-bottom:1px solid var(--border);display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;}
+.tf-search{display:flex;align-items:center;gap:0.4rem;background:rgba(255,255,255,0.03);border:1px solid var(--border2);border-radius:7px;padding:0.4rem 0.75rem;flex:1;min-width:180px;}
+.tf-search input{background:transparent;border:none;outline:none;font-family:'Manrope',sans-serif;font-size:0.78rem;color:var(--white);width:100%;}
+.tf-search input::placeholder{color:rgba(255,255,255,0.2);}
+.filter-pill{padding:0.32rem 0.75rem;border-radius:20px;font-size:0.7rem;font-weight:700;cursor:pointer;border:1.5px solid var(--border2);color:rgba(255,255,255,0.4);background:transparent;transition:all 0.2s;}
+.filter-pill.on{border-color:var(--gold);color:var(--gold);background:var(--gold-dim);}
+.filter-pill.on.green{border-color:var(--green);color:var(--green);background:var(--green-dim);}
+.filter-pill.on.red{border-color:var(--red);color:var(--red);background:var(--red-dim);}
+.filter-pill.on.blue{border-color:var(--blue);color:var(--blue);background:var(--blue-dim);}
+table{width:100%;border-collapse:collapse;}
+th{padding:0.75rem 1.25rem;text-align:left;font-size:0.65rem;font-weight:800;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid var(--border);}
+td{padding:0.875rem 1.25rem;border-bottom:1px solid var(--border);font-size:0.8rem;color:rgba(255,255,255,0.7);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,0.02);}
+.td-name{display:flex;align-items:center;gap:0.6rem;}
+.td-av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.68rem;color:white;flex-shrink:0;border:1.5px solid rgba(212,168,67,0.3);}
+.td-n{font-weight:700;color:var(--white);font-size:0.82rem;}
+.td-r{font-size:0.68rem;color:rgba(255,255,255,0.35);margin-top:1px;}
+.badge{padding:0.22rem 0.6rem;border-radius:20px;font-size:0.65rem;font-weight:700;display:inline-block;}
+.badge.pending{background:rgba(243,156,18,0.12);color:var(--orange);border:1px solid rgba(243,156,18,0.25);}
+.badge.approved{background:var(--green-dim);color:var(--green);border:1px solid rgba(46,204,113,0.2);}
+.badge.rejected{background:var(--red-dim);color:var(--red);border:1px solid rgba(231,76,60,0.2);}
+.badge.review{background:var(--blue-dim);color:var(--blue);border:1px solid rgba(52,152,219,0.2);}
+.badge.active{background:var(--green-dim);color:var(--green);border:1px solid rgba(46,204,113,0.2);}
+.badge.starter{background:var(--gold-dim);color:var(--gold);border:1px solid rgba(212,168,67,0.2);}
+.badge.growth{background:rgba(155,89,182,0.1);color:#9B59B6;border:1px solid rgba(155,89,182,0.2);}
+.badge.elite{background:var(--blue-dim);color:var(--blue);border:1px solid rgba(52,152,219,0.2);}
+.score-bar{display:flex;align-items:center;gap:0.5rem;}
+.sb-track{flex:1;height:5px;background:var(--border2);border-radius:3px;overflow:hidden;min-width:60px;}
+.sb-fill{height:100%;border-radius:3px;}
+.sb-num{font-size:0.72rem;font-weight:800;min-width:28px;}
+.action-btns{display:flex;gap:0.35rem;}
+.act{width:28px;height:28px;border-radius:6px;border:none;cursor:pointer;font-size:0.8rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.act.view{background:var(--blue-dim);color:var(--blue);}
+.act.approve{background:var(--green-dim);color:var(--green);}
+.act.reject{background:var(--red-dim);color:var(--red);}
+.act.edit{background:var(--gold-dim);color:var(--gold);}
+.act.msg{background:rgba(155,89,182,0.1);color:#9B59B6;}
+.act:hover{filter:brightness(1.3);transform:scale(1.1);}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(5,8,16,0.85);backdrop-filter:blur(6px);z-index:200;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:20px;width:100%;max-width:780px;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,0.5);}
+.modal-header{padding:1.75rem 2rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;background:linear-gradient(135deg,var(--dark),var(--dark2));}
+.mh-left{}
+.mh-tag{font-size:0.6rem;font-weight:800;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.3rem;}
+.mh-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1px;}
+.mh-sub{font-size:0.75rem;color:rgba(255,255,255,0.4);margin-top:2px;}
+.modal-close{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.07);border:none;color:rgba(255,255,255,0.5);cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0;}
+.modal-close:hover{background:rgba(255,255,255,0.12);color:var(--white);}
+.modal-body{padding:1.75rem 2rem;}
+.modal-footer{padding:1.25rem 2rem;border-top:1px solid var(--border);display:flex;gap:0.75rem;justify-content:flex-end;background:rgba(255,255,255,0.01);}
+.btn-modal{padding:0.65rem 1.5rem;border-radius:8px;font-family:'Manrope',sans-serif;font-weight:700;font-size:0.82rem;cursor:pointer;border:none;transition:all 0.2s;}
+.btn-modal.outline{background:transparent;border:1.5px solid var(--border2);color:rgba(255,255,255,0.6);}
+.btn-modal.gold{background:var(--gold);color:var(--black);}
+.btn-modal.green{background:var(--green);color:white;}
+.btn-modal.red{background:var(--red);color:white;}
+.btn-modal:hover{filter:brightness(1.1);transform:translateY(-1px);}
+
+/* RUBRIC */
+.rubric-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;}
+.rubric-item{background:var(--dark2);border:1px solid var(--border);border-radius:12px;padding:1.1rem;}
+.ri-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;}
+.ri-label{font-size:0.75rem;font-weight:700;color:var(--white);}
+.ri-score{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--gold);letter-spacing:1px;}
+.ri-stars{display:flex;gap:0.3rem;margin-bottom:0.5rem;}
+.star{width:28px;height:28px;border-radius:6px;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:0.75rem;cursor:pointer;transition:all 0.2s;color:rgba(255,255,255,0.2);}
+.star.filled{background:var(--gold-dim);border-color:rgba(212,168,67,0.3);color:var(--gold);}
+.star:hover{border-color:var(--gold);color:var(--gold);}
+.ri-desc{font-size:0.68rem;color:rgba(255,255,255,0.3);line-height:1.5;}
+.total-score-box{background:linear-gradient(135deg,rgba(212,168,67,0.08),rgba(212,168,67,0.03));border:1px solid rgba(212,168,67,0.2);border-radius:12px;padding:1.25rem;display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;}
+.ts-label{font-size:0.72rem;font-weight:700;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;}
+.ts-score{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--gold);letter-spacing:2px;}
+.ts-max{font-size:0.82rem;color:rgba(255,255,255,0.3);}
+.ts-verdict{font-size:0.8rem;font-weight:700;padding:0.3rem 0.875rem;border-radius:20px;}
+.ts-verdict.strong{background:var(--green-dim);color:var(--green);}
+.ts-verdict.maybe{background:rgba(243,156,18,0.1);color:var(--orange);}
+.ts-verdict.pass{background:var(--red-dim);color:var(--red);}
+.rubric-notes{width:100%;padding:0.75rem 1rem;background:rgba(255,255,255,0.03);border:1.5px solid var(--border2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:0.82rem;color:var(--white);outline:none;resize:vertical;min-height:80px;transition:border-color 0.2s;}
+.rubric-notes:focus{border-color:var(--gold);}
+.rubric-notes::placeholder{color:rgba(255,255,255,0.2);}
+
+/* VA PROFILE IN MODAL */
+.va-profile-modal{display:flex;gap:1.25rem;align-items:flex-start;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);}
+.vpm-av{width:64px;height:64px;border-radius:50%;border:2.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:white;flex-shrink:0;}
+.vpm-name{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:1px;}
+.vpm-role{font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:2px;}
+.vpm-badges{display:flex;gap:0.4rem;flex-wrap:wrap;margin-top:0.5rem;}
+.vpm-badge{padding:0.2rem 0.6rem;border-radius:12px;font-size:0.65rem;font-weight:700;}
+.vpm-badge.gold{background:var(--gold-dim);color:var(--gold);border:1px solid rgba(212,168,67,0.2);}
+.vpm-badge.gray{background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.5);border:1px solid var(--border2);}
+.info-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem;margin-bottom:1.25rem;}
+.info-item{background:var(--dark2);border-radius:8px;padding:0.75rem;}
+.ii-label{font-size:0.6rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:2px;}
+.ii-val{font-size:0.82rem;font-weight:700;color:var(--white);}
+.crm-tags{display:flex;flex-wrap:wrap;gap:0.35rem;margin-bottom:1.25rem;}
+.crm-tag{font-size:0.65rem;font-weight:600;padding:0.2rem 0.55rem;border-radius:5px;background:var(--gold-dim);color:var(--gold);border:1px solid rgba(212,168,67,0.15);}
+
+/* CLIENT DETAIL */
+.client-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;}
+.cd-card{background:var(--dark2);border:1px solid var(--border);border-radius:12px;padding:1.1rem;}
+.cd-title{font-size:0.65rem;font-weight:800;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.75rem;}
+.cd-item{display:flex;align-items:center;justify-content:space-between;padding:0.3rem 0;border-bottom:1px solid var(--border);font-size:0.78rem;}
+.cd-item:last-child{border-bottom:none;}
+.cd-key{color:rgba(255,255,255,0.4);}
+.cd-val{font-weight:700;color:var(--white);}
+.hired-va-list{display:flex;flex-direction:column;gap:0.5rem;}
+.hva{display:flex;align-items:center;gap:0.75rem;padding:0.6rem;background:rgba(255,255,255,0.02);border-radius:8px;border:1px solid var(--border);}
+.hva-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.62rem;font-weight:800;color:white;flex-shrink:0;}
+.hva-name{font-size:0.78rem;font-weight:700;}
+.hva-role{font-size:0.65rem;color:rgba(255,255,255,0.35);}
+.hva-since{margin-left:auto;font-size:0.65rem;color:rgba(255,255,255,0.3);}
+
+/* REVENUE CHART */
+.rev-chart{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.5rem;}
+.rc-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.5rem;}
+.rc-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;}
+.rc-total{text-align:right;}
+.rc-total-num{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--gold);letter-spacing:1px;}
+.rc-total-label{font-size:0.65rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;}
+.chart-bars{display:flex;align-items:flex-end;gap:0.75rem;height:120px;padding-bottom:0.5rem;}
+.chart-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:0.3rem;}
+.chart-bar{width:100%;border-radius:4px 4px 0 0;background:var(--gold-dim);border:1px solid rgba(212,168,67,0.2);transition:all 0.3s;cursor:pointer;position:relative;}
+.chart-bar:hover{background:rgba(212,168,67,0.2);}
+.chart-bar.current{background:linear-gradient(180deg,var(--gold),rgba(212,168,67,0.5));border-color:var(--gold);}
+.chart-label{font-size:0.6rem;color:rgba(255,255,255,0.3);font-weight:600;}
+.chart-val{font-size:0.62rem;color:var(--gold);font-weight:800;}
+
+/* ACTIVITY FEED */
+.activity-feed{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;}
+.af-item{display:flex;gap:0.875rem;padding:0.75rem 0;border-bottom:1px solid var(--border);}
+.af-item:last-child{border-bottom:none;}
+.af-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.85rem;flex-shrink:0;}
+.af-icon.green{background:var(--green-dim);}
+.af-icon.gold{background:var(--gold-dim);}
+.af-icon.blue{background:var(--blue-dim);}
+.af-icon.red{background:var(--red-dim);}
+.af-text{font-size:0.78rem;color:rgba(255,255,255,0.65);line-height:1.5;flex:1;}
+.af-text strong{color:var(--white);}
+.af-time{font-size:0.65rem;color:rgba(255,255,255,0.25);white-space:nowrap;margin-top:2px;}
+
+/* SETTINGS */
+.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.settings-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;}
+.sc-title{font-weight:800;font-size:0.88rem;margin-bottom:0.25rem;}
+.sc-desc{font-size:0.72rem;color:rgba(255,255,255,0.35);margin-bottom:1.25rem;line-height:1.6;}
+.setting-row{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid var(--border);}
+.setting-row:last-child{border-bottom:none;}
+.sr-label{font-size:0.78rem;color:rgba(255,255,255,0.65);}
+.toggle{width:40px;height:22px;border-radius:11px;background:var(--border2);cursor:pointer;position:relative;transition:background 0.2s;}
+.toggle.on{background:var(--green);}
+.toggle::after{content:'';position:absolute;width:16px;height:16px;border-radius:50%;background:white;top:3px;left:3px;transition:left 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.3);}
+.toggle.on::after{left:21px;}
+.fi-s{width:100%;padding:0.6rem 0.875rem;background:rgba(255,255,255,0.04);border:1.5px solid var(--border2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:0.82rem;color:var(--white);outline:none;transition:border-color 0.2s;margin-bottom:0.75rem;}
+.fi-s:focus{border-color:var(--gold);}
+.fi-s::placeholder{color:rgba(255,255,255,0.2);}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--dark2);border:1px solid rgba(212,168,67,0.25);color:white;padding:0.875rem 1.25rem;border-radius:10px;font-size:0.8rem;font-weight:600;z-index:999;transform:translateX(160%);transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);display:flex;align-items:center;gap:0.5rem;max-width:300px;}
+.toast.show{transform:translateX(0);}
+.tdot{width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+
+/* EMPTY STATE */
+.empty{text-align:center;padding:3rem;color:rgba(255,255,255,0.2);}
+.empty-icon{font-size:2.5rem;margin-bottom:0.75rem;}
+.empty-text{font-size:0.82rem;}
+
+/* TWO COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;}
+
+@media(max-width:900px){
+  .sidebar{width:60px;}
+  .sb-item-label,.sb-logo-text,.sb-logo-sub,.sb-admin-name,.sb-admin-role,.sb-section{display:none;}
+  .main{margin-left:60px;}
+  .stat-grid{grid-template-columns:1fr 1fr;}
+  .rubric-grid,.two-col,.settings-grid,.client-detail-grid{grid-template-columns:1fr;}
+  .info-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"><div class="tdot"></div><span id="tmsg"></span></div>
+
+<!-- LOGIN -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-logo">Elite Remote Agent</div>
+  <div class="login-sub">Admin Panel — Authorized Access Only</div>
+  <div class="login-card">
+    <div class="login-title">Welcome Back</div>
+    <div class="login-desc">Sign in to manage your VA platform</div>
+    <label class="lf">Email Address</label>
+    <input class="li" type="email" id="loginEmail" placeholder="admin@eliteremoteagent.com" value="admin@eliteremoteagent.com"/>
+    <label class="lf">Password</label>
+    <input class="li" type="password" id="loginPass" placeholder="••••••••" value="ERA2026"/>
+    <button class="btn-login" onclick="doLogin()">Sign In to Admin Panel →</button>
+    <div class="login-hint">Demo: admin@eliteremoteagent.com / ERA2026</div>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <div class="sb-logo">
+    <div class="sb-logo-text">Elite Remote</div>
+    <div class="sb-logo-sub">Admin Panel</div>
+  </div>
+  <div class="sb-admin">
+    <div class="sb-av">JB</div>
+    <div>
+      <div class="sb-admin-name">James Burbank</div>
+      <div class="sb-admin-role">Platform Owner</div>
+    </div>
+  </div>
+  <div class="sb-nav">
+    <div class="sb-section">Main</div>
+    <div class="sb-item active" onclick="nav('dashboard')">
+      <div class="sb-item-icon">📊</div>
+      <div class="sb-item-label">Dashboard</div>
+    </div>
+    <div class="sb-item" onclick="nav('applications')">
+      <div class="sb-item-icon">📋</div>
+      <div class="sb-item-label">VA Applications</div>
+      <div class="sb-badge" id="appBadge">7</div>
+    </div>
+    <div class="sb-item" onclick="nav('vas')">
+      <div class="sb-item-icon">👥</div>
+      <div class="sb-item-label">Active VAs</div>
+      <div class="sb-badge green">23</div>
+    </div>
+    <div class="sb-item" onclick="nav('clients')">
+      <div class="sb-item-icon">🏢</div>
+      <div class="sb-item-label">Clients</div>
+    </div>
+    <div class="sb-section">Business</div>
+    <div class="sb-item" onclick="nav('revenue')">
+      <div class="sb-item-icon">💰</div>
+      <div class="sb-item-label">Revenue</div>
+    </div>
+    <div class="sb-item" onclick="nav('training')">
+      <div class="sb-item-icon">📚</div>
+      <div class="sb-item-label">Training</div>
+    </div>
+    <div class="sb-section">System</div>
+    <div class="sb-item" onclick="nav('settings')">
+      <div class="sb-item-icon">⚙️</div>
+      <div class="sb-item-label">Settings</div>
+    </div>
+  </div>
+  <div class="sb-footer">
+    <div class="sb-logout" onclick="doLogout()">🚪 <span>Sign Out</span></div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div class="tb-title" id="pageTitle">Dashboard</div>
+    <div class="tb-right">
+      <div class="tb-search"><span style="color:rgba(255,255,255,0.2);">🔍</span><input placeholder="Search platform..." id="globalSearch"/></div>
+      <div class="tb-notif">🔔<div class="notif-dot"></div></div>
+      <div class="tb-date" id="tbDate"></div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="page active" id="page-dashboard">
+    <div class="stat-grid">
+      <div class="stat-card gold">
+        <div class="stat-icon">📋</div>
+        <div class="stat-num">7</div>
+        <div class="stat-label">Pending Applications</div>
+        <div class="stat-change up">↑ 3 new today</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-icon">👥</div>
+        <div class="stat-num">23</div>
+        <div class="stat-label">Active VAs Live</div>
+        <div class="stat-change up">↑ 2 this week</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-icon">🏢</div>
+        <div class="stat-num">18</div>
+        <div class="stat-label">Paying Clients</div>
+        <div class="stat-change up">↑ 4 this month</div>
+      </div>
+      <div class="stat-card red">
+        <div class="stat-icon">💰</div>
+        <div class="stat-num">$4,446</div>
+        <div class="stat-label">Monthly Revenue</div>
+        <div class="stat-change up">↑ +$988 vs last mo</div>
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-bottom:1.5rem;">
+      <!-- PENDING APPS -->
+      <div>
+        <div class="sec-head">
+          <div class="sec-title">⚡ Pending Applications</div>
+          <button class="btn-sm gold" onclick="nav('applications')">View All →</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Applicant</th><th>Role</th><th>Applied</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><div class="td-name"><div class="td-av" style="background:#1B4F8A;">MS</div><div><div class="td-n">Maria Santos</div><div class="td-r">Philippines · EST+1</div></div></div></td>
+                <td>Transaction Coord.</td>
+                <td style="color:var(--muted);font-size:0.72rem;">2 hrs ago</td>
+                <td><div class="action-btns"><div class="act view" onclick="openVAModal('Maria Santos','Transaction Coordinator','MS','#1B4F8A','6 yrs','$8/hr','Philippines')" title="Score & Review">👁️</div><div class="act approve" onclick="approveVA('Maria Santos')" title="Approve">✓</div><div class="act reject" onclick="rejectVA('Maria Santos')" title="Reject">✗</div></div></td>
+              </tr>
+              <tr>
+                <td><div class="td-name"><div class="td-av" style="background:#2D5A3D;">JR</div><div><div class="td-n">Juan Reyes</div><div class="td-r">Philippines · CST</div></div></div></td>
+                <td>ISA / Lead Qualifier</td>
+                <td style="color:var(--muted);font-size:0.72rem;">5 hrs ago</td>
+                <td><div class="action-btns"><div class="act view" onclick="openVAModal('Juan Reyes','ISA / Lead Qualifier','JR','#2D5A3D','4 yrs','$7/hr','Philippines')" title="Score & Review">👁️</div><div class="act approve" onclick="approveVA('Juan Reyes')" title="Approve">✓</div><div class="act reject" onclick="rejectVA('Juan Reyes')" title="Reject">✗</div></div></td>
+              </tr>
+              <tr>
+                <td><div class="td-name"><div class="td-av" style="background:#7B3F00;">AC</div><div><div class="td-n">Ana Cruz</div><div class="td-r">Philippines · PST+3</div></div></div></td>
+                <td>Marketing VA</td>
+                <td style="color:var(--muted);font-size:0.72rem;">1 day ago</td>
+                <td><div class="action-btns"><div class="act view" onclick="openVAModal('Ana Cruz','Marketing VA','AC','#7B3F00','5 yrs','$8/hr','Philippines')" title="Score & Review">👁️</div><div class="act approve" onclick="approveVA('Ana Cruz')" title="Approve">✓</div><div class="act reject" onclick="rejectVA('Ana Cruz')" title="Reject">✗</div></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- RECENT CLIENTS -->
+      <div>
+        <div class="sec-head">
+          <div class="sec-title">🏢 Recent Clients</div>
+          <button class="btn-sm outline" onclick="nav('clients')">View All →</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Client</th><th>Plan</th><th>VAs Hired</th><th>MRR</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><div class="td-name"><div class="td-av" style="background:#1B4F8A;">SK</div><div><div class="td-n">Sarah K.</div><div class="td-r">Phoenix, AZ</div></div></div></td>
+                <td><span class="badge growth">Growth</span></td>
+                <td style="font-weight:700;color:var(--green);">3 VAs</td>
+                <td style="color:var(--gold);font-weight:800;">$247</td>
+              </tr>
+              <tr>
+                <td><div class="td-name"><div class="td-av" style="background:#2D5A3D;">TR</div><div><div class="td-n">Tom R.</div><div class="td-r">Scottsdale, AZ</div></div></div></td>
+                <td><span class="badge elite">Elite</span></td>
+                <td style="font-weight:700;color:var(--green);">7 VAs</td>
+                <td style="color:var(--gold);font-weight:800;">$597</td>
+              </tr>
+              <tr>
+                <td><div class="td-name"><div class="td-av" style="background:#7B1D1D;">DM</div><div><div class="td-n">Dr. Marcus L.</div><div class="td-r">Scottsdale, AZ</div></div></div></td>
+                <td><span class="badge starter">Starter</span></td>
+                <td style="font-weight:700;color:var(--green);">1 VA</td>
+                <td style="color:var(--gold);font-weight:800;">$97</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTIVITY + CHART -->
+    <div class="two-col">
+      <div class="rev-chart">
+        <div class="rc-header">
+          <div>
+            <div class="rc-title">Monthly Revenue</div>
+            <div style="font-size:0.72rem;color:rgba(255,255,255,0.3);">Last 6 months</div>
+          </div>
+          <div class="rc-total">
+            <div class="rc-total-num">$4,446</div>
+            <div class="rc-total-label">This Month</div>
+          </div>
+        </div>
+        <div class="chart-bars">
+          <div class="chart-bar-wrap"><div class="chart-val">$1.2k</div><div class="chart-bar" style="height:35%;"></div><div class="chart-label">Dec</div></div>
+          <div class="chart-bar-wrap"><div class="chart-val">$1.8k</div><div class="chart-bar" style="height:48%;"></div><div class="chart-label">Jan</div></div>
+          <div class="chart-bar-wrap"><div class="chart-val">$2.4k</div><div class="chart-bar" style="height:60%;"></div><div class="chart-label">Feb</div></div>
+          <div class="chart-bar-wrap"><div class="chart-val">$3.1k</div><div class="chart-bar" style="height:72%;"></div><div class="chart-label">Mar</div></div>
+          <div class="chart-bar-wrap"><div class="chart-val">$3.5k</div><div class="chart-bar" style="height:82%;"></div><div class="chart-label">Apr</div></div>
+          <div class="chart-bar-wrap"><div class="chart-val">$4.4k</div><div class="chart-bar current" style="height:100%;"></div><div class="chart-label">May</div></div>
+        </div>
+      </div>
+
+      <div class="activity-feed">
+        <div class="sec-head" style="margin-bottom:0.5rem;"><div class="sec-title">Live Activity</div></div>
+        <div class="af-item">
+          <div class="af-icon green">✅</div>
+          <div><div class="af-text"><strong>Maria Santos</strong> approved and went live on the platform</div><div class="af-time">12 min ago</div></div>
+        </div>
+        <div class="af-item">
+          <div class="af-icon gold">💳</div>
+          <div><div class="af-text"><strong>Tom R.</strong> upgraded from Growth to Elite Team</div><div class="af-time">1 hr ago</div></div>
+        </div>
+        <div class="af-item">
+          <div class="af-icon blue">👋</div>
+          <div><div class="af-text"><strong>New client</strong> Sarah K. signed up — Growth Plan</div><div class="af-time">3 hrs ago</div></div>
+        </div>
+        <div class="af-item">
+          <div class="af-icon gold">📋</div>
+          <div><div class="af-text"><strong>Juan Reyes</strong> submitted VA application</div><div class="af-time">5 hrs ago</div></div>
+        </div>
+        <div class="af-item">
+          <div class="af-icon green">🤝</div>
+          <div><div class="af-text"><strong>Dr. Marcus L.</strong> hired Sofia P. — Med Spa VA</div><div class="af-time">Yesterday</div></div>
+        </div>
+        <div class="af-item">
+          <div class="af-icon red">❌</div>
+          <div><div class="af-text"><strong>Ben T.</strong> application rejected — insufficient experience</div><div class="af-time">Yesterday</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPLICATIONS PAGE -->
+  <div class="page" id="page-applications">
+    <div class="sec-head">
+      <div class="sec-title">VA Applications</div>
+      <div class="sec-actions">
+        <button class="btn-sm outline" onclick="fire('📤 Invite link copied!')">📎 Copy Invite Link</button>
+        <button class="btn-sm gold" onclick="fire('📧 Bulk invite sent!')">+ Invite VAs</button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <div class="table-filters">
+        <div class="tf-search"><span style="color:rgba(255,255,255,0.2);">🔍</span><input placeholder="Search applicants..."/></div>
+        <button class="filter-pill on" onclick="toggleFilter(this)">All (7)</button>
+        <button class="filter-pill" onclick="toggleFilter(this)">Pending (4)</button>
+        <button class="filter-pill" onclick="toggleFilter(this)">In Review (2)</button>
+        <button class="filter-pill on green" onclick="toggleFilter(this)">Approved (18)</button>
+        <button class="filter-pill on red" onclick="toggleFilter(this)">Rejected (3)</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Applicant</th>
+            <th>Specialty</th>
+            <th>Experience</th>
+            <th>Rate</th>
+            <th>Rubric Score</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="td-name"><div class="td-av" style="background:#1B4F8A;">MS</div><div><div class="td-n">Maria Santos</div><div class="td-r">Philippines · EST+1</div></div></div></td>
+            <td>Transaction Coord.</td><td>6 years</td><td>$8/hr</td>
+            <td><div class="score-bar"><div class="sb-track"><div class="sb-fill" style="width:87%;background:var(--green);"></div></div><div class="sb-num" style="color:var(--green);">87</div></div></td>
+            <td><span class="badge pending">Pending</span></td>
+            <td><div class="action-btns"><div class="act view" onclick="openVAModal('Maria Santos','Transaction Coordinator','MS','#1B4F8A','6 yrs','$8/hr','Philippines')" title="Score">📊</div><div class="act approve" onclick="approveVA('Maria Santos')" title="Approve">✓</div><div class="act reject" onclick="rejectVA('Maria Santos')" title="Reject">✗</div><div class="act msg" onclick="fire('💬 Message sent!')" title="Message">💬</div></div></td>
+          </tr>
+          <tr>
+            <td><div class="td-name"><div class="td-av" style="background:#2D5A3D;">JR</div><div><div class="td-n">Juan Reyes</div><div class="td-r">Philippines · CST</div></div></div></td>
+            <td>ISA / Lead Qualifier</td><td>4 years</td><td>$7/hr</td>
+            <td><div class="score-bar"><div class="sb-track"><div class="sb-fill" style="width:74%;background:var(--orange);"></div></div><div class="sb-num" style="color:var(--orange);">74</div></div></td>
+            <td><span class="badge review">In Review</span></td>
+            <td><div class="action-btns"><div class="act view" onclick="openVAModal('Juan Reyes','ISA / Lead Qualifier','JR','#2D5A3D','4 yrs','$7/hr','Philippines')" title="Score">📊</div><div class="act approve" onclick="approveVA('Juan Reyes')" title="Approve">✓</div><div class="act reject" onclick="rejectVA('Juan Reyes')" title="Reject">✗</div><div class="act msg" onclick="fire('💬 Message sent!')" title="Message">💬</div></div></td>
+          </tr>
+          <tr>
+            <td><div class="td-name"><div class="td-av" style="background:#7B3F00;">AC</div><div><div class="td-n">Ana Cruz</div><div class="td-r">Philippines · PST+3</div></div></div></td>
+            <td>Marketing VA</td><td>5 years</td><td>$8/hr</td>
+            <td><div class="score-bar"><div class="sb-track"><div class="sb-fill" style="width:91%;background:var(--green);"></div></div><div class="sb-num" style="color:var(--green);">91</div></div></td>
+            <td><span class="badge pending">Pending</span></td>
+            <td><div class="action-btns"><div class="act view" onclick="openVAModal('Ana Cruz','Marketing VA','AC','#7B3F00','5 yrs','$8/hr','Philippines')" title="Score">📊</div><div class="act approve" onclick="approveVA('Ana Cruz')" title="Approve">✓</div><div class="act reject" onclick="rejectVA('Ana Cruz')" title="Reject">✗</div><div class="act msg" onclick="fire('💬 Message sent!')" title="Message">💬</div></div></td>
+          </tr>
+          <tr>
+            <td><div class="td-name"><div class="td-av" style="background:#1B4F8A;">CM</div><div><div class="td-n">Carlo Mendoza</div><div class="td-r">Philippines · EST+1</div></div></div></td>
+            <td>CRM Specialist</td><td>5 years</td><td>$8/hr</td>
+            <td><div class="score-bar"><div class="sb-track"><div class="sb-fill" style="width:95%;background:var(--green);"></div></div><div class="sb-num" style="color:var(--green);">95</div></div></td>
+            <td><span class="badge approved">Approved</span></td>
+            <td><div class="action-btns"><div class="act view" onclick="openVAModal('Carlo Mendoza','CRM Specialist','CM','#1B4F8A','5 yrs','$8/hr','Philippines')" title="View">👁️</div><div class="act edit" onclick="fire('✏️ Edit profile opened!')" title="Edit">✏️</div><div class="act msg" onclick="fire('💬 Message sent!')" title="Message">💬</div></div></td>
+          </tr>
+          <tr>
+            <td><div class="td-name"><div class="td-av" style="background:#6B3A7D;">LF</div><div><div class="td-n">Liza Flores</div><div class="td-r">Philippines · CST</div></div></div></td>
+            <td>Social Media VA</td><td>3 years</td><td>$6/hr</td>
+            <td><div class="score-bar"><div class="sb-track"><div class="sb-fill" style="width:62%;background:var(--orange);"></div></div><div class="sb-num" style="color:var(--orange);">62</div></div></td>
+            <td><span class="badge pending">Pending</span></td>
+            <td><div class="action-btns"><div class="act view" onclick="openVAModal('Liza Flores','Social Media VA','LF','#6B3A7D','3 yrs','$6/hr','Philippines')" title="Score">📊</div><div class="act approve" onclick="approveVA('Liza Flores')" title="Approve">✓</div><div class="act reject" onclick="rejectVA('Liza Flores')" title="Reject">✗</div></div></td>
+          </tr>
+          <tr>
+            <td><div class="td-name"><div class="td-av" style="background:#7B1D1D;">BT</div><div><div class="td-n">Ben Torres</div><div class="td-r">Philippines · EST+1</div></div></div></td>
+            <td>Admin VA</td><td>1 year</td><td>$5/hr</td>
+            <td><div class="score-bar"><div class="sb-track"><div class="sb-fill" style="width:38%;background:var(--red);"></div></div><div class="sb-num" style="color:var(--red);">38</div></div></td>
+            <td><span class="badge rejected">Rejected</span></td>
+            <td><div class="action-btns"><div class="act view" onclick="openVAModal('Ben Torres','Admin VA','BT','#7B1D1D','1 yr','$5/hr','Philippines')" title="View">👁️</div><div class="act msg" onclick="fire('💬 Message sent!')" title="Message">💬</div></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ACTIVE VAs PAGE -->
+  <div class="page" id="page-vas">
+    <div class="sec-head">
+      <div class="sec-title">Active VAs — Live on Platform</div>
+      <div class="sec-actions">
+        <button class="btn-sm outline" onclick="fire('📊 Export CSV downloading...')">📊 Export</button>
+        <button class="btn-sm gold" onclick="fire('📎 Invite link copied!')">+ Add VA</button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <div class="table-filters">
+        <div class="tf-search"><span style="color:rgba(255,255,255,0.2);">🔍</span><input placeholder="Search active VAs..."/></div>
+        <button class="filter-pill on" onclick="toggleFilter(this)">All (23)</button>
+        <button class="filter-pill on green" onclick="toggleFilter(this)">Available</button>
+        <button class="filter-pill" onclick="toggleFilter(this)">Hired</button>
+        <button class="filter-pill" onclick="toggleFilter(this)">Real Estate</button>
+        <button class="filter-pill" onclick="toggleFilter(this)">Business</button>
+      </div>
+      <table>
+        <thead><tr><th>VA</th><th>Specialty</th><th>Rating</th><th>Rate</th><th>Status</th><th>Hired By</th><th>Since</th><th>Actions</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><div class="td-name"><div class="td-av" style="background:#1B4F8A;">MS</div><div><div class="td-n">Maria Santos</div><div class="td-r">Transaction Coord.</div></div></div></td>
+            <td>Real Estate</td><td style="color:var(--gold);">★ 4.9</td><td>$8/hr</td>
+            <td><span class="badge active">Available</span></td>
+            <td style="color:rgba(255,255,255,0.4);">—</td><td style="color:rgba(255,255,255,0.35);font-size:0.72rem;">Jan 2026</td>
+            <td><div class="action-btns"><div class="act view" onclick="openVAModal('Maria Santos','Transaction Coordinator','MS','#1B4F8A','6 yrs','$8/hr','Philippines')" title="View">👁️</div><div class="act edit" onclick="fire('✏️ Edit mode opened!')" title="Edit">✏️</div><div class="act red" onclick="fire('⚠️ VA hidden from platform')" style="background:var(--red-dim);color:var(--red);" title="Hide">👁️‍🗨️</div></div></td>
+          </tr>
+          <tr>
+            <td><div class="td-name"><div class="td-av" style="background:#2D5A3D;">RT</div><div><div class="td-n">Ramon Torres</div><div class="td-r">Executive Admin</div></div></div></td>
+            <td>Real Estate</td><td style="color:var(--gold);">★ 4.9</td><td>$7/hr</td>
+            <td><span class="badge" style="background:var(--red-dim);color:var(--red);border:1px solid rgba(231,76,60,0.2);">Hired</span></td>
+            <td style="color:var(--white);font-size:0.75rem;font-weight:600;">Sarah K.</td><td style="color:rgba(255,255,255,0.35);font-size:0.72rem;">Feb 2026</td>
+            <td><div class="action-btns"><div class="act view" onclick="openVAModal('Ramon Torres','Executive Admin','RT','#2D5A3D','8 yrs','$7/hr','Philippines')" title="View">👁️</div><div class="act edit" onclick="fire('✏️ Edit mode opened!')" title="Edit">✏️</div><div class="act msg" onclick="fire('💬 Message sent!')" title="Message">💬</div></div></td>
+          </tr>
+          <tr>
+            <td><div class="td-name"><div class="td-av" style="background:#7B1D1D;">SP</div><div><div class="td-n">Sofia Perez</div><div class="td-r">Med Spa VA</div></div></div></td>
+            <td>Business</td><td style="color:var(--gold);">★ 4.8</td><td>$8/hr</td>
+            <td><span class="badge" style="background:var(--red-dim);color:var(--red);border:1px solid rgba(231,76,60,0.2);">Hired</span></td>
+            <td style="color:var(--white);font-size:0.75rem;font-weight:600;">Dr. Marcus L.</td><td style="color:rgba(255,255,255,0.35);font-size:0.72rem;">Mar 2026</td>
+            <td><div class="action-btns"><div class="act view" onclick="openVAModal('Sofia Perez','Med Spa VA','SP','#7B1D1D','5 yrs','$8/hr','Philippines')" title="View">👁️</div><div class="act edit" onclick="fire('✏️ Edit mode opened!')" title="Edit">✏️</div><div class="act msg" onclick="fire('💬 Message sent!')" title="Message">💬</div></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- CLIENTS PAGE -->
+  <div class="page" id="page-clients">
+    <div class="sec-head">
+      <div class="sec-title">Client Management</div>
+      <div class="sec-actions">
+        <button class="btn-sm outline" onclick="fire('📊 Client report exported!')">📊 Export</button>
+        <button class="btn-sm gold" onclick="fire('✉️ Client invite sent!')">+ Add Client</button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <div class="table-filters">
+        <div class="tf-search"><span style="color:rgba(255,255,255,0.2);">🔍</span><input placeholder="Search clients..."/></div>
+        <button class="filter-pill on" onclick="toggleFilter(this)">All (18)</button>
+        <button class="filter-pill on green" onclick="toggleFilter(this)">Active</button>
+        <button class="filter-pill" onclick="toggleFilter(this)">Starter</button>
+        <button class="filter-pill" onclick="toggleFilter(this)">Growth</button>
+        <button class="filter-pill" onclick="toggleFilter(this)">Elite</button>
+      </div>
+      <table>
+        <thead><tr><th>Client</th><th>Plan</th><th>VAs Hired</th><th>Member Since</th><th>MRR</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><div class="td-name"><div class="td-av" style="background:#1B4F8A;">SK</div><div><div class="td-n">Sarah K.</div><div class="td-r">Real Estate · Phoenix AZ</div></div></div></td>
+            <td><span class="badge growth">Growth</span></td>
+            <td style="font-weight:800;color:var(--green);">3</td>
+            <td style="color:rgba(255,255,255,0.4);font-size:0.75rem;">Jan 15, 2026</td>
+            <td style="color:var(--gold);font-weight:800;">$247</td>
+            <td><span class="badge active">Active</span></td>
+            <td><div class="action-btns"><div class="act view" onclick="openClientModal('Sarah K.','SK','#1B4F8A','Growth','$247/mo','Jan 15 2026','Real Estate Agent','Phoenix AZ')" title="View All Details">👁️</div><div class="act msg" onclick="fire('💬 Message sent to Sarah!')" title="Message">💬</div><div class="act edit" onclick="fire('✏️ Edit client opened!')" title="Edit">✏️</div></div></td>
+          </tr>
+          <tr>
+            <td><div class="td-name"><div class="td-av" style="background:#2D5A3D;">TR</div><div><div class="td-n">Tom R.</div><div class="td-r">Real Estate · Scottsdale AZ</div></div></div></td>
+            <td><span class="badge elite">Elite</span></td>
+            <td style="font-weight:800;color:var(--green);">7</td>
+            <td style="color:rgba(255,255,255,0.4);font-size:0.75rem;">Dec 1, 2025</td>
+            <td style="color:var(--gold);font-weight:800;">$597</td>
+            <td><span class="badge active">Active</span></td>
+            <td><div class="action-btns"><div class="act view" onclick="openClientModal('Tom R.','TR','#2D5A3D','Elite Team','$597/mo','Dec 1 2025','Team Leader · eXp Realty','Scottsdale AZ')" title="View All Details">👁️</div><div class="act msg" onclick="fire('💬 Message sent to Tom!')" title="Message">💬</div><div class="act edit" onclick="fire('✏️ Edit client opened!')" title="Edit">✏️</div></div></td>
+          </tr>
+          <tr>
+            <td><div class="td-name"><div class="td-av" style="background:#7B1D1D;">DM</div><div><div class="td-n">Dr. Marcus L.</div><div class="td-r">Med Spa · Scottsdale AZ</div></div></div></td>
+            <td><span class="badge starter">Starter</span></td>
+            <td style="font-weight:800;color:var(--green);">1</td>
+            <td style="color:rgba(255,255,255,0.4);font-size:0.75rem;">Mar 8, 2026</td>
+            <td style="color:var(--gold);font-weight:800;">$97</td>
+            <td><span class="badge active">Active</span></td>
+            <td><div class="action-btns"><div class="act view" onclick="openClientModal('Dr. Marcus L.','DM','#7B1D1D','Starter','$97/mo','Mar 8 2026','Med Spa Owner','Scottsdale AZ')" title="View All Details">👁️</div><div class="act msg" onclick="fire('💬 Message sent!')" title="Message">💬</div><div class="act edit" onclick="fire('✏️ Edit client opened!')" title="Edit">✏️</div></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- REVENUE PAGE -->
+  <div class="page" id="page-revenue">
+    <div class="stat-grid">
+      <div class="stat-card gold"><div class="stat-icon">💰</div><div class="stat-num">$4,446</div><div class="stat-label">Monthly Recurring</div><div class="stat-change up">↑ +$988 vs last mo</div></div>
+      <div class="stat-card green"><div class="stat-icon">📈</div><div class="stat-num">$53,352</div><div class="stat-label">Projected Annual</div><div class="stat-change up">↑ Based on current MRR</div></div>
+      <div class="stat-card blue"><div class="stat-icon">💳</div><div class="stat-num">$247</div><div class="stat-label">Avg Revenue Per Client</div><div class="stat-change up">↑ Growth plan winning</div></div>
+      <div class="stat-card red"><div class="stat-icon">📉</div><div class="stat-num">5.5%</div><div class="stat-label">Churn Rate</div><div class="stat-change dn">↓ 1 client cancelled</div></div>
+    </div>
+    <div class="three-col" style="margin-bottom:1.5rem;">
+      <div class="stat-card gold" style="text-align:center;"><div style="font-size:0.68rem;color:rgba(255,255,255,0.3);margin-bottom:0.5rem;">STARTER — $97/mo</div><div class="stat-num">7</div><div class="stat-label">Clients · $679/mo</div></div>
+      <div class="stat-card blue" style="text-align:center;"><div style="font-size:0.68rem;color:rgba(255,255,255,0.3);margin-bottom:0.5rem;">GROWTH — $247/mo</div><div class="stat-num">8</div><div class="stat-label">Clients · $1,976/mo</div></div>
+      <div class="stat-card green" style="text-align:center;"><div style="font-size:0.68rem;color:rgba(255,255,255,0.3);margin-bottom:0.5rem;">ELITE — $597/mo</div><div class="stat-num">3</div><div class="stat-label">Clients · $1,791/mo</div></div>
+    </div>
+    <div class="rev-chart">
+      <div class="rc-header"><div><div class="rc-title">Revenue Growth</div><div style="font-size:0.72rem;color:rgba(255,255,255,0.3);">Monthly breakdown</div></div><div class="rc-total"><div class="rc-total-num">$4,446</div><div class="rc-total-label">May 2026</div></div></div>
+      <div class="chart-bars" style="height:160px;">
+        <div class="chart-bar-wrap"><div class="chart-val">$1.2k</div><div class="chart-bar" style="height:27%;"></div><div class="chart-label">Dec</div></div>
+        <div class="chart-bar-wrap"><div class="chart-val">$1.8k</div><div class="chart-bar" style="height:40%;"></div><div class="chart-label">Jan</div></div>
+        <div class="chart-bar-wrap"><div class="chart-val">$2.4k</div><div class="chart-bar" style="height:54%;"></div><div class="chart-label">Feb</div></div>
+        <div class="chart-bar-wrap"><div class="chart-val">$3.1k</div><div class="chart-bar" style="height:70%;"></div><div class="chart-label">Mar</div></div>
+        <div class="chart-bar-wrap"><div class="chart-val">$3.5k</div><div class="chart-bar" style="height:79%;"></div><div class="chart-label">Apr</div></div>
+        <div class="chart-bar-wrap"><div class="chart-val">$4.4k</div><div class="chart-bar current" style="height:100%;"></div><div class="chart-label">May</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRAINING PAGE -->
+  <div class="page" id="page-training">
+    <div class="sec-head">
+      <div class="sec-title">Training Library</div>
+      <div class="sec-actions">
+        <button class="btn-sm gold" onclick="fire('📹 Upload training module opened!')">+ Upload Module</button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Module</th><th>Type</th><th>Portal</th><th>Required</th><th>Completions</th><th>Actions</th></tr></thead>
+        <tbody>
+          <tr><td><div class="td-name"><div style="font-size:1.25rem;margin-right:0.25rem;">🎯</div><div><div class="td-n">Follow Up Boss Mastery</div><div class="td-r">2h 15m · 8 modules</div></div></div></td><td>Video Series</td><td><span class="badge starter">Real Estate</span></td><td><span class="badge active">Required</span></td><td style="color:var(--green);font-weight:700;">18/23 VAs</td><td><div class="action-btns"><div class="act view" onclick="fire('▶️ Preview opened!')" title="Preview">▶️</div><div class="act edit" onclick="fire('✏️ Edit module!')" title="Edit">✏️</div><div class="act red" onclick="fire('🗑️ Module archived!')" title="Archive">🗑️</div></div></td></tr>
+          <tr><td><div class="td-name"><div style="font-size:1.25rem;margin-right:0.25rem;">📋</div><div><div class="td-n">Transaction Coordinator SOPs</div><div class="td-r">45m · 12 modules</div></div></div></td><td>Loom + Doc</td><td><span class="badge starter">Real Estate</span></td><td><span class="badge active">Required</span></td><td style="color:var(--green);font-weight:700;">23/23 VAs</td><td><div class="action-btns"><div class="act view" onclick="fire('▶️ Preview opened!')" title="Preview">▶️</div><div class="act edit" onclick="fire('✏️ Edit module!')" title="Edit">✏️</div><div class="act red" onclick="fire('🗑️ Module archived!')" title="Archive">🗑️</div></div></td></tr>
+          <tr><td><div class="td-name"><div style="font-size:1.25rem;margin-right:0.25rem;">📞</div><div><div class="td-n">ISA Cold Calling Scripts</div><div class="td-r">1h 30m · 6 modules</div></div></div></td><td>Role-play + Audio</td><td><span class="badge starter">Real Estate</span></td><td><span class="badge pending">Optional</span></td><td style="color:var(--orange);font-weight:700;">9/23 VAs</td><td><div class="action-btns"><div class="act view" onclick="fire('▶️ Preview opened!')" title="Preview">▶️</div><div class="act edit" onclick="fire('✏️ Edit module!')" title="Edit">✏️</div><div class="act red" onclick="fire('🗑️ Module archived!')" title="Archive">🗑️</div></div></td></tr>
+          <tr><td><div class="td-name"><div style="font-size:1.25rem;margin-right:0.25rem;">💼</div><div><div class="td-n">Business Communication Standards</div><div class="td-r">1h · 5 modules</div></div></div></td><td>Video + Quiz</td><td><span class="badge growth">Business</span></td><td><span class="badge active">Required</span></td><td style="color:var(--orange);font-weight:700;">4/8 VAs</td><td><div class="action-btns"><div class="act view" onclick="fire('▶️ Preview opened!')" title="Preview">▶️</div><div class="act edit" onclick="fire('✏️ Edit module!')" title="Edit">✏️</div><div class="act red" onclick="fire('🗑️ Module archived!')" title="Archive">🗑️</div></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SETTINGS PAGE -->
+  <div class="page" id="page-settings">
+    <div class="sec-head"><div class="sec-title">Platform Settings</div></div>
+    <div class="settings-grid">
+      <div class="settings-card">
+        <div class="sc-title">🔔 Notifications</div>
+        <div class="sc-desc">Control when and how you get notified about platform activity.</div>
+        <div class="setting-row"><div class="sr-label">New VA application received</div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="setting-row"><div class="sr-label">New client signup</div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="setting-row"><div class="sr-label">Client payment received</div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="setting-row"><div class="sr-label">VA hired by client</div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="setting-row"><div class="sr-label">Client cancellation</div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="setting-row"><div class="sr-label">Weekly revenue report</div><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+      </div>
+      <div class="settings-card">
+        <div class="sc-title">💳 Subscription Plans</div>
+        <div class="sc-desc">Manage your platform pricing tiers.</div>
+        <div class="setting-row"><div class="sr-label">Starter Plan</div><div style="font-weight:800;color:var(--gold);">$97/mo</div></div>
+        <div class="setting-row"><div class="sr-label">Growth Plan</div><div style="font-weight:800;color:var(--gold);">$247/mo</div></div>
+        <div class="setting-row"><div class="sr-label">Elite Team Plan</div><div style="font-weight:800;color:var(--gold);">$597/mo</div></div>
+        <div class="setting-row"><div class="sr-label">Free Trial Days</div><div style="font-weight:800;color:var(--white);">30 days</div></div>
+        <button class="btn-sm gold" style="margin-top:1rem;width:100%;" onclick="fire('✏️ Pricing editor opened!')">Edit Pricing</button>
+      </div>
+      <div class="settings-card">
+        <div class="sc-title">🔒 Admin Access</div>
+        <div class="sc-desc">Manage who can access this admin panel.</div>
+        <label class="lf" style="color:rgba(255,255,255,0.4);font-size:0.68rem;display:block;margin-bottom:0.35rem;">Admin Email</label>
+        <input class="fi-s" type="email" value="admin@eliteremoteagent.com"/>
+        <label class="lf" style="color:rgba(255,255,255,0.4);font-size:0.68rem;display:block;margin-bottom:0.35rem;">New Password</label>
+        <input class="fi-s" type="password" placeholder="Enter new password"/>
+        <button class="btn-sm gold" onclick="fire('✅ Settings saved!')">Save Changes</button>
+      </div>
+      <div class="settings-card">
+        <div class="sc-title">🌐 Platform Settings</div>
+        <div class="sc-desc">Control platform-wide features and visibility.</div>
+        <div class="setting-row"><div class="sr-label">Real Estate Portal Active</div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="setting-row"><div class="sr-label">Business Portal Active</div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="setting-row"><div class="sr-label">New VA Applications Open</div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="setting-row"><div class="sr-label">Free Trial Enabled</div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="setting-row"><div class="sr-label">Maintenance Mode</div><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VA SCORING MODAL -->
+<div class="modal-overlay" id="vaModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="mh-left">
+        <div class="mh-tag">VA Application — Scoring Rubric</div>
+        <div class="mh-title" id="modal-va-name">VA Name</div>
+        <div class="mh-sub" id="modal-va-role">Role · Location</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('vaModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <!-- VA PROFILE -->
+      <div class="va-profile-modal">
+        <div class="vpm-av" id="modal-va-av" style="background:#1B4F8A;">MS</div>
+        <div>
+          <div class="vpm-name" id="modal-va-name2">VA Name</div>
+          <div class="vpm-role" id="modal-va-role2">Role</div>
+          <div class="vpm-badges">
+            <span class="vpm-badge gold" id="modal-va-exp">6 yrs exp</span>
+            <span class="vpm-badge gold" id="modal-va-rate">$8/hr</span>
+            <span class="vpm-badge gray" id="modal-va-loc">Philippines</span>
+            <span class="vpm-badge gray">Voice ✓</span>
+            <span class="vpm-badge gray">Resume ✓</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-item"><div class="ii-label">Applied</div><div class="ii-val">2 hours ago</div></div>
+        <div class="info-item"><div class="ii-label">US Experience</div><div class="ii-val">3–5 clients</div></div>
+        <div class="info-item"><div class="ii-label">Availability</div><div class="ii-val">Full-time</div></div>
+        <div class="info-item"><div class="ii-label">Education</div><div class="ii-val">BS Business</div></div>
+        <div class="info-item"><div class="ii-label">English Level</div><div class="ii-val">Fluent</div></div>
+        <div class="info-item"><div class="ii-label">RE Knowledge</div><div class="ii-val">Advanced</div></div>
+      </div>
+
+      <div style="margin-bottom:1rem;">
+        <div style="font-size:0.65rem;font-weight:800;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.5rem;">CRM & Tool Experience</div>
+        <div class="crm-tags">
+          <span class="crm-tag">Follow Up Boss</span><span class="crm-tag">Dotloop</span><span class="crm-tag">MLS</span>
+          <span class="crm-tag">Google Workspace</span><span class="crm-tag">Canva Pro</span><span class="crm-tag">Loom</span>
+        </div>
+      </div>
+
+      <!-- RUBRIC -->
+      <div style="font-size:0.68rem;font-weight:800;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.875rem;">📊 Scoring Rubric — Rate Each Category</div>
+      <div class="rubric-grid">
+        <div class="rubric-item">
+          <div class="ri-header"><span class="ri-label">🛠️ CRM & Tool Experience</span><span class="ri-score" id="score-crm">0/20</span></div>
+          <div class="ri-stars" id="stars-crm">
+            <div class="star" onclick="scoreRubric('crm',1,4)">1</div>
+            <div class="star" onclick="scoreRubric('crm',2,8)">2</div>
+            <div class="star" onclick="scoreRubric('crm',3,12)">3</div>
+            <div class="star" onclick="scoreRubric('crm',4,16)">4</div>
+            <div class="star" onclick="scoreRubric('crm',5,20)">5</div>
+          </div>
+          <div class="ri-desc">Rate their proficiency in real estate CRMs, transaction tools, and software listed in their application.</div>
+        </div>
+        <div class="rubric-item">
+          <div class="ri-header"><span class="ri-label">🗣️ Communication Quality</span><span class="ri-score" id="score-comm">0/20</span></div>
+          <div class="ri-stars" id="stars-comm">
+            <div class="star" onclick="scoreRubric('comm',1,4)">1</div>
+            <div class="star" onclick="scoreRubric('comm',2,8)">2</div>
+            <div class="star" onclick="scoreRubric('comm',3,12)">3</div>
+            <div class="star" onclick="scoreRubric('comm',4,16)">4</div>
+            <div class="star" onclick="scoreRubric('comm',5,20)">5</div>
+          </div>
+          <div class="ri-desc">Rate their voice recording quality, bio writing, and English proficiency in their application.</div>
+        </div>
+        <div class="rubric-item">
+          <div class="ri-header"><span class="ri-label">📋 Real Estate Knowledge</span><span class="ri-score" id="score-re">0/20</span></div>
+          <div class="ri-stars" id="stars-re">
+            <div class="star" onclick="scoreRubric('re',1,4)">1</div>
+            <div class="star" onclick="scoreRubric('re',2,8)">2</div>
+            <div class="star" onclick="scoreRubric('re',3,12)">3</div>
+            <div class="star" onclick="scoreRubric('re',4,16)">4</div>
+            <div class="star" onclick="scoreRubric('re',5,20)">5</div>
+          </div>
+          <div class="ri-desc">Rate their understanding of US real estate processes, terminology, and client workflows.</div>
+        </div>
+        <div class="rubric-item">
+          <div class="ri-header"><span class="ri-label">💼 Work Experience</span><span class="ri-score" id="score-exp">0/20</span></div>
+          <div class="ri-stars" id="stars-exp">
+            <div class="star" onclick="scoreRubric('exp',1,4)">1</div>
+            <div class="star" onclick="scoreRubric('exp',2,8)">2</div>
+            <div class="star" onclick="scoreRubric('exp',3,12)">3</div>
+            <div class="star" onclick="scoreRubric('exp',4,16)">4</div>
+            <div class="star" onclick="scoreRubric('exp',5,20)">5</div>
+          </div>
+          <div class="ri-desc">Rate their years of relevant experience, US client history, and quality of resume/work history.</div>
+        </div>
+        <div class="rubric-item">
+          <div class="ri-header"><span class="ri-label">⭐ Overall Presentation</span><span class="ri-score" id="score-pres">0/20</span></div>
+          <div class="ri-stars" id="stars-pres">
+            <div class="star" onclick="scoreRubric('pres',1,4)">1</div>
+            <div class="star" onclick="scoreRubric('pres',2,8)">2</div>
+            <div class="star" onclick="scoreRubric('pres',3,12)">3</div>
+            <div class="star" onclick="scoreRubric('pres',4,16)">4</div>
+            <div class="star" onclick="scoreRubric('pres',5,20)">5</div>
+          </div>
+          <div class="ri-desc">Rate their profile photo quality, bio completeness, and overall first impression as a professional.</div>
+        </div>
+        <div class="rubric-item" style="display:flex;flex-direction:column;justify-content:center;align-items:center;">
+          <div class="total-score-box" style="width:100%;flex-direction:column;text-align:center;gap:0.5rem;">
+            <div class="ts-label">Total Rubric Score</div>
+            <div class="ts-score" id="totalScore">0</div>
+            <div class="ts-max">out of 100</div>
+            <div class="ts-verdict maybe" id="scoreVerdict">Score to see verdict</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom:0;">
+        <label style="display:block;font-size:0.68rem;font-weight:800;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.5rem;">Admin Notes</label>
+        <textarea class="rubric-notes" placeholder="Add your notes about this applicant — strengths, concerns, things to follow up on..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-modal outline" onclick="closeModal('vaModal')">Close</button>
+      <button class="btn-modal outline" onclick="fire('📧 Request for more info sent!')">Request Info</button>
+      <button class="btn-modal red" onclick="rejectAndClose()">✗ Reject</button>
+      <button class="btn-modal green" onclick="approveAndClose()">✓ Approve & Go Live</button>
+    </div>
+  </div>
+</div>
+
+<!-- CLIENT DETAIL MODAL -->
+<div class="modal-overlay" id="clientModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="mh-left">
+        <div class="mh-tag">Client Profile — Full Details</div>
+        <div class="mh-title" id="cm-name">Client Name</div>
+        <div class="mh-sub" id="cm-sub">Plan · Location</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('clientModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="client-detail-grid">
+        <div class="cd-card">
+          <div class="cd-title">Account Details</div>
+          <div class="cd-item"><span class="cd-key">Plan</span><span class="cd-val" id="cm-plan">—</span></div>
+          <div class="cd-item"><span class="cd-key">Monthly Revenue</span><span class="cd-val" id="cm-mrr" style="color:var(--gold);">—</span></div>
+          <div class="cd-item"><span class="cd-key">Member Since</span><span class="cd-val" id="cm-since">—</span></div>
+          <div class="cd-item"><span class="cd-key">Industry</span><span class="cd-val" id="cm-industry">—</span></div>
+          <div class="cd-item"><span class="cd-key">Location</span><span class="cd-val" id="cm-location">—</span></div>
+          <div class="cd-item"><span class="cd-key">Payment Status</span><span class="cd-val" style="color:var(--green);">✓ Current</span></div>
+          <div class="cd-item"><span class="cd-key">Next Billing</span><span class="cd-val">Jun 1, 2026</span></div>
+        </div>
+        <div class="cd-card">
+          <div class="cd-title">VAs Currently Hired</div>
+          <div class="hired-va-list" id="cm-vas">
+            <div class="hva"><div class="hva-av" style="background:#1B4F8A;">MS</div><div><div class="hva-name">Maria Santos</div><div class="hva-role">Transaction Coordinator</div></div><div class="hva-since">Jan 2026</div></div>
+            <div class="hva"><div class="hva-av" style="background:#2D5A3D;">RT</div><div><div class="hva-name">Ramon Torres</div><div class="hva-role">Executive Admin</div></div><div class="hva-since">Feb 2026</div></div>
+            <div class="hva"><div class="hva-av" style="background:#7B3F00;">JR</div><div><div class="hva-name">Juan Reyes</div><div class="hva-role">ISA / Caller</div></div><div class="hva-since">Mar 2026</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="cd-card" style="margin-bottom:1rem;">
+        <div class="cd-title">Activity Timeline</div>
+        <div class="af-item"><div class="af-icon green">🤝</div><div><div class="af-text">Hired <strong>Juan Reyes</strong> as ISA</div><div class="af-time">Mar 15, 2026</div></div></div>
+        <div class="af-item"><div class="af-icon gold">💳</div><div><div class="af-text">Renewed subscription — Month 3</div><div class="af-time">Mar 1, 2026</div></div></div>
+        <div class="af-item"><div class="af-icon green">🤝</div><div><div class="af-text">Hired <strong>Ramon Torres</strong> as Admin VA</div><div class="af-time">Feb 10, 2026</div></div></div>
+        <div class="af-item"><div class="af-icon blue">👋</div><div><div class="af-text">Signed up — Growth Plan free trial started</div><div class="af-time">Jan 15, 2026</div></div></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-modal outline" onclick="closeModal('clientModal')">Close</button>
+      <button class="btn-modal outline" onclick="fire('💬 Message sent!')">Send Message</button>
+      <button class="btn-modal red" onclick="fire('⚠️ Subscription cancelled — client notified');closeModal('clientModal')">Cancel Subscription</button>
+      <button class="btn-modal gold" onclick="fire('✏️ Edit client opened!')">Edit Client</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── STATE ──
+let rubricScores = { crm:0, comm:0, re:0, exp:0, pres:0 };
+let currentVAName = '';
+
+// ── LOGIN ──
+function doLogin() {
+  const e = document.getElementById('loginEmail').value;
+  const p = document.getElementById('loginPass').value;
+  if (e && p) {
+    document.getElementById('loginScreen').classList.add('hidden');
+    fire('✅ Welcome back, James!');
+  } else {
+    fire('⚠️ Please enter your credentials');
+  }
+}
+
+function doLogout() {
+  document.getElementById('loginScreen').classList.remove('hidden');
+  fire('👋 Signed out successfully');
+}
+
+// ── DATE ──
+document.getElementById('tbDate').textContent = new Date().toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
+
+// ── NAVIGATION ──
+const pages = ['dashboard','applications','vas','clients','revenue','training','settings'];
+const titles = {dashboard:'Dashboard',applications:'VA Applications',vas:'Active VAs',clients:'Client Management',revenue:'Revenue & Analytics',training:'Training Library',settings:'Settings'};
+
+function nav(page) {
+  pages.forEach(p => {
+    const el = document.getElementById('page-' + p);
+    if (el) el.classList.toggle('active', p === page);
+  });
+  document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
+  event.currentTarget?.classList.add('active');
+  document.getElementById('pageTitle').textContent = titles[page] || page;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── FILTERS ──
+function toggleFilter(el) { el.classList.toggle('on'); }
+
+// ── TOAST ──
+function fire(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('tmsg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// ── MODALS ──
+function openVAModal(name, role, initials, color, exp, rate, loc) {
+  currentVAName = name;
+  document.getElementById('modal-va-name').textContent = name;
+  document.getElementById('modal-va-name2').textContent = name;
+  document.getElementById('modal-va-role').textContent = role + ' · ' + loc;
+  document.getElementById('modal-va-role2').textContent = role;
+  document.getElementById('modal-va-av').textContent = initials;
+  document.getElementById('modal-va-av').style.background = color;
+  document.getElementById('modal-va-exp').textContent = exp + ' exp';
+  document.getElementById('modal-va-rate').textContent = rate;
+  document.getElementById('modal-va-loc').textContent = loc;
+  rubricScores = { crm:0, comm:0, re:0, exp:0, pres:0 };
+  ['crm','comm','re','exp','pres'].forEach(k => {
+    document.getElementById('score-' + k).textContent = '0/20';
+    document.querySelectorAll('#stars-' + k + ' .star').forEach(s => s.classList.remove('filled'));
+  });
+  document.getElementById('totalScore').textContent = '0';
+  document.getElementById('scoreVerdict').textContent = 'Score to see verdict';
+  document.getElementById('scoreVerdict').className = 'ts-verdict maybe';
+  document.getElementById('vaModal').classList.add('open');
+}
+
+function openClientModal(name, initials, color, plan, mrr, since, industry, location) {
+  document.getElementById('cm-name').textContent = name;
+  document.getElementById('cm-sub').textContent = plan + ' · ' + location;
+  document.getElementById('cm-plan').innerHTML = `<span class="badge ${plan.toLowerCase().replace(' ','')}">${plan}</span>`;
+  document.getElementById('cm-mrr').textContent = mrr;
+  document.getElementById('cm-since').textContent = since;
+  document.getElementById('cm-industry').textContent = industry;
+  document.getElementById('cm-location').textContent = location;
+  document.getElementById('clientModal').classList.add('open');
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+}
+
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
+});
+
+// ── RUBRIC SCORING ──
+function scoreRubric(category, stars, points) {
+  rubricScores[category] = points;
+  document.getElementById('score-' + category).textContent = points + '/20';
+  document.querySelectorAll('#stars-' + category + ' .star').forEach((s, i) => {
+    s.classList.toggle('filled', i < stars);
+  });
+  updateTotal();
+}
+
+function updateTotal() {
+  const total = Object.values(rubricScores).reduce((a, b) => a + b, 0);
+  document.getElementById('totalScore').textContent = total;
+  const v = document.getElementById('scoreVerdict');
+  if (total >= 80) { v.textContent = '✅ Strong Hire — Approve'; v.className = 'ts-verdict strong'; }
+  else if (total >= 60) { v.textContent = '🤔 Possible Hire — Review More'; v.className = 'ts-verdict maybe'; }
+  else { v.textContent = '❌ Not Ready — Consider Rejecting'; v.className = 'ts-verdict pass'; }
+}
+
+// ── APPROVE / REJECT ──
+function approveVA(name) {
+  fire('✅ ' + name + ' approved and is now live on the platform!');
+  const badge = parseInt(document.getElementById('appBadge').textContent);
+  if (badge > 0) document.getElementById('appBadge').textContent = badge - 1;
+}
+
+function rejectVA(name) {
+  fire('❌ ' + name + ' application rejected. They will be notified.');
+}
+
+function approveAndClose() {
+  approveVA(currentVAName);
+  closeModal('vaModal');
+}
+
+function rejectAndClose() {
+  rejectVA(currentVAName);
+  closeModal('vaModal');
+}
+</script>
+</body>
+</html>
