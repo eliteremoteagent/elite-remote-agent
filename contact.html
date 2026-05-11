@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Contact & Book a Demo — Elite Remote Agent</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --black:#050810;--dark:#0C1020;--dark2:#131828;--card:#0F1525;
+  --gold:#D4A843;--gold2:#F0C060;--gold-dim:rgba(212,168,67,0.1);
+  --white:#FFFFFF;--muted:#8892A4;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
+  --green:#2ECC71;--red:#E74C3C;--blue:#3498DB;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Manrope',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--black);}
+::-webkit-scrollbar-thumb{background:rgba(212,168,67,0.2);border-radius:2px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.1rem 3rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);backdrop-filter:blur(20px);background:rgba(5,8,16,0.85);}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:3px;color:var(--gold);cursor:pointer;text-decoration:none;}
+.logo small{display:block;font-family:'Manrope',sans-serif;font-size:0.45rem;letter-spacing:4px;color:rgba(255,255,255,0.3);text-transform:uppercase;}
+.nav-links{display:flex;gap:2rem;}
+.nav-link{color:rgba(255,255,255,0.45);font-size:0.8rem;font-weight:500;text-decoration:none;transition:color 0.2s;}
+.nav-link:hover,.nav-link.active{color:var(--gold);}
+.nav-btns{display:flex;gap:0.6rem;}
+.btn-ghost{padding:0.45rem 1.1rem;border:1px solid rgba(255,255,255,0.12);border-radius:6px;background:transparent;color:rgba(255,255,255,0.6);font-family:'Manrope',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+.btn-gold{padding:0.5rem 1.4rem;border-radius:6px;background:var(--gold);color:var(--black);font-family:'Manrope',sans-serif;font-size:0.8rem;font-weight:800;cursor:pointer;border:none;transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-1px);}
+
+/* HERO */
+.page-hero{padding:8rem 3rem 4rem;text-align:center;position:relative;overflow:hidden;}
+.ph-glow{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(212,168,67,0.06) 0%,transparent 65%);pointer-events:none;}
+.ph-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(212,168,67,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(212,168,67,0.02) 1px,transparent 1px);background-size:60px 60px;}
+.ph-content{position:relative;z-index:1;}
+.ph-tag{display:inline-flex;align-items:center;gap:0.5rem;background:var(--gold-dim);border:1px solid rgba(212,168,67,0.2);border-radius:30px;padding:0.35rem 0.875rem;margin-bottom:1.25rem;}
+.ph-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.ph-tag span{font-size:0.68rem;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;}
+.ph-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,6vw,4.5rem);letter-spacing:2px;line-height:1;margin-bottom:0.875rem;}
+.ph-h1 span{color:var(--gold);}
+.ph-sub{color:rgba(255,255,255,0.45);font-size:0.9rem;max-width:520px;margin:0 auto;}
+
+/* CONTACT OPTIONS */
+.options-section{padding:3rem 3rem 0;}
+.options-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:900px;margin:0 auto;}
+.option-card{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:1.75rem;text-align:center;cursor:pointer;transition:all 0.25s;position:relative;}
+.option-card:hover{transform:translateY(-3px);}
+.option-card.demo{border-color:rgba(212,168,67,0.2);}
+.option-card.demo:hover{border-color:var(--gold);box-shadow:0 12px 35px rgba(212,168,67,0.08);}
+.option-card.message:hover{border-color:rgba(52,152,219,0.4);}
+.option-card.va:hover{border-color:rgba(46,204,113,0.4);}
+.oc-icon{font-size:2rem;margin-bottom:0.875rem;}
+.oc-title{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:1px;margin-bottom:0.4rem;}
+.oc-desc{font-size:0.78rem;color:rgba(255,255,255,0.4);line-height:1.6;margin-bottom:1.25rem;}
+.oc-btn{width:100%;padding:0.7rem;border-radius:8px;font-family:'Manrope',sans-serif;font-weight:700;font-size:0.82rem;cursor:pointer;border:none;transition:all 0.2s;}
+.oc-btn.gold{background:var(--gold);color:var(--black);}
+.oc-btn.blue{background:var(--blue);color:white;}
+.oc-btn.green{background:var(--green);color:#0d1f12;}
+.oc-btn:hover{filter:brightness(1.1);transform:translateY(-1px);}
+.oc-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--black);font-size:0.58rem;font-weight:800;padding:0.2rem 0.875rem;border-radius:20px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;}
+
+/* MAIN CONTENT */
+.main-section{padding:3rem 3rem 5rem;}
+.main-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:2.5rem;max-width:980px;margin:0 auto;align-items:start;}
+
+/* LEFT — INFO */
+.info-col{}
+.info-title{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:1px;margin-bottom:0.5rem;}
+.info-title span{color:var(--gold);}
+.info-sub{font-size:0.82rem;color:rgba(255,255,255,0.45);line-height:1.75;margin-bottom:2rem;}
+.info-items{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;}
+.info-item{display:flex;gap:0.875rem;align-items:flex-start;}
+.ii-icon{width:40px;height:40px;border-radius:10px;background:var(--gold-dim);border:1px solid rgba(212,168,67,0.2);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+.ii-title{font-weight:700;font-size:0.85rem;margin-bottom:2px;}
+.ii-desc{font-size:0.75rem;color:rgba(255,255,255,0.4);line-height:1.55;}
+.demo-includes{background:linear-gradient(135deg,rgba(212,168,67,0.07),rgba(212,168,67,0.03));border:1px solid rgba(212,168,67,0.15);border-radius:14px;padding:1.5rem;margin-bottom:2rem;}
+.di-title{font-size:0.65rem;font-weight:800;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.875rem;}
+.di-item{display:flex;align-items:center;gap:0.5rem;padding:0.3rem 0;font-size:0.78rem;color:rgba(255,255,255,0.6);border-bottom:1px solid rgba(255,255,255,0.04);}
+.di-item:last-child{border-bottom:none;}
+.di-check{color:var(--green);font-weight:800;font-size:0.8rem;}
+.contact-links{display:flex;flex-direction:column;gap:0.6rem;}
+.cl-item{display:flex;align-items:center;gap:0.75rem;padding:0.875rem 1rem;background:var(--card);border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all 0.2s;text-decoration:none;}
+.cl-item:hover{border-color:rgba(212,168,67,0.25);transform:translateX(4px);}
+.cl-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0;}
+.cl-icon.gold{background:var(--gold-dim);}
+.cl-icon.green{background:rgba(46,204,113,0.1);}
+.cl-icon.blue{background:rgba(52,152,219,0.1);}
+.cl-label{font-size:0.72rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.5px;font-weight:700;}
+.cl-value{font-size:0.82rem;font-weight:600;color:var(--white);}
+.cl-arrow{margin-left:auto;color:rgba(255,255,255,0.2);font-size:0.8rem;transition:color 0.2s;}
+.cl-item:hover .cl-arrow{color:var(--gold);}
+
+/* RIGHT — FORM */
+.form-col{}
+.form-card{background:var(--card);border:1.5px solid var(--border);border-radius:18px;overflow:hidden;}
+.form-tabs{display:flex;border-bottom:1px solid var(--border);}
+.form-tab{flex:1;padding:1rem;text-align:center;font-size:0.78rem;font-weight:700;cursor:pointer;transition:all 0.2s;border:none;background:transparent;font-family:'Manrope',sans-serif;color:rgba(255,255,255,0.4);border-bottom:2.5px solid transparent;margin-bottom:-1px;}
+.form-tab.active{color:var(--gold);border-bottom-color:var(--gold);background:rgba(212,168,67,0.03);}
+.form-body{padding:1.75rem;}
+.form-content{display:none;}
+.form-content.active{display:block;}
+.fl{display:block;font-size:0.68rem;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.35rem;}
+.fi{width:100%;padding:0.7rem 0.875rem;background:rgba(255,255,255,0.04);border:1.5px solid var(--border2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:0.82rem;color:var(--white);outline:none;transition:all 0.2s;margin-bottom:0.875rem;}
+.fi:focus{border-color:var(--gold);background:rgba(212,168,67,0.02);}
+.fi::placeholder{color:rgba(255,255,255,0.18);}
+select.fi option{background:var(--dark2);}
+textarea.fi{resize:vertical;min-height:90px;line-height:1.6;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;}
+.btn-submit{width:100%;padding:0.875rem;border-radius:10px;background:var(--gold);color:var(--black);font-family:'Manrope',sans-serif;font-weight:800;font-size:0.9rem;cursor:pointer;border:none;transition:all 0.25s;display:flex;align-items:center;justify-content:center;gap:0.5rem;}
+.btn-submit:hover{background:var(--gold2);transform:translateY(-1px);box-shadow:0 8px 25px rgba(212,168,67,0.3);}
+.btn-submit.blue{background:var(--blue);}
+.btn-submit.blue:hover{filter:brightness(1.1);box-shadow:0 8px 25px rgba(52,152,219,0.3);}
+.secure-note{display:flex;align-items:center;justify-content:center;gap:0.4rem;font-size:0.68rem;color:rgba(255,255,255,0.2);margin-top:0.75rem;}
+
+/* CALENDAR EMBED PLACEHOLDER */
+.cal-placeholder{background:rgba(255,255,255,0.02);border:1.5px dashed var(--border2);border-radius:12px;padding:2.5rem;text-align:center;margin-bottom:1rem;}
+.cal-icon{font-size:2.5rem;margin-bottom:0.75rem;}
+.cal-title{font-weight:700;font-size:0.9rem;margin-bottom:0.4rem;}
+.cal-desc{font-size:0.75rem;color:rgba(255,255,255,0.35);line-height:1.6;margin-bottom:1.25rem;}
+.cal-options{display:flex;flex-direction:column;gap:0.5rem;}
+.cal-slot{display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1rem;background:var(--dark2);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all 0.2s;}
+.cal-slot:hover{border-color:var(--gold);background:rgba(212,168,67,0.04);}
+.cs-time{font-size:0.8rem;font-weight:700;}
+.cs-date{font-size:0.7rem;color:rgba(255,255,255,0.4);}
+.cs-avail{font-size:0.65rem;font-weight:700;color:var(--green);background:rgba(46,204,113,0.1);padding:0.2rem 0.5rem;border-radius:10px;}
+
+/* SUCCESS */
+.success-card{display:none;text-align:center;padding:2.5rem 1.75rem;}
+.success-card.show{display:block;}
+.success-icon{font-size:3rem;margin-bottom:1rem;animation:pop 0.5s cubic-bezier(0.34,1.56,0.64,1);}
+@keyframes pop{from{transform:scale(0);}to{transform:scale(1);}}
+.success-title{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:1px;margin-bottom:0.5rem;}
+.success-title span{color:var(--gold);}
+.success-sub{font-size:0.82rem;color:rgba(255,255,255,0.45);line-height:1.7;margin-bottom:1.5rem;}
+.success-detail{background:rgba(46,204,113,0.06);border:1px solid rgba(46,204,113,0.15);border-radius:10px;padding:1rem;font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.65;}
+.success-detail strong{color:var(--green);}
+
+/* FAQ STRIP */
+.faq-strip{padding:4rem 3rem;background:var(--dark);}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:860px;margin:0 auto;}
+.fq{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;cursor:pointer;transition:all 0.2s;}
+.fq:hover{border-color:rgba(212,168,67,0.2);}
+.fq-q{font-weight:700;font-size:0.82rem;margin-bottom:0;display:flex;justify-content:space-between;align-items:center;gap:0.5rem;}
+.fq-arrow{color:var(--muted);font-size:0.7rem;flex-shrink:0;transition:transform 0.2s;}
+.fq.open .fq-arrow{transform:rotate(180deg);color:var(--gold);}
+.fq-a{font-size:0.75rem;color:rgba(255,255,255,0.4);line-height:1.7;max-height:0;overflow:hidden;transition:all 0.3s ease;}
+.fq.open .fq-a{max-height:200px;margin-top:0.75rem;}
+
+/* CTA */
+.cta-section{padding:6rem 3rem;text-align:center;position:relative;overflow:hidden;}
+.cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(212,168,67,0.06) 0%,transparent 65%);pointer-events:none;}
+.cta-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4.5vw,3.5rem);letter-spacing:2px;line-height:1.05;margin-bottom:0.875rem;position:relative;z-index:1;}
+.cta-h span{color:var(--gold);}
+.cta-sub{color:rgba(255,255,255,0.4);font-size:0.875rem;max-width:440px;margin:0 auto 2rem;line-height:1.75;position:relative;z-index:1;}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
+.btn-cta{padding:0.9rem 2.25rem;border-radius:8px;font-family:'Manrope',sans-serif;font-size:0.9rem;font-weight:800;cursor:pointer;border:none;transition:all 0.25s;text-decoration:none;display:inline-flex;align-items:center;}
+.btn-cta.gold{background:var(--gold);color:var(--black);}
+.btn-cta.gold:hover{background:var(--gold2);transform:translateY(-2px);}
+.btn-cta.outline{background:transparent;border:2px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.65);}
+.btn-cta.outline:hover{border-color:var(--gold);color:var(--gold);}
+
+/* FOOTER */
+footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.foot-logo{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--gold);letter-spacing:3px;}
+.foot-links{display:flex;gap:1.75rem;flex-wrap:wrap;}
+.foot-link{font-size:0.72rem;color:rgba(255,255,255,0.3);cursor:pointer;transition:color 0.2s;text-decoration:none;}
+.foot-link:hover{color:var(--gold);}
+.foot-copy{font-size:0.68rem;color:rgba(255,255,255,0.18);}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--dark2);border:1px solid rgba(212,168,67,0.25);color:white;padding:0.875rem 1.25rem;border-radius:10px;font-size:0.8rem;font-weight:600;z-index:999;transform:translateX(160%);transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);display:flex;align-items:center;gap:0.5rem;max-width:300px;}
+.toast.show{transform:translateX(0);}
+.tdot{width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+  .page-hero{padding:6rem 1.5rem 3rem;}
+  .options-section{padding:2rem 1.5rem 0;}
+  .options-grid{grid-template-columns:1fr;}
+  .main-section{padding:2rem 1.5rem 4rem;}
+  .main-grid{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .faq-grid{grid-template-columns:1fr;}
+  .cta-section{padding:4rem 1.5rem;}
+  footer{padding:2rem 1.5rem;flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"><div class="tdot"></div><span id="tmsg"></span></div>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="index.html">Elite Remote Agent<small>Pre-Screened. Trained. Ready.</small></a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="how-it-works.html">How It Works</a>
+    <a class="nav-link" href="index.html#pricing">Pricing</a>
+    <a class="nav-link active" href="contact.html">Contact</a>
+  </div>
+  <div class="nav-btns">
+    <a class="btn-ghost" href="dashboard.html">Log In</a>
+    <a class="btn-gold" href="checkout.html">Start Free →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="ph-glow"></div>
+  <div class="ph-grid"></div>
+  <div class="ph-content">
+    <div class="ph-tag"><div class="ph-tag-dot"></div><span>We Respond Within 1 Business Day</span></div>
+    <h1 class="ph-h1">Let's Talk About<br/><span>Your VA Strategy</span></h1>
+    <p class="ph-sub">Whether you want a live demo, have questions before subscribing, or need help figuring out which plan is right for you — we're here.</p>
+  </div>
+</div>
+
+<!-- CONTACT OPTIONS -->
+<div class="options-section">
+  <div class="options-grid">
+    <div class="option-card demo" onclick="scrollToForm('demo')">
+      <div class="oc-badge">Most Popular</div>
+      <div class="oc-icon">🎯</div>
+      <div class="oc-title">Book a Live Demo</div>
+      <div class="oc-desc">See the platform live. We'll walk you through everything and help you figure out exactly which VA role would make the biggest impact in your business.</div>
+      <button class="oc-btn gold">Book My Demo →</button>
+    </div>
+    <div class="option-card message" onclick="scrollToForm('message')">
+      <div class="oc-icon">💬</div>
+      <div class="oc-title">Send a Message</div>
+      <div class="oc-desc">Have a question before you subscribe? Want to know if ERA is right for your specific situation? Send us a message and we'll get back to you fast.</div>
+      <button class="oc-btn blue">Send a Message →</button>
+    </div>
+    <div class="option-card va" onclick="window.location.href='apply.html'">
+      <div class="oc-icon">🙋</div>
+      <div class="oc-title">I'm a VA — Apply Here</div>
+      <div class="oc-desc">Are you a virtual assistant looking to join the platform and get connected with US real estate agents and business owners?</div>
+      <button class="oc-btn green">Apply to Join →</button>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-section">
+  <div class="main-grid">
+
+    <!-- LEFT — INFO -->
+    <div class="info-col">
+      <h2 class="info-title">What Happens On<br/>a <span>Demo Call?</span></h2>
+      <p class="info-sub">A demo call is a free 20-minute conversation where we show you the platform live, understand your business, and tell you exactly which VA role would make the biggest difference for you.</p>
+
+      <div class="info-items">
+        <div class="info-item">
+          <div class="ii-icon">🕐</div>
+          <div>
+            <div class="ii-title">20 Minutes — That's It</div>
+            <div class="ii-desc">No long sales pitches. No pressure. Just a focused look at the platform and an honest conversation about whether ERA is right for you.</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="ii-icon">🎯</div>
+          <div>
+            <div class="ii-title">Personalized to Your Business</div>
+            <div class="ii-desc">We'll ask about your current setup — what's eating your time, what CRM you use, how many transactions you're doing — and show you exactly the VAs who fit.</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="ii-icon">💡</div>
+          <div>
+            <div class="ii-title">Walk Away With a Plan</div>
+            <div class="ii-desc">Even if you don't subscribe that day, you'll leave with a clear picture of what VA role to hire first and what to expect.</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="ii-icon">🚀</div>
+          <div>
+            <div class="ii-title">Same-Day Access If You're Ready</div>
+            <div class="ii-desc">If you want to subscribe during or after the call, we'll get you set up immediately and have your first VA browsing session done before the day is over.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-includes">
+        <div class="di-title">What's Covered in the Demo</div>
+        <div class="di-item"><span class="di-check">✓</span>Live walkthrough of the VA browsing experience</div>
+        <div class="di-item"><span class="di-check">✓</span>We show you real VA profiles, voice recordings, and resumes</div>
+        <div class="di-item"><span class="di-check">✓</span>Which plan fits your stage of business</div>
+        <div class="di-item"><span class="di-check">✓</span>Which VA role makes the biggest impact first</div>
+        <div class="di-item"><span class="di-check">✓</span>How the onboarding process works</div>
+        <div class="di-item"><span class="di-check">✓</span>Your questions answered live</div>
+      </div>
+
+      <div class="contact-links">
+        <a class="cl-item" href="mailto:hello@eliteremoteagent.com">
+          <div class="cl-icon gold">📧</div>
+          <div>
+            <div class="cl-label">Email Us</div>
+            <div class="cl-value">hello@eliteremoteagent.com</div>
+          </div>
+          <div class="cl-arrow">→</div>
+        </a>
+        <a class="cl-item" href="tel:+16025550100">
+          <div class="cl-icon green">📞</div>
+          <div>
+            <div class="cl-label">Call or Text</div>
+            <div class="cl-value">(602) 555-0100</div>
+          </div>
+          <div class="cl-arrow">→</div>
+        </a>
+        <a class="cl-item" href="#" onclick="fire('💬 Opening Instagram DM...')">
+          <div class="cl-icon blue">📱</div>
+          <div>
+            <div class="cl-label">Instagram DM</div>
+            <div class="cl-value">@EliteRemoteAgent</div>
+          </div>
+          <div class="cl-arrow">→</div>
+        </a>
+        <div class="cl-item" onclick="fire('⏰ Response time: within 1 business day')">
+          <div class="cl-icon gold">⏰</div>
+          <div>
+            <div class="cl-label">Response Time</div>
+            <div class="cl-value">Within 1 Business Day</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT — FORM -->
+    <div class="form-col" id="formSection">
+      <div class="form-card">
+        <div class="form-tabs">
+          <button class="form-tab active" id="tab-demo" onclick="switchTab('demo')">🎯 Book a Demo</button>
+          <button class="form-tab" id="tab-message" onclick="switchTab('message')">💬 Send a Message</button>
+        </div>
+        <div class="form-body">
+
+          <!-- DEMO FORM -->
+          <div class="form-content active" id="form-demo">
+            <div id="demo-form-wrap">
+              <div style="font-size:0.68rem;font-weight:800;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:1.25rem;">Your Information</div>
+              <div class="form-row">
+                <div><label class="fl">First Name *</label><input class="fi" type="text" id="demo-fname" placeholder="Sarah"/></div>
+                <div><label class="fl">Last Name *</label><input class="fi" type="text" id="demo-lname" placeholder="Johnson"/></div>
+              </div>
+              <label class="fl">Email Address *</label>
+              <input class="fi" type="email" id="demo-email" placeholder="sarah@realty.com"/>
+              <label class="fl">Phone Number *</label>
+              <input class="fi" type="tel" id="demo-phone" placeholder="(602) 555-0100"/>
+              <label class="fl">I Am A *</label>
+              <select class="fi" id="demo-type">
+                <option value="">Select your role</option>
+                <option>Solo Real Estate Agent</option>
+                <option>Real Estate Team Leader</option>
+                <option>Real Estate Broker/Owner</option>
+                <option>Med Spa / Healthcare Owner</option>
+                <option>Law Firm / Legal</option>
+                <option>Insurance Agency Owner</option>
+                <option>Mortgage / Lending</option>
+                <option>E-Commerce Business Owner</option>
+                <option>Other Business Owner</option>
+              </select>
+              <label class="fl">What's Your Biggest Challenge Right Now? *</label>
+              <select class="fi" id="demo-challenge">
+                <option value="">Select your biggest pain point</option>
+                <option>Leads going cold — nobody following up</option>
+                <option>Transactions falling through without coordination</option>
+                <option>No time to market myself or my business</option>
+                <option>Admin work eating all my time</option>
+                <option>Can't afford US-based staff</option>
+                <option>Bad experience with unvetted VAs before</option>
+                <option>Need to scale but don't know where to start</option>
+              </select>
+              <label class="fl">CRM You Currently Use</label>
+              <select class="fi" id="demo-crm">
+                <option value="">Select your CRM</option>
+                <option>Follow Up Boss</option>
+                <option>KVCore</option>
+                <option>Chime</option>
+                <option>HubSpot</option>
+                <option>Go High Level</option>
+                <option>Salesforce</option>
+                <option>LionDesk</option>
+                <option>Other / None</option>
+              </select>
+
+              <div style="font-size:0.68rem;font-weight:800;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:1rem;margin-top:0.25rem;">Pick Your Demo Time</div>
+              <div class="cal-options" style="margin-bottom:1.25rem;">
+                <div class="cal-slot" onclick="selectSlot(this,'Mon May 13 — 10:00 AM MST')">
+                  <div><div class="cs-time">10:00 AM MST</div><div class="cs-date">Monday, May 13</div></div>
+                  <div class="cs-avail">Available</div>
+                </div>
+                <div class="cal-slot" onclick="selectSlot(this,'Mon May 13 — 2:00 PM MST')">
+                  <div><div class="cs-time">2:00 PM MST</div><div class="cs-date">Monday, May 13</div></div>
+                  <div class="cs-avail">Available</div>
+                </div>
+                <div class="cal-slot" onclick="selectSlot(this,'Tue May 14 — 11:00 AM MST')">
+                  <div><div class="cs-time">11:00 AM MST</div><div class="cs-date">Tuesday, May 14</div></div>
+                  <div class="cs-avail">Available</div>
+                </div>
+                <div class="cal-slot" onclick="selectSlot(this,'Tue May 14 — 3:00 PM MST')">
+                  <div><div class="cs-time">3:00 PM MST</div><div class="cs-date">Tuesday, May 14</div></div>
+                  <div class="cs-avail">Available</div>
+                </div>
+                <div class="cal-slot" onclick="selectSlot(this,'Wed May 15 — 9:00 AM MST')">
+                  <div><div class="cs-time">9:00 AM MST</div><div class="cs-date">Wednesday, May 15</div></div>
+                  <div class="cs-avail">Available</div>
+                </div>
+              </div>
+              <div id="selected-slot" style="display:none;background:rgba(212,168,67,0.08);border:1px solid rgba(212,168,67,0.2);border-radius:8px;padding:0.6rem 0.875rem;font-size:0.78rem;color:var(--gold);font-weight:700;margin-bottom:1rem;">✓ Selected: <span id="slot-text"></span></div>
+              <button class="btn-submit" onclick="submitDemo()">🎯 Book My Free Demo →</button>
+              <div class="secure-note">🔒 No spam. No obligations. Cancel or reschedule anytime.</div>
+            </div>
+            <div class="success-card" id="demo-success">
+              <div class="success-icon">🎉</div>
+              <h3 class="success-title">Demo <span>Booked!</span></h3>
+              <p class="success-sub">We'll send a calendar invite to your email with the Zoom link. See you soon!</p>
+              <div class="success-detail">
+                <strong>What to expect:</strong> A 20-minute Zoom call where we walk you through the platform live, understand your business needs, and help you identify the exact VA role that will make the biggest impact — starting this week.
+              </div>
+            </div>
+          </div>
+
+          <!-- MESSAGE FORM -->
+          <div class="form-content" id="form-message">
+            <div id="msg-form-wrap">
+              <div style="font-size:0.68rem;font-weight:800;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:1.25rem;">Send Us a Message</div>
+              <div class="form-row">
+                <div><label class="fl">First Name *</label><input class="fi" type="text" id="msg-fname" placeholder="Sarah"/></div>
+                <div><label class="fl">Last Name *</label><input class="fi" type="text" id="msg-lname" placeholder="Johnson"/></div>
+              </div>
+              <label class="fl">Email Address *</label>
+              <input class="fi" type="email" id="msg-email" placeholder="sarah@realty.com"/>
+              <label class="fl">Phone (Optional)</label>
+              <input class="fi" type="tel" id="msg-phone" placeholder="(602) 555-0100"/>
+              <label class="fl">I Am A</label>
+              <select class="fi" id="msg-type">
+                <option value="">Select your role</option>
+                <option>Real Estate Agent</option>
+                <option>Team Leader / Broker</option>
+                <option>Business Owner</option>
+                <option>Virtual Assistant (Applying)</option>
+                <option>Other</option>
+              </select>
+              <label class="fl">Subject *</label>
+              <select class="fi" id="msg-subject">
+                <option value="">What's this about?</option>
+                <option>Question about pricing or plans</option>
+                <option>Want to see a demo first</option>
+                <option>Question about VA availability</option>
+                <option>Enterprise / brokerage inquiry</option>
+                <option>Partnership opportunity</option>
+                <option>I'm a VA and want to join</option>
+                <option>Technical support</option>
+                <option>Other</option>
+              </select>
+              <label class="fl">Your Message *</label>
+              <textarea class="fi" id="msg-body" placeholder="Tell us what's on your mind. The more detail you give us, the better we can help you..."></textarea>
+              <button class="btn-submit blue" onclick="submitMessage()">💬 Send Message →</button>
+              <div class="secure-note">📧 We respond within 1 business day. Usually much faster.</div>
+            </div>
+            <div class="success-card" id="msg-success">
+              <div class="success-icon">✅</div>
+              <h3 class="success-title">Message <span>Sent!</span></h3>
+              <p class="success-sub">We got your message and will respond within 1 business day — usually much sooner.</p>
+              <div class="success-detail">
+                While you wait, feel free to <strong><a href="how-it-works.html" style="color:var(--gold);">read how the platform works</a></strong> or <strong><a href="checkout.html" style="color:var(--gold);">browse our pricing plans</a></strong>. If you want to move faster — just book a demo and we'll answer everything live.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ STRIP -->
+<div class="faq-strip">
+  <div style="text-align:center;margin-bottom:2rem;">
+    <div style="font-size:0.65rem;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">Quick Answers</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,3.5vw,2.5rem);letter-spacing:1px;">Common Questions Before the Demo</div>
+  </div>
+  <div class="faq-grid">
+    <div class="fq" onclick="this.classList.toggle('open')">
+      <div class="fq-q">Is the demo really free with no obligation? <span class="fq-arrow">▼</span></div>
+      <div class="fq-a">Yes. 100% free. No credit card. No pressure. It's a 20-minute conversation — if ERA isn't right for you, we'll tell you that honestly.</div>
+    </div>
+    <div class="fq" onclick="this.classList.toggle('open')">
+      <div class="fq-q">Can I hire a VA the same day as the demo? <span class="fq-arrow">▼</span></div>
+      <div class="fq-a">Absolutely. If you subscribe during or right after the demo, you can be browsing VAs within minutes. Many clients hire their first VA the same day they discover the platform.</div>
+    </div>
+    <div class="fq" onclick="this.classList.toggle('open')">
+      <div class="fq-q">What if I'm not sure which VA role I need? <span class="fq-arrow">▼</span></div>
+      <div class="fq-a">That's exactly what the demo is for. We ask you about your business and tell you specifically which VA role will make the biggest impact. Most people leave with total clarity.</div>
+    </div>
+    <div class="fq" onclick="this.classList.toggle('open')">
+      <div class="fq-q">Do you work with non-real estate businesses? <span class="fq-arrow">▼</span></div>
+      <div class="fq-a">Yes. Our Business Portal serves med spas, law firms, insurance agencies, mortgage companies, e-commerce stores, and more. We have industry-trained VAs for most business types.</div>
+    </div>
+    <div class="fq" onclick="this.classList.toggle('open')">
+      <div class="fq-q">How long does it take to get my first VA working? <span class="fq-arrow">▼</span></div>
+      <div class="fq-a">Most clients have their first VA hired and onboarded within 48 hours of subscribing. Some do it in the same day. The platform is built to move fast.</div>
+    </div>
+    <div class="fq" onclick="this.classList.toggle('open')">
+      <div class="fq-q">What if the demo time slots don't work for me? <span class="fq-arrow">▼</span></div>
+      <div class="fq-a">Just send us a message with your preferred time and we'll make it work. We're flexible and can accommodate evenings and weekends for busy professionals.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-glow"></div>
+  <h2 class="cta-h">Not Ready for a Demo?<br/><span>Just Start Browsing.</span></h2>
+  <p class="cta-sub">You don't need a demo to subscribe. Jump in, browse real VA profiles, hear their voices, and hire when you're ready.</p>
+  <div class="cta-btns">
+    <a class="btn-cta gold" href="checkout.html">Browse VAs Now →</a>
+    <a class="btn-cta outline" href="how-it-works.html">Learn How It Works</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">Elite Remote Agent</div>
+  <div class="foot-links">
+    <a class="foot-link" href="index.html">Home</a>
+    <a class="foot-link" href="how-it-works.html">How It Works</a>
+    <a class="foot-link" href="checkout.html">Pricing</a>
+    <a class="foot-link" href="apply.html">For VAs</a>
+    <a class="foot-link" href="dashboard.html">Client Login</a>
+    <a class="foot-link" href="#">Privacy Policy</a>
+    <a class="foot-link" href="#">Terms</a>
+  </div>
+  <div class="foot-copy">© 2026 Elite Remote Agent. All rights reserved.</div>
+</footer>
+
+<script>
+function fire(msg){
+  const t=document.getElementById('toast');
+  document.getElementById('tmsg').textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3500);
+}
+
+function scrollToForm(tab){
+  switchTab(tab);
+  document.getElementById('formSection').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function switchTab(tab){
+  document.querySelectorAll('.form-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.form-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+  document.getElementById('form-'+tab).classList.add('active');
+}
+
+let selectedSlotText = '';
+function selectSlot(el, text){
+  document.querySelectorAll('.cal-slot').forEach(s=>{
+    s.style.borderColor='';
+    s.style.background='';
+  });
+  el.style.borderColor='var(--gold)';
+  el.style.background='rgba(212,168,67,0.06)';
+  selectedSlotText = text;
+  document.getElementById('selected-slot').style.display='block';
+  document.getElementById('slot-text').textContent=text;
+}
+
+function submitDemo(){
+  const fname=document.getElementById('demo-fname').value;
+  const email=document.getElementById('demo-email').value;
+  const type=document.getElementById('demo-type').value;
+  const challenge=document.getElementById('demo-challenge').value;
+  if(!fname||!email||!type||!challenge){
+    fire('⚠️ Please fill in all required fields');return;
+  }
+  document.getElementById('demo-form-wrap').style.display='none';
+  document.getElementById('demo-success').classList.add('show');
+  fire('🎉 Demo booked! Check your email for the Zoom link.');
+}
+
+function submitMessage(){
+  const fname=document.getElementById('msg-fname').value;
+  const email=document.getElementById('msg-email').value;
+  const subject=document.getElementById('msg-subject').value;
+  const body=document.getElementById('msg-body').value;
+  if(!fname||!email||!subject||!body){
+    fire('⚠️ Please fill in all required fields');return;
+  }
+  document.getElementById('msg-form-wrap').style.display='none';
+  document.getElementById('msg-success').classList.add('show');
+  fire('✅ Message sent! We\'ll get back to you soon.');
+}
+
+// Animate on scroll
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}
+  });
+},{threshold:0.1});
+document.querySelectorAll('.option-card,.info-item,.fq').forEach(el=>{
+  el.style.opacity='0';
+  el.style.transform='translateY(15px)';
+  el.style.transition='opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
