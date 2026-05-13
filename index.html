@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="Elite Remote Agent — Pre-screened, real estate and business trained virtual assistants. Hire in 48 hours. Unlimited access. No placement fees."/>
-<title>Elite Remote Agent — Stop Doing $15/Hour Work</title>
+<meta name="description" content="Elite Remote Agent — Pre-screened, real estate and business trained virtual assistants. Unlimited browsing, hiring, and replacements. Cancel anytime."/>
+<title>Elite Remote Agent — Stop Doing $6/Hour Work</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -32,15 +32,15 @@ body{font-family:'Manrope',sans-serif;background:var(--black);color:var(--white)
 
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.1rem 4rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);backdrop-filter:blur(20px);background:rgba(5,8,16,0.85);transition:all 0.3s;}
-.logo{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:3px;color:var(--gold);line-height:1;cursor:pointer;}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:3px;color:var(--gold);line-height:1;cursor:pointer;text-decoration:none;}
 .logo small{display:block;font-family:'Manrope',sans-serif;font-size:0.48rem;letter-spacing:4px;color:rgba(255,255,255,0.3);text-transform:uppercase;font-weight:600;}
 .nav-links{display:flex;gap:2rem;align-items:center;}
 .nav-link{color:rgba(255,255,255,0.45);font-size:0.8rem;font-weight:500;cursor:pointer;transition:color 0.2s;text-decoration:none;letter-spacing:0.3px;}
 .nav-link:hover{color:var(--gold);}
 .nav-btns{display:flex;gap:0.6rem;}
-.btn-ghost{padding:0.45rem 1.1rem;border:1px solid rgba(255,255,255,0.12);border-radius:6px;background:transparent;color:rgba(255,255,255,0.6);font-family:'Manrope',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
+.btn-ghost{padding:0.45rem 1.1rem;border:1px solid rgba(255,255,255,0.12);border-radius:6px;background:transparent;color:rgba(255,255,255,0.6);font-family:'Manrope',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;}
 .btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
-.btn-gold{padding:0.5rem 1.4rem;border-radius:6px;background:var(--gold);color:var(--black);font-family:'Manrope',sans-serif;font-size:0.8rem;font-weight:800;cursor:pointer;border:none;transition:all 0.2s;letter-spacing:0.3px;}
+.btn-gold{padding:0.5rem 1.4rem;border-radius:6px;background:var(--gold);color:var(--black);font-family:'Manrope',sans-serif;font-size:0.8rem;font-weight:800;cursor:pointer;border:none;transition:all 0.2s;letter-spacing:0.3px;text-decoration:none;display:inline-flex;align-items:center;}
 .btn-gold:hover{background:var(--gold2);transform:translateY(-1px);box-shadow:0 8px 25px rgba(212,168,67,0.3);}
 
 /* ── HERO ── */
@@ -69,9 +69,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.1rem 4rem;display:
 .px{color:#E74C3C;font-weight:800;}
 
 .hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem;animation:up 0.7s 0.4s ease both;}
-.btn-primary{padding:0.95rem 2.5rem;border-radius:8px;background:var(--gold);color:var(--black);font-family:'Manrope',sans-serif;font-size:0.95rem;font-weight:800;cursor:pointer;border:none;transition:all 0.25s;letter-spacing:0.3px;}
+.btn-primary{padding:0.95rem 2.5rem;border-radius:8px;background:var(--gold);color:var(--black);font-family:'Manrope',sans-serif;font-size:0.95rem;font-weight:800;cursor:pointer;border:none;transition:all 0.25s;letter-spacing:0.3px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;}
 .btn-primary:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 15px 40px rgba(212,168,67,0.35);}
-.btn-secondary{padding:0.95rem 2.5rem;border-radius:8px;background:transparent;color:rgba(255,255,255,0.75);font-family:'Manrope',sans-serif;font-size:0.95rem;font-weight:600;cursor:pointer;border:2px solid rgba(255,255,255,0.12);transition:all 0.25s;}
+.btn-secondary{padding:0.95rem 2.5rem;border-radius:8px;background:transparent;color:rgba(255,255,255,0.75);font-family:'Manrope',sans-serif;font-size:0.95rem;font-weight:600;cursor:pointer;border:2px solid rgba(255,255,255,0.12);transition:all 0.25s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;}
 .btn-secondary:hover{border-color:var(--gold);color:var(--gold);}
 
 .stats-row{display:flex;border:1px solid var(--border);border-radius:12px;overflow:hidden;max-width:720px;margin:0 auto;animation:up 0.7s 0.5s ease both;background:rgba(255,255,255,0.02);}
@@ -88,7 +88,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.1rem 4rem;display:
 .sec-sub{text-align:center;color:rgba(255,255,255,0.45);font-size:0.875rem;max-width:480px;margin:0 auto 3.5rem;line-height:1.75;}
 
 .portals{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:880px;margin:0 auto;}
-.portal{border-radius:20px;padding:2.5rem;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden;border:1.5px solid transparent;}
+.portal{border-radius:20px;padding:2.5rem;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden;border:1.5px solid transparent;text-decoration:none;color:inherit;display:block;}
 .portal.re{background:linear-gradient(145deg,#0d1829,#152540);border-color:rgba(212,168,67,0.15);}
 .portal.biz{background:linear-gradient(145deg,#0d1f12,#142b18);border-color:rgba(46,204,113,0.12);}
 .portal:hover{transform:translateY(-5px);}
@@ -121,7 +121,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.1rem 4rem;display:
 
 /* ── VA CARDS ── */
 .va-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:900px;margin:0 auto;}
-.vac{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all 0.25s;cursor:pointer;}
+.vac{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all 0.25s;cursor:pointer;text-decoration:none;color:inherit;display:block;}
 .vac:hover{border-color:rgba(212,168,67,0.3);transform:translateY(-4px);box-shadow:0 15px 40px rgba(0,0,0,0.35);}
 .vac-top{padding:1.25rem;display:flex;gap:0.875rem;align-items:flex-start;}
 .vac-av{width:50px;height:50px;border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.95rem;flex-shrink:0;color:white;}
@@ -139,9 +139,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.1rem 4rem;display:
 .vac-btn{padding:0.4rem 0.875rem;border-radius:6px;background:var(--gold);color:var(--black);font-size:0.7rem;font-weight:800;border:none;cursor:pointer;transition:all 0.2s;letter-spacing:0.3px;}
 .vac-btn:hover{background:var(--gold2);}
 
+.see-all{text-align:center;margin-top:2.5rem;}
+.see-all a{color:var(--gold);font-weight:800;font-size:0.85rem;text-decoration:none;letter-spacing:0.5px;border-bottom:1px dashed rgba(212,168,67,0.4);padding-bottom:2px;transition:all 0.2s;}
+.see-all a:hover{color:var(--gold2);border-color:var(--gold2);}
+
 /* ── UNLIMITED CALLOUT ── */
 .unlimited{max-width:880px;margin:0 auto;background:linear-gradient(135deg,rgba(212,168,67,0.07),rgba(212,168,67,0.03));border:1px solid rgba(212,168,67,0.2);border-radius:20px;padding:3rem;text-align:center;}
-.ul-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3rem);letter-spacing:2px;margin-bottom:0.75rem;}
+.ul-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3rem);letter-spacing:2px;margin-bottom:0.75rem;line-height:1.05;}
 .ul-title span{color:var(--gold);}
 .ul-sub{color:rgba(255,255,255,0.5);font-size:0.9rem;max-width:520px;margin:0 auto 2rem;line-height:1.75;}
 .ul-items{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;}
@@ -150,29 +154,36 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.1rem 4rem;display:
 .ul-label{font-size:0.75rem;font-weight:700;color:rgba(255,255,255,0.6);}
 
 /* ── PRICING ── */
-.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:920px;margin:0 auto 2rem;}
-.pc{border-radius:18px;padding:2rem;border:1.5px solid var(--border);background:var(--card);position:relative;transition:all 0.25s;}
+.pitch-bar{max-width:760px;margin:0 auto 2.5rem;padding:1.25rem 1.75rem;background:linear-gradient(90deg,rgba(212,168,67,0.06),rgba(212,168,67,0.02));border:1px solid rgba(212,168,67,0.18);border-radius:14px;text-align:center;}
+.pitch-bar-text{font-size:0.88rem;color:rgba(255,255,255,0.85);line-height:1.65;font-weight:500;}
+.pitch-bar-text strong{color:var(--gold);font-weight:800;}
+
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:980px;margin:0 auto 2rem;}
+.pc{border-radius:18px;padding:2rem;border:1.5px solid var(--border);background:var(--card);position:relative;transition:all 0.25s;display:flex;flex-direction:column;}
 .pc:hover{transform:translateY(-3px);}
 .pc.feat{background:linear-gradient(145deg,rgba(212,168,67,0.07),rgba(212,168,67,0.02));border-color:rgba(212,168,67,0.28);}
 .feat-pill{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--black);font-size:0.6rem;font-weight:800;padding:0.22rem 1rem;border-radius:20px;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;}
-.pc-name{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:1px;margin-bottom:0.3rem;}
+.pc-name{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:1px;margin-bottom:0.25rem;}
+.pc-mode{font-size:0.6rem;font-weight:800;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.5rem;}
 .pc-price{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--gold);letter-spacing:1px;line-height:1;}
 .pc-per{font-size:0.72rem;font-family:'Manrope',sans-serif;font-weight:400;color:var(--muted);}
 .pc-tagline{font-size:0.78rem;font-weight:700;color:rgba(255,255,255,0.6);margin:0.5rem 0;font-style:italic;}
-.pc-desc{font-size:0.75rem;color:rgba(255,255,255,0.38);margin-bottom:1.25rem;line-height:1.6;}
+.pc-desc{font-size:0.75rem;color:rgba(255,255,255,0.4);margin-bottom:1rem;line-height:1.6;}
+.pc-buyer{font-size:0.7rem;color:rgba(255,255,255,0.55);background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:0.55rem 0.7rem;margin-bottom:1.25rem;line-height:1.5;}
+.pc-buyer strong{color:var(--gold);font-weight:800;letter-spacing:0.5px;text-transform:uppercase;font-size:0.6rem;display:block;margin-bottom:3px;}
 .divider{height:1px;background:var(--border);margin-bottom:1.25rem;}
-.pc-feats{list-style:none;margin-bottom:1.5rem;}
+.pc-feats{list-style:none;margin-bottom:1.5rem;flex:1;}
 .pc-feats li{font-size:0.77rem;color:rgba(255,255,255,0.62);padding:0.3rem 0;display:flex;gap:0.45rem;line-height:1.45;}
 .pc-feats li::before{content:'✓';color:var(--green);font-weight:800;flex-shrink:0;}
-.pc-feats li.highlight{color:var(--gold);}
+.pc-feats li.highlight{color:var(--gold);font-weight:700;}
 .pc-feats li.highlight::before{color:var(--gold);}
-.pc-btn{width:100%;padding:0.8rem;border-radius:10px;font-family:'Manrope',sans-serif;font-weight:800;font-size:0.85rem;cursor:pointer;border:none;transition:all 0.2s;letter-spacing:0.3px;}
+.pc-btn{width:100%;padding:0.8rem;border-radius:10px;font-family:'Manrope',sans-serif;font-weight:800;font-size:0.85rem;cursor:pointer;border:none;transition:all 0.2s;letter-spacing:0.3px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;}
 .pc-btn.out{background:transparent;border:1.5px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.65);}
 .pc-btn.gold{background:var(--gold);color:var(--black);}
 .pc-btn:hover{transform:translateY(-1px);filter:brightness(1.1);}
 
-.price-note{text-align:center;color:rgba(255,255,255,0.3);font-size:0.75rem;margin-bottom:2.5rem;}
-.price-note span{color:var(--gold);}
+.price-note{text-align:center;color:rgba(255,255,255,0.35);font-size:0.78rem;margin-bottom:2.5rem;}
+.price-note strong{color:var(--gold);font-weight:800;}
 
 .roi-strip{max-width:920px;margin:0 auto;background:rgba(46,204,113,0.05);border:1px solid rgba(46,204,113,0.15);border-radius:14px;padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
 .roi-text{font-size:0.85rem;color:rgba(255,255,255,0.6);line-height:1.6;}
@@ -196,7 +207,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.1rem 4rem;display:
 .ent-left{}
 .ent-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:1px;color:var(--gold);margin-bottom:0.35rem;}
 .ent-sub{font-size:0.82rem;color:rgba(255,255,255,0.45);line-height:1.6;max-width:420px;}
-.btn-ent{padding:0.75rem 2rem;border-radius:8px;background:transparent;border:1.5px solid rgba(212,168,67,0.35);color:var(--gold);font-family:'Manrope',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.btn-ent{padding:0.75rem 2rem;border-radius:8px;background:transparent;border:1.5px solid rgba(212,168,67,0.35);color:var(--gold);font-family:'Manrope',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.2s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;}
 .btn-ent:hover{border-color:var(--gold);background:rgba(212,168,67,0.06);}
 
 /* ── FINAL CTA ── */
@@ -250,16 +261,17 @@ footer{padding:2.5rem 4rem;border-top:1px solid var(--border);display:flex;align
 
 <!-- NAV -->
 <nav>
-  <div class="logo">Elite Remote Agent<small>Pre-Screened. Trained. Ready.</small></div>
+  <a class="logo" href="index.html">Elite Remote Agent<small>Pre-Screened. Trained. Ready.</small></a>
   <div class="nav-links">
-    <a class="nav-link" href="#portals">Portals</a>
-    <a class="nav-link" href="#how">How It Works</a>
-    <a class="nav-link" href="#vas">Browse VAs</a>
+    <a class="nav-link" href="vas.html">Browse VAs</a>
+    <a class="nav-link" href="how-it-works.html">How It Works</a>
     <a class="nav-link" href="#pricing">Pricing</a>
+    <a class="nav-link" href="faq.html">FAQ</a>
+    <a class="nav-link" href="contact.html">Contact</a>
   </div>
   <div class="nav-btns">
-    <button class="btn-ghost" onclick="toast('👋 Login coming soon — get on the waitlist!')">Log In</button>
-    <button class="btn-gold" onclick="toast('🚀 Starting your free 30-day trial!')">Start Free — 30 Days</button>
+    <a class="btn-ghost" href="dashboard.html">Log In</a>
+    <a class="btn-gold" href="checkout.html">Get Started →</a>
   </div>
 </nav>
 
@@ -272,7 +284,7 @@ footer{padding:2.5rem 4rem;border-top:1px solid var(--border);display:flex;align
     <div class="badge"><div class="badge-dot"></div><span class="badge-text">500+ Pre-Screened VAs Available Now</span></div>
     <h1 class="hero-h1">
       <span class="w">Stop Doing</span>
-      <span class="g">$15/Hour Work</span>
+      <span class="g">$6/Hour Work</span>
       <span class="w">On a $500/Hour Schedule</span>
     </h1>
     <p class="hero-sub">Elite Remote Agent connects real estate agents and business owners with pre-screened, industry-trained virtual assistants — so you can stop drowning in admin and start scaling your income.</p>
@@ -290,8 +302,8 @@ footer{padding:2.5rem 4rem;border-top:1px solid var(--border);display:flex;align
     </div>
 
     <div class="hero-btns">
-      <button class="btn-primary" onclick="toast('🏡 Welcome — entering Real Estate Portal!')">I\'m a Real Estate Agent →</button>
-      <button class="btn-secondary" onclick="toast('💼 Welcome — entering Business Portal!')">I\'m a Business Owner →</button>
+      <a class="btn-primary" href="vas.html">Browse VAs Now →</a>
+      <a class="btn-secondary" href="#pricing">See Pricing</a>
     </div>
 
     <div class="stats-row">
@@ -310,32 +322,32 @@ footer{padding:2.5rem 4rem;border-top:1px solid var(--border);display:flex;align
   <h2 class="sec-title">Two Portals. One Platform.<br/>Unlimited Talent.</h2>
   <p class="sec-sub">Whether you sell houses or run a business — we have pre-trained, pre-screened VAs who already speak your language and know your tools.</p>
   <div class="portals">
-    <div class="portal re" onclick="toast('🏡 Real Estate Portal — browse VAs trained in FUB, Dotloop, MLS & more!')">
+    <a class="portal re" href="vas.html?category=re">
       <div class="portal-emoji">🏡</div>
       <div class="portal-tag">Real Estate Agents & Teams</div>
       <div class="portal-title">Real Estate<br/>Remote Agents</div>
       <div class="portal-pains">
         <div class="pp"><span class="pp-arrow">→</span>Your leads are rotting in a CRM nobody is working</div>
         <div class="pp"><span class="pp-arrow">→</span>Transactions falling through without a coordinator</div>
-        <div class="pp"><span class="pp-arrow">→</span>You're doing $20/hr admin on a $500/hr schedule</div>
+        <div class="pp"><span class="pp-arrow">→</span>You're doing $6/hr admin on a $500/hr schedule</div>
         <div class="pp"><span class="pp-arrow">→</span>Your brand looks like a part-time agent's brand</div>
         <div class="pp"><span class="pp-arrow">→</span>No consistent follow-up system working for you</div>
       </div>
       <button class="portal-btn">Browse Real Estate VAs →</button>
-    </div>
-    <div class="portal biz" onclick="toast('💼 Business Portal — Med Spa, Legal, E-Commerce, Insurance & more!')">
+    </a>
+    <a class="portal biz" href="vas.html?category=biz">
       <div class="portal-emoji">💼</div>
       <div class="portal-tag">Business Owners — All Industries</div>
       <div class="portal-title">Business<br/>Remote Agents</div>
       <div class="portal-pains">
-        <div class="pp"><span class="pp-arrow">→</span>40% of your day spent on tasks worth $15/hr</div>
+        <div class="pp"><span class="pp-arrow">→</span>40% of your day spent on tasks worth $6/hr</div>
         <div class="pp"><span class="pp-arrow">→</span>Missing follow-ups losing you clients and revenue</div>
         <div class="pp"><span class="pp-arrow">→</span>Can't scale because local hiring costs too much</div>
         <div class="pp"><span class="pp-arrow">→</span>Burned by unvetted Upwork or Fiverr hires before</div>
         <div class="pp"><span class="pp-arrow">→</span>Wearing every hat instead of running your business</div>
       </div>
       <button class="portal-btn">Browse Business VAs →</button>
-    </div>
+    </a>
   </div>
 </section>
 
@@ -378,7 +390,7 @@ footer{padding:2.5rem 4rem;border-top:1px solid var(--border);display:flex;align
   <h2 class="sec-title">Meet Your Unfair Advantage</h2>
   <p class="sec-sub">Every VA on this platform has passed our 3-step vetting process and completed our full training curriculum. These aren't random freelancers. These are professionals.</p>
   <div class="va-grid">
-    <div class="vac" onclick="toast('📋 Opening Maria\'s full profile — voice, resume, skills & more!')">
+    <a class="vac" href="va-profile.html?id=1">
       <div class="vac-top">
         <div class="vac-av" style="background:#1B4F8A;">MS</div>
         <div>
@@ -397,8 +409,8 @@ footer{padding:2.5rem 4rem;border-top:1px solid var(--border);display:flex;align
         <div class="vac-rate">$8<sub>/hr</sub></div>
         <button class="vac-btn">View Profile</button>
       </div>
-    </div>
-    <div class="vac" onclick="toast('📋 Opening Juan\'s full profile — voice, resume, skills & more!')">
+    </a>
+    <a class="vac" href="va-profile.html?id=2">
       <div class="vac-top">
         <div class="vac-av" style="background:#2D5A3D;">JR</div>
         <div>
@@ -417,8 +429,8 @@ footer{padding:2.5rem 4rem;border-top:1px solid var(--border);display:flex;align
         <div class="vac-rate">$7<sub>/hr</sub></div>
         <button class="vac-btn">View Profile</button>
       </div>
-    </div>
-    <div class="vac" onclick="toast('📋 Opening Ramon\'s full profile — voice, resume, skills & more!')">
+    </a>
+    <a class="vac" href="va-profile.html?id=6">
       <div class="vac-top">
         <div class="vac-av" style="background:#7B3F00;">RT</div>
         <div>
@@ -437,8 +449,9 @@ footer{padding:2.5rem 4rem;border-top:1px solid var(--border);display:flex;align
         <div class="vac-rate">$7<sub>/hr</sub></div>
         <button class="vac-btn">View Profile</button>
       </div>
-    </div>
+    </a>
   </div>
+  <div class="see-all"><a href="vas.html">See all 500+ VAs →</a></div>
 </section>
 
 <!-- UNLIMITED CALLOUT -->
@@ -459,72 +472,89 @@ footer{padding:2.5rem 4rem;border-top:1px solid var(--border);display:flex;align
 <!-- PRICING -->
 <section class="section dark" id="pricing">
   <div class="sec-label">Simple Pricing</div>
-  <h2 class="sec-title">One Subscription.<br/>Elite Talent. No Limits.</h2>
-  <p class="sec-sub">All plans include unlimited access to browse, hire, and replace VAs. Plans differ by how much our team does FOR you.</p>
+  <h2 class="sec-title">One Subscription.<br/>Unlimited Access.</h2>
+  <p class="sec-sub">The only question is how much support <strong style="color:rgba(255,255,255,0.85);">you</strong> want from <strong style="color:rgba(255,255,255,0.85);">us</strong>.</p>
+
+  <div class="pitch-bar">
+    <div class="pitch-bar-text">All plans include <strong>unlimited browsing, hiring, and replacements</strong>. Plans differ by <strong>how much our team does for you</strong>.</div>
+  </div>
+
   <div class="price-grid">
 
     <div class="pc">
       <div class="pc-name">Starter</div>
+      <div class="pc-mode">Self Serve</div>
       <div class="pc-price">$97<span class="pc-per">/mo</span></div>
-      <div class="pc-tagline">"Your first great hire. Zero guesswork."</div>
-      <div class="pc-desc">Perfect for solo agents and business owners ready to stop doing everything themselves.</div>
+      <div class="pc-tagline">"You have full access. You run it yourself."</div>
+      <div class="pc-desc">We give you the tools. You run it yourself.</div>
+      <div class="pc-buyer">
+        <strong>Who buys this</strong>
+        Solo agent who is resourceful and just needs access to great talent.
+      </div>
       <div class="divider"></div>
       <ul class="pc-feats">
-        <li class="highlight">Unlimited VA browsing & hiring</li>
-        <li class="highlight">Unlimited VA replacements</li>
-        <li>Full voice recording access</li>
-        <li>Resume & background review</li>
+        <li class="highlight">Unlimited VA browsing</li>
+        <li class="highlight">Unlimited hiring</li>
+        <li class="highlight">Unlimited replacements</li>
+        <li>Full voice recordings & resumes</li>
         <li>Core training library</li>
-        <li>Basic KPI tracking</li>
         <li>Email support</li>
-        <li>30-day free trial included</li>
+        <li>You onboard your own VAs</li>
       </ul>
-      <button class="pc-btn out" onclick="toast('🚀 Starting Starter trial — 30 days free!')">Start Free Trial</button>
+      <a class="pc-btn out" href="checkout.html">Get Started →</a>
     </div>
 
     <div class="pc feat">
       <div class="feat-pill">Most Popular</div>
       <div class="pc-name">Growth</div>
+      <div class="pc-mode">Guided</div>
       <div class="pc-price">$247<span class="pc-per">/mo</span></div>
-      <div class="pc-tagline">"Your whole VA team. A fraction of US payroll."</div>
-      <div class="pc-desc">For scaling agents and business owners who want tools, training, and real team support.</div>
+      <div class="pc-tagline">"We help you set it up and train your VAs."</div>
+      <div class="pc-desc">Everything in Starter plus our team helps you set things up, trains your VAs on your systems, and checks in monthly.</div>
+      <div class="pc-buyer">
+        <strong>Who buys this</strong>
+        Growing agent or business owner who wants support, not just access.
+      </div>
       <div class="divider"></div>
       <ul class="pc-feats">
         <li class="highlight">Everything in Starter</li>
-        <li>Full training library access</li>
+        <li>Full training library</li>
+        <li>KPI dashboard</li>
+        <li>SOP template library</li>
         <li>Upload your own Loom training</li>
-        <li>Advanced KPI dashboard</li>
-        <li>Complete SOP template library</li>
-        <li>Share SOPs directly with VAs</li>
         <li>Monthly strategy call</li>
         <li>Slack support channel</li>
-        <li>Guided VA onboarding</li>
+        <li>We help onboard your VAs</li>
       </ul>
-      <button class="pc-btn gold" onclick="toast('🔥 Starting Growth trial — most popular plan!')">Start Free Trial</button>
+      <a class="pc-btn gold" href="checkout.html">Start Growth Plan →</a>
     </div>
 
     <div class="pc">
-      <div class="pc-name">Elite Team</div>
+      <div class="pc-name">Elite</div>
+      <div class="pc-mode">Done For You</div>
       <div class="pc-price">$597<span class="pc-per">/mo</span></div>
-      <div class="pc-tagline">"Your remote headquarters. Run like a CEO."</div>
-      <div class="pc-desc">For top producers and growing businesses who want their entire VA operation managed for them.</div>
+      <div class="pc-tagline">"You focus on your business. We run your VAs."</div>
+      <div class="pc-desc">You focus on your business. We manage your entire VA operation. Hiring, training, KPIs, replacements — all handled by your dedicated account manager.</div>
+      <div class="pc-buyer">
+        <strong>Who buys this</strong>
+        Top producer who values their time at $500/hr and wants zero involvement in managing VAs.
+      </div>
       <div class="divider"></div>
       <ul class="pc-feats">
         <li class="highlight">Everything in Growth</li>
         <li class="highlight">Dedicated account manager</li>
         <li>We BUILD your custom training</li>
-        <li>White-label SOPs with your brand</li>
-        <li>Advanced KPI reporting</li>
+        <li>We BUILD your SOPs</li>
         <li>Weekly strategy calls</li>
-        <li>Done-for-you VA onboarding</li>
+        <li>We handle VA transitions for you</li>
         <li>First access to new VAs</li>
-        <li class="highlight">Free custom SOP built on signup</li>
+        <li>White-label everything</li>
       </ul>
-      <button class="pc-btn out" onclick="toast('👑 Starting Elite trial — done-for-you everything!')">Start Free Trial</button>
+      <a class="pc-btn out" href="checkout.html">Get Elite →</a>
     </div>
   </div>
 
-  <div class="price-note">All plans include a <span>30-day free trial</span>. No credit card required to start. Cancel anytime.</div>
+  <div class="price-note"><strong>Cancel anytime.</strong> No contracts. No placement fees. No hidden costs.</div>
 
   <div class="roi-strip">
     <div class="roi-text">
@@ -541,7 +571,7 @@ footer{padding:2.5rem 4rem;border-top:1px solid var(--border);display:flex;align
       <div class="ent-title">🏢 Brokerages, Franchises & Multi-Location Businesses</div>
       <div class="ent-sub">Custom enterprise packages with white-label training portals, branded dashboards, dedicated VA pools, and volume pricing. Built to scale with your entire organization.</div>
     </div>
-    <button class="btn-ent" onclick="toast('📞 Enterprise team will reach out within 1 business day!')">Contact Enterprise Sales →</button>
+    <a class="btn-ent" href="contact.html">Contact Enterprise Sales →</a>
   </div>
 </section>
 
@@ -583,12 +613,12 @@ footer{padding:2.5rem 4rem;border-top:1px solid var(--border);display:flex;align
   <div class="cta-glow"></div>
   <div class="cta-content">
     <h2 class="cta-h">Your Next Hire Is Already<br/><span>Trained. Vetted. Waiting.</span></h2>
-    <p class="cta-sub">Stop losing deals to admin work. Stop missing follow-ups. Stop wearing every hat. Your Elite Remote Agent is ready — and your first 30 days are on us.</p>
+    <p class="cta-sub">Stop losing deals to admin work. Stop missing follow-ups. Stop wearing every hat. Your Elite Remote Agent is ready — pick a plan and get instant access.</p>
     <div class="cta-btns">
-      <button class="btn-primary" style="font-size:1rem;padding:1.1rem 2.75rem;" onclick="toast('🚀 Starting your free 30-day trial!')">Start Free — 30 Days →</button>
-      <button class="btn-secondary" style="font-size:1rem;padding:1.1rem 2.75rem;" onclick="toast('📞 Booking a demo call!')">Book a Demo Call</button>
+      <a class="btn-primary" style="font-size:1rem;padding:1.1rem 2.75rem;" href="vas.html">Browse VAs Now →</a>
+      <a class="btn-secondary" style="font-size:1rem;padding:1.1rem 2.75rem;" href="#pricing">See Pricing</a>
     </div>
-    <div class="cta-note">No credit card required. No contracts. Cancel anytime.</div>
+    <div class="cta-note">Cancel anytime. No contracts. No placement fees.</div>
   </div>
 </section>
 
@@ -596,14 +626,14 @@ footer{padding:2.5rem 4rem;border-top:1px solid var(--border);display:flex;align
 <footer>
   <div class="foot-logo">Elite Remote Agent</div>
   <div class="foot-links">
-    <a class="foot-link" href="#portals">Portals</a>
-    <a class="foot-link" href="#how">How It Works</a>
-    <a class="foot-link" href="#vas">Browse VAs</a>
+    <a class="foot-link" href="vas.html">Browse VAs</a>
+    <a class="foot-link" href="how-it-works.html">How It Works</a>
     <a class="foot-link" href="#pricing">Pricing</a>
-    <a class="foot-link" href="#">Privacy Policy</a>
-    <a class="foot-link" href="#">Terms of Service</a>
-    <a class="foot-link" href="#">For VAs</a>
-    <a class="foot-link" href="#">Contact</a>
+    <a class="foot-link" href="faq.html">FAQ</a>
+    <a class="foot-link" href="apply.html">For VAs</a>
+    <a class="foot-link" href="contact.html">Contact</a>
+    <a class="foot-link" href="privacy.html">Privacy Policy</a>
+    <a class="foot-link" href="terms.html">Terms of Service</a>
   </div>
   <div class="foot-copy">© 2026 Elite Remote Agent. All rights reserved.</div>
 </footer>
