@@ -9,7 +9,7 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 // These values come from your Vercel environment variables
 // In plain HTML files we hardcode them here (they're public-safe)
 const SUPABASE_URL = 'https://wcmvtfclkybgdwjybyzb.supabase.co'
-const SUPABASE_ANON_KEY = 'sb_publishable_2OgEXZ2Uk2dQy6Pw3VJQXg_ZzC2a1R_l'
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndjbXZ0ZmNsa3liZ2R3anlieXpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMzExOTIsImV4cCI6MjA5NDgwNzE5Mn0.zI0tjF7dN0DT30Mkd1nEDyMdXlYPzTmKH3BxvNea1Fs
 
 // Create and export the Supabase client
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
