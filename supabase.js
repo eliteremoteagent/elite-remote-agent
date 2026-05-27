@@ -1,27 +1,20 @@
 // ═══════════════════════════════════════════════════════════════════
 // SUPABASE CLIENT — Elite Remote Agent
-// This file connects your website to your Supabase database
-// Import this at the top of any HTML file that needs database access
 // ═══════════════════════════════════════════════════════════════════
 
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
-// These values come from your Vercel environment variables
-// In plain HTML files we hardcode them here (they're public-safe)
 const SUPABASE_URL = 'https://wcmvtfclkybgdwjybyzb.supabase.co'
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndjbXZ0ZmNsa3liZ2R3anlieXpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMzExOTIsImV4cCI6MjA5NDgwNzE5Mn0.zI0tjF7dN0DT30Mkd1nEDyMdXlYPzTmKH3BxvNea1Fs
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndjbXZ0ZmNsa3liZ2R3anlieXpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMzExOTIsImV4cCI6MjA5NDgwNzE5Mn0.zI0tjF7dN0DT30Mkd1nEDyMdXlYPzTmKH3BxvNea1Fs'
 
-// Create and export the Supabase client
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
-// Quick connection test — run this to verify everything works
 export async function testConnection() {
   try {
     const { data, error } = await supabase
       .from('vas')
       .select('count')
       .limit(1)
-    
     if (error) throw error
     console.log('✅ Supabase connected successfully!')
     return true
