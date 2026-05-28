@@ -1,7 +1,3 @@
-// ═══════════════════════════════════════════════════════════════════
-// SUPABASE CLIENT — Elite Remote Agent
-// ═══════════════════════════════════════════════════════════════════
-
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
 const SUPABASE_URL = 'https://wcmvtfclkybgdwjybyzb.supabase.co'
@@ -11,10 +7,7 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
 export async function testConnection() {
   try {
-    const { data, error } = await supabase
-      .from('vas')
-      .select('count')
-      .limit(1)
+    const { data, error } = await supabase.from('vas').select('count').limit(1)
     if (error) throw error
     console.log('✅ Supabase connected successfully!')
     return true
