@@ -251,14 +251,16 @@ function skillPct(rating) {
 }
 
 function renderProfile(va) {
+  const fullName = [va.first_name, va.last_name].filter(Boolean).join(' ') || 'VA'
   const photoUrl = getUrl(PHOTO_BUCKET, va.photo_url)
   const resumeUrl = getUrl(RESUME_BUCKET, va.resume_url)
-  const voiceUrl = getUrl(VOICE_BUCKET, va.voice_url)
-  const color = avatarColor(va.full_name || 'VA')
-  const init = initials(va.full_name || 'VA')
+  const voiceRec = (va.va_voice_recordings || [])[0]
+  const voiceUrl = voiceRec ? voiceRec.audio_url : null
+  const color = avatarColor(fullName)
+  const init = initials(fullName)
 
   const photoHtml = photoUrl
-    ? `<img src="${photoUrl}" alt="${va.full_name}" onerror="this.parentElement.innerHTML='${init}';this.parentElement.style.background='${color}'">`
+    ? `<img src="${photoUrl}" alt="${fullName}" onerror="this.parentElement.innerHTML='${init}';this.parentElement.style.background='${color}'">`
     : init
 
   let badgeHtml = ''
@@ -290,38 +292,29 @@ function renderProfile(va) {
   const workHtml = (va.va_work_history || []).length
     ? va.va_work_history.map(w => `
         <div class="work-item">
-          <div class="work-title">${w.job_title || ''}</div>
+          <div class="work-title">${w.role || ''}</div>
           <div class="work-company">${w.company || ''}</div>
-          <div class="work-dates">${[w.start_date, w.end_date || 'Present'].filter(Boolean).join(' – ')}</div>
+          <div class="work-dates">${w.period || ''}</div>
           ${w.description ? `<div class="work-desc">${w.description}</div>` : ''}
         </div>`).join('')
     : '<p style="color:var(--muted);font-size:.85rem">No work history provided.</p>'
 
   // Education
   const eduHtml = (va.va_education || []).length
-    ? va.va_education.filter(e => e.edu_type === 'education' || !e.edu_type).map(e => `
+    ? va.va_education.map(e => `
         <div class="edu-item">
-          <div class="edu-icon">🎓</div>
+          <div class="edu-icon">${e.icon || '🎓'}</div>
           <div>
-            <div class="edu-degree">${e.degree || e.credential_name || ''}</div>
-            <div class="edu-school">${e.school || e.institution || ''}</div>
-            <div class="edu-year">${e.graduation_year || e.year || ''}</div>
+            <div class="edu-degree">${e.degree_name || ''}</div>
+            <div class="edu-school">${e.school || ''}</div>
+            <div class="edu-year">${e.year || ''}</div>
           </div>
         </div>`).join('')
     : '<p style="color:var(--muted);font-size:.85rem">No education listed.</p>'
 
-  // Certifications
-  const certs = (va.va_education || []).filter(e => e.edu_type === 'certification')
-  const certsHtml = certs.length
-    ? certs.map(c => `
-        <div class="cert-item">
-          <div class="cert-icon">🏅</div>
-          <div>
-            <div class="cert-name">${c.credential_name || c.degree || ''}</div>
-            <div class="cert-org">${c.institution || c.school || ''}${c.year ? ' · ' + c.year : ''}</div>
-          </div>
-        </div>`).join('')
-    : null
+  // Certifications — no edu_type split in current schema
+  const certs = []
+  const certsHtml = null
 
   // Voice player
   const voiceHtml = voiceUrl
@@ -330,7 +323,7 @@ function renderProfile(va) {
         <audio id="voiceAudio" src="${voiceUrl}" onended="resetPlay(this)"></audio>
         <div class="voice-info">
           <p>Voice Sample</p>
-          <small>Click to hear ${va.full_name?.split(' ')[0] || 'VA'} introduce themselves</small>
+          <small>Click to hear ${fullName.split(' ')[0] || 'VA'} introduce themselves</small>
         </div>
       </div>`
     : ''
@@ -343,15 +336,15 @@ function renderProfile(va) {
       </a>`
     : ''
 
-  document.getElementById('bcName').textContent = va.full_name ? `/ ${va.full_name}` : ''
-  document.title = `${va.full_name || 'VA Profile'} — Elite Remote Agent`
+  document.getElementById('bcName').textContent = fullName ? `/ ${fullName}` : ''
+  document.title = `${fullName || 'VA Profile'} — Elite Remote Agent`
 
   document.getElementById('profileContent').innerHTML = `
     <div class="profile-hero">
       <div class="profile-photo" style="background:${color}">${photoHtml}</div>
       <div class="profile-info">
-        <h1>${va.full_name || 'VA'}</h1>
-        <div class="role">${va.primary_role || va.category || ''}</div>
+        <h1>${fullName || 'VA'}</h1>
+        <div class="role">${va.role || va.category || ''}</div>
         <div class="profile-meta">
           ${va.timezone ? `<span>🌍 ${va.timezone}</span>` : ''}
           ${va.english_level ? `<span>🗣 English: ${va.english_level}</span>` : ''}
@@ -366,7 +359,7 @@ function renderProfile(va) {
 
     <div class="hire-bar">
       <div class="cta-text">
-        <h3>Ready to hire ${va.full_name?.split(' ')[0] || 'this VA'}?</h3>
+        <h3>Ready to hire ${fullName.split(' ')[0] || 'this VA'}?</h3>
         <p>Start your free trial — no placement fees, no contracts.</p>
       </div>
       <a href="checkout.html" class="btn-hire">Hire Now — Start Free</a>
@@ -389,7 +382,7 @@ function renderProfile(va) {
           <div class="sidebar-title">Quick Info</div>
           ${va.hourly_rate ? `<div class="info-row"><span class="info-label">Rate</span><span class="info-value gold">$${va.hourly_rate}/hr</span></div>` : ''}
           ${va.category ? `<div class="info-row"><span class="info-label">Category</span><span class="info-value">${va.category}</span></div>` : ''}
-          ${va.primary_role ? `<div class="info-row"><span class="info-label">Role</span><span class="info-value">${va.primary_role}</span></div>` : ''}
+          ${va.role ? `<div class="info-row"><span class="info-label">Role</span><span class="info-value">${va.role}</span></div>` : ''}
           ${va.timezone ? `<div class="info-row"><span class="info-label">Timezone</span><span class="info-value">${va.timezone}</span></div>` : ''}
           ${va.english_level ? `<div class="info-row"><span class="info-label">English</span><span class="info-value">${va.english_level}</span></div>` : ''}
           <div class="info-row"><span class="info-label">Status</span><span class="info-value" style="color:var(--success)">● Available</span></div>
@@ -437,10 +430,11 @@ async function loadProfile() {
     .from('vas')
     .select(`
       *,
-      va_skills ( skill_name, skill_rating, admin_rating, final_rating ),
-      va_tools ( tool_name, proficiency ),
-      va_work_history ( job_title, company, start_date, end_date, description ),
-      va_education ( edu_type, degree, credential_name, school, institution, graduation_year, year )
+      va_skills ( skill_name, va_self_rating, final_rating, level_pct ),
+      va_tools ( tool_name, tool_type ),
+      va_work_history ( role, company, period, description, display_order ),
+      va_education ( degree_name, school, year, icon, display_order ),
+      va_voice_recordings ( audio_url, label )
     `)
     .eq('id', id)
     .eq('status', 'approved')
