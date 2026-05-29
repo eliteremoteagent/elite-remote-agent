@@ -6,911 +6,364 @@
 <title>Browse VAs — Elite Remote Agent</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --black:#050810;--dark:#0C1020;--dark2:#131828;--card:#0F1525;
-  --gold:#D4A843;--gold2:#F0C060;--gold-dim:rgba(212,168,67,0.1);
-  --white:#FFFFFF;--muted:#8892A4;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
-  --green:#2ECC71;--green-dim:rgba(46,204,113,0.1);
-  --red:#E74C3C;--red-dim:rgba(231,76,60,0.1);
-  --blue:#3498DB;--purple:#9B59B6;
+:root {
+  --gold: #D4AF37; --gold-light: #F0CC55; --black: #0A0A0A; --dark: #111;
+  --card: #1A1A1A; --border: #2A2A2A; --text: #E8E8E8; --muted: #888;
 }
-html{scroll-behavior:smooth;}
-body{font-family:'Manrope',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;}
-::-webkit-scrollbar{width:4px;}
-::-webkit-scrollbar-track{background:var(--black);}
-::-webkit-scrollbar-thumb{background:rgba(212,168,67,0.2);border-radius:2px;}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--black); color: var(--text); font-family: 'Manrope', sans-serif; min-height: 100vh; }
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.1rem 3rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);backdrop-filter:blur(20px);background:rgba(5,8,16,0.88);}
-.logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:3px;color:var(--gold);text-decoration:none;}
-.logo small{display:block;font-family:'Manrope',sans-serif;font-size:0.45rem;letter-spacing:4px;color:rgba(255,255,255,0.3);text-transform:uppercase;}
-.nav-links{display:flex;gap:2rem;}
-.nav-link{color:rgba(255,255,255,0.45);font-size:0.8rem;font-weight:500;text-decoration:none;transition:color 0.2s;}
-.nav-link:hover,.nav-link.active{color:var(--gold);}
-.nav-btns{display:flex;gap:0.6rem;}
-.btn-ghost{padding:0.45rem 1.1rem;border:1px solid rgba(255,255,255,0.12);border-radius:6px;background:transparent;color:rgba(255,255,255,0.6);font-family:'Manrope',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;}
-.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
-.btn-gold{padding:0.5rem 1.4rem;border-radius:6px;background:var(--gold);color:var(--black);font-family:'Manrope',sans-serif;font-size:0.8rem;font-weight:800;cursor:pointer;border:none;transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;}
-.btn-gold:hover{background:var(--gold2);transform:translateY(-1px);}
+nav {
+  background: rgba(10,10,10,.97); border-bottom: 1px solid var(--border);
+  padding: 0 2rem; height: 68px; display: flex; align-items: center;
+  justify-content: space-between; position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(12px);
+}
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: var(--gold); letter-spacing: 3px; text-decoration: none; line-height: 1; }
+.nav-logo small { display: block; font-family: 'Manrope', sans-serif; font-size: .55rem; color: var(--muted); letter-spacing: 2px; font-weight: 500; text-transform: uppercase; }
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: .85rem; font-weight: 500; transition: color .2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--gold); }
+.nav-cta { display: flex; gap: .75rem; align-items: center; }
+.btn-outline { border: 1px solid var(--border); color: var(--text); padding: .45rem 1rem; border-radius: 7px; text-decoration: none; font-size: .82rem; font-weight: 600; transition: all .2s; }
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+.btn-gold { background: var(--gold); color: var(--black); padding: .5rem 1.2rem; border-radius: 7px; text-decoration: none; font-size: .82rem; font-weight: 800; transition: background .2s; white-space: nowrap; }
+.btn-gold:hover { background: var(--gold-light); }
 
 /* HERO */
-.hero{padding:7rem 3rem 3rem;background:var(--dark);position:relative;overflow:hidden;}
-.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:50px;background:var(--black);border-radius:50px 50px 0 0;}
-.hero-glow{position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(212,168,67,0.05) 0%,transparent 65%);pointer-events:none;}
-.hero-content{position:relative;z-index:1;max-width:680px;}
-.hero-tag{display:inline-flex;align-items:center;gap:0.5rem;background:var(--gold-dim);border:1px solid rgba(212,168,67,0.2);border-radius:30px;padding:0.32rem 0.875rem;margin-bottom:1rem;}
-.hero-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
-.hero-tag span{font-size:0.65rem;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;}
-.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,3.8rem);letter-spacing:2px;line-height:1;margin-bottom:0.75rem;}
-.hero h1 span{color:var(--gold);}
-.hero p{color:rgba(255,255,255,0.45);font-size:0.875rem;line-height:1.75;margin-bottom:1.5rem;max-width:520px;}
-.hero-stats{display:flex;gap:2rem;flex-wrap:wrap;}
-.hs-item{text-align:center;}
-.hs-num{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--gold);letter-spacing:1px;}
-.hs-label{font-size:0.62rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;margin-top:1px;}
+.hero { padding: 3rem 2rem 2rem; text-align: center; border-bottom: 1px solid var(--border); }
+.hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 5vw, 3.2rem); letter-spacing: 2px; line-height: 1.1; }
+.hero h1 span { color: var(--gold); }
+.hero p { color: var(--muted); font-size: .95rem; margin-top: .75rem; max-width: 560px; margin-left: auto; margin-right: auto; }
+.hero-stats { display: flex; gap: 2.5rem; justify-content: center; margin-top: 1.75rem; flex-wrap: wrap; }
+.stat { text-align: center; }
+.stat-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--gold); letter-spacing: 1px; }
+.stat-lbl { font-size: .68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: .1rem; }
 
 /* FILTERS */
-.filters-bar{background:var(--dark2);border-bottom:1px solid var(--border);padding:1.1rem 3rem;position:sticky;top:60px;z-index:90;display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;}
-.search-wrap{display:flex;align-items:center;gap:0.4rem;background:rgba(255,255,255,0.04);border:1.5px solid var(--border2);border-radius:8px;padding:0.5rem 0.875rem;flex:1;min-width:200px;transition:border-color 0.2s;}
-.search-wrap:focus-within{border-color:var(--gold);}
-.search-wrap input{background:transparent;border:none;outline:none;font-family:'Manrope',sans-serif;font-size:0.8rem;color:var(--white);width:100%;}
-.search-wrap input::placeholder{color:rgba(255,255,255,0.2);}
-.fsel{padding:0.48rem 0.75rem;border:1.5px solid var(--border2);border-radius:8px;background:rgba(255,255,255,0.03);font-family:'Manrope',sans-serif;font-size:0.75rem;color:rgba(255,255,255,0.55);cursor:pointer;outline:none;transition:border-color 0.2s;}
-.fsel:focus{border-color:var(--gold);}
-.fsel option{background:var(--dark2);}
-.fpill{padding:0.35rem 0.875rem;border-radius:20px;font-size:0.7rem;font-weight:700;cursor:pointer;border:1.5px solid var(--border2);color:rgba(255,255,255,0.4);background:transparent;transition:all 0.2s;white-space:nowrap;}
-.fpill.on{border-color:var(--gold);color:var(--gold);background:var(--gold-dim);}
-.results-count{margin-left:auto;font-size:0.75rem;color:rgba(255,255,255,0.3);white-space:nowrap;}
+.filters { padding: 1rem 2rem; background: var(--dark); border-bottom: 1px solid var(--border); display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; position: sticky; top: 68px; z-index: 90; }
+.filter-group { position: relative; }
+.filter-group select {
+  appearance: none; background: #0F0F0F; border: 1px solid var(--border); color: var(--text);
+  padding: .5rem 2rem .5rem .9rem; border-radius: 8px; font-size: .82rem; font-family: 'Manrope', sans-serif;
+  cursor: pointer; outline: none; transition: border-color .2s;
+}
+.filter-group select:focus { border-color: var(--gold); }
+.filter-group::after { content: '▾'; position: absolute; right: .65rem; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: .7rem; pointer-events: none; }
+.search-wrap { flex: 1; min-width: 200px; max-width: 320px; position: relative; }
+.search-wrap input {
+  width: 100%; background: #0F0F0F; border: 1px solid var(--border); color: var(--text);
+  padding: .5rem .9rem .5rem 2.2rem; border-radius: 8px; font-size: .82rem; font-family: 'Manrope', sans-serif;
+  outline: none; transition: border-color .2s;
+}
+.search-wrap input:focus { border-color: var(--gold); }
+.search-wrap::before { content: '🔍'; position: absolute; left: .7rem; top: 50%; transform: translateY(-50%); font-size: .75rem; }
+.tab-group { display: flex; gap: .25rem; }
+.tab { padding: .45rem .9rem; border-radius: 8px; font-size: .8rem; font-weight: 600; cursor: pointer; border: 1px solid var(--border); color: var(--muted); background: #0F0F0F; transition: all .2s; }
+.tab.active { background: rgba(212,175,55,.12); border-color: var(--gold); color: var(--gold); }
+.result-count { margin-left: auto; font-size: .8rem; color: var(--muted); white-space: nowrap; }
 
-/* MAIN LAYOUT */
-.main-wrap{display:grid;grid-template-columns:1fr 420px;gap:0;min-height:calc(100vh - 200px);}
-.va-list{padding:1.5rem 2rem;overflow-y:auto;}
-.profile-panel{position:sticky;top:117px;height:calc(100vh - 117px);overflow-y:auto;background:var(--dark2);border-left:1px solid var(--border);}
+/* GRID */
+.grid-wrap { padding: 1.75rem 2rem; }
+.va-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
 
 /* VA CARD */
-.va-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:1.25rem;margin-bottom:1rem;cursor:pointer;transition:all 0.25s;position:relative;}
-.va-card:hover{border-color:rgba(212,168,67,0.25);transform:translateX(3px);}
-.va-card.selected{border-color:var(--gold);background:rgba(212,168,67,0.03);}
-.va-card.selected::before{content:'';position:absolute;left:-1.5px;top:20%;bottom:20%;width:3px;background:var(--gold);border-radius:0 3px 3px 0;}
-.vc-top{display:flex;gap:0.875rem;align-items:flex-start;margin-bottom:0.875rem;}
-.vc-av{width:52px;height:52px;border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;color:white;flex-shrink:0;}
-.vc-info{flex:1;min-width:0;}
-.vc-name{font-weight:700;font-size:0.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.vc-role{font-size:0.72rem;color:rgba(255,255,255,0.4);margin-top:2px;}
-.vc-status{font-size:0.62rem;font-weight:700;margin-top:4px;display:flex;align-items:center;gap:3px;}
-.vc-dot{width:5px;height:5px;border-radius:50%;background:currentColor;}
-.vc-status.avail{color:var(--green);}
-.vc-status.hired{color:var(--red);}
-.vc-status.interview{color:#F39C12;}
-.vc-fav{position:absolute;top:1rem;right:1rem;font-size:0.95rem;cursor:pointer;color:rgba(255,255,255,0.2);transition:color 0.2s;}
-.vc-fav:hover,.vc-fav.saved{color:var(--gold);}
-.vc-body{}
-.vc-rating{display:flex;align-items:center;gap:0.35rem;margin-bottom:0.5rem;}
-.vc-stars{color:var(--gold);font-size:0.75rem;}
-.vc-rnum{font-size:0.75rem;font-weight:700;}
-.vc-rct{font-size:0.68rem;color:rgba(255,255,255,0.35);}
-.vc-bio{font-size:0.75rem;color:rgba(255,255,255,0.4);line-height:1.5;margin-bottom:0.6rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-.tags{display:flex;flex-wrap:wrap;gap:0.3rem;}
-.tag{font-size:0.62rem;font-weight:600;padding:0.18rem 0.5rem;border-radius:4px;background:var(--gold-dim);color:var(--gold);border:1px solid rgba(212,168,67,0.15);}
-.tag.gr{background:var(--green-dim);color:var(--green);border-color:rgba(46,204,113,0.15);}
-.tag.bl{background:rgba(52,152,219,0.1);color:var(--blue);border-color:rgba(52,152,219,0.15);}
-.vc-footer{display:flex;align-items:center;justify-content:space-between;margin-top:0.875rem;padding-top:0.875rem;border-top:1px solid var(--border);}
-.vc-rate{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;}
-.vc-rate sub{font-size:0.58rem;font-family:'Manrope',sans-serif;font-weight:400;color:var(--muted);}
-.vc-btns{display:flex;gap:0.35rem;}
-.btn-xs{padding:0.35rem 0.75rem;border-radius:6px;font-family:'Manrope',sans-serif;font-size:0.7rem;font-weight:700;cursor:pointer;border:none;transition:all 0.2s;}
-.btn-xs.out{background:transparent;border:1.5px solid var(--border2);color:rgba(255,255,255,0.55);}
-.btn-xs.gold{background:var(--gold);color:var(--black);}
-.btn-xs:hover{opacity:0.85;transform:translateY(-1px);}
+.va-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+  overflow: hidden; cursor: pointer; transition: all .25s; text-decoration: none; color: inherit; display: block;
+}
+.va-card:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(212,175,55,.1); }
+.card-photo { width: 100%; height: 180px; background: #1a1a1a; position: relative; overflow: hidden; }
+.card-photo img { width: 100%; height: 100%; object-fit: cover; }
+.card-photo-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: 800; color: #fff; }
+.card-badges { position: absolute; top: .6rem; right: .6rem; display: flex; flex-direction: column; gap: .3rem; align-items: flex-end; }
+.badge { font-size: .6rem; font-weight: 700; padding: .2rem .5rem; border-radius: 8px; text-transform: uppercase; letter-spacing: .5px; }
+.badge.top-rated { background: var(--gold); color: var(--black); }
+.badge.elite { background: linear-gradient(135deg, #b8860b, var(--gold)); color: var(--black); }
+.badge.rising-star { background: rgba(212,175,55,.2); color: var(--gold); border: 1px solid rgba(212,175,55,.4); }
+.badge.new { background: rgba(59,130,246,.2); color: #60a5fa; border: 1px solid rgba(59,130,246,.3); }
+.card-body { padding: 1rem 1.1rem 1.2rem; }
+.card-name { font-weight: 800; font-size: 1rem; }
+.card-role { font-size: .78rem; color: var(--muted); margin-top: .15rem; }
+.card-meta { display: flex; gap: .5rem; margin-top: .75rem; flex-wrap: wrap; }
+.meta-pill { font-size: .7rem; background: rgba(255,255,255,.05); border: 1px solid var(--border); padding: .2rem .55rem; border-radius: 6px; color: var(--muted); }
+.meta-pill.rate { color: var(--gold); border-color: rgba(212,175,55,.3); background: rgba(212,175,55,.05); }
+.card-skills { margin-top: .85rem; display: flex; gap: .35rem; flex-wrap: wrap; }
+.skill-chip { font-size: .67rem; background: rgba(255,255,255,.04); border: 1px solid var(--border); padding: .15rem .45rem; border-radius: 5px; color: var(--muted); }
+.card-footer { margin-top: 1rem; padding-top: .8rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.card-avail { font-size: .72rem; color: #22C55E; display: flex; align-items: center; gap: .3rem; }
+.card-avail::before { content: ''; width: 6px; height: 6px; background: #22C55E; border-radius: 50%; flex-shrink: 0; }
+.card-cta { font-size: .75rem; font-weight: 700; color: var(--gold); }
 
-/* PROFILE PANEL */
-.pp-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:3rem;text-align:center;}
-.ppe-icon{font-size:3rem;margin-bottom:1rem;opacity:0.3;}
-.ppe-title{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:1px;color:rgba(255,255,255,0.2);margin-bottom:0.5rem;}
-.ppe-sub{font-size:0.78rem;color:rgba(255,255,255,0.15);line-height:1.6;}
-
-.pp-content{display:none;flex-direction:column;}
-.pp-content.show{display:flex;}
-
-/* PROFILE HEADER */
-.pp-header{background:linear-gradient(145deg,var(--dark),var(--black));padding:1.75rem;border-bottom:1px solid var(--border);position:relative;}
-.pp-close{position:absolute;top:1rem;right:1rem;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.07);border:none;color:rgba(255,255,255,0.4);cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
-.pp-close:hover{background:rgba(255,255,255,0.12);color:var(--white);}
-.pp-av-wrap{display:flex;gap:1rem;align-items:flex-start;margin-bottom:1rem;}
-.pp-av{width:68px;height:68px;border-radius:50%;border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:white;flex-shrink:0;}
-.pp-name{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:1px;line-height:1;}
-.pp-role{font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:4px;}
-.pp-badges{display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:0.5rem;}
-.pp-badge{padding:0.2rem 0.6rem;border-radius:12px;font-size:0.62rem;font-weight:700;}
-.pp-badge.gold{background:var(--gold-dim);color:var(--gold);border:1px solid rgba(212,168,67,0.2);}
-.pp-badge.green{background:var(--green-dim);color:var(--green);border:1px solid rgba(46,204,113,0.15);}
-.pp-badge.gray{background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.5);border:1px solid var(--border2);}
-.pp-badge.red{background:var(--red-dim);color:var(--red);border:1px solid rgba(231,76,60,0.15);}
-
-/* QUICK STATS */
-.pp-quick{display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem;margin-bottom:0;}
-.pq{background:rgba(255,255,255,0.04);border-radius:8px;padding:0.6rem;text-align:center;}
-.pq-val{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--gold);letter-spacing:1px;}
-.pq-label{font-size:0.55rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.5px;margin-top:1px;}
-
-/* PROFILE TABS */
-.pp-tabs{display:flex;border-bottom:1px solid var(--border);background:var(--dark2);overflow-x:auto;}
-.pp-tab{padding:0.7rem 1rem;border:none;background:transparent;font-family:'Manrope',sans-serif;font-size:0.72rem;font-weight:600;color:rgba(255,255,255,0.35);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.2s;white-space:nowrap;}
-.pp-tab.active{color:var(--gold);border-bottom-color:var(--gold);}
-.pp-tab:hover:not(.active){color:rgba(255,255,255,0.65);}
-
-/* PROFILE BODY */
-.pp-body{padding:1.25rem;flex:1;}
-.pp-section{margin-bottom:1.5rem;}
-.pp-sec-title{font-size:0.62rem;font-weight:800;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.5rem;}
-.pp-sec-title::after{content:'';flex:1;height:1px;background:var(--border);}
-
-/* ABOUT */
-.pp-bio{font-size:0.8rem;color:rgba(255,255,255,0.55);line-height:1.75;}
-
-/* STATS GRID */
-.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;}
-.sg-item{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.75rem;}
-.sg-label{font-size:0.6rem;color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;}
-.sg-val{font-size:0.8rem;font-weight:700;}
-
-/* SKILLS */
-.skill-list{display:flex;flex-direction:column;gap:0.5rem;}
-.skill-item{display:flex;align-items:center;gap:0.75rem;}
-.skill-name{font-size:0.75rem;font-weight:600;width:130px;flex-shrink:0;}
-.skill-bar{flex:1;height:5px;background:var(--border2);border-radius:3px;overflow:hidden;}
-.skill-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width 0.8s ease;}
-.skill-level{font-size:0.62rem;font-weight:700;width:70px;text-align:right;flex-shrink:0;}
-.skill-level.expert{color:var(--green);}
-.skill-level.advanced{color:var(--gold);}
-.skill-level.intermediate{color:#F39C12;}
-
-/* CRM TAGS */
-.crm-tags{display:flex;flex-wrap:wrap;gap:0.4rem;}
-.crm-tag{font-size:0.68rem;font-weight:700;padding:0.25rem 0.6rem;border-radius:6px;background:var(--green-dim);color:var(--green);border:1px solid rgba(46,204,113,0.15);}
-.crm-tag.secondary{background:rgba(52,152,219,0.08);color:var(--blue);border-color:rgba(52,152,219,0.15);}
-
-/* EDUCATION */
-.edu-item{display:flex;gap:0.75rem;padding:0.75rem;background:rgba(255,255,255,0.02);border-radius:8px;border:1px solid var(--border);margin-bottom:0.5rem;}
-.edu-icon{width:32px;height:32px;background:var(--dark2);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:0.85rem;flex-shrink:0;}
-.edu-deg{font-weight:700;font-size:0.78rem;}
-.edu-sch{font-size:0.7rem;color:rgba(255,255,255,0.35);margin-top:1px;}
-.edu-yr{font-size:0.65rem;color:var(--gold);font-weight:700;margin-top:2px;}
-
-/* WORK HISTORY */
-.work-item{padding-left:1rem;border-left:2px solid rgba(212,168,67,0.25);margin-bottom:1rem;position:relative;}
-.work-item::before{content:'';position:absolute;left:-5px;top:4px;width:8px;height:8px;border-radius:50%;background:var(--gold);}
-.work-role{font-weight:700;font-size:0.8rem;}
-.work-company{font-size:0.72rem;color:rgba(255,255,255,0.4);margin-top:1px;}
-.work-period{font-size:0.65rem;color:var(--gold);font-weight:700;margin-top:2px;}
-.work-desc{font-size:0.72rem;color:rgba(255,255,255,0.35);margin-top:0.4rem;line-height:1.55;}
-
-/* VOICE */
-.voice-player{background:var(--dark);border-radius:10px;padding:0.875rem;display:flex;align-items:center;gap:0.875rem;margin-bottom:0.6rem;border:1px solid var(--border);}
-.play-btn{width:36px;height:36px;background:var(--gold);border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--black);font-size:0.85rem;flex-shrink:0;transition:transform 0.2s;}
-.play-btn:hover{transform:scale(1.1);}
-.waveform{flex:1;height:26px;background:rgba(255,255,255,0.03);border-radius:5px;display:flex;align-items:center;padding:0 0.4rem;gap:2px;overflow:hidden;}
-.wb{width:3px;border-radius:2px;background:rgba(212,168,67,0.35);}
-.vp-info{flex-shrink:0;text-align:right;}
-.vp-label{font-size:0.65rem;color:rgba(255,255,255,0.35);}
-.vp-dur{font-size:0.68rem;font-weight:700;color:var(--gold);}
-
-/* REVIEWS */
-.review-item{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;padding:1rem;margin-bottom:0.6rem;}
-.rv-stars{color:var(--gold);font-size:0.75rem;margin-bottom:0.4rem;}
-.rv-text{font-size:0.75rem;color:rgba(255,255,255,0.5);line-height:1.65;font-style:italic;margin-bottom:0.6rem;}
-.rv-author{display:flex;align-items:center;justify-content:space-between;}
-.rv-name{font-size:0.7rem;font-weight:700;}
-.rv-date{font-size:0.65rem;color:rgba(255,255,255,0.25);}
-
-/* RESUME */
-.resume-box{background:rgba(255,255,255,0.02);border:1.5px dashed var(--border2);border-radius:10px;padding:1.5rem;text-align:center;}
-.rb-icon{font-size:2rem;margin-bottom:0.5rem;}
-.rb-title{font-weight:700;font-size:0.82rem;margin-bottom:3px;}
-.rb-sub{font-size:0.7rem;color:rgba(255,255,255,0.3);margin-bottom:1rem;}
-.btn-dl{padding:0.5rem 1.25rem;border-radius:6px;background:var(--gold-dim);color:var(--gold);border:1px solid rgba(212,168,67,0.2);font-family:'Manrope',sans-serif;font-size:0.75rem;font-weight:700;cursor:pointer;transition:all 0.2s;}
-.btn-dl:hover{background:rgba(212,168,67,0.15);}
-
-/* CTA ACTIONS */
-.pp-actions{padding:1.25rem;border-top:1px solid var(--border);background:var(--dark);display:flex;gap:0.6rem;}
-.btn-action{flex:1;padding:0.7rem;border-radius:8px;font-family:'Manrope',sans-serif;font-weight:700;font-size:0.8rem;cursor:pointer;border:none;transition:all 0.2s;}
-.btn-action.out{background:transparent;border:1.5px solid var(--border2);color:rgba(255,255,255,0.6);}
-.btn-action.gold{background:var(--gold);color:var(--black);}
-.btn-action.green{background:var(--green);color:#0d1f12;}
-.btn-action:hover{filter:brightness(1.1);transform:translateY(-1px);}
-
-/* TOAST */
-.toast{position:fixed;bottom:2rem;right:2rem;background:var(--dark2);border:1px solid rgba(212,168,67,0.25);color:white;padding:0.875rem 1.25rem;border-radius:10px;font-size:0.8rem;font-weight:600;z-index:999;transform:translateX(160%);transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);display:flex;align-items:center;gap:0.5rem;max-width:300px;}
-.toast.show{transform:translateX(0);}
-.tdot{width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+/* EMPTY / LOADING */
+.state-msg { text-align: center; padding: 4rem 2rem; color: var(--muted); }
+.state-msg .icon { font-size: 2.5rem; margin-bottom: 1rem; opacity: .5; }
+.state-msg p { font-size: .95rem; }
+.spinner { width: 40px; height: 40px; border: 3px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin .8s linear infinite; margin: 0 auto 1rem; }
+@keyframes spin { to { transform: rotate(360deg); } }
 
 /* FOOTER */
-footer{padding:2rem 3rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;background:var(--black);}
-.foot-logo{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--gold);letter-spacing:3px;}
-.foot-links{display:flex;gap:1.5rem;flex-wrap:wrap;}
-.foot-link{font-size:0.7rem;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;}
-.foot-link:hover{color:var(--gold);}
-.foot-copy{font-size:0.65rem;color:rgba(255,255,255,0.18);}
+footer { border-top: 1px solid var(--border); padding: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; gap: 1rem; background: var(--dark); }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: var(--gold); letter-spacing: 2px; }
+.footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.footer-links a { color: var(--muted); text-decoration: none; font-size: .8rem; transition: color .2s; }
+.footer-links a:hover { color: var(--gold); }
+.footer-copy { color: var(--muted); font-size: .75rem; }
 
-@media(max-width:900px){
-  nav{padding:1rem 1.5rem;}
-  .nav-links{display:none;}
-  .hero{padding:6rem 1.5rem 2.5rem;}
-  .filters-bar{padding:0.875rem 1.5rem;}
-  .main-wrap{grid-template-columns:1fr;}
-  .profile-panel{display:none;}
-  .va-list{padding:1rem 1.5rem;}
-  footer{padding:1.5rem;flex-direction:column;text-align:center;}
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .filters { padding: .75rem 1rem; }
+  .grid-wrap { padding: 1rem; }
+  .hero { padding: 2rem 1rem 1.5rem; }
+  .hero-stats { gap: 1.5rem; }
 }
 </style>
 </head>
 <body>
-<div class="toast" id="toast"><div class="tdot"></div><span id="tmsg"></span></div>
 
-<!-- NAV -->
 <nav>
-  <a class="logo" href="index.html">Elite Remote Agent<small>Pre-Screened. Trained. Ready.</small></a>
+  <a href="index.html" class="nav-logo">Elite Remote Agent<small>Pre-Screened. Trained. Ready.</small></a>
   <div class="nav-links">
-    <a class="nav-link active" href="vas.html">Browse VAs</a>
-    <a class="nav-link" href="how-it-works.html">How It Works</a>
-    <a class="nav-link" href="index.html#pricing">Pricing</a>
-    <a class="nav-link" href="contact.html">Contact</a>
+    <a href="vas.html" class="active">Browse VAs</a>
+    <a href="how-it-works.html">How It Works</a>
+    <a href="index.html#pricing">Pricing</a>
+    <a href="contact.html">Contact</a>
   </div>
-  <div class="nav-btns">
-    <a class="btn-ghost" href="dashboard.html">Log In</a>
-    <a class="btn-gold" href="checkout.html">Start Free →</a>
+  <div class="nav-cta">
+    <a href="dashboard.html" class="btn-outline">Log In</a>
+    <a href="checkout.html" class="btn-gold">Start Free →</a>
   </div>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-content">
-    <div class="hero-tag"><div class="hero-tag-dot"></div><span>All VAs Pre-Screened & Trained</span></div>
-    <h1>Meet Your <span>Unfair Advantage.</span><br/>Browse Every VA.</h1>
-    <p>Every profile you see has passed our 3-step vetting process, completed our real estate and business training curriculum, and is ready to plug into your business. Click any profile to see everything.</p>
-    <div class="hero-stats">
-      <div class="hs-item"><div class="hs-num">500+</div><div class="hs-label">Vetted VAs</div></div>
-      <div class="hs-item"><div class="hs-num">4.9★</div><div class="hs-label">Avg Rating</div></div>
-      <div class="hs-item"><div class="hs-num">$6–$12</div><div class="hs-label">Per Hour</div></div>
-      <div class="hs-item"><div class="hs-num">48hr</div><div class="hs-label">Avg Hire Time</div></div>
-      <div class="hs-item"><div class="hs-num">$0</div><div class="hs-label">Placement Fees</div></div>
-    </div>
+  <h1>Meet Your <span>Unfair Advantage.</span><br>Browse Every VA.</h1>
+  <p>Every profile has passed our 3-step vetting process, completed real estate training, and is ready to plug into your business.</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-val" id="statTotal">—</div><div class="stat-lbl">Vetted VAs</div></div>
+    <div class="stat"><div class="stat-val">4.9★</div><div class="stat-lbl">Avg Rating</div></div>
+    <div class="stat"><div class="stat-val">$6–$12</div><div class="stat-lbl">Per Hour</div></div>
+    <div class="stat"><div class="stat-val">48hr</div><div class="stat-lbl">Avg Hire Time</div></div>
+    <div class="stat"><div class="stat-val">$0</div><div class="stat-lbl">Placement Fees</div></div>
   </div>
 </div>
 
-<!-- FILTERS -->
-<div class="filters-bar">
-  <div class="search-wrap"><span style="color:rgba(255,255,255,0.2);font-size:0.85rem;">🔍</span><input placeholder="Search by name, role, CRM, or skill..." id="searchInput" oninput="filterVAs()"/></div>
-  <select class="fsel" onchange="filterVAs()" id="filterSpecialty">
-    <option value="">All Specialties</option>
-    <option>Transaction Coordinator</option>
-    <option>ISA / Lead Qualifier</option>
-    <option>Marketing VA</option>
-    <option>CRM Specialist</option>
-    <option>Executive Admin</option>
-    <option>Social Media VA</option>
-    <option>Med Spa VA</option>
-    <option>Legal VA</option>
-    <option>Insurance VA</option>
-    <option>Mortgage VA</option>
-  </select>
-  <select class="fsel" onchange="filterVAs()" id="filterRate">
-    <option value="">Any Rate</option>
-    <option value="6">Under $7/hr</option>
-    <option value="8">$7–$9/hr</option>
-    <option value="10">$9+/hr</option>
-  </select>
-  <button class="fpill on" id="pill-all" onclick="setStatus('all',this)">All</button>
-  <button class="fpill" id="pill-avail" onclick="setStatus('avail',this)">Available</button>
-  <button class="fpill" id="pill-re" onclick="setStatus('re',this)">Real Estate</button>
-  <button class="fpill" id="pill-biz" onclick="setStatus('biz',this)">Business</button>
-  <span class="results-count" id="resultsCount">Loading...</span>
+<div class="filters">
+  <div class="search-wrap">
+    <input type="text" id="searchInput" placeholder="Search name, skills, role…" oninput="applyFilters()"/>
+  </div>
+  <div class="filter-group">
+    <select id="filterSpecialty" onchange="applyFilters()">
+      <option value="">All Specialties</option>
+      <option value="Transaction Coordinator">Transaction Coordinator</option>
+      <option value="ISA / Lead Qualifier">ISA / Lead Qualifier</option>
+      <option value="Marketing VA">Marketing VA</option>
+      <option value="CRM Specialist">CRM Specialist</option>
+      <option value="Executive Admin">Executive Admin</option>
+      <option value="Social Media VA">Social Media VA</option>
+      <option value="Med Spa VA">Med Spa VA</option>
+      <option value="Legal VA">Legal VA</option>
+      <option value="Insurance VA">Insurance VA</option>
+      <option value="Mortgage VA">Mortgage VA</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <select id="filterRate" onchange="applyFilters()">
+      <option value="">Any Rate</option>
+      <option value="low">Under $7/hr</option>
+      <option value="mid">$7–$9/hr</option>
+      <option value="high">$9+/hr</option>
+    </select>
+  </div>
+  <div class="tab-group">
+    <button class="tab active" onclick="setTab('all', this)">All</button>
+    <button class="tab" onclick="setTab('available', this)">Available</button>
+    <button class="tab" onclick="setTab('real-estate', this)">Real Estate</button>
+    <button class="tab" onclick="setTab('business', this)">Business</button>
+  </div>
+  <span class="result-count" id="resultCount"></span>
 </div>
 
-<!-- MAIN -->
-<div class="main-wrap">
-  <!-- VA LIST -->
-  <div class="va-list" id="vaList"></div>
-
-  <!-- PROFILE PANEL -->
-  <div class="profile-panel" id="profilePanel">
-    <div class="pp-empty" id="ppEmpty">
-      <div class="ppe-icon">👈</div>
-      <div class="ppe-title">Select a VA Profile</div>
-      <div class="ppe-sub">Click any VA card on the left to see their full profile — voice recordings, work history, skills, education, reviews, and resume.</div>
-    </div>
-    <div class="pp-content" id="ppContent">
-      <!-- Populated by JS -->
+<div class="grid-wrap">
+  <div id="vaGrid" class="va-grid">
+    <div class="state-msg" style="grid-column:1/-1">
+      <div class="spinner"></div>
+      <p>Loading VAs…</p>
     </div>
   </div>
 </div>
 
 <footer>
-  <div class="foot-logo">Elite Remote Agent</div>
-  <div class="foot-links">
-    <a class="foot-link" href="index.html">Home</a>
-    <a class="foot-link" href="how-it-works.html">How It Works</a>
-    <a class="foot-link" href="checkout.html">Pricing</a>
-    <a class="foot-link" href="contact.html">Contact</a>
-    <a class="foot-link" href="apply.html">For VAs</a>
+  <div class="footer-logo">Elite Remote Agent</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="how-it-works.html">How It Works</a>
+    <a href="checkout.html">Pricing</a>
+    <a href="contact.html">Contact</a>
+    <a href="apply.html">For VAs</a>
   </div>
-  <div class="foot-copy">© 2026 Elite Remote Agent. All rights reserved.</div>
+  <div class="footer-copy">© 2026 Elite Remote Agent. All rights reserved.</div>
 </footer>
 
-<script>
-// ── DATA ──
-const VAs = [
-  {
-    id:1,initials:'MS',color:'#1B4F8A',name:'Maria Santos',
-    role:'Transaction Coordinator',status:'avail',category:'re',
-    rating:4.9,reviews:47,rate:8,rateDisplay:'$8',
-    exp:'6 Years',tz:'EST (UTC-5)',avail:'Full-time · 40hrs/wk',
-    jobs:47,startDate:'Available Now',
-    badge:'Top Rated',english:'Native-level',edu:'BS Business Administration',
-    bio:'6+ years in US real estate operations. Expert in Dotloop, Skyslope, and full transaction management from contract to close. I\'ve coordinated 200+ transactions for top-producing agents across Arizona, Texas, and Florida. Your deals will never fall through the cracks again.',
-    skills:[
-      {name:'Transaction Management',level:100,label:'Expert'},
-      {name:'Follow Up Boss',level:95,label:'Expert'},
-      {name:'Dotloop / Skyslope',level:95,label:'Expert'},
-      {name:'MLS & Showingtime',level:85,label:'Advanced'},
-      {name:'DocuSign / zipForms',level:90,label:'Expert'},
-      {name:'Google Workspace',level:95,label:'Expert'},
-      {name:'Client Communication',level:90,label:'Expert'},
-      {name:'Calendar Management',level:85,label:'Advanced'},
-    ],
-    crms:['Follow Up Boss','KVCore','Dotloop','Skyslope','DocuSign','ShowingTime','zipForms','Google Workspace'],
-    crmSecondary:['Trello','Slack','Zoom','Microsoft Office'],
-    education:[
-      {icon:'🎓',deg:'BS Business Administration',school:'University of the Philippines',year:'2018'},
-      {icon:'📜',deg:'ERA Certified Transaction Coordinator',school:'Elite Remote Agent Academy',year:'2024'},
-      {icon:'🏆',deg:'Follow Up Boss Certified Admin',school:'Follow Up Boss',year:'2023'},
-      {icon:'📋',deg:'Dotloop Certified Professional',school:'Dotloop',year:'2022'},
-    ],
-    workHistory:[
-      {role:'Senior Transaction Coordinator',company:'Top Producing Team — Phoenix, AZ (Remote)',period:'2022–Present',desc:'Managed 40+ transactions/month for a top-5 eXp Realty team. Full contract-to-close management including title coordination, inspection scheduling, and agent communication.'},
-      {role:'Real Estate VA & TC',company:'Century 21 Regional — Remote',period:'2020–2022',desc:'Handled transaction coordination and database management for 3 agents simultaneously. Maintained 98% on-time closing rate.'},
-      {role:'Executive Admin VA',company:'Various US Clients — Remote',period:'2018–2020',desc:'Calendar management, inbox zero, CRM data entry, and client follow-up for real estate professionals.'},
-    ],
-    voices:[
-      {label:'60-Second Introduction',dur:'1:00'},
-      {label:'Mock Client Call — New Buyer',dur:'2:15'},
-      {label:'Transaction Status Update Call',dur:'1:45'},
-    ],
-    reviews:[
-      {stars:5,text:'Maria has been an absolute game changer for our team. She manages our entire transaction pipeline without me touching it. I closed 3 more deals last month because I stopped doing TC work.',name:'Sarah K.',date:'April 2026'},
-      {stars:5,text:'Extremely professional, proactive, and knows real estate inside and out. She flagged a title issue before I even knew about it. Cannot recommend her enough.',name:'Tom R.',date:'March 2026'},
-      {stars:5,text:'Best hire I\'ve ever made. She was fully up to speed in 2 days and I\'ve never had a deal fall through since.',name:'Mike D.',date:'February 2026'},
-    ],
-  },
-  {
-    id:2,initials:'JR',color:'#2D5A3D',name:'Juan Reyes',
-    role:'ISA / Lead Qualifier',status:'avail',category:'re',
-    rating:4.8,reviews:33,rate:7,rateDisplay:'$7',
-    exp:'4 Years',tz:'CST (UTC-6)',avail:'Full-time · 40hrs/wk',
-    jobs:33,startDate:'Available Now',
-    badge:'Rising Star',english:'Fluent',edu:'BS Marketing',
-    bio:'High-converting ISA with a proven track record of 3,000+ cold calls monthly. LPMAMA trained, BOLD scripts certified. I\'ve booked appointments for agents who were ready to give up on their database. Your leads will be worked — every single one.',
-    skills:[
-      {name:'Cold Calling',level:98,label:'Expert'},
-      {name:'Lead Qualification',level:95,label:'Expert'},
-      {name:'LPMAMA Scripts',level:90,label:'Expert'},
-      {name:'Objection Handling',level:88,label:'Advanced'},
-      {name:'Mojo Dialer',level:95,label:'Expert'},
-      {name:'Follow Up Boss',level:85,label:'Advanced'},
-      {name:'Database Management',level:80,label:'Advanced'},
-      {name:'Appointment Setting',level:92,label:'Expert'},
-    ],
-    crms:['Mojo Dialer','REDX','Follow Up Boss','Vulcan7','BatchDialer'],
-    crmSecondary:['Google Sheets','Slack','Zoom','Loom'],
-    education:[
-      {icon:'🎓',deg:'BS Marketing',school:'Polytechnic University of the Philippines',year:'2020'},
-      {icon:'📜',deg:'ERA Certified ISA',school:'Elite Remote Agent Academy',year:'2024'},
-      {icon:'🏆',deg:'BOLD Business Certified',school:'Keller Williams BOLD',year:'2023'},
-      {icon:'📋',deg:'LPMAMA Script Mastery',school:'Mike Ferry Organization',year:'2022'},
-    ],
-    workHistory:[
-      {role:'Senior ISA',company:'KW Mega Agent Team — Dallas, TX (Remote)',period:'2023–Present',desc:'Making 3,000+ cold calls monthly across expired, FSBO, and circle prospecting lists. Averaging 8–12 booked appointments per week consistently.'},
-      {role:'ISA / Lead Qualifier',company:'eXp Realty Team — Remote',period:'2021–2023',desc:'Worked a database of 4,500+ contacts using Follow Up Boss and Mojo Dialer. Converted 180 cold leads into appointments in 12 months.'},
-      {role:'Sales VA',company:'Various Real Estate Clients',period:'2020–2021',desc:'Outbound calling, lead nurturing, and CRM data management for residential real estate agents.'},
-    ],
-    voices:[
-      {label:'60-Second Introduction',dur:'1:00'},
-      {label:'Mock Cold Call — Expired Listing',dur:'2:30'},
-      {label:'Mock Cold Call — FSBO',dur:'2:00'},
-    ],
-    reviews:[
-      {stars:5,text:'Juan called my entire expired database in 2 weeks and booked 14 appointments. I\'d been sitting on those leads for months. He paid for himself in the first week.',name:'Chris B.',date:'April 2026'},
-      {stars:5,text:'Best ISA I\'ve ever worked with. Handles objections better than most agents I know. Very professional and coachable.',name:'Lisa M.',date:'March 2026'},
-      {stars:4,text:'Great caller, very consistent. Sometimes goes slightly off script but always in a good way. Highly recommend.',name:'Derek W.',date:'January 2026'},
-    ],
-  },
-  {
-    id:3,initials:'AC',color:'#7B3F00',name:'Ana Cruz',
-    role:'Marketing & Listing Coordinator',status:'avail',category:'re',
-    rating:5.0,reviews:62,rate:9,rateDisplay:'$9',
-    exp:'7 Years',tz:'PST (UTC-8)',avail:'Full-time · 40hrs/wk',
-    jobs:62,startDate:'Available Now',
-    badge:'Elite',english:'Native-level',edu:'BA Communications',
-    bio:'MLS pro, Canva master, listing presentation builder, and social media strategist. I\'ve built brands for top-producing agents that look like $500K marketing budgets on a VA budget. Your business will look exactly as good as it performs.',
-    skills:[
-      {name:'Canva Pro / Design',level:98,label:'Expert'},
-      {name:'MLS & Listing Entry',level:95,label:'Expert'},
-      {name:'Social Media Management',level:92,label:'Expert'},
-      {name:'Email Marketing',level:88,label:'Advanced'},
-      {name:'Video Editing',level:80,label:'Advanced'},
-      {name:'Listing Presentations',level:90,label:'Expert'},
-      {name:'Content Strategy',level:85,label:'Advanced'},
-      {name:'Google Analytics',level:75,label:'Intermediate'},
-    ],
-    crms:['Canva Pro','Adobe Creative Suite','Later','Buffer','Mailchimp','MLS Systems','BombBomb','KVCore'],
-    crmSecondary:['Zillow Premier','Realtor.com','Facebook Ads','Instagram','TikTok'],
-    education:[
-      {icon:'🎓',deg:'BA Communications — Marketing',school:'University of Santo Tomas',year:'2017'},
-      {icon:'📜',deg:'ERA Certified Marketing VA',school:'Elite Remote Agent Academy',year:'2024'},
-      {icon:'🏆',deg:'Canva Pro Certified Designer',school:'Canva',year:'2023'},
-      {icon:'📋',deg:'HubSpot Content Marketing',school:'HubSpot Academy',year:'2022'},
-    ],
-    workHistory:[
-      {role:'Senior Marketing Coordinator',company:'Top 1% Agent — Scottsdale, AZ (Remote)',period:'2021–Present',desc:'Full brand management for a top-producing Scottsdale agent. Social media, listing marketing, email campaigns, and listing presentation design. Grew Instagram following from 800 to 12,000 in 18 months.'},
-      {role:'Real Estate Marketing VA',company:'Century 21 Team — Remote',period:'2019–2021',desc:'Created all marketing materials for 3 agents including listing flyers, social posts, email newsletters, and video thumbnails.'},
-      {role:'Freelance Designer & VA',company:'Various US Clients',period:'2017–2019',desc:'Brand design, social media management, and content creation for real estate and mortgage professionals.'},
-    ],
-    voices:[
-      {label:'60-Second Introduction',dur:'1:00'},
-      {label:'Marketing Strategy Walkthrough',dur:'2:45'},
-    ],
-    reviews:[
-      {stars:5,text:'Ana completely transformed my brand. My listings now look like luxury properties even at $400K price points. I\'ve had 3 sellers mention my marketing specifically when choosing me.',name:'Jennifer A.',date:'April 2026'},
-      {stars:5,text:'Grew my Instagram from zero to 8,000 followers in a year. Her content strategy is the real deal. She understands real estate AND social media equally well.',name:'Marcus T.',date:'March 2026'},
-      {stars:5,text:'Best investment I\'ve made in my business. She handles everything visual so I can focus on closings. Absolutely elite.',name:'Rachel H.',date:'February 2026'},
-    ],
-  },
-  {
-    id:4,initials:'CM',color:'#6B3A7D',name:'Carlo Mendoza',
-    role:'CRM & Automation Specialist',status:'avail',category:'re',
-    rating:4.7,reviews:28,rate:8,rateDisplay:'$8',
-    exp:'5 Years',tz:'EST (UTC-5)',avail:'Full-time · 40hrs/wk',
-    jobs:28,startDate:'Available Now',
-    badge:'Top Rated',english:'Fluent',edu:'BS Information Technology',
-    bio:'I build the systems that make your CRM actually work. Smart lists, automated follow-up sequences, tags, pipelines, and lead routing. If your CRM is a mess of unworked leads and broken automations — give me 2 weeks and it\'ll feel like a completely different tool.',
-    skills:[
-      {name:'Follow Up Boss',level:98,label:'Expert'},
-      {name:'Go High Level',level:92,label:'Expert'},
-      {name:'Zapier / Make.com',level:90,label:'Expert'},
-      {name:'CRM Architecture',level:88,label:'Advanced'},
-      {name:'Email Automation',level:85,label:'Advanced'},
-      {name:'Smart Lists / Tags',level:95,label:'Expert'},
-      {name:'API Integrations',level:75,label:'Intermediate'},
-      {name:'Reporting & Analytics',level:82,label:'Advanced'},
-    ],
-    crms:['Follow Up Boss','Go High Level','HubSpot','Zapier','Make.com','Lofty','KVCore','Salesforce'],
-    crmSecondary:['Thanks.io','Twilio','Mailchimp','Google Data Studio'],
-    education:[
-      {icon:'🎓',deg:'BS Information Technology',school:'Mapúa University',year:'2019'},
-      {icon:'📜',deg:'ERA Certified CRM Specialist',school:'Elite Remote Agent Academy',year:'2024'},
-      {icon:'🏆',deg:'Follow Up Boss Advanced Certification',school:'Follow Up Boss',year:'2023'},
-      {icon:'📋',deg:'Zapier Certified Expert',school:'Zapier',year:'2022'},
-    ],
-    workHistory:[
-      {role:'CRM & Systems Specialist',company:'eXp Realty Mega Team — Remote',period:'2022–Present',desc:'Built and maintain the entire CRM infrastructure for a 15-agent team. Custom automations, lead routing, smart lists, and a 90-day nurture sequence that generates 20% of their listings.'},
-      {role:'CRM Admin VA',company:'Various RE Teams — Remote',period:'2020–2022',desc:'Follow Up Boss setup, cleanup, and automation builds for solo agents and small teams. Specialized in tag architecture and smart list design.'},
-      {role:'IT & Systems VA',company:'Tech Startup — Remote',period:'2019–2020',desc:'CRM management, API integrations, and workflow automation for a SaaS company.'},
-    ],
-    voices:[
-      {label:'60-Second Introduction',dur:'1:00'},
-      {label:'CRM Audit Walkthrough Demo',dur:'3:00'},
-    ],
-    reviews:[
-      {stars:5,text:'Carlo rebuilt our entire Follow Up Boss setup in 3 days. We went from a CRM nobody used to a system that automatically routes and follows up with every lead. Game changer.',name:'James B.',date:'April 2026'},
-      {stars:5,text:'Best CRM guy I\'ve found after trying 3 others. He doesn\'t just do what you ask — he tells you what you should be doing instead.',name:'Amanda K.',date:'February 2026'},
-      {stars:4,text:'Very technical and thorough. Took a few days to get aligned on exactly what we needed but once he understood the vision he executed perfectly.',name:'Derek P.',date:'January 2026'},
-    ],
-  },
-  {
-    id:5,initials:'SP',color:'#7B1D1D',name:'Sofia Perez',
-    role:'Med Spa / Healthcare VA',status:'avail',category:'biz',
-    rating:4.9,reviews:38,rate:8,rateDisplay:'$8',
-    exp:'5 Years',tz:'EST (UTC-5)',avail:'Full-time · 40hrs/wk',
-    jobs:38,startDate:'Available Now',
-    badge:'Top Rated',english:'Fluent',edu:'BS Health Administration',
-    bio:'HIPAA-aware healthcare VA with 5 years serving US med spas and wellness clinics. I handle patient scheduling, follow-ups, review management, and front-desk coordination so your staff can focus entirely on patient care and revenue-generating procedures.',
-    skills:[
-      {name:'Patient Scheduling',level:95,label:'Expert'},
-      {name:'Jane App / Mindbody',level:92,label:'Expert'},
-      {name:'HIPAA Compliance',level:90,label:'Expert'},
-      {name:'Review Management',level:88,label:'Advanced'},
-      {name:'Email & SMS Follow-ups',level:85,label:'Advanced'},
-      {name:'Insurance Verification',level:75,label:'Intermediate'},
-      {name:'Social Media',level:80,label:'Advanced'},
-      {name:'Client Retention',level:88,label:'Advanced'},
-    ],
-    crms:['Jane App','Mindbody','Vagaro','Square','Google Workspace','Mailchimp','Podium'],
-    crmSecondary:['Canva','Later','Instagram','Facebook','Yelp','Google Business'],
-    education:[
-      {icon:'🎓',deg:'BS Health Administration',school:'Far Eastern University',year:'2019'},
-      {icon:'📜',deg:'ERA Certified Healthcare VA',school:'Elite Remote Agent Academy',year:'2024'},
-      {icon:'🏆',deg:'HIPAA Compliance Certification',school:'HIPAA Training',year:'2023'},
-      {icon:'📋',deg:'Jane App Certified Administrator',school:'Jane App',year:'2022'},
-    ],
-    workHistory:[
-      {role:'Senior Med Spa VA',company:'Luxury Med Spa — Scottsdale, AZ (Remote)',period:'2022–Present',desc:'Full front-desk support for a busy med spa including scheduling, patient follow-ups, review responses, and social media. Increased booking rate by 34% in first 6 months.'},
-      {role:'Healthcare Admin VA',company:'Wellness Clinic — Remote',period:'2020–2022',desc:'Patient scheduling, insurance verification follow-ups, and email campaigns for a multi-location wellness clinic.'},
-      {role:'Admin VA',company:'Various Healthcare Clients',period:'2019–2020',desc:'General admin support for US healthcare and wellness businesses.'},
-    ],
-    voices:[
-      {label:'60-Second Introduction',dur:'1:00'},
-      {label:'Patient Scheduling Mock Call',dur:'1:45'},
-    ],
-    reviews:[
-      {stars:5,text:'Sofia handles all our scheduling and patient follow-ups. We\'ve seen a 40% reduction in no-shows since she started sending reminder sequences. Absolutely worth every penny.',name:'Dr. Marcus L.',date:'April 2026'},
-      {stars:5,text:'Professional, HIPAA-aware, and genuinely understands med spa operations. She\'s not just a VA — she\'s an operations partner.',name:'Dr. Lisa T.',date:'March 2026'},
-      {stars:5,text:'Best business decision I\'ve made. Freed up 15 hours a week for me and my front desk team.',name:'Melissa K.',date:'February 2026'},
-    ],
-  },
-  {
-    id:6,initials:'RT',color:'#2D5A3D',name:'Ramon Torres',
-    role:'Executive Admin VA',status:'avail',category:'re',
-    rating:4.9,reviews:51,rate:7,rateDisplay:'$7',
-    exp:'8 Years',tz:'EST (UTC-5)',avail:'Full-time · 40hrs/wk',
-    jobs:51,startDate:'Available Now',
-    badge:'Elite',english:'Native-level',edu:'BS Business Management',
-    bio:'8 years of C-suite level support for US executives and top-producing real estate agents. Calendar management, inbox zero, vendor coordination, travel booking, and reporting. I am the person who makes sure nothing falls through the cracks — ever.',
-    skills:[
-      {name:'Calendar Management',level:98,label:'Expert'},
-      {name:'Inbox Zero / Email',level:95,label:'Expert'},
-      {name:'Google Workspace',level:98,label:'Expert'},
-      {name:'Vendor Coordination',level:88,label:'Advanced'},
-      {name:'Reporting & Analytics',level:85,label:'Advanced'},
-      {name:'Travel Coordination',level:82,label:'Advanced'},
-      {name:'Notion / ClickUp',level:90,label:'Expert'},
-      {name:'Slack Communication',level:95,label:'Expert'},
-    ],
-    crms:['Google Workspace','Notion','ClickUp','Slack','Asana','Monday.com','Zoom','Microsoft Office'],
-    crmSecondary:['Expensify','QuickBooks','Loom','Dropbox','DocuSign'],
-    education:[
-      {icon:'🎓',deg:'BS Business Management',school:'De La Salle University',year:'2016'},
-      {icon:'📜',deg:'ERA Certified Executive VA',school:'Elite Remote Agent Academy',year:'2024'},
-      {icon:'🏆',deg:'Google Workspace Certified',school:'Google',year:'2022'},
-      {icon:'📋',deg:'ClickUp Certified',school:'ClickUp',year:'2023'},
-    ],
-    workHistory:[
-      {role:'Executive VA',company:'Top Producer — eXp Realty (Remote)',period:'2021–Present',desc:'Full executive support for a top-10 eXp agent including calendar management, vendor coordination, client gifting, reporting, and travel arrangements.'},
-      {role:'C-Suite Admin VA',company:'Tech Executive — Remote',period:'2018–2021',desc:'Personal and business admin support for a tech company CEO including board meeting prep, vendor management, and executive communications.'},
-      {role:'Admin VA',company:'Various US Clients',period:'2016–2018',desc:'General administrative support, email management, and calendar coordination for US-based professionals.'},
-    ],
-    voices:[
-      {label:'60-Second Introduction',dur:'1:00'},
-      {label:'Executive Admin Overview',dur:'2:00'},
-    ],
-    reviews:[
-      {stars:5,text:'Ramon is the best hire I\'ve made in 10 years of business. My calendar runs perfectly, my inbox is always clean, and I never miss a deadline. He just handles things.',name:'David H.',date:'April 2026'},
-      {stars:5,text:'8 years of experience shows. He anticipated things I didn\'t even know I needed before I asked for them. Truly elite level.',name:'Carla S.',date:'March 2026'},
-      {stars:5,text:'I gave Ramon my email login and my calendar and told him to run it. Best decision of my professional life.',name:'Alex T.',date:'January 2026'},
-    ],
-  },
-];
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
-// ── STATE ──
-let selectedId = null;
-let filterStatus = 'all';
-const WAVES = [10,18,26,20,28,14,22,30,16,24,12,28,20,18,26,14,30,22];
+const SUPABASE_URL = 'https://wcmvtfclkybgdwjybyzb.supabase.co'
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndjbXZ0ZmNsa3liZ2R3anlieXpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMzExOTIsImV4cCI6MjA5NDgwNzE5Mn0.zI0tjF7dN0DT30Mkd1nEDyMdXlYPzTmKH3BxvNea1Fs'
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
-// ── TOAST ──
-function fire(msg){
-  const t=document.getElementById('toast');
-  document.getElementById('tmsg').textContent=msg;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),3500);
+const PHOTO_BUCKET = 'va-photos'
+let allVAs = []
+let activeTab = 'all'
+
+function getPhotoUrl(path) {
+  if (!path) return null
+  if (path.startsWith('http')) return path
+  const { data } = supabase.storage.from(PHOTO_BUCKET).getPublicUrl(path)
+  return data?.publicUrl || null
 }
 
-// ── FILTER ──
-function setStatus(s,el){
-  filterStatus=s;
-  document.querySelectorAll('.fpill').forEach(p=>p.classList.remove('on'));
-  el.classList.add('on');
-  filterVAs();
+function avatarColor(name) {
+  const colors = ['#c0392b','#8e44ad','#2980b9','#27ae60','#d35400','#16a085','#2c3e50','#7f8c8d']
+  let h = 0
+  for (let i = 0; i < name.length; i++) h = name.charCodeAt(i) + ((h << 5) - h)
+  return colors[Math.abs(h) % colors.length]
 }
 
-function filterVAs(){
-  const q=document.getElementById('searchInput').value.toLowerCase();
-  const spec=document.getElementById('filterSpecialty').value.toLowerCase();
-  const rate=document.getElementById('filterRate').value;
-  const filtered=VAs.filter(v=>{
-    const mq=!q||v.name.toLowerCase().includes(q)||v.role.toLowerCase().includes(q)||v.crms.some(c=>c.toLowerCase().includes(q))||v.skills.some(s=>s.name.toLowerCase().includes(q));
-    const ms=filterStatus==='all'||(filterStatus==='avail'&&v.status==='avail')||(filterStatus==='re'&&v.category==='re')||(filterStatus==='biz'&&v.category==='biz');
-    const mspec=!spec||v.role.toLowerCase().includes(spec);
-    const mr=!rate||(rate==='6'&&v.rate<7)||(rate==='8'&&v.rate>=7&&v.rate<=9)||(rate==='10'&&v.rate>9);
-    return mq&&ms&&mspec&&mr;
-  });
-  renderList(filtered);
-  document.getElementById('resultsCount').textContent=filtered.length+' VAs found';
+function initials(name) {
+  return name.split(' ').map(p => p[0]).join('').slice(0, 2).toUpperCase()
 }
 
-// ── RENDER LIST ──
-function renderList(vas){
-  const list=document.getElementById('vaList');
-  if(!vas.length){
-    list.innerHTML=`<div style="text-align:center;padding:3rem;color:rgba(255,255,255,0.2);">
-      <div style="font-size:2rem;margin-bottom:0.75rem;">🔍</div>
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:1px;">No VAs Match Your Filters</div>
-      <div style="font-size:0.78rem;margin-top:0.4rem;">Try adjusting your search or filters</div>
-    </div>`;
-    return;
-  }
-  list.innerHTML=vas.map(v=>`
-    <div class="va-card${selectedId===v.id?' selected':''}" id="card-${v.id}" onclick="selectVA(${v.id})">
-      <span class="vc-fav" id="fav-${v.id}" onclick="event.stopPropagation();toggleFav(${v.id})">♡</span>
-      <div class="vc-top">
-        <div class="vc-av" style="background:${v.color}">${v.initials}</div>
-        <div class="vc-info">
-          <div class="vc-name">${v.name}</div>
-          <div class="vc-role">${v.role}</div>
-          <div class="vc-status ${v.status}"><div class="vc-dot"></div>${v.status==='avail'?'Available Now':v.status==='hired'?'Currently Hired':'Interviewing'}</div>
-        </div>
-      </div>
-      <div class="vc-body">
-        <div class="vc-rating">
-          <span class="vc-stars">${'★'.repeat(Math.floor(v.rating))}</span>
-          <span class="vc-rnum">${v.rating}</span>
-          <span class="vc-rct">(${v.reviews} reviews)</span>
-        </div>
-        <div class="vc-bio">${v.bio}</div>
-        <div class="tags">
-          <span class="tag">${v.badge}</span>
-          ${v.crms.slice(0,3).map(c=>`<span class="tag gr">${c}</span>`).join('')}
-          <span class="tag bl">${v.exp}</span>
-        </div>
-      </div>
-      <div class="vc-footer">
-        <div class="vc-rate">${v.rateDisplay}<sub>/hr</sub></div>
-        <div class="vc-btns">
-          <button class="btn-xs out" onclick="event.stopPropagation();fire('📨 Interview request sent to ${v.name}!')">Interview</button>
-          <button class="btn-xs gold" onclick="event.stopPropagation();fire('✅ Hire offer sent to ${v.name}! Onboarding begins within 24hrs.')">Hire Now</button>
-        </div>
-      </div>
-    </div>`).join('');
-}
+function renderCard(va) {
+  const photoUrl = getPhotoUrl(va.photo_url)
+  const color = avatarColor(va.full_name || 'VA')
+  const init = initials(va.full_name || 'VA')
+  const rate = va.hourly_rate ? `$${va.hourly_rate}/hr` : '—'
+  const tz = va.timezone || ''
+  const english = va.english_level || ''
+  const skills = (va.va_skills || []).slice(0, 4).map(s => `<span class="skill-chip">${s.skill_name}</span>`).join('')
 
-// ── SELECT VA ──
-let activeTab='about';
-function selectVA(id){
-  selectedId=id;
-  activeTab='about';
-  document.querySelectorAll('.va-card').forEach(c=>c.classList.remove('selected'));
-  const card=document.getElementById('card-'+id);
-  if(card) card.classList.add('selected');
-  const va=VAs.find(v=>v.id===id);
-  if(!va) return;
-  document.getElementById('ppEmpty').style.display='none';
-  const pc=document.getElementById('ppContent');
-  pc.classList.add('show');
-  pc.innerHTML=buildProfile(va);
-  showPPTab('about',va);
-}
+  let badgeHtml = ''
+  if (va.badge === 'Top Rated') badgeHtml = `<span class="badge top-rated">⭐ Top Rated</span>`
+  else if (va.badge === 'Elite') badgeHtml = `<span class="badge elite">💎 Elite</span>`
+  else if (va.badge === 'Rising Star') badgeHtml = `<span class="badge rising-star">🚀 Rising Star</span>`
+  else if (va.badge === 'New') badgeHtml = `<span class="badge new">✨ New</span>`
 
-function buildProfile(va){
+  const photoHtml = photoUrl
+    ? `<img src="${photoUrl}" alt="${va.full_name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'card-photo-placeholder\\' style=\\'background:${color}\\'>${init}</div>'">`
+    : `<div class="card-photo-placeholder" style="background:${color}">${init}</div>`
+
   return `
-    <div class="pp-header">
-      <button class="pp-close" onclick="closeProfile()">✕</button>
-      <div class="pp-av-wrap">
-        <div class="pp-av" style="background:${va.color}">${va.initials}</div>
-        <div>
-          <div class="pp-name">${va.name}</div>
-          <div class="pp-role">${va.role}</div>
-          <div class="pp-badges">
-            <span class="pp-badge gold">⭐ ${va.badge}</span>
-            <span class="pp-badge green">${va.rating}★ Rating</span>
-            <span class="pp-badge ${va.status==='avail'?'green':'red'}">${va.status==='avail'?'Available Now':'Currently Hired'}</span>
-            <span class="pp-badge gray">${va.tz}</span>
-            <span class="pp-badge gray">${va.english} English</span>
-          </div>
+    <a href="va-profile.html?id=${va.id}" class="va-card">
+      <div class="card-photo">
+        ${photoHtml}
+        <div class="card-badges">${badgeHtml}</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">${va.full_name || 'VA'}</div>
+        <div class="card-role">${va.primary_role || va.category || ''}</div>
+        <div class="card-meta">
+          <span class="meta-pill rate">${rate}</span>
+          ${tz ? `<span class="meta-pill">🌍 ${tz}</span>` : ''}
+          ${english ? `<span class="meta-pill">🗣 ${english}</span>` : ''}
+        </div>
+        ${skills ? `<div class="card-skills">${skills}</div>` : ''}
+        <div class="card-footer">
+          <span class="card-avail">Available Now</span>
+          <span class="card-cta">View Profile →</span>
         </div>
       </div>
-      <div class="pp-quick">
-        <div class="pq"><div class="pq-val">${va.exp.split(' ')[0]}yr</div><div class="pq-label">Experience</div></div>
-        <div class="pq"><div class="pq-val">${va.jobs}</div><div class="pq-label">Jobs Done</div></div>
-        <div class="pq"><div class="pq-val">${va.rateDisplay}</div><div class="pq-label">Per Hour</div></div>
-        <div class="pq"><div class="pq-val">${va.reviews}</div><div class="pq-label">Reviews</div></div>
-      </div>
-    </div>
-    <div class="pp-tabs">
-      <button class="pp-tab active" id="pptab-about" onclick="showPPTab('about',null)">About</button>
-      <button class="pp-tab" id="pptab-skills" onclick="showPPTab('skills',null)">Skills</button>
-      <button class="pp-tab" id="pptab-history" onclick="showPPTab('history',null)">History</button>
-      <button class="pp-tab" id="pptab-voice" onclick="showPPTab('voice',null)">Voice</button>
-      <button class="pp-tab" id="pptab-reviews" onclick="showPPTab('reviews',null)">Reviews</button>
-      <button class="pp-tab" id="pptab-resume" onclick="showPPTab('resume',null)">Resume</button>
-    </div>
-    <div class="pp-body" id="pp-body"></div>
-    <div class="pp-actions">
-      <button class="btn-action out" onclick="fire('📨 Interview request sent!')">Interview</button>
-      <button class="btn-action out" onclick="fire('💬 Message sent!')">Message</button>
-      <button class="btn-action gold" onclick="fire('✅ Hire offer sent! ${va.name} will be onboarded within 24-48 hours.')">Hire Now →</button>
-    </div>`;
+    </a>`
 }
 
-function showPPTab(tab, vaObj){
-  const va = vaObj || VAs.find(v=>v.id===selectedId);
-  if(!va) return;
-  activeTab=tab;
-  document.querySelectorAll('.pp-tab').forEach(t=>t.classList.remove('active'));
-  const tabEl=document.getElementById('pptab-'+tab);
-  if(tabEl) tabEl.classList.add('active');
-  const body=document.getElementById('pp-body');
-  if(!body) return;
+function applyFilters() {
+  const search = document.getElementById('searchInput').value.toLowerCase()
+  const specialty = document.getElementById('filterSpecialty').value
+  const rateFilter = document.getElementById('filterRate').value
 
-  if(tab==='about'){
-    body.innerHTML=`
-      <div class="pp-section">
-        <div class="pp-sec-title">About ${va.name}</div>
-        <p class="pp-bio">${va.bio}</p>
-      </div>
-      <div class="pp-section">
-        <div class="pp-sec-title">Quick Info</div>
-        <div class="stats-grid">
-          <div class="sg-item"><div class="sg-label">Experience</div><div class="sg-val">${va.exp}</div></div>
-          <div class="sg-item"><div class="sg-label">Education</div><div class="sg-val">${va.edu}</div></div>
-          <div class="sg-item"><div class="sg-label">Timezone</div><div class="sg-val">${va.tz}</div></div>
-          <div class="sg-item"><div class="sg-label">Availability</div><div class="sg-val">${va.avail}</div></div>
-          <div class="sg-item"><div class="sg-label">English Level</div><div class="sg-val">${va.english}</div></div>
-          <div class="sg-item"><div class="sg-label">Start Date</div><div class="sg-val" style="color:var(--green)">${va.startDate}</div></div>
-        </div>
-      </div>
-      <div class="pp-section">
-        <div class="pp-sec-title">Primary CRM & Tools</div>
-        <div class="crm-tags">${va.crms.map(c=>`<span class="crm-tag">${c}</span>`).join('')}</div>
-      </div>
-      <div class="pp-section">
-        <div class="pp-sec-title">Additional Tools</div>
-        <div class="crm-tags">${va.crmSecondary.map(c=>`<span class="crm-tag secondary">${c}</span>`).join('')}</div>
-      </div>`;
+  let filtered = allVAs.filter(va => {
+    // Tab filter
+    if (activeTab === 'available') {
+      if (va.status !== 'approved') return false
+    }
+    if (activeTab === 'real-estate') {
+      const re = ['Transaction Coordinator','ISA / Lead Qualifier','CRM Specialist']
+      if (!re.includes(va.primary_role) && !re.includes(va.category)) return false
+    }
+    if (activeTab === 'business') {
+      const biz = ['Executive Admin','Marketing VA','Social Media VA','Med Spa VA','Legal VA','Insurance VA','Mortgage VA']
+      if (!biz.includes(va.primary_role) && !biz.includes(va.category)) return false
+    }
+
+    // Specialty
+    if (specialty && va.primary_role !== specialty && va.category !== specialty) return false
+
+    // Rate
+    const r = parseFloat(va.hourly_rate) || 0
+    if (rateFilter === 'low' && r >= 7) return false
+    if (rateFilter === 'mid' && (r < 7 || r > 9)) return false
+    if (rateFilter === 'high' && r <= 9) return false
+
+    // Search
+    if (search) {
+      const haystack = [
+        va.full_name, va.primary_role, va.category, va.bio,
+        ...(va.va_skills || []).map(s => s.skill_name),
+        ...(va.va_tools || []).map(t => t.tool_name)
+      ].join(' ').toLowerCase()
+      if (!haystack.includes(search)) return false
+    }
+
+    return true
+  })
+
+  const grid = document.getElementById('vaGrid')
+  document.getElementById('resultCount').textContent = `${filtered.length} VA${filtered.length !== 1 ? 's' : ''}`
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="state-msg" style="grid-column:1/-1"><div class="icon">🔍</div><p>No VAs match your filters.<br>Try broadening your search.</p></div>`
+    return
   }
 
-  if(tab==='skills'){
-    body.innerHTML=`
-      <div class="pp-section">
-        <div class="pp-sec-title">Skill Proficiency Ratings</div>
-        <div class="skill-list">${va.skills.map(s=>`
-          <div class="skill-item">
-            <span class="skill-name">${s.name}</span>
-            <div class="skill-bar"><div class="skill-fill" style="width:${s.level}%"></div></div>
-            <span class="skill-level ${s.label.toLowerCase()}">${s.label}</span>
-          </div>`).join('')}
-        </div>
-      </div>
-      <div class="pp-section">
-        <div class="pp-sec-title">Education & Certifications</div>
-        ${va.education.map(e=>`
-          <div class="edu-item">
-            <div class="edu-icon">${e.icon}</div>
-            <div><div class="edu-deg">${e.deg}</div><div class="edu-sch">${e.school}</div><div class="edu-yr">${e.year}</div></div>
-          </div>`).join('')}
-      </div>`;
-  }
-
-  if(tab==='history'){
-    body.innerHTML=`
-      <div class="pp-section">
-        <div class="pp-sec-title">Work History</div>
-        ${va.workHistory.map(w=>`
-          <div class="work-item">
-            <div class="work-role">${w.role}</div>
-            <div class="work-company">${w.company}</div>
-            <div class="work-period">${w.period}</div>
-            <div class="work-desc">${w.desc}</div>
-          </div>`).join('')}
-      </div>`;
-  }
-
-  if(tab==='voice'){
-    body.innerHTML=`
-      <div class="pp-section">
-        <div class="pp-sec-title">Voice Recordings</div>
-        <p style="font-size:0.75rem;color:rgba(255,255,255,0.35);margin-bottom:1rem;line-height:1.6;">Listen to ${va.name.split(' ')[0]}'s actual voice recordings. These are unscripted and show real communication ability.</p>
-        ${va.voices.map(v=>`
-          <div class="voice-player">
-            <button class="play-btn" onclick="fire('▶️ Playing: ${v.label}')">▶</button>
-            <div>
-              <div style="font-size:0.72rem;font-weight:600;color:rgba(255,255,255,0.8);margin-bottom:3px;">${v.label}</div>
-              <div class="waveform">${WAVES.map(h=>`<div class="wb" style="height:${h}px"></div>`).join('')}</div>
-            </div>
-            <div class="vp-info"><div class="vp-dur">${v.dur}</div></div>
-          </div>`).join('')}
-      </div>`;
-  }
-
-  if(tab==='reviews'){
-    const avg=va.rating;
-    const total=va.reviews;
-    body.innerHTML=`
-      <div class="pp-section">
-        <div class="pp-sec-title">Client Reviews</div>
-        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem;padding:1rem;background:rgba(212,168,67,0.05);border-radius:10px;border:1px solid rgba(212,168,67,0.1);">
-          <div style="text-align:center;">
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--gold);line-height:1;">${avg}</div>
-            <div style="color:var(--gold);font-size:1rem;letter-spacing:2px;">${'★'.repeat(5)}</div>
-            <div style="font-size:0.65rem;color:rgba(255,255,255,0.3);margin-top:2px;">${total} reviews</div>
-          </div>
-          <div style="flex:1;">
-            ${[5,4,3,2,1].map(n=>{
-              const count=n===5?Math.round(total*0.75):n===4?Math.round(total*0.18):n===3?Math.round(total*0.05):n===2?1:0;
-              const pct=Math.round((count/total)*100);
-              return `<div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:3px;">
-                <span style="font-size:0.65rem;color:rgba(255,255,255,0.4);width:8px;">${n}</span>
-                <div style="flex:1;height:5px;background:var(--border2);border-radius:3px;overflow:hidden;">
-                  <div style="width:${pct}%;height:100%;background:var(--gold);border-radius:3px;"></div>
-                </div>
-                <span style="font-size:0.62rem;color:rgba(255,255,255,0.3);width:24px;">${pct}%</span>
-              </div>`;
-            }).join('')}
-          </div>
-        </div>
-        ${va.reviews_data ? va.reviews_data.map(r=>reviewCard(r)).join('') : va.reviews.map(r=>reviewCard(r)).join('')}
-      </div>`;
-  }
-
-  if(tab==='resume'){
-    body.innerHTML=`
-      <div class="pp-section">
-        <div class="pp-sec-title">Resume & Documents</div>
-        <div class="resume-box">
-          <div class="rb-icon">📄</div>
-          <div class="rb-title">${va.name} — Professional Resume</div>
-          <div class="rb-sub">Updated January 2026 · 2 pages · PDF</div>
-          <button class="btn-dl" onclick="fire('📥 Downloading ${va.name}\'s resume...')">📥 Download Resume</button>
-        </div>
-      </div>
-      <div class="pp-section">
-        <div class="pp-sec-title">Background Check</div>
-        <div style="background:var(--green-dim);border:1px solid rgba(46,204,113,0.2);border-radius:10px;padding:1rem;display:flex;align-items:center;gap:0.75rem;">
-          <div style="font-size:1.25rem;">✅</div>
-          <div>
-            <div style="font-weight:700;font-size:0.82rem;color:var(--green);">Background Check Passed</div>
-            <div style="font-size:0.72rem;color:rgba(255,255,255,0.4);margin-top:2px;">Identity verified · Work history confirmed · References checked</div>
-          </div>
-        </div>
-      </div>
-      <div class="pp-section">
-        <div class="pp-sec-title">Platform Certifications</div>
-        ${va.education.filter(e=>e.school.includes('Elite')||e.school.includes('ERA')).map(e=>`
-          <div style="display:flex;align-items:center;gap:0.6rem;padding:0.5rem 0;border-bottom:1px solid var(--border);font-size:0.78rem;">
-            <span style="color:var(--gold);">${e.icon}</span>
-            <div>
-              <div style="font-weight:600;">${e.deg}</div>
-              <div style="font-size:0.65rem;color:rgba(255,255,255,0.3);">${e.year}</div>
-            </div>
-          </div>`).join('')}
-      </div>`;
-  }
+  grid.innerHTML = filtered.map(renderCard).join('')
 }
 
-function reviewCard(r){
-  return `<div class="review-item">
-    <div class="rv-stars">${'★'.repeat(r.stars)}</div>
-    <div class="rv-text">"${r.text}"</div>
-    <div class="rv-author"><div class="rv-name">${r.name}</div><div class="rv-date">${r.date}</div></div>
-  </div>`;
+function setTab(tab, btn) {
+  activeTab = tab
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'))
+  btn.classList.add('active')
+  applyFilters()
 }
 
-function closeProfile(){
-  selectedId=null;
-  document.querySelectorAll('.va-card').forEach(c=>c.classList.remove('selected'));
-  document.getElementById('ppEmpty').style.display='flex';
-  document.getElementById('ppContent').classList.remove('show');
+// Expose setTab globally (called from inline onclick)
+window.setTab = setTab
+
+async function loadVAs() {
+  const grid = document.getElementById('vaGrid')
+
+  const { data, error } = await supabase
+    .from('vas')
+    .select(`
+      id, full_name, primary_role, category, hourly_rate, english_level,
+      timezone, bio, photo_url, badge, status,
+      va_skills ( skill_name, final_rating ),
+      va_tools ( tool_name, proficiency )
+    `)
+    .eq('status', 'approved')
+    .order('created_at', { ascending: false })
+
+  if (error) {
+    console.error('Supabase error:', error)
+    grid.innerHTML = `<div class="state-msg" style="grid-column:1/-1"><div class="icon">⚠️</div><p>Couldn't load VAs. Please refresh.</p></div>`
+    return
+  }
+
+  allVAs = data || []
+  document.getElementById('statTotal').textContent = allVAs.length + '+'
+  applyFilters()
 }
 
-function toggleFav(id){
-  const el=document.getElementById('fav-'+id);
-  const saved=el.classList.toggle('saved');
-  el.textContent=saved?'♥':'♡';
-  fire(saved?'❤️ Saved to favorites!':'Removed from favorites');
-}
-
-// ── INIT ──
-filterVAs();
+loadVAs()
 </script>
 </body>
 </html>
