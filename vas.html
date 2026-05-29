@@ -235,9 +235,10 @@ function initials(name) {
 }
 
 function renderCard(va) {
+  const fullName = [va.first_name, va.last_name].filter(Boolean).join(' ') || 'VA'
   const photoUrl = getPhotoUrl(va.photo_url)
-  const color = avatarColor(va.full_name || 'VA')
-  const init = initials(va.full_name || 'VA')
+  const color = avatarColor(fullName)
+  const init = initials(fullName)
   const rate = va.hourly_rate ? `$${va.hourly_rate}/hr` : '—'
   const tz = va.timezone || ''
   const english = va.english_level || ''
@@ -250,7 +251,7 @@ function renderCard(va) {
   else if (va.badge === 'New') badgeHtml = `<span class="badge new">✨ New</span>`
 
   const photoHtml = photoUrl
-    ? `<img src="${photoUrl}" alt="${va.full_name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'card-photo-placeholder\\' style=\\'background:${color}\\'>${init}</div>'">`
+    ? `<img src="${photoUrl}" alt="${fullName}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'card-photo-placeholder\\' style=\\'background:${color}\\'>${init}</div>'">`
     : `<div class="card-photo-placeholder" style="background:${color}">${init}</div>`
 
   return `
@@ -260,8 +261,8 @@ function renderCard(va) {
         <div class="card-badges">${badgeHtml}</div>
       </div>
       <div class="card-body">
-        <div class="card-name">${va.full_name || 'VA'}</div>
-        <div class="card-role">${va.primary_role || va.category || ''}</div>
+        <div class="card-name">${fullName}</div>
+        <div class="card-role">${va.role || va.category || ''}</div>
         <div class="card-meta">
           <span class="meta-pill rate">${rate}</span>
           ${tz ? `<span class="meta-pill">🌍 ${tz}</span>` : ''}
@@ -288,15 +289,15 @@ function applyFilters() {
     }
     if (activeTab === 'real-estate') {
       const re = ['Transaction Coordinator','ISA / Lead Qualifier','CRM Specialist']
-      if (!re.includes(va.primary_role) && !re.includes(va.category)) return false
+      if (!re.includes(va.role) && !re.includes(va.category)) return false
     }
     if (activeTab === 'business') {
       const biz = ['Executive Admin','Marketing VA','Social Media VA','Med Spa VA','Legal VA','Insurance VA','Mortgage VA']
-      if (!biz.includes(va.primary_role) && !biz.includes(va.category)) return false
+      if (!biz.includes(va.role) && !biz.includes(va.category)) return false
     }
 
     // Specialty
-    if (specialty && va.primary_role !== specialty && va.category !== specialty) return false
+    if (specialty && va.role !== specialty && va.category !== specialty) return false
 
     // Rate
     const r = parseFloat(va.hourly_rate) || 0
@@ -306,8 +307,9 @@ function applyFilters() {
 
     // Search
     if (search) {
+      const fullName = [va.first_name, va.last_name].filter(Boolean).join(' ')
       const haystack = [
-        va.full_name, va.primary_role, va.category, va.bio,
+        fullName, va.role, va.category, va.bio,
         ...(va.va_skills || []).map(s => s.skill_name),
         ...(va.va_tools || []).map(t => t.tool_name)
       ].join(' ').toLowerCase()
@@ -344,10 +346,10 @@ async function loadVAs() {
   const { data, error } = await supabase
     .from('vas')
     .select(`
-      id, full_name, primary_role, category, hourly_rate, english_level,
+      id, first_name, last_name, role, category, hourly_rate, english_level,
       timezone, bio, photo_url, badge, status,
       va_skills ( skill_name, final_rating ),
-      va_tools ( tool_name, proficiency )
+      va_tools ( tool_name, tool_type )
     `)
     .eq('status', 'approved')
     .order('created_at', { ascending: false })
