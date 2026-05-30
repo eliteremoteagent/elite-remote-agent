@@ -170,7 +170,7 @@ footer { border-top: 1px solid var(--border); padding: 2rem; display: flex; just
   <div class="filter-group">
     <select id="filterRate" onchange="applyFilters()">
       <option value="">Any Rate</option>
-      <option value="low'>Under $7/hr</option>
+      <option value="low">Under $7/hr</option>
       <option value="mid">$7–$9/hr</option>
       <option value="high">$9+/hr</option>
     </select>
@@ -365,4 +365,17 @@ async function loadVAs() {
   applyFilters()
 }
 
-// Read URL params to pre-set tab (e
+// Read URL params to pre-set tab (e.g. ?tab=real-estate from homepage portals)
+;(function() {
+  const params = new URLSearchParams(window.location.search)
+  const tab = params.get('tab')
+  if (tab) {
+    const btn = Array.from(document.querySelectorAll('.tab')).find(b => b.getAttribute('onclick')?.includes(`'${tab}'`))
+    if (btn) { document.querySelectorAll('.tab').forEach(t => t.classList.remove('active')); btn.classList.add('active'); activeTab = tab }
+  }
+})()
+
+loadVAs()
+</script>
+</body>
+</html>
