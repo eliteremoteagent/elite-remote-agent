@@ -262,7 +262,7 @@ const SUPABASE_URL = 'https://wcmvtfclkybgdwjybyzb.supabase.co'
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndjbXZ0ZmNsa3liZ2R3anlieXpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMzExOTIsImV4cCI6MjA5NDgwNzE5Mn0.zI0tjF7dN0DT30Mkd1nEDyMdXlYPzTmKH3BxvNea1Fs'
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
-// ── SIMPLE PASSWORD GATE ──────────────────────────────────────────
+// ── SIMPLE PASSWORD GATE ────────────────────────────────────────────
 // Change this password to whatever you want
 const ADMIN_PASSWORD = 'ERA2025admin'
 
@@ -285,13 +285,13 @@ window.logout = function() {
 }
 document.getElementById('pwInput').addEventListener('keydown', e => { if (e.key === 'Enter') window.checkPw() })
 
-// ── STATE ─────────────────────────────────────────────────────────
+// ── STATE ────────────────────────────────────────────────────────────
 let allVAs = []
 let filteredVAs = []
 let currentFilter = 'all'
 let selectedVAId = null
 
-// ── LOAD DATA ─────────────────────────────────────────────────────
+// ── LOAD DATA ──────────────────────────────────────────────────────
 async function loadAll() {
   const { data, error } = await supabase
     .from('vas')
@@ -432,9 +432,16 @@ function renderDetail(va, skills, tools, work, edu, voice) {
       <!-- FILES -->
       <div class="section-card">
         <div class="section-title">📁 Files</div>
-        <div class="file-links">
-          ${va.photo_url ? `<a class="file-link" href="${va.photo_url}" target="_blank">🖼️ Profile Photo</a>` : '<span style="color:var(--muted);font-size:.82rem">No photo</span>'}
+        <div class="file-links" style="margin-bottom:.75rem">
+          ${va.photo_url ? `<a class="file-link" href="${va.photo_url}" target="_blank">🖼️ Profile Photo</a>` : '<span style="color:var(--muted);font-size:.82rem">No photo yet</span>'}
           ${va.resume_url ? `<a class="file-link" href="${va.resume_url}" target="_blank">📄 Resume PDF</a>` : '<span style="color:var(--muted);font-size:.82rem">No resume</span>'}
+        </div>
+        <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
+          <label style="cursor:pointer">
+            <input type="file" accept="image/*" style="display:none" onchange="uploadPhoto('${va.id}', this)">
+            <span class="file-link" style="cursor:pointer" id="uploadPhotoBtn_${va.id}">📤 ${va.photo_url ? 'Replace Photo' : 'Upload Photo'}</span>
+          </label>
+          <span id="photoUploadStatus_${va.id}" style="font-size:.78rem;color:var(--muted)"></span>
         </div>
       </div>
 
@@ -618,6 +625,58 @@ function showToast(msg, type = 'success') {
   t.textContent = (type === 'success' ? '✅ ' : '❌ ') + msg
   t.className = 'toast show ' + type
   setTimeout(() => t.className = 'toast', 3000)
+}
+
+// ── PHOTO UPLOAD ──────────────────────────────────────────────────
+window.uploadPhoto = async function(vaId, input) {
+  const file = input.files[0]
+  if (!file) return
+
+  const statusEl = document.getElementById('photoUploadStatus_' + vaId)
+  const btnEl = document.getElementById('uploadPhotoBtn_' + vaId)
+  if (statusEl) statusEl.textContent = '⏳ Uploading...'
+
+  const ext = file.name.split('.').pop().toLowerCase()
+  const path = vaId + '.' + ext
+
+  // Upload to Supabase Storage (upsert = replace if exists)
+  const { error: uploadError } = await supabase.storage
+    .from('va-photos')
+    .upload(path, file, { upsert: true, contentType: file.type })
+
+  if (uploadError) {
+    if (statusEl) statusEl.textContent = '❌ ' + uploadError.message
+    showToast('Upload failed: ' + uploadError.message, 'error')
+    return
+  }
+
+  // Get public URL
+  const { data: urlData } = supabase.storage.from('va-photos').getPublicUrl(path)
+  const photoUrl = urlData.publicUrl
+
+  // Save URL to vas table
+  const { error: dbError } = await supabase.from('vas').update({ photo_url: photoUrl }).eq('id', vaId)
+  if (dbError) {
+    if (statusEl) statusEl.textContent = '❌ DB update failed'
+    showToast('DB update failed: ' + dbError.message, 'error')
+    return
+  }
+
+  // Update local state
+  const va = allVAs.find(v => v.id === vaId)
+  if (va) va.photo_url = photoUrl
+
+  // Update avatar in list row
+  const listAvatar = document.querySelector('#row_' + vaId + ' .va-avatar')
+  if (listAvatar) listAvatar.innerHTML = '<img src="' + photoUrl + '" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">'
+
+  // Update avatar in detail header
+  const detailAvatar = document.querySelector('.detail-avatar')
+  if (detailAvatar) detailAvatar.innerHTML = '<img src="' + photoUrl + '" alt="">'
+
+  if (statusEl) statusEl.textContent = '✅ Photo saved!'
+  if (btnEl) btnEl.textContent = '📤 Replace Photo'
+  showToast('Photo uploaded successfully!', 'success')
 }
 
 // ── UTILS ─────────────────────────────────────────────────────────
