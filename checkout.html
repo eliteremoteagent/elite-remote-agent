@@ -232,7 +232,8 @@ nav{background:rgba(5,8,16,0.95);border-bottom:1px solid var(--border);padding:1
         <div class="plan-mode">Self Serve</div>
         <div class="plan-tagline">"You have full access. You run it yourself."</div>
         <div class="plan-price-wrap">
-          <div class="plan-price" id="price-starter">$97<sub>/mo</sub></div>
+          <div class="plan-price" id="price-starter">$49<sub>/mo</sub></div>
+          <div style="font-size:0.7rem;color:var(--muted);margin-top:2px;">$149 one-time setup fee</div>
           <div class="plan-annual-note" id="note-starter"></div>
         </div>
         <div class="plan-desc">We give you the tools. You run it yourself. Perfect for resourceful solo agents.</div>
@@ -495,12 +496,12 @@ let selectedPlanName = 'Growth';
 // ANNUAL: starter_annual, growth_annual, elite_annual
 
 const PRICES = {
-  monthly: { starter: 97, growth: 247, elite: 597 },
-  annual:  { starter: 970, growth: 2470, elite: 5970 }
+  monthly: { starter: 49, growth: 247, elite: 597 },
+  annual:  { starter: 490, growth: 2470, elite: 5970 }
 };
 // Annual = 10x monthly (i.e., 2 months free)
-const MONTHLY_EQUIV = { starter: 81, growth: 206, elite: 498 };
-const ANNUAL_SAVINGS = { starter: 194, growth: 494, elite: 1194 };
+const MONTHLY_EQUIV = { starter: 41, growth: 206, elite: 498 };
+const ANNUAL_SAVINGS = { starter: 98, growth: 494, elite: 1194 };
 
 // ── TOAST ──
 function fire(msg) {
@@ -540,7 +541,7 @@ function updatePrices(mode) {
     const priceEl = document.getElementById('price-' + p);
     const noteEl = document.getElementById('note-' + p);
     if (mode === 'monthly') {
-      const prices = { starter:'$97', growth:'$247', elite:'$597' };
+      const prices = { starter:'$49', growth:'$247', elite:'$597' };
       priceEl.innerHTML = prices[p] + '<sub>/mo</sub>';
       noteEl.textContent = '';
     } else {
