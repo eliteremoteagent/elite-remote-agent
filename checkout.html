@@ -560,12 +560,13 @@ function updatePrices(mode) {
 // ═══════════════════════════════════════════════════════════════════
 const STRIPE_LINKS = {
   monthly: {
-    starter: 'https://buy.stripe.com/28E7sM8I058U2F57HUfMA01',
+    starter: 'https://buy.stripe.com/6oU3cw1fy30M5Rh8LYfMA07', // Step 1: $149 setup fee
+    starter_monthly: 'https://buy.stripe.com/14AaEYaQ8eJugvV3rEfMA08', // Step 2: $49/mo (set as Stripe success redirect)
     growth:  'https://buy.stripe.com/8x2fZicYgdFq93td2efMA03',
     elite:   'https://buy.stripe.com/aFa7sM7DWate1B1aU6fMA05'
   },
   annual: {
-    starter: 'https://buy.stripe.com/aFa7sMf6ocBmcfF3rEfMA02',
+    starter: 'https://buy.stripe.com/6oU3cw1fy30M5Rh8LYfMA07', // No annual Starter yet
     growth:  'https://buy.stripe.com/dRmaEY4rKfNy6Vld2efMA04',
     elite:   'https://buy.stripe.com/14A6oI1fyateenN3rEfMA06'
   }
