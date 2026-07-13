@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Terms of Service — Elite Remote Agent</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+--black:#050810;--dark:#0C1020;--dark2:#131828;--card:#0F1525;
+--gold:#D4A843;--gold2:#F0C060;--gold-dim:rgba(212,168,67,0.1);
+--white:#FFFFFF;--muted:#8892A4;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
+--green:#2ECC71;--red:#E74C3C;--blue:#3498DB;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Manrope',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--black);}
+::-webkit-scrollbar-thumb{background:rgba(212,168,67,0.2);border-radius:2px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.1rem 3rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);backdrop-filter:blur(20px);background:rgba(5,8,16,0.85);}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:3px;color:var(--gold);cursor:pointer;text-decoration:none;}
+.logo small{display:block;font-family:'Manrope',sans-serif;font-size:0.45rem;letter-spacing:4px;color:rgba(255,255,255,0.3);text-transform:uppercase;}
+.nav-links{display:flex;gap:2rem;align-items:center;}
+.nav-link{color:rgba(255,255,255,0.45);font-size:0.8rem;font-weight:500;cursor:pointer;transition:color 0.2s;text-decoration:none;}
+.nav-link:hover{color:var(--gold);}
+.nav-btns{display:flex;gap:0.6rem;}
+.btn-ghost{padding:0.45rem 1.1rem;border:1px solid rgba(255,255,255,0.12);border-radius:6px;background:transparent;color:rgba(255,255,255,0.6);font-family:'Manrope',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+.btn-gold{padding:0.5rem 1.4rem;border-radius:6px;background:var(--gold);color:var(--black);font-family:'Manrope',sans-serif;font-size:0.8rem;font-weight:800;cursor:pointer;border:none;transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-1px);}
+
+/* HERO */
+.page-hero{padding:8rem 3rem 4rem;text-align:center;position:relative;overflow:hidden;}
+.ph-glow{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(ellipse,rgba(212,168,67,0.05) 0%,transparent 65%);pointer-events:none;}
+.ph-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(212,168,67,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(212,168,67,0.02) 1px,transparent 1px);background-size:60px 60px;}
+.ph-content{position:relative;z-index:1;}
+.ph-tag{display:inline-flex;align-items:center;gap:0.5rem;background:var(--gold-dim);border:1px solid rgba(212,168,67,0.2);border-radius:30px;padding:0.35rem 0.875rem;margin-bottom:1.25rem;}
+.ph-tag span{font-size:0.68rem;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;}
+.ph-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,4.5rem);letter-spacing:2px;line-height:1;margin-bottom:1rem;}
+.ph-h1 span{color:var(--gold);}
+.ph-sub{color:rgba(255,255,255,0.4);font-size:0.85rem;max-width:500px;margin:0 auto;}
+
+/* CONTENT */
+.legal-wrap{max-width:780px;margin:0 auto;padding:4rem 3rem 6rem;}
+.toc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.75rem;margin-bottom:3rem;}
+.toc-title{font-size:0.65rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+.toc-links{display:flex;flex-direction:column;gap:0.4rem;}
+.toc-link{color:rgba(255,255,255,0.45);font-size:0.82rem;text-decoration:none;transition:color 0.2s;display:flex;align-items:center;gap:0.5rem;}
+.toc-link:hover{color:var(--gold);}
+.toc-link::before{content:'→';color:var(--gold);font-size:0.7rem;flex-shrink:0;}
+.effective{display:inline-flex;align-items:center;gap:0.6rem;background:rgba(46,204,113,0.08);border:1px solid rgba(46,204,113,0.15);border-radius:8px;padding:0.5rem 1rem;margin-bottom:2.5rem;font-size:0.78rem;color:rgba(255,255,255,0.55);}
+.effective strong{color:var(--green);}
+
+.legal-section{margin-bottom:3rem;}
+.ls-num{font-size:0.62rem;font-weight:800;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:0.4rem;}
+.ls-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:1px;margin-bottom:1.25rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border);}
+.ls-body{color:rgba(255,255,255,0.55);font-size:0.875rem;line-height:1.9;}
+.ls-body p{margin-bottom:1rem;}
+.ls-body p:last-child{margin-bottom:0;}
+.ls-body strong{color:rgba(255,255,255,0.8);}
+.ls-body a{color:var(--gold);text-decoration:none;}
+.ls-body a:hover{text-decoration:underline;}
+.ls-body ul{padding-left:1.25rem;margin:0.75rem 0;}
+.ls-body ul li{margin-bottom:0.5rem;color:rgba(255,255,255,0.5);}
+.highlight-box{background:var(--gold-dim);border:1px solid rgba(212,168,67,0.2);border-radius:10px;padding:1.25rem 1.5rem;margin:1.25rem 0;}
+.highlight-box p{color:rgba(255,255,255,0.65);font-size:0.82rem;line-height:1.75;margin:0;}
+.highlight-box strong{color:var(--gold);}
+.warn-box{background:rgba(231,76,60,0.06);border:1px solid rgba(231,76,60,0.15);border-radius:10px;padding:1.25rem 1.5rem;margin:1.25rem 0;}
+.warn-box p{color:rgba(255,255,255,0.6);font-size:0.82rem;line-height:1.75;margin:0;}
+.warn-box strong{color:#E74C3C;}
+
+/* FOOTER */
+footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;background:var(--black);}
+.foot-logo{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--gold);letter-spacing:3px;}
+.foot-links{display:flex;gap:1.75rem;flex-wrap:wrap;}
+.foot-link{font-size:0.72rem;color:rgba(255,255,255,0.3);cursor:pointer;transition:color 0.2s;text-decoration:none;}
+.foot-link:hover{color:var(--gold);}
+.foot-copy{font-size:0.68rem;color:rgba(255,255,255,0.18);}
+
+@media(max-width:768px){
+nav{padding:1rem 1.5rem;}
+.nav-links{display:none;}
+.page-hero{padding:6rem 1.5rem 3rem;}
+.legal-wrap{padding:2.5rem 1.5rem 4rem;}
+footer{padding:2rem 1.5rem;flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+<a class="logo" href="index.html">Elite Remote Agent<small>Pre-Screened. Trained. Ready.</small></a>
+<div class="nav-links">
+<a class="nav-link" href="how-it-works.html">How It Works</a>
+<a class="nav-link" href="index.html#portals">Portals</a>
+<a class="nav-link" href="index.html#pricing">Pricing</a>
+<a class="nav-link" href="apply.html">For VAs</a>
+</div>
+<div class="nav-btns">
+<a class="btn-ghost" href="dashboard.html">Log In</a>
+<a class="btn-gold" href="checkout.html">Get Started →</a>
+</div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+<div class="ph-glow"></div>
+<div class="ph-grid"></div>
+<div class="ph-content">
+<div class="ph-tag"><span>Legal</span></div>
+<h1 class="ph-h1">Terms of <span>Service</span></h1>
+<p class="ph-sub">Please read these terms carefully before subscribing to or using the Elite Remote Agent platform.</p>
+</div>
+</div>
+
+<!-- CONTENT -->
+<div class="legal-wrap">
+
+<div class="effective">
+<strong>Effective Date:</strong> July 1, 2026 &nbsp;·&nbsp; Last Updated: July 13, 2026
+</div>
+
+<!-- TOC -->
+<div class="toc">
+<div class="toc-title">Table of Contents</div>
+<div class="toc-links">
+<a class="toc-link" href="#acceptance">Acceptance of Terms</a>
+<a class="toc-link" href="#services">Description of Services</a>
+<a class="toc-link" href="#accounts">Accounts &amp; Eligibility</a>
+<a class="toc-link" href="#subscriptions">Subscriptions &amp; Billing</a>
+<a class="toc-link" href="#refunds">Refund Policy</a>
+<a class="toc-link" href="#platform">Platform Use &amp; Conduct</a>
+<a class="toc-link" href="#vas">VA Relationships &amp; Limitations</a>
+<a class="toc-link" href="#ip">Intellectual Property</a>
+<a class="toc-link" href="#disclaimers">Disclaimers &amp; Limitations of Liability</a>
+<a class="toc-link" href="#termination">Termination</a>
+<a class="toc-link" href="#governing">Governing Law &amp; Disputes</a>
+<a class="toc-link" href="#changes">Changes to These Terms</a>
+<a class="toc-link" href="#contact">Contact Us</a>
+</div>
+</div>
+
+<!-- 1 -->
+<div class="legal-section" id="acceptance">
+<div class="ls-num">Section 01</div>
+<div class="ls-title">Acceptance of Terms</div>
+<div class="ls-body">
+<p>By accessing or using the Elite Remote Agent platform, website located at <a href="https://eliteremoteagent.com">eliteremoteagent.com</a>, or any related services (collectively, the "Platform"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, do not use the Platform.</p>
+<p>These Terms constitute a legally binding agreement between you ("Client," "User," or "you") and Elite Remote Agent, operated by James Burbank ("Company," "we," "us," or "our"), a business based in Phoenix, Arizona.</p>
+<p>These Terms apply to all visitors, registered users, clients, and virtual assistants who access or use the Platform in any capacity.</p>
+</div>
+</div>
+
+<!-- 2 -->
+<div class="legal-section" id="services">
+<div class="ls-num">Section 02</div>
+<div class="ls-title">Description of Services</div>
+<div class="ls-body">
+<p>Elite Remote Agent is a subscription-based platform that connects business owners and professionals with pre-screened, trained virtual assistants ("VAs"). Our services include:</p>
+<ul>
+<li>Access to a curated marketplace of vetted VA profiles</li>
+<li>VA matching and placement assistance</li>
+<li>Done-For-You (DFY) placement for eligible plan subscribers</li>
+<li>A client dashboard for managing VA relationships, tracking KPIs, and sharing SOPs</li>
+<li>Training resources and onboarding support</li>
+</ul>
+<p><strong>We are a platform and intermediary, not an employer.</strong> Elite Remote Agent does not employ the VAs listed on our platform. The Company facilitates connections between clients and independent contractors. Once hired, the VA works directly for and with you under a separate agreement.</p>
+<div class="highlight-box">
+<p><strong>Important:</strong> All payments for VA services (hourly compensation, project fees, etc.) are paid directly from the client to the VA. The Elite Remote Agent subscription fee covers platform access only — not VA labor costs.</p>
+</div>
+</div>
+</div>
+
+<!-- 3 -->
+<div class="legal-section" id="accounts">
+<div class="ls-num">Section 03</div>
+<div class="ls-title">Accounts &amp; Eligibility</div>
+<div class="ls-body">
+<p>To use the Platform, you must be at least 18 years old and have the legal capacity to enter into contracts. By using the Platform, you represent and warrant that you meet these requirements.</p>
+<p>You are responsible for maintaining the confidentiality of your account credentials and for all activity that occurs under your account. You agree to notify us immediately at <a href="mailto:james@soldbyburbank.com">james@soldbyburbank.com</a> if you suspect any unauthorized access to your account.</p>
+<p>You agree to provide accurate, complete, and current information when creating an account. The Company reserves the right to suspend or terminate accounts that contain false or misleading information.</p>
+</div>
+</div>
+
+<!-- 4 -->
+<div class="legal-section" id="subscriptions">
+<div class="ls-num">Section 04</div>
+<div class="ls-title">Subscriptions &amp; Billing</div>
+<div class="ls-body">
+<p>The Platform is offered on a subscription basis. Current plans and pricing are published at <a href="https://eliteremoteagent.com/checkout.html">eliteremoteagent.com/checkout.html</a> and are subject to change.</p>
+<p><strong>Starter Plan:</strong> Requires a one-time setup fee of $149 at enrollment. Monthly platform access is billed at $49/month beginning with your first billing cycle following setup. The setup fee is non-refundable after your account has been created and you have received access to the platform.</p>
+<p><strong>Growth and Elite Plans:</strong> Billed monthly or annually as selected at checkout. Annual subscriptions are billed in full at the start of each annual term.</p>
+<p>All billing is processed securely through Stripe. By subscribing, you authorize us to charge your payment method on a recurring basis according to your selected plan until you cancel. You are responsible for keeping your payment information current.</p>
+<ul>
+<li>Subscriptions automatically renew unless cancelled at least 24 hours before the next billing date</li>
+<li>You may cancel at any time through your client dashboard or by contacting us</li>
+<li>Cancellation takes effect at the end of the current billing period — you retain access until then</li>
+<li>Failed payments may result in temporary suspension of platform access</li>
+</ul>
+</div>
+</div>
+
+<!-- 5 -->
+<div class="legal-section" id="refunds">
+<div class="ls-num">Section 05</div>
+<div class="ls-title">Refund Policy</div>
+<div class="ls-body">
+<p>We stand behind our platform and want every client to feel confident in their subscription. Our refund policy is as follows:</p>
+<p><strong>Setup Fees:</strong> The one-time $149 Starter setup fee is non-refundable once your account has been activated and you have been granted access to the platform.</p>
+<p><strong>Monthly Subscriptions:</strong> If you are not satisfied within the first 7 days of your initial monthly subscription, contact us and we will review your case and issue a refund of the first month's platform fee at our discretion. After 7 days, monthly subscription fees are non-refundable.</p>
+<p><strong>Annual Subscriptions:</strong> Annual subscriptions are eligible for a prorated refund within the first 30 days if you have not placed a VA through the platform. After 30 days or after a successful VA placement, annual fees are non-refundable.</p>
+<div class="highlight-box">
+<p><strong>VA Replacement Guarantee:</strong> If a VA you hire through the platform does not work out for any reason, we will replace them at no additional cost, on any plan, with no limit on replacements. This is not a refund — it is a replacement guarantee.</p>
+</div>
+<p>To request a refund or replacement, email <a href="mailto:james@soldbyburbank.com">james@soldbyburbank.com</a> with your account information and reason for the request.</p>
+</div>
+</div>
+
+<!-- 6 -->
+<div class="legal-section" id="platform">
+<div class="ls-num">Section 06</div>
+<div class="ls-title">Platform Use &amp; Conduct</div>
+<div class="ls-body">
+<p>You agree to use the Platform only for lawful purposes and in a manner consistent with these Terms. You agree not to:</p>
+<ul>
+<li>Use the Platform to solicit VAs outside of the Platform in order to avoid paying subscription fees</li>
+<li>Share your account credentials with unauthorized third parties</li>
+<li>Harass, threaten, or discriminate against VAs or other users</li>
+<li>Post false, misleading, or defamatory content about any VA or user</li>
+<li>Attempt to reverse-engineer, scrape, or copy any portion of the Platform</li>
+<li>Use the Platform in any way that violates applicable local, state, or federal law</li>
+<li>Circumvent or attempt to circumvent any security or access controls</li>
+</ul>
+<p>The Company reserves the right to suspend or terminate any account that violates these conduct standards without prior notice.</p>
+</div>
+</div>
+
+<!-- 7 -->
+<div class="legal-section" id="vas">
+<div class="ls-num">Section 07</div>
+<div class="ls-title">VA Relationships &amp; Limitations</div>
+<div class="ls-body">
+<p>Elite Remote Agent pre-screens, interviews, and vets all VAs listed on the platform before approving their profiles. However, we make no guarantee regarding the performance of any individual VA once hired.</p>
+<p><strong>Independent Contractor Relationship:</strong> VAs on the Platform are independent contractors, not employees of Elite Remote Agent or of the client. You are solely responsible for managing, directing, and compensating any VA you hire through the Platform in compliance with applicable laws.</p>
+<p><strong>Client Responsibilities:</strong> You are responsible for:</p>
+<ul>
+<li>Verifying that any VA you hire is authorized to work in their location</li>
+<li>Complying with any applicable tax reporting requirements for independent contractors</li>
+<li>Paying VAs directly for their time and services as agreed</li>
+<li>Maintaining a professional and respectful working relationship</li>
+<li>Providing clear expectations, SOPs, and feedback to your VA</li>
+</ul>
+<div class="warn-box">
+<p><strong>Non-Solicitation:</strong> During your active subscription and for 12 months following cancellation, you agree not to directly hire, solicit, or recruit any VA you were introduced to through the Platform outside of the Platform without our written consent. Violation of this provision may result in a non-solicitation fee of $2,500 per VA.</p>
+</div>
+</div>
+</div>
+
+<!-- 8 -->
+<div class="legal-section" id="ip">
+<div class="ls-num">Section 08</div>
+<div class="ls-title">Intellectual Property</div>
+<div class="ls-body">
+<p>All content on the Platform — including but not limited to text, graphics, logos, training materials, the Elite Remote Agent name and branding, and software — is the exclusive property of Elite Remote Agent or its licensors and is protected by applicable intellectual property laws.</p>
+<p>You are granted a limited, non-exclusive, non-transferable license to access and use the Platform for your personal or internal business purposes during your active subscription. This license does not permit you to copy, reproduce, distribute, or create derivative works from any Platform content without our express written consent.</p>
+<p>Content you upload to the Platform (SOPs, task descriptions, communications) remains your property. By uploading it, you grant us a limited license to store and display it as necessary to provide the service.</p>
+</div>
+</div>
+
+<!-- 9 -->
+<div class="legal-section" id="disclaimers">
+<div class="ls-num">Section 09</div>
+<div class="ls-title">Disclaimers &amp; Limitations of Liability</div>
+<div class="ls-body">
+<p><strong>AS-IS BASIS:</strong> The Platform is provided on an "as-is" and "as-available" basis without warranties of any kind, either express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, or non-infringement.</p>
+<p>We do not warrant that the Platform will be uninterrupted, error-free, or free of viruses or other harmful components. We do not guarantee specific business results from using a VA or our platform.</p>
+<p><strong>Limitation of Liability:</strong> To the fullest extent permitted by applicable law, Elite Remote Agent and its officers, directors, employees, agents, and affiliates shall not be liable for any indirect, incidental, special, consequential, or punitive damages — including lost profits, lost data, or business interruption — arising out of or related to your use of the Platform, even if we have been advised of the possibility of such damages.</p>
+<p>Our total cumulative liability to you for any cause of action related to these Terms or the Platform shall not exceed the greater of (a) the total subscription fees paid by you to the Company in the 3 months preceding the event giving rise to the claim, or (b) $100.</p>
+</div>
+</div>
+
+<!-- 10 -->
+<div class="legal-section" id="termination">
+<div class="ls-num">Section 10</div>
+<div class="ls-title">Termination</div>
+<div class="ls-body">
+<p><strong>By You:</strong> You may cancel your subscription at any time through your account dashboard or by emailing <a href="mailto:james@soldbyburbank.com">james@soldbyburbank.com</a>. Cancellation takes effect at the end of your current billing period. You retain access to the Platform until that date.</p>
+<p><strong>By Us:</strong> We reserve the right to suspend or terminate your access to the Platform at any time, with or without notice, if we reasonably believe you have violated these Terms, engaged in fraudulent activity, or for any other reason at our sole discretion. In cases of termination for cause, no refund will be issued for any remaining subscription period.</p>
+<p>Upon termination, your right to access the Platform ceases immediately. Sections of these Terms that by their nature should survive termination (including intellectual property, disclaimers, limitations of liability, and governing law) shall survive.</p>
+</div>
+</div>
+
+<!-- 11 -->
+<div class="legal-section" id="governing">
+<div class="ls-num">Section 11</div>
+<div class="ls-title">Governing Law &amp; Disputes</div>
+<div class="ls-body">
+<p>These Terms shall be governed by and construed in accordance with the laws of the State of Arizona, without regard to its conflict of law provisions.</p>
+<p>Any dispute arising out of or relating to these Terms or the Platform that cannot be resolved informally shall be submitted to binding arbitration in Maricopa County, Arizona, under the rules of the American Arbitration Association, except that either party may seek injunctive or other equitable relief in any court of competent jurisdiction to prevent actual or threatened infringement of intellectual property rights.</p>
+<p>By agreeing to these Terms, you waive any right to a jury trial and agree that disputes will be resolved on an individual basis only — not as part of any class or representative action.</p>
+</div>
+</div>
+
+<!-- 12 -->
+<div class="legal-section" id="changes">
+<div class="ls-num">Section 12</div>
+<div class="ls-title">Changes to These Terms</div>
+<div class="ls-body">
+<p>We reserve the right to modify these Terms at any time. When we make material changes, we will update the "Last Updated" date at the top of this page and, where appropriate, notify active subscribers by email.</p>
+<p>Your continued use of the Platform following the posting of revised Terms constitutes your acceptance of those changes. If you do not agree to the revised Terms, you must stop using the Platform and cancel your subscription.</p>
+</div>
+</div>
+
+<!-- 13 -->
+<div class="legal-section" id="contact">
+<div class="ls-num">Section 13</div>
+<div class="ls-title">Contact Us</div>
+<div class="ls-body">
+<p>If you have any questions about these Terms of Service, please contact us:</p>
+<ul>
+<li><strong>Email:</strong> <a href="mailto:james@soldbyburbank.com">james@soldbyburbank.com</a></li>
+<li><strong>Business:</strong> Elite Remote Agent</li>
+<li><strong>Location:</strong> Phoenix, Arizona</li>
+<li><strong>Website:</strong> <a href="https://eliteremoteagent.com">eliteremoteagent.com</a></li>
+</ul>
+<p>We aim to respond to all inquiries within 1–2 business days.</p>
+</div>
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+<div class="foot-logo">Elite Remote Agent</div>
+<div class="foot-links">
+<a class="foot-link" href="index.html">Home</a>
+<a class="foot-link" href="how-it-works.html">How It Works</a>
+<a class="foot-link" href="checkout.html">Pricing</a>
+<a class="foot-link" href="apply.html">For VAs</a>
+<a class="foot-link" href="dashboard.html">Client Login</a>
+<a class="foot-link" href="privacy.html">Privacy Policy</a>
+<a class="foot-link" href="tos.html">Terms of Service</a>
+</div>
+<div class="foot-copy">© 2026 Elite Remote Agent. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
