@@ -4,163 +4,299 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Privacy Policy — Elite Remote Agent</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Manrope',sans-serif;background:#050810;color:#fff;min-height:100vh;}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.07);backdrop-filter:blur(20px);background:rgba(5,8,16,0.9);}
-.logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:3px;color:#D4A843;text-decoration:none;}
-.btn-gold{padding:0.5rem 1.25rem;border-radius:6px;background:#D4A843;color:#050810;font-family:'Manrope',sans-serif;font-size:0.8rem;font-weight:800;text-decoration:none;display:inline-flex;align-items:center;}
-.hero{padding:7rem 2rem 3rem;text-align:center;background:#0C1020;}
-.hero h1{font-family:'Bebas Neue',sans-serif;font-size:3rem;letter-spacing:2px;margin-bottom:0.4rem;}
-.hero h1 span{color:#D4A843;}
-.hero p{color:rgba(255,255,255,0.4);font-size:0.82rem;}
-.wrap{max-width:760px;margin:0 auto;padding:3rem 2rem 5rem;}
-.summary{background:rgba(212,168,67,0.06);border:1px solid rgba(212,168,67,0.15);border-radius:10px;padding:1rem 1.25rem;font-size:0.78rem;color:rgba(255,255,255,0.5);margin-bottom:2rem;line-height:1.6;}
-.summary strong{color:#D4A843;}
-.toc{background:#0F1525;border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:1.5rem;margin-bottom:2.5rem;}
-.toc-title{font-size:0.65rem;font-weight:800;color:#D4A843;letter-spacing:2px;text-transform:uppercase;margin-bottom:1rem;}
-.toc a{display:block;color:rgba(255,255,255,0.5);font-size:0.8rem;padding:0.28rem 0;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.05);}
-.toc a:last-child{border-bottom:none;}
-.toc a:hover{color:#D4A843;}
-.sec{margin-bottom:2.5rem;}
-.sec-title{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:1px;color:#D4A843;margin-bottom:0.875rem;padding-top:0.5rem;}
-.sec-body{font-size:0.82rem;color:rgba(255,255,255,0.55);line-height:1.85;}
-.sec-body p{margin-bottom:0.875rem;}
-.sec-body strong{color:#fff;}
-.sec-body h4{font-size:0.82rem;font-weight:800;color:#fff;margin:1rem 0 0.4rem;}
-.sec-body ul{padding-left:1.25rem;margin-bottom:0.875rem;}
-.sec-body li{margin-bottom:0.4rem;}
-.sec-body a{color:#D4A843;text-decoration:none;}
-footer{padding:2rem;border-top:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
-.foot-logo{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:#D4A843;letter-spacing:3px;}
-.foot-links{display:flex;gap:1.5rem;flex-wrap:wrap;}
-.foot-link{font-size:0.7rem;color:rgba(255,255,255,0.3);text-decoration:none;}
-.foot-link:hover{color:#D4A843;}
-.foot-copy{font-size:0.65rem;color:rgba(255,255,255,0.18);}
+:root{--black:#050810;--dark:#0C1020;--dark2:#131828;--card:#0F1525;--gold:#D4A843;--gold2:#F0C060;--gold-dim:rgba(212,168,67,0.1);--white:#FFFFFF;--muted:#8892A4;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);--green:#2ECC71;--red:#E74C3C;--blue:#3498DB;}
+html{scroll-behavior:smooth;}
+body{font-family:'Manrope',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--black);}::-webkit-scrollbar-thumb{background:rgba(212,168,67,0.2);border-radius:2px;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.1rem 3rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);backdrop-filter:blur(20px);background:rgba(5,8,16,0.85);}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:3px;color:var(--gold);cursor:pointer;text-decoration:none;}
+.logo small{display:block;font-family:'Manrope',sans-serif;font-size:0.45rem;letter-spacing:4px;color:rgba(255,255,255,0.3);text-transform:uppercase;}
+.nav-links{display:flex;gap:2rem;align-items:center;}
+.nav-link{color:rgba(255,255,255,0.45);font-size:0.8rem;font-weight:500;cursor:pointer;transition:color 0.2s;text-decoration:none;}
+.nav-link:hover{color:var(--gold);}
+.nav-btns{display:flex;gap:0.6rem;}
+.btn-ghost{padding:0.45rem 1.1rem;border:1px solid rgba(255,255,255,0.12);border-radius:6px;background:transparent;color:rgba(255,255,255,0.6);font-family:'Manrope',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+.btn-gold{padding:0.5rem 1.4rem;border-radius:6px;background:var(--gold);color:var(--black);font-family:'Manrope',sans-serif;font-size:0.8rem;font-weight:800;cursor:pointer;border:none;transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-1px);}
+.page-hero{padding:8rem 3rem 4rem;text-align:center;position:relative;overflow:hidden;}
+.ph-glow{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(ellipse,rgba(212,168,67,0.05) 0%,transparent 65%);pointer-events:none;}
+.ph-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(212,168,67,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(212,168,67,0.02) 1px,transparent 1px);background-size:60px 60px;}
+.ph-content{position:relative;z-index:1;}
+.ph-tag{display:inline-flex;align-items:center;gap:0.5rem;background:var(--gold-dim);border:1px solid rgba(212,168,67,0.2);border-radius:30px;padding:0.35rem 0.875rem;margin-bottom:1.25rem;}
+.ph-tag span{font-size:0.68rem;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;}
+.ph-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,4.5rem);letter-spacing:2px;line-height:1;margin-bottom:1rem;}
+.ph-h1 span{color:var(--gold);}
+.ph-sub{color:rgba(255,255,255,0.4);font-size:0.85rem;max-width:500px;margin:0 auto;}
+.legal-wrap{max-width:780px;margin:0 auto;padding:4rem 3rem 6rem;}
+.toc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.75rem;margin-bottom:3rem;}
+.toc-title{font-size:0.65rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+.toc-links{display:flex;flex-direction:column;gap:0.4rem;}
+.toc-link{color:rgba(255,255,255,0.45);font-size:0.82rem;text-decoration:none;transition:color 0.2s;display:flex;align-items:center;gap:0.5rem;}
+.toc-link:hover{color:var(--gold);}
+.toc-link::before{content:'→';color:var(--gold);font-size:0.7rem;flex-shrink:0;}
+.effective{display:inline-flex;align-items:center;gap:0.6rem;background:rgba(46,204,113,0.08);border:1px solid rgba(46,204,113,0.15);border-radius:8px;padding:0.5rem 1rem;margin-bottom:2.5rem;font-size:0.78rem;color:rgba(255,255,255,0.55);}
+.effective strong{color:var(--green);}
+.legal-section{margin-bottom:3rem;}
+.ls-num{font-size:0.62rem;font-weight:800;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:0.4rem;}
+.ls-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:1px;margin-bottom:1.25rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border);}
+.ls-body{color:rgba(255,255,255,0.55);font-size:0.875rem;line-height:1.9;}
+.ls-body p{margin-bottom:1rem;}
+.ls-body p:last-child{margin-bottom:0;}
+.ls-body strong{color:rgba(255,255,255,0.8);}
+.ls-body a{color:var(--gold);text-decoration:none;}
+.ls-body a:hover{text-decoration:underline;}
+.ls-body ul{padding-left:1.25rem;margin:0.75rem 0;}
+.ls-body ul li{margin-bottom:0.5rem;color:rgba(255,255,255,0.5);}
+.highlight-box{background:var(--gold-dim);border:1px solid rgba(212,168,67,0.2);border-radius:10px;padding:1.25rem 1.5rem;margin:1.25rem 0;}
+.highlight-box p{color:rgba(255,255,255,0.65);font-size:0.82rem;line-height:1.75;margin:0;}
+.highlight-box strong{color:var(--gold);}
+.data-table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;}
+.data-table th{text-align:left;padding:0.75rem 1rem;font-size:0.7rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--gold);background:var(--dark2);border-bottom:1px solid var(--border2);}
+.data-table td{padding:0.75rem 1rem;font-size:0.8rem;color:rgba(255,255,255,0.5);border-bottom:1px solid var(--border);vertical-align:top;line-height:1.6;}
+.data-table tr:last-child td{border-bottom:none;}
+footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;background:var(--black);}
+.foot-logo{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--gold);letter-spacing:3px;}
+.foot-links{display:flex;gap:1.75rem;flex-wrap:wrap;}
+.foot-link{font-size:0.72rem;color:rgba(255,255,255,0.3);cursor:pointer;transition:color 0.2s;text-decoration:none;}
+.foot-link:hover{color:var(--gold);}
+.foot-copy{font-size:0.68rem;color:rgba(255,255,255,0.18);}
+@media(max-width:768px){nav{padding:1rem 1.5rem;}.nav-links{display:none;}.page-hero{padding:6rem 1.5rem 3rem;}.legal-wrap{padding:2.5rem 1.5rem 4rem;}footer{padding:2rem 1.5rem;flex-direction:column;text-align:center;}.data-table th,.data-table td{padding:0.6rem 0.75rem;font-size:0.72rem;}}
 </style>
 </head>
 <body>
 <nav>
-  <a class="logo" href="index.html">Elite Remote Agent</a>
-  <a class="btn-gold" href="index.html">← Back to Site</a>
-</nav>
-<div class="hero">
-  <h1><span>Privacy</span> Policy</h1>
-  <p>eliteremoteagent.com · Last Updated: May 11, 2026</p>
+<a class="logo" href="index.html">Elite Remote Agent<small>Pre-Screened. Trained. Ready.</small></a>
+<div class="nav-links">
+<a class="nav-link" href="how-it-works.html">How It Works</a>
+<a class="nav-link" href="index.html#portals">Portals</a>
+<a class="nav-link" href="index.html#pricing">Pricing</a>
+<a class="nav-link" href="apply.html">For VAs</a>
 </div>
-<div class="wrap">
-  <div class="summary"><strong>Summary:</strong> We collect only information needed to run the platform. We never sell your data. Stripe handles all payments so we never store card details. You can request deletion of your data anytime by emailing hello@eliteremoteagent.com.</div>
-  <div class="toc">
-    <div class="toc-title">Table of Contents</div>
-    <a href="#collect">1. Information We Collect</a>
-    <a href="#use">2. How We Use Your Information</a>
-    <a href="#sharing">3. Information Sharing</a>
-    <a href="#cookies">4. Cookies & Tracking</a>
-    <a href="#security">5. Data Security</a>
-    <a href="#rights">6. Your Rights</a>
-    <a href="#children">7. Children's Privacy</a>
-    <a href="#changes">8. Changes to This Policy</a>
-    <a href="#contact">9. Contact Us</a>
-  </div>
-  <div class="sec" id="collect">
-    <div class="sec-title">1. Information We Collect</div>
-    <div class="sec-body">
-      <p>Elite Remote Agent ("ERA") operates eliteremoteagent.com. This Privacy Policy explains how we collect, use, and protect your information.</p>
-      <h4>Information You Provide</h4>
-      <ul>
-        <li><strong>Account registration:</strong> Name, email, phone, and password.</li>
-        <li><strong>Billing:</strong> Payment information processed securely through Stripe. We never store card numbers.</li>
-        <li><strong>VA applications:</strong> Name, photo, resume, voice recordings, work history, education, and skills.</li>
-        <li><strong>Contact forms:</strong> Name, email, phone, and message content.</li>
-        <li><strong>Platform activity:</strong> VA browsing, hire offers, messages, training completions, and KPI entries.</li>
-      </ul>
-      <h4>Information Collected Automatically</h4>
-      <ul>
-        <li><strong>Usage data:</strong> Pages visited, features used, time spent, and clicks.</li>
-        <li><strong>Device information:</strong> Browser type, operating system, IP address.</li>
-        <li><strong>Cookies:</strong> Session and analytics cookies. See Section 4.</li>
-      </ul>
-    </div>
-  </div>
-  <div class="sec" id="use">
-    <div class="sec-title">2. How We Use Your Information</div>
-    <div class="sec-body">
-      <p>We use information we collect to operate the platform, process payments, match clients with VAs, send transactional emails, provide support, analyze usage to improve the platform, and comply with legal obligations.</p>
-      <p>We do <strong>not</strong> use your information for third-party advertising. ERA is ad-free. We do not sell, rent, or trade your personal information.</p>
-    </div>
-  </div>
-  <div class="sec" id="sharing">
-    <div class="sec-title">3. Information Sharing</div>
-    <div class="sec-body">
-      <h4>With VAs You Hire</h4>
-      <p>When you hire a VA, your name and contact information are shared with that VA to facilitate the working relationship.</p>
-      <h4>With Subscribed Clients</h4>
-      <p>VA profiles including name, photo, voice recordings, resume, skills, and reviews are visible to subscribed clients on the platform.</p>
-      <h4>With Service Providers</h4>
-      <ul>
-        <li><strong>Stripe</strong> — payment processing</li>
-        <li><strong>Supabase</strong> — secure database and file storage</li>
-        <li><strong>Email providers</strong> — transactional emails</li>
-        <li><strong>Analytics providers</strong> — anonymous usage data</li>
-      </ul>
-      <h4>Legal Requirements</h4>
-      <p>We may disclose information if required by law or to protect the rights, property, or safety of ERA, our users, or others.</p>
-    </div>
-  </div>
-  <div class="sec" id="cookies">
-    <div class="sec-title">4. Cookies & Tracking</div>
-    <div class="sec-body">
-      <h4>Essential Cookies</h4>
-      <p>Required for the platform to function — keep you logged in and remember preferences. Cannot be opted out of while using ERA.</p>
-      <h4>Analytics Cookies</h4>
-      <p>We use Google Analytics to understand how users interact with the platform. Data is aggregated and anonymous. You can opt out using the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank">Google Analytics Opt-out Add-on</a>.</p>
-    </div>
-  </div>
-  <div class="sec" id="security">
-    <div class="sec-title">5. Data Security</div>
-    <div class="sec-body">
-      <p>We implement industry-standard security measures including SSL/TLS encryption, secure cloud storage via Supabase, payment processing through Stripe only, and password hashing. While we implement strong security, no method of internet transmission is 100% secure. We will notify you promptly if a breach occurs.</p>
-    </div>
-  </div>
-  <div class="sec" id="rights">
-    <div class="sec-title">6. Your Rights</div>
-    <div class="sec-body">
-      <p>You have the right to access, correct, delete, and export your personal information. You can opt out of marketing emails at any time. To exercise any of these rights, contact us at <a href="mailto:hello@eliteremoteagent.com">hello@eliteremoteagent.com</a>. We respond within 30 days.</p>
-    </div>
-  </div>
-  <div class="sec" id="children">
-    <div class="sec-title">7. Children's Privacy</div>
-    <div class="sec-body">
-      <p>ERA is intended for adults aged 18 and older. We do not knowingly collect personal information from children under 13. If you believe a child has provided us their information, contact us immediately.</p>
-    </div>
-  </div>
-  <div class="sec" id="changes">
-    <div class="sec-title">8. Changes to This Policy</div>
-    <div class="sec-body">
-      <p>We may update this Privacy Policy periodically. When we make material changes, we will notify you by email and on the platform at least 14 days before changes take effect. Continued use after the effective date constitutes acceptance.</p>
-    </div>
-  </div>
-  <div class="sec" id="contact">
-    <div class="sec-title">9. Contact Us</div>
-    <div class="sec-body">
-      <ul>
-        <li><strong>Email:</strong> <a href="mailto:hello@eliteremoteagent.com">hello@eliteremoteagent.com</a></li>
-        <li><strong>Website:</strong> <a href="contact.html">eliteremoteagent.com/contact</a></li>
-        <li><strong>Response time:</strong> Within 2 business days</li>
-      </ul>
-    </div>
-  </div>
+<div class="nav-btns">
+<a class="btn-ghost" href="dashboard.html">Log In</a>
+<a class="btn-gold" href="checkout.html">Get Started</a>
+</div>
+</nav>
+<div class="page-hero">
+<div class="ph-glow"></div><div class="ph-grid"></div>
+<div class="ph-content">
+<div class="ph-tag"><span>Legal</span></div>
+<h1 class="ph-h1">Privacy <span>Policy</span></h1>
+<p class="ph-sub">We take your privacy seriously. Here's exactly what we collect, why, and how we protect it.</p>
+</div>
+</div>
+<div class="legal-wrap">
+<div class="effective"><strong>Effective Date:</strong> July 1, 2026 &nbsp;·&nbsp; Last Updated: July 13, 2026</div>
+<div class="toc">
+<div class="toc-title">Table of Contents</div>
+<div class="toc-links">
+<a class="toc-link" href="#overview">Overview</a>
+<a class="toc-link" href="#collect">Information We Collect</a>
+<a class="toc-link" href="#how-we-use">How We Use Your Information</a>
+<a class="toc-link" href="#sharing">Information Sharing</a>
+<a class="toc-link" href="#payments">Payment Processing</a>
+<a class="toc-link" href="#cookies">Cookies &amp; Tracking</a>
+<a class="toc-link" href="#retention">Data Retention</a>
+<a class="toc-link" href="#security">Data Security</a>
+<a class="toc-link" href="#rights">Your Rights &amp; Choices</a>
+<a class="toc-link" href="#children">Children's Privacy</a>
+<a class="toc-link" href="#changes">Changes to This Policy</a>
+<a class="toc-link" href="#contact">Contact Us</a>
+</div>
+</div>
+<div class="legal-section" id="overview">
+<div class="ls-num">Section 01</div>
+<div class="ls-title">Overview</div>
+<div class="ls-body">
+<p>Elite Remote Agent ("we," "us," or "our"), operated by James Burbank in Phoenix, Arizona, is committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard information when you visit our website at <a href="https://eliteremoteagent.com">eliteremoteagent.com</a> and use our platform (collectively, the "Platform").</p>
+<p>By using the Platform, you consent to the practices described in this Privacy Policy. If you do not agree with this Policy, please do not use our Platform.</p>
+<div class="highlight-box"><p><strong>Plain English Summary:</strong> We collect only what we need to run the Platform. We don't sell your data. We use Stripe for payments (we never see your card number). We use Supabase to store your account securely. We use cookies to keep you logged in and improve your experience. You can request your data or ask us to delete it at any time.</p></div>
+</div>
+</div>
+<div class="legal-section" id="collect">
+<div class="ls-num">Section 02</div>
+<div class="ls-title">Information We Collect</div>
+<div class="ls-body">
+<p>We collect information you provide directly, information collected automatically when you use the Platform, and information from third-party service providers.</p>
+<p><strong>Information You Provide Directly:</strong></p>
+<table class="data-table">
+<tr><th>Category</th><th>Examples</th><th>When Collected</th></tr>
+<tr><td>Account Information</td><td>Name, email address, password (hashed)</td><td>When you create an account</td></tr>
+<tr><td>Profile Information</td><td>Business type, hiring needs, plan selection</td><td>During onboarding</td></tr>
+<tr><td>Communication Data</td><td>Messages sent to support, emails</td><td>When you contact us</td></tr>
+<tr><td>VA Application Data</td><td>Resume, skills, work history, voice recording, photo</td><td>When VAs apply to the platform</td></tr>
+<tr><td>Platform Content</td><td>SOPs, task descriptions, KPI notes</td><td>When you use dashboard features</td></tr>
+</table>
+<p><strong>Information Collected Automatically:</strong></p>
+<ul>
+<li><strong>Usage Data:</strong> Pages visited, features used, time spent on the Platform, browser type, device type, and operating system</li>
+<li><strong>Log Data:</strong> IP address, access timestamps, referring URL, and error logs</li>
+<li><strong>Cookies:</strong> Session cookies used for authentication and preference cookies (see Section 6)</li>
+</ul>
+<p><strong>Information From Third Parties:</strong></p>
+<ul>
+<li><strong>Stripe:</strong> We receive confirmation of payment success or failure and a Stripe Customer ID. We do not receive or store your full card number, CVV, or bank account details.</li>
+<li><strong>Supabase:</strong> Our database and authentication provider may generate metadata related to your session and account activity.</li>
+</ul>
+</div>
+</div>
+<div class="legal-section" id="how-we-use">
+<div class="ls-num">Section 03</div>
+<div class="ls-title">How We Use Your Information</div>
+<div class="ls-body">
+<p>We use the information we collect for the following purposes:</p>
+<ul>
+<li><strong>Provide and operate the Platform</strong> — creating your account, displaying VA profiles, managing your dashboard</li>
+<li><strong>Process payments and subscriptions</strong> — billing, renewals, refunds, and payment confirmations</li>
+<li><strong>Communicate with you</strong> — account confirmations, password resets, subscription updates, and support responses</li>
+<li><strong>Improve the Platform</strong> — understanding usage patterns to fix bugs, add features, and improve user experience</li>
+<li><strong>Ensure security</strong> — detecting fraud, unauthorized access, and Terms of Service violations</li>
+<li><strong>Legal compliance</strong> — meeting our obligations under applicable law and resolving disputes</li>
+<li><strong>Marketing (with your consent)</strong> — sending information about new features or offers if you have opted in</li>
+</ul>
+<p>We do not use your personal information to make automated decisions that significantly affect you without human review.</p>
+</div>
+</div>
+<div class="legal-section" id="sharing">
+<div class="ls-num">Section 04</div>
+<div class="ls-title">Information Sharing</div>
+<div class="ls-body">
+<p><strong>We do not sell, rent, or trade your personal information to third parties for their marketing purposes.</strong></p>
+<ul>
+<li><strong>Service Providers:</strong> We share necessary information with Stripe for payments and Supabase for database/auth. These providers are contractually required to protect your information.</li>
+<li><strong>VA Profiles:</strong> When you send a hire offer to a VA, we share your name and business information with that VA.</li>
+<li><strong>Legal Requirements:</strong> We may disclose information if required by law or court order.</li>
+<li><strong>Business Transfers:</strong> In the event of a merger or acquisition, your information may be transferred. We will notify you before your data becomes subject to a different privacy policy.</li>
+</ul>
+</div>
+</div>
+<div class="legal-section" id="payments">
+<div class="ls-num">Section 05</div>
+<div class="ls-title">Payment Processing</div>
+<div class="ls-body">
+<p>All payment processing is handled by <strong>Stripe, Inc.</strong>, a PCI-DSS compliant payment processor. When you subscribe, you enter payment information directly into Stripe's secure interface.</p>
+<p>Elite Remote Agent <strong>never receives, stores, or has access to</strong> your full credit card number, CVV, expiration date, or bank account details. We receive only:</p>
+<ul>
+<li>A Stripe Customer ID (an anonymized reference number)</li>
+<li>Confirmation that a payment succeeded or failed</li>
+<li>The last 4 digits of your card (for display in your account)</li>
+</ul>
+<p>For more information, please review <a href="https://stripe.com/privacy" target="_blank">Stripe's Privacy Policy</a>.</p>
+</div>
+</div>
+<div class="legal-section" id="cookies">
+<div class="ls-num">Section 06</div>
+<div class="ls-title">Cookies &amp; Tracking</div>
+<div class="ls-body">
+<p>We use cookies and similar tracking technologies to operate and improve the Platform. A cookie is a small text file stored in your browser.</p>
+<table class="data-table">
+<tr><th>Type</th><th>Purpose</th><th>Duration</th></tr>
+<tr><td>Authentication Cookies</td><td>Keep you logged in between sessions</td><td>Session / up to 1 week</td></tr>
+<tr><td>Preference Cookies</td><td>Remember your UI preferences</td><td>Up to 1 year</td></tr>
+<tr><td>Analytics Cookies</td><td>Help us understand how pages are used</td><td>Up to 2 years</td></tr>
+</table>
+<p>We do not use advertising tracking cookies or sell cookie data to advertising networks.</p>
+<p><strong>Managing Cookies:</strong> You can control and delete cookies through your browser settings. Note that disabling cookies may prevent you from staying logged in.</p>
+</div>
+</div>
+<div class="legal-section" id="retention">
+<div class="ls-num">Section 07</div>
+<div class="ls-title">Data Retention</div>
+<div class="ls-body">
+<p>We retain your personal information for as long as your account is active or as needed to provide the Platform:</p>
+<ul>
+<li><strong>Account data:</strong> Duration of subscription plus 90 days after cancellation</li>
+<li><strong>Payment records:</strong> 7 years in compliance with financial record-keeping requirements</li>
+<li><strong>Support communications:</strong> Up to 3 years</li>
+<li><strong>VA application data:</strong> 12 months after rejection or termination</li>
+<li><strong>Usage logs:</strong> Up to 12 months</li>
+</ul>
+<p>After the applicable retention period, we securely delete or anonymize your personal information.</p>
+</div>
+</div>
+<div class="legal-section" id="security">
+<div class="ls-num">Section 08</div>
+<div class="ls-title">Data Security</div>
+<div class="ls-body">
+<p>We implement appropriate technical and organizational security measures to protect your personal information:</p>
+<ul>
+<li>All data transmitted between you and the Platform is encrypted via HTTPS/TLS</li>
+<li>Passwords are hashed using industry-standard bcrypt — we never store plain-text passwords</li>
+<li>Our database (Supabase) uses row-level security policies ensuring you can only access your own data</li>
+<li>Payment processing is handled entirely by Stripe and never touches our servers</li>
+<li>Access to production systems is restricted to authorized personnel only</li>
+</ul>
+<p>No method of transmission over the internet is 100% secure. In the event of a data breach affecting your rights and freedoms, we will notify you and relevant authorities as required by applicable law.</p>
+</div>
+</div>
+<div class="legal-section" id="rights">
+<div class="ls-num">Section 09</div>
+<div class="ls-title">Your Rights &amp; Choices</div>
+<div class="ls-body">
+<p>You have the following rights regarding your personal information:</p>
+<ul>
+<li><strong>Access:</strong> Request a copy of the personal information we hold about you</li>
+<li><strong>Correction:</strong> Request that we correct inaccurate or incomplete information</li>
+<li><strong>Deletion:</strong> Request that we delete your personal information, subject to legal retention requirements</li>
+<li><strong>Portability:</strong> Request your data in a structured, machine-readable format</li>
+<li><strong>Opt-out of marketing:</strong> Unsubscribe from marketing emails at any time</li>
+<li><strong>Account deletion:</strong> Delete your account at any time through your dashboard</li>
+</ul>
+<p>To exercise any of these rights, contact us at <a href="mailto:james@soldbyburbank.com">james@soldbyburbank.com</a>. We will respond within 30 days. California residents may have additional rights under CCPA; EEA residents may have additional rights under GDPR.</p>
+</div>
+</div>
+<div class="legal-section" id="children">
+<div class="ls-num">Section 10</div>
+<div class="ls-title">Children's Privacy</div>
+<div class="ls-body">
+<p>The Platform is intended for business professionals who are 18 years of age or older. We do not knowingly collect personal information from children under 13.</p>
+<p>If you believe your child has provided us with personal information, contact us at <a href="mailto:james@soldbyburbank.com">james@soldbyburbank.com</a> and we will promptly delete that information.</p>
+</div>
+</div>
+<div class="legal-section" id="changes">
+<div class="ls-num">Section 11</div>
+<div class="ls-title">Changes to This Policy</div>
+<div class="ls-body">
+<p>We may update this Privacy Policy from time to time. When we make material changes, we will:</p>
+<ul>
+<li>Update the "Last Updated" date at the top of this page</li>
+<li>Notify active subscribers by email at least 7 days before changes take effect</li>
+<li>Post a prominent notice on the Platform</li>
+</ul>
+<p>Your continued use of the Platform after changes take effect constitutes your acceptance of the revised Policy.</p>
+</div>
+</div>
+<div class="legal-section" id="contact">
+<div class="ls-num">Section 12</div>
+<div class="ls-title">Contact Us</div>
+<div class="ls-body">
+<p>If you have any questions, concerns, or requests related to this Privacy Policy, please contact us:</p>
+<ul>
+<li><strong>Email:</strong> <a href="mailto:james@soldbyburbank.com">james@soldbyburbank.com</a></li>
+<li><strong>Business:</strong> Elite Remote Agent</li>
+<li><strong>Location:</strong> Phoenix, Arizona</li>
+<li><strong>Website:</strong> <a href="https://eliteremoteagent.com">eliteremoteagent.com</a></li>
+</ul>
+<p>We aim to respond to all privacy inquiries within 5 business days.</p>
+</div>
+</div>
 </div>
 <footer>
-  <div class="foot-logo">Elite Remote Agent</div>
-  <div class="foot-links">
-    <a class="foot-link" href="index.html">Home</a>
-    <a class="foot-link" href="terms.html">Terms of Service</a>
-    <a class="foot-link" href="faq.html">FAQ</a>
-    <a class="foot-link" href="contact.html">Contact</a>
-  </div>
-  <div class="foot-copy">© 2026 Elite Remote Agent. All rights reserved.</div>
+<div class="foot-logo">Elite Remote Agent</div>
+<div class="foot-links">
+<a class="foot-link" href="index.html">Home</a>
+<a class="foot-link" href="how-it-works.html">How It Works</a>
+<a class="foot-link" href="checkout.html">Pricing</a>
+<a class="foot-link" href="apply.html">For VAs</a>
+<a class="foot-link" href="dashboard.html">Client Login</a>
+<a class="foot-link" href="privacy.html">Privacy Policy</a>
+<a class="foot-link" href="tos.html">Terms of Service</a>
+</div>
+<div class="foot-copy">© 2026 Elite Remote Agent. All rights reserved.</div>
 </footer>
 </body>
 </html>
