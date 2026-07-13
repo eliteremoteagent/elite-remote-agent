@@ -186,6 +186,14 @@ nav{background:rgba(5,8,16,0.95);border-bottom:1px solid var(--border);padding:1
   .trust-bar{gap:1rem;}
   .success-btns{flex-direction:column;}
 }
+.checkout-footer{padding:2rem 3rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;background:var(--black);}
+.foot-logo{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--gold);letter-spacing:3px;}
+.foot-links{display:flex;gap:1.75rem;flex-wrap:wrap;}
+.foot-link{font-size:0.72rem;color:rgba(255,255,255,0.3);cursor:pointer;transition:color 0.2s;text-decoration:none;}
+.foot-link:hover{color:var(--gold);}
+.foot-copy{font-size:0.68rem;color:rgba(255,255,255,0.18);}
+.secure-note a{color:var(--gold);text-decoration:none;opacity:0.85;}
+.secure-note a:hover{opacity:1;text-decoration:underline;}
 </style>
 </head>
 <body>
@@ -477,7 +485,10 @@ nav{background:rgba(5,8,16,0.95);border-bottom:1px solid var(--border);padding:1
       <button class="btn-submit" id="submitBtn" onclick="processPayment()">
         🔒 Complete Subscription
       </button>
-      <div class="secure-note">🔒 Your payment is encrypted and secured by Stripe. We never store card details.</div>
+      <div class="secure-note">
+🔒 Encrypted by Stripe. We never store card details.<br/>
+By subscribing you agree to our <a href="tos.html" target="_blank">Terms of Service</a> and <a href="privacy.html" target="_blank">Privacy Policy</a>.
+</div>
     </div>
   </div>
 </div>
@@ -693,5 +704,19 @@ function toggleFaq(el) {
   el.classList.toggle('open');
 }
 </script>
+
+<!-- FOOTER -->
+<footer class="checkout-footer">
+<div class="foot-logo">Elite Remote Agent</div>
+<div class="foot-links">
+<a class="foot-link" href="index.html">Home</a>
+<a class="foot-link" href="how-it-works.html">How It Works</a>
+<a class="foot-link" href="apply.html">For VAs</a>
+<a class="foot-link" href="dashboard.html">Client Login</a>
+<a class="foot-link" href="privacy.html">Privacy Policy</a>
+<a class="foot-link" href="tos.html">Terms of Service</a>
+</div>
+<div class="foot-copy">© 2026 Elite Remote Agent. All rights reserved.</div>
+</footer>
 </body>
 </html>
