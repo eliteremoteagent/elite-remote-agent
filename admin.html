@@ -14,7 +14,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: var(--black); color: var(--text); font-family: 'Manrope', sans-serif; min-height: 100vh; }
 
-/* ── PASSWORD GATE ── */
+/* ── AUTH GATE ── */
 #passwordGate {
   position: fixed; inset: 0; background: var(--black);
   display: flex; align-items: center; justify-content: center; z-index: 9999;
@@ -22,10 +22,11 @@ body { background: var(--black); color: var(--text); font-family: 'Manrope', san
 .gate-box { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 2.5rem; width: 360px; text-align: center; }
 .gate-box h1 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--gold); margin-bottom: .25rem; }
 .gate-box p { color: var(--muted); font-size: .85rem; margin-bottom: 1.5rem; }
-.gate-box input { width: 100%; background: #0F0F0F; border: 1px solid var(--border); border-radius: 8px; color: var(--text); padding: .75rem 1rem; font-size: .95rem; outline: none; text-align: center; letter-spacing: 4px; margin-bottom: 1rem; }
+.gate-box input { width: 100%; background: #0F0F0F; border: 1px solid var(--border); border-radius: 8px; color: var(--text); padding: .75rem 1rem; font-size: .95rem; outline: none; margin-bottom: .75rem; }
 .gate-box input:focus { border-color: var(--gold); }
 .gate-btn { width: 100%; background: var(--gold); color: var(--black); border: none; padding: .8rem; border-radius: 8px; font-weight: 800; font-size: 1rem; cursor: pointer; }
 .gate-btn:hover { background: var(--gold-light); }
+.gate-btn:disabled { opacity: .6; cursor: not-allowed; }
 .gate-error { color: var(--error); font-size: .8rem; margin-top: .75rem; }
 
 /* ── LAYOUT ── */
@@ -181,17 +182,17 @@ audio { width: 100%; height: 36px; }
 </head>
 <body>
 
-<!-- PASSWORD GATE -->
+<!-- AUTH GATE -->
 <div id="passwordGate">
   <div class="gate-box">
     <h1>ERA ADMIN</h1>
-    <p>Enter admin password to continue</p>
-    <input type="password" id="pwInput" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkPw()"/>
-    <button class="gate-btn" onclick="checkPw()">Unlock →</button>
-    <p class="gate-error hidden" id="pwError">Incorrect password. Try again.</p>
+    <p>Admin access only. Sign in with your admin email.</p>
+    <input type="email" id="emailInput" placeholder="admin@email.com" autocomplete="email"/>
+    <input type="password" id="pwInput" placeholder="••••••••" autocomplete="current-password"/>
+    <button class="gate-btn" id="loginBtn" onclick="signIn()">Sign In →</button>
+    <p class="gate-error hidden" id="pwError">Invalid credentials or not an admin account.</p>
   </div>
 </div>
-
 <!-- APP SHELL -->
 <div id="appShell">
 
@@ -262,28 +263,52 @@ const SUPABASE_URL = 'https://wcmvtfclkybgdwjybyzb.supabase.co'
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndjbXZ0ZmNsa3liZ2R3anlieXpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMzExOTIsImV4cCI6MjA5NDgwNzE5Mn0.zI0tjF7dN0DT30Mkd1nEDyMdXlYPzTmKH3BxvNea1Fs'
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
-// ── SIMPLE PASSWORD GATE ────────────────────────────────────────────
-// Change this password to whatever you want
-const ADMIN_PASSWORD = 'ERA2025admin'
+// ── SUPABASE AUTH GATE ────────────────────────────────────────────────────
+const ADMIN_EMAILS = ['james@soldbyburbank.com']
 
-window.checkPw = function() {
-  const val = document.getElementById('pwInput').value
-  if (val === ADMIN_PASSWORD) {
+async function initAuth() {
+  const { data: { session } } = await supabase.auth.getSession()
+  if (session && ADMIN_EMAILS.includes(session.user.email)) {
     document.getElementById('passwordGate').style.display = 'none'
     document.getElementById('appShell').style.display = 'block'
     loadAll()
-  } else {
-    document.getElementById('pwError').classList.remove('hidden')
-    document.getElementById('pwInput').value = ''
-    document.getElementById('pwInput').focus()
   }
 }
-window.logout = function() {
+
+window.signIn = async function() {
+  const email = document.getElementById('emailInput').value.trim()
+  const password = document.getElementById('pwInput').value
+  const btn = document.getElementById('loginBtn')
+  if (!email || !password) return
+  btn.textContent = 'Signing in…'
+  btn.disabled = true
+  document.getElementById('pwError').classList.add('hidden')
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password })
+  if (error || !data.user || !ADMIN_EMAILS.includes(data.user.email)) {
+    if (data?.user && !ADMIN_EMAILS.includes(data.user.email)) await supabase.auth.signOut()
+    document.getElementById('pwError').classList.remove('hidden')
+    btn.textContent = 'Sign In →'
+    btn.disabled = false
+    document.getElementById('pwInput').value = ''
+    return
+  }
+  document.getElementById('passwordGate').style.display = 'none'
+  document.getElementById('appShell').style.display = 'block'
+  loadAll()
+}
+
+window.logout = async function() {
+  await supabase.auth.signOut()
   document.getElementById('appShell').style.display = 'none'
   document.getElementById('passwordGate').style.display = 'flex'
+  document.getElementById('emailInput').value = ''
   document.getElementById('pwInput').value = ''
+  document.getElementById('pwError').classList.add('hidden')
 }
-document.getElementById('pwInput').addEventListener('keydown', e => { if (e.key === 'Enter') window.checkPw() })
+
+document.getElementById('emailInput').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('pwInput').focus() })
+document.getElementById('pwInput').addEventListener('keydown', e => { if (e.key === 'Enter') window.signIn() })
+initAuth()
 
 // ── STATE ────────────────────────────────────────────────────────────
 let allVAs = []
