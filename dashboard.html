@@ -539,6 +539,22 @@ body{font-family:'Manrope',sans-serif;background:var(--dark);color:var(--white);
   </div>
 </div>
 
+<!-- PLACEMENT -->
+<div class="page" id="page-placement">
+<div class="sec-head"><div class="sec-title">Done-For-You VA Placement</div></div>
+<div class="billing-card" style="margin-bottom:1.5rem;">
+<div style="font-size:0.82rem;color:rgba(255,255,255,0.55);line-height:1.7;margin-bottom:1rem;">Tell us exactly what you need and we'll hand-pick the perfect VA for your business. Our team reviews your requirements and matches you with a pre-screened, interview-ready candidate — typically within 48 hours.</div>
+<div style="display:flex;gap:0.6rem;flex-wrap:wrap;">
+<div style="background:var(--gold-dim);border:1px solid rgba(212,168,67,0.15);border-radius:8px;padding:0.45rem 0.875rem;font-size:0.72rem;font-weight:700;color:var(--gold);">✓ Pre-screened candidates</div>
+<div style="background:var(--green-dim);border:1px solid rgba(46,204,113,0.15);border-radius:8px;padding:0.45rem 0.875rem;font-size:0.72rem;font-weight:700;color:var(--green);">✓ 48-hr match guarantee</div>
+<div style="background:var(--blue-dim);border:1px solid rgba(52,152,219,0.15);border-radius:8px;padding:0.45rem 0.875rem;font-size:0.72rem;font-weight:700;color:var(--blue);">✓ Free replacement if not a fit</div>
+</div>
+</div>
+<div class="billing-card" style="padding:0;overflow:hidden;border-radius:14px;">
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe7nl_a1Oiiv_BOFbU8Z8Y5_TqmYlicEnxCZ8nELH7ZxwsLMw/viewform?embedded=true" width="100%" height="920" frameborder="0" marginheight="0" marginwidth="0" style="display:block;border:none;background:white;">Loading form…</iframe>
+</div>
+</div>
+
 <!-- VA DETAIL MODAL -->
 <div class="modal-overlay" id="vaModal">
   <div class="modal">
@@ -607,9 +623,9 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 // ── DATA ──
 const PLANS = {
-  starter:{ name:'Starter', price:'$49/mo', color:'starter', nav:['dashboard','browse','my-vas','billing','settings'], locked:['training','kpis','sops'] },
+  starter:{ name:'Starter', price:'$49/mo', color:'starter', nav:['dashboard','browse','my-vas','placement','billing','settings'], locked:['training','kpis','sops'] },
   growth:{ name:'Growth', price:'$247/mo', color:'growth', nav:['dashboard','browse','my-vas','training','kpis','sops','billing','settings'], locked:[] },
-  elite:{ name:'Elite Team', price:'$597/mo', color:'elite', nav:['dashboard','browse','my-vas','training','kpis','sops','billing','settings'], locked:[] }
+  elite:{ name:'Elite Team', price:'$597/mo', color:'elite', nav:['dashboard','browse','my-vas','training','kpis','sops','placement','billing','settings'], locked:[] }
 };
 const NAV_ITEMS = [
   {id:'dashboard',icon:'📊',label:'Dashboard',section:'Main'},
@@ -618,7 +634,8 @@ const NAV_ITEMS = [
   {id:'training',icon:'📚',label:'Training Library',section:'Tools'},
   {id:'kpis',icon:'📈',label:'KPI Dashboard',section:null},
   {id:'sops',icon:'📋',label:'SOPs & Templates',section:null},
-  {id:'billing',icon:'💳',label:'Billing',section:'Account'},
+  {id:'placement',icon:'🎯',label:'Done-For-You',section:null},
+{id:'billing',icon:'💳',label:'Billing',section:'Account'},
   {id:'settings',icon:'⚙️',label:'Settings',section:null},
 ];
 const DEMO_USERS = {
