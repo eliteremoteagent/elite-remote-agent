@@ -405,6 +405,7 @@ window.selectVA = async function(id) {
   ])
 
   renderDetail(va, skills.data || [], tools.data || [], work.data || [], edu.data || [], voice.data || [])
+  loadClientsIntoDropdown(va.id)
 }
 
 function renderDetail(va, skills, tools, work, edu, voice) {
@@ -568,6 +569,21 @@ function renderDetail(va, skills, tools, work, edu, voice) {
               style="background:${va.badge === b ? 'var(--gold)' : '#0F0F0F'};color:${va.badge === b ? 'var(--black)' : 'var(--muted)'};border:1px solid ${va.badge === b ? 'var(--gold)' : 'var(--border)'};padding:.45rem .9rem;border-radius:7px;cursor:pointer;font-size:.8rem;font-weight:700;transition:all .2s"
               id="badge_${va.id}_${b.replace(' ','_')}">${b}</button>`).join('')}
         </div>
+      </div>
+
+
+      <!-- ASSIGN TO CLIENT -->
+      <div class="section-card">
+        <div class="section-title">🔗 Assign to Client</div>
+        <div style="font-size:.82rem;color:var(--muted);margin-bottom:.75rem">Assign this VA to a client. Their dashboard updates and they get a notification email.</div>
+        <select id="clientSelect_${va.id}" style="width:100%;background:#0F0F0F;border:1px solid var(--border);border-radius:8px;color:var(--text);padding:.6rem .9rem;font-size:.85rem;margin-bottom:.75rem;outline:none;cursor:pointer">
+          <option value="">Loading clients…</option>
+        </select>
+        <button onclick="assignVAToClient('${va.id}','${va.first_name} ${va.last_name}','${(va.role||'').replace(/'/g,\"\\'\")}',event)"
+          style="background:var(--info);color:#fff;border:none;padding:.55rem 1.1rem;border-radius:7px;font-weight:700;font-size:.82rem;cursor:pointer;transition:opacity .2s">
+          🔗 Assign & Send Email
+        </button>
+        <span id="assignStatus_${va.id}" style="font-size:.78rem;margin-left:.75rem;color:var(--success);opacity:0;transition:opacity .3s"></span>
       </div>
 
     </div><!-- /detail-body -->
