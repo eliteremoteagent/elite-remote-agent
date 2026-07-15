@@ -294,6 +294,29 @@
         <textarea id="bio" rows="4" placeholder="Tell clients about your experience, specialties, and what makes you a great hire. Be specific about your real estate or business background..."></textarea>
       </div>
 
+      <div style="margin-top:1.75rem;padding:1.5rem;background:#0F0F0F;border:1px solid var(--border);border-radius:10px">
+        <div style="font-size:.75rem;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:2px;margin-bottom:.25rem">✦ Your 3 Client Highlights</div>
+        <p style="font-size:.8rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.55">These appear at the very top of your profile — the first thing every client reads. Be specific. Specific beats impressive every time.</p>
+
+        <div class="field-group">
+          <label>What are you best at? <span class="req">*</span></label>
+          <p style="font-size:.75rem;color:var(--muted);margin-bottom:.5rem">Be specific — not just "admin work." Name the exact role, tools, and what you actually do day-to-day.</p>
+          <textarea id="highlightBestAt" rows="3" placeholder="e.g. I specialize in transaction coordination. I've processed 200+ real estate closings using Dotloop and Skyslope, managing everything from contract to close — without the agent having to chase a single document."></textarea>
+        </div>
+
+        <div class="field-group">
+          <label>Describe one real result you got for a client <span class="req">*</span></label>
+          <p style="font-size:.75rem;color:var(--muted);margin-bottom:.5rem">A specific outcome with a number if possible. What actually changed because of your work?</p>
+          <textarea id="highlightResult" rows="3" placeholder="e.g. I took over follow-up for a Phoenix team doing 8 deals/month. Within 60 days their lead response time dropped from 4 hours to 12 minutes — and they closed 3 deals from leads that had previously gone cold."></textarea>
+        </div>
+
+        <div class="field-group" style="margin-bottom:0">
+          <label>What makes you different from other VAs? <span class="req">*</span></label>
+          <p style="font-size:.75rem;color:var(--muted);margin-bottom:.5rem">Your honest differentiator — bilingual, agent background, niche specialization, US client experience, etc.</p>
+          <textarea id="highlightDifferentiator" rows="3" placeholder="e.g. I'm a licensed real estate agent in the Philippines with a US real estate certificate. I understand the full transaction from both sides — I don't just follow checklists, I anticipate problems before they happen."></textarea>
+        </div>
+      </div>
+
       <div class="form-nav">
         <span class="step-counter">Step <strong>1</strong> of 5</span>
         <button class="btn-next" onclick="goToStep(2)">Next: Skills & Tools →</button>
@@ -520,7 +543,7 @@ function updateProgressBar(active) {
 // ── VALIDATION ────────────────────────────────────────────────────
 function validateStep(n) {
   if (n === 1) {
-    const required = ['firstName','lastName','email','phone','category','role','yearsExp','hourlyRate','englishLevel','bio']
+    const required = ['firstName','lastName','email','phone','category','role','yearsExp','hourlyRate','englishLevel','bio','highlightBestAt','highlightResult','highlightDifferentiator']
     for (const id of required) {
       const el = document.getElementById(id)
       if (!el.value.trim()) {
@@ -788,7 +811,10 @@ window.submitApplication = async function() {
         profile_color: profileColor,
         photo_url: photoUrl,
         resume_url: resumeUrl,
-        badge: 'New'
+        badge: 'New',
+        highlight_best_at: document.getElementById('highlightBestAt').value.trim(),
+        highlight_result: document.getElementById('highlightResult').value.trim(),
+        highlight_differentiator: document.getElementById('highlightDifferentiator').value.trim()
       })
       .select('id')
       .single()
