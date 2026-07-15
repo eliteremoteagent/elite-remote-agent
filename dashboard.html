@@ -326,6 +326,7 @@ body{font-family:'Manrope',sans-serif;background:var(--dark);color:var(--white);
   .info-grid-3{grid-template-columns:1fr 1fr;}
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 </head>
 <body>
 
@@ -643,6 +644,45 @@ const HIRED_VAs = [
 let currentUser = null;
 let currentPlan = 'growth';
 let currentPage = 'dashboard';
+
+// ── SUPABASE ──
+const _sb = window.supabase.createClient(
+  'https://wcmvtfclkybgdwjybyzb.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndjbXZ0ZmNsa3liZ2R3anlieXpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMzExOTIsImV4cCI6MjA5NDgwNzE5Mn0.zI0tjF7dN0DT30Mkd1nEDyMdXlYPzTmKH3BxvNea1Fs'
+)
+
+async function initDashboard(){
+  const{data:{session}}=await _sb.auth.getSession();
+  if(session) await loadRealUser(session.user);
+}
+
+async function loadRealUser(user){
+  const email=user.email;
+  const namePart=email.split('@')[0].replace(/[._-]/g,' ');
+  const name=namePart.split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
+  const initials=name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2)||'CL';
+  const{data:client}=await _sb.from('clients').select('*').eq('user_id',user.id).single();
+  let rawPlan=client?.plan||'starter';
+  let plan='starter';
+  if(rawPlan.includes('growth'))plan='growth';
+  else if(rawPlan.includes('elite'))plan='elite';
+  currentUser={name,initials,plan,email,client};
+  currentPlan=plan;
+  let assignedVA=null;
+  if(client?.va_id){
+    const{data:va}=await _sb.from('vas').select('*').eq('id',client.va_id).single();
+    assignedVA=va;
+  }
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('appScreen').classList.add('show');
+  buildSidebar(plan);
+  buildDashboard(plan,client,assignedVA);
+  setUserInfo({name,initials,plan,email,client});
+  const hour=new Date().getHours();
+  const greet=hour<12?'Good morning':hour<17?'Good afternoon':'Good evening';
+  document.getElementById('wb-greeting').textContent=greet+', '+name.split(' ')[0]+'!';
+  fire('👋 Welcome back, '+name.split(' ')[0]+'!');
+}
 
 // ── TOAST ──
 function fire(msg){
@@ -1050,6 +1090,9 @@ document.querySelectorAll('.modal-overlay').forEach(m=>{
 document.querySelectorAll('.toggle').forEach(t=>{
   t.addEventListener('click',function(){this.classList.toggle('on');});
 });
+
+// ── INIT ──
+initDashboard();
 </script>
 </body>
 </html>
