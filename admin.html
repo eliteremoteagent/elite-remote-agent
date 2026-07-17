@@ -13,12 +13,7 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: var(--black); color: var(--text); font-family: 'Manrope', sans-serif; min-height: 100vh; }
-
-/* ── PASSWORD GATE ── */
-#passwordGate {
-  position: fixed; inset: 0; background: var(--black);
-  display: flex; align-items: center; justify-content: center; z-index: 9999;
-}
+#passwordGate { position: fixed; inset: 0; background: var(--black); display: flex; align-items: center; justify-content: center; z-index: 9999; }
 .gate-box { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 2.5rem; width: 360px; text-align: center; }
 .gate-box h1 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--gold); margin-bottom: .25rem; }
 .gate-box p { color: var(--muted); font-size: .85rem; margin-bottom: 1.5rem; }
@@ -27,19 +22,13 @@ body { background: var(--black); color: var(--text); font-family: 'Manrope', san
 .gate-btn { width: 100%; background: var(--gold); color: var(--black); border: none; padding: .8rem; border-radius: 8px; font-weight: 800; font-size: 1rem; cursor: pointer; }
 .gate-btn:hover { background: var(--gold-light); }
 .gate-error { color: var(--error); font-size: .8rem; margin-top: .75rem; }
-
-/* ── LAYOUT ── */
 #appShell { display: none; min-height: 100vh; }
-
-/* TOP NAV */
 .topnav { background: var(--dark); border-bottom: 1px solid var(--border); padding: 0 1.5rem; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
 .topnav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--gold); letter-spacing: 2px; }
 .topnav-logo span { color: var(--muted); font-size: .75rem; font-family: 'Manrope', sans-serif; font-weight: 400; letter-spacing: 0; margin-left: .5rem; }
 .topnav-actions { display: flex; gap: .75rem; align-items: center; }
 .topnav-actions a { color: var(--muted); font-size: .8rem; text-decoration: none; padding: .4rem .8rem; border: 1px solid var(--border); border-radius: 6px; transition: all .2s; }
 .topnav-actions a:hover { color: var(--gold); border-color: var(--gold); }
-
-/* STATS BAR */
 .stats-bar { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); border-bottom: 1px solid var(--border); }
 .stat-cell { background: var(--dark); padding: .9rem 1.25rem; text-align: center; cursor: pointer; transition: background .2s; }
 .stat-cell:hover { background: #1a1a1a; }
@@ -51,22 +40,16 @@ body { background: var(--black); color: var(--text); font-family: 'Manrope', san
 .stat-num.inactive { color: var(--muted); }
 .stat-num.all { color: var(--gold); }
 .stat-label { font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
-
-/* MAIN SPLIT */
 .split { display: grid; grid-template-columns: 340px 1fr; min-height: calc(100vh - 112px); }
-
-/* LEFT: LIST PANEL */
 .list-panel { border-right: 1px solid var(--border); overflow-y: auto; }
 .list-search { padding: .75rem 1rem; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--dark); z-index: 10; }
 .list-search input { width: 100%; background: #0F0F0F; border: 1px solid var(--border); border-radius: 8px; color: var(--text); padding: .55rem .9rem; font-size: .85rem; outline: none; }
 .list-search input:focus { border-color: var(--gold); }
 .list-count { padding: .5rem 1rem; font-size: .75rem; color: var(--muted); border-bottom: 1px solid var(--border); background: var(--dark); }
-
 .va-row { padding: .9rem 1rem; border-bottom: 1px solid var(--border); cursor: pointer; transition: background .15s; display: flex; gap: .75rem; align-items: flex-start; }
 .va-row:hover { background: #1a1a1a; }
 .va-row.selected { background: rgba(212,175,55,.07); border-left: 3px solid var(--gold); }
-.va-avatar { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: .85rem; flex-shrink: 0; color: #fff; overflow: hidden; }
-.va-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.va-avatar { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: .85rem; flex-shrink: 0; color: #fff; }
 .va-row-info { flex: 1; min-width: 0; }
 .va-row-name { font-weight: 700; font-size: .9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .va-row-role { font-size: .75rem; color: var(--muted); margin-top: 1px; }
@@ -78,14 +61,10 @@ body { background: var(--black); color: var(--text); font-family: 'Manrope', san
 .status-badge.inactive { background: rgba(136,136,136,.15); color: var(--muted); }
 .status-badge.archived { background: rgba(255,68,68,.1); color: var(--error); }
 .va-row-date { font-size: .7rem; color: var(--muted); }
-
-/* RIGHT: DETAIL PANEL */
 .detail-panel { overflow-y: auto; padding: 0; }
 .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--muted); text-align: center; padding: 3rem; }
 .empty-state .icon { font-size: 3rem; margin-bottom: 1rem; opacity: .4; }
 .empty-state p { font-size: .9rem; }
-
-/* DETAIL HEADER */
 .detail-header { padding: 1.5rem; border-bottom: 1px solid var(--border); display: flex; gap: 1.25rem; align-items: flex-start; background: var(--dark); position: sticky; top: 0; z-index: 10; }
 .detail-avatar { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 800; color: #fff; flex-shrink: 0; overflow: hidden; }
 .detail-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
@@ -97,15 +76,13 @@ body { background: var(--black); color: var(--text); font-family: 'Manrope', san
 .action-btns { display: flex; gap: .5rem; flex-wrap: wrap; }
 .btn-approve { background: var(--success); color: #fff; border: none; padding: .55rem 1.1rem; border-radius: 7px; font-weight: 700; font-size: .82rem; cursor: pointer; transition: opacity .2s; }
 .btn-approve:hover { opacity: .85; }
-.btn-archive { background: none; border: 1px solid var(--error); color: var(--error); padding: .55rem 1rem; border-radius: 7px; font-weight: 700; font-size: .82rem; cursor: pointer; transition: all .2s; }
+.btn-archive { background: none; border: 1px solid var(--error); color: var(--error); padding: .55rem 1rem; border-radius: 7px; font-weight: 700; font-size: .82rem; cursor: pointer; }
 .btn-archive:hover { background: rgba(255,68,68,.1); }
-.btn-hired { background: var(--info); color: #fff; border: none; padding: .55rem 1rem; border-radius: 7px; font-weight: 700; font-size: .82rem; cursor: pointer; transition: opacity .2s; }
+.btn-hired { background: var(--info); color: #fff; border: none; padding: .55rem 1rem; border-radius: 7px; font-weight: 700; font-size: .82rem; cursor: pointer; }
 .btn-hired:hover { opacity: .85; }
-.btn-inactive { background: none; border: 1px solid var(--border); color: var(--muted); padding: .55rem 1rem; border-radius: 7px; font-weight: 700; font-size: .82rem; cursor: pointer; transition: all .2s; }
+.btn-inactive { background: none; border: 1px solid var(--border); color: var(--muted); padding: .55rem 1rem; border-radius: 7px; font-weight: 700; font-size: .82rem; cursor: pointer; }
 .btn-inactive:hover { border-color: var(--muted); color: var(--text); }
 .btn-pending { background: none; border: 1px solid var(--warn); color: var(--warn); padding: .55rem 1rem; border-radius: 7px; font-weight: 700; font-size: .82rem; cursor: pointer; }
-
-/* DETAIL BODY */
 .detail-body { padding: 1.5rem; display: grid; gap: 1.25rem; }
 .section-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; }
 .section-title { font-size: .7rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 1rem; display: flex; align-items: center; gap: .5rem; }
@@ -161,21 +138,17 @@ audio { width: 100%; height: 36px; }
 </head>
 <body>
 
-<!-- PASSWORD GATE -->
 <div id="passwordGate">
   <div class="gate-box">
     <h1>ERA ADMIN</h1>
     <p>Enter admin password to continue</p>
-    <input type="password" id="pwInput" placeholder="••••••••"/>
+    <input type="password" id="pwInput" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkPw()"/>
     <button class="gate-btn" onclick="checkPw()">Unlock →</button>
     <p class="gate-error hidden" id="pwError">Incorrect password. Try again.</p>
   </div>
 </div>
 
-<!-- APP SHELL -->
 <div id="appShell">
-
-  <!-- TOP NAV -->
   <div class="topnav">
     <div class="topnav-logo">ERA ADMIN <span>· VA Management</span></div>
     <div class="topnav-actions">
@@ -185,7 +158,6 @@ audio { width: 100%; height: 36px; }
     </div>
   </div>
 
-  <!-- STATS BAR -->
   <div class="stats-bar">
     <div class="stat-cell active" id="tab_all" onclick="filterByStatus('all')">
       <span class="stat-num all" id="count_all">–</span>
@@ -209,7 +181,6 @@ audio { width: 100%; height: 36px; }
     </div>
   </div>
 
-  <!-- SPLIT LAYOUT -->
   <div class="split">
     <div class="list-panel">
       <div class="list-search">
@@ -236,11 +207,11 @@ const SUPABASE_URL = 'https://wcmvtfclkybgdwjybyzb.supabase.co'
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndjbXZ0ZmNsa3liZ2R3anlieXpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMzExOTIsImV4cCI6MjA5NDgwNzE5Mn0.zI0tjF7dN0DT30Mkd1nEDyMdXlYPzTmKH3BxvNea1Fs'
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
-// ── SIMPLE PASSWORD GATE ──────────────────────────────────────────
 const ADMIN_PASSWORD = 'ERA2025admin'
 
 window.checkPw = function() {
-  if (document.getElementById('pwInput').value === ADMIN_PASSWORD) {
+  const val = document.getElementById('pwInput').value
+  if (val === ADMIN_PASSWORD) {
     document.getElementById('passwordGate').style.display = 'none'
     document.getElementById('appShell').style.display = 'block'
     loadAll()
@@ -250,30 +221,17 @@ window.checkPw = function() {
     document.getElementById('pwInput').focus()
   }
 }
-
 window.logout = function() {
   document.getElementById('appShell').style.display = 'none'
   document.getElementById('passwordGate').style.display = 'flex'
   document.getElementById('pwInput').value = ''
-  document.getElementById('pwError').classList.add('hidden')
 }
+document.getElementById('pwInput').addEventListener('keydown', e => { if (e.key === 'Enter') window.checkPw() })
 
-document.getElementById('pwInput').addEventListener('keydown', e => {
-  if (e.key === 'Enter') window.checkPw()
-})
+let allVAs = [], filteredVAs = [], currentFilter = 'all', selectedVAId = null
 
-// ── STATE ─────────────────────────────────────────────────────────
-let allVAs = []
-let filteredVAs = []
-let currentFilter = 'all'
-let selectedVAId = null
-
-// ── LOAD DATA ─────────────────────────────────────────────────────
 async function loadAll() {
-  const { data, error } = await supabase
-    .from('vas')
-    .select('*')
-    .order('created_at', { ascending: false })
+  const { data, error } = await supabase.from('vas').select('*').order('created_at', { ascending: false })
   if (error) { showToast('Failed to load VAs: ' + error.message, 'error'); return }
   allVAs = data || []
   updateCounts()
@@ -297,28 +255,23 @@ window.filterByStatus = function(status) {
 
 window.filterList = function() {
   const q = document.getElementById('searchInput').value.toLowerCase()
-  const shown = q
-    ? filteredVAs.filter(v =>
-        (v.first_name + ' ' + v.last_name).toLowerCase().includes(q) ||
-        (v.role || '').toLowerCase().includes(q) ||
-        (v.email || '').toLowerCase().includes(q) ||
-        (v.category || '').toLowerCase().includes(q))
-    : filteredVAs
+  const shown = q ? filteredVAs.filter(v =>
+    (v.first_name + ' ' + v.last_name).toLowerCase().includes(q) ||
+    (v.role || '').toLowerCase().includes(q) ||
+    (v.email || '').toLowerCase().includes(q) ||
+    (v.category || '').toLowerCase().includes(q)) : filteredVAs
   renderList(shown)
 }
 
 function renderList(vas) {
   const container = document.getElementById('vaList')
   document.getElementById('listCount').textContent = vas.length + ' VA' + (vas.length !== 1 ? 's' : '')
-  if (!vas.length) {
-    container.innerHTML = '<div class="loading-row" style="color:var(--muted)">No VAs found</div>'
-    return
-  }
-  container.innerHTML = vas.map(v => {
-    const initials = (v.initials || '?').replace(/'/g, '&#39;')
-    return `<div class="va-row ${selectedVAId === v.id ? 'selected' : ''}" id="row_${v.id}" onclick="selectVA('${v.id}')">
+  if (!vas.length) { container.innerHTML = '<div class="loading-row" style="color:var(--muted)">No VAs found</div>'; return }
+  container.innerHTML = vas.map(v => `
+    <div class="va-row ${selectedVAId === v.id ? 'selected' : ''}" id="row_${v.id}" onclick="selectVA('${v.id}')">
       <div class="va-avatar" style="background:${v.profile_color || '#1B4F8A'}">
-        ${v.photo_url ? `<img src="${v.photo_url}" alt="" onerror="this.parentElement.textContent='${initials}'">` : initials}
+        ${v.photo_url ? `<img src="${v.photo_url}" alt="${v.first_name}" style="width:40px;height:40px;border-radius:50%;object-fit:cover" onerror="this.parentElement.textContent='${(v.initials||'?').replace(/'/g,"\\'")}'">`
+          : (v.initials || '?')}
       </div>
       <div class="va-row-info">
         <div class="va-row-name">${v.first_name} ${v.last_name}</div>
@@ -328,23 +281,18 @@ function renderList(vas) {
           <span class="va-row-date">${formatDate(v.created_at)}</span>
         </div>
       </div>
-    </div>`
-  }).join('')
+    </div>`).join('')
 }
 
-// ── SELECT VA ─────────────────────────────────────────────────────
 window.selectVA = async function(id) {
   selectedVAId = id
   document.querySelectorAll('.va-row').forEach(r => r.classList.remove('selected'))
   const row = document.getElementById('row_' + id)
   if (row) row.classList.add('selected')
-
   const panel = document.getElementById('detailPanel')
   panel.innerHTML = '<div class="loading-row"><span class="spinner-sm"></span>Loading profile...</div>'
-
   const va = allVAs.find(v => v.id === id)
   if (!va) return
-
   const [skills, tools, work, edu, voice] = await Promise.all([
     supabase.from('va_skills').select('*').eq('va_id', id).order('level_pct', { ascending: false }),
     supabase.from('va_tools').select('*').eq('va_id', id),
@@ -352,54 +300,20 @@ window.selectVA = async function(id) {
     supabase.from('va_education').select('*').eq('va_id', id).order('display_order'),
     supabase.from('va_voice_recordings').select('*').eq('va_id', id).order('display_order')
   ])
-
   renderDetail(va, skills.data || [], tools.data || [], work.data || [], edu.data || [], voice.data || [])
-  loadClientsIntoDropdown(id)
 }
 
-// ── ASSIGN TO CLIENT ──────────────────────────────────────────────
-async function loadClientsIntoDropdown(vaId) {
-  const select = document.getElementById('clientSelect_' + vaId)
-  if (!select) return
-  const { data, error } = await supabase
-    .from('clients')
-    .select('id, email, full_name, plan')
-    .order('created_at', { ascending: false })
-  if (error || !data || !data.length) {
-    select.innerHTML = '<option value="">No clients yet</option>'
-    return
-  }
-  select.innerHTML = '<option value="">— Select a client —</option>' +
-    data.map(c => `<option value="${c.id}">${c.full_name || c.email} (${c.plan || 'plan'})</option>`).join('')
-}
-
-window.assignVAToClient = async function(btn) {
-  const vaId = btn.dataset.vaId
-  const select = document.getElementById('clientSelect_' + vaId)
-  const clientId = select ? select.value : ''
-  if (!clientId) { showToast('Please select a client first', 'error'); return }
-  const statusEl = document.getElementById('assignStatus_' + vaId)
-  btn.disabled = true
-  btn.textContent = 'Assigning…'
-  const { error } = await supabase.from('clients').update({ va_id: vaId }).eq('id', clientId)
-  btn.disabled = false
-  btn.textContent = '🔗 Assign VA'
-  if (error) { showToast('Assignment failed: ' + error.message, 'error'); return }
-  if (statusEl) { statusEl.style.opacity = 1; statusEl.textContent = '✅ Assigned!'; setTimeout(() => { statusEl.style.opacity = 0 }, 3000) }
-  showToast('VA assigned to client!', 'success')
-}
-
-// ── RENDER DETAIL ─────────────────────────────────────────────────
 function renderDetail(va, skills, tools, work, edu, voice) {
   const panel = document.getElementById('detailPanel')
   const primaryTools = tools.filter(t => t.tool_type === 'primary')
   const secondaryTools = tools.filter(t => t.tool_type === 'secondary')
-  const initials = va.initials || '?'
 
   panel.innerHTML = `
     <div class="detail-header">
       <div class="detail-avatar" style="background:${va.profile_color || '#1B4F8A'}">
-        ${va.photo_url ? `<img src="${va.photo_url}" alt="" onerror="this.style.display='none'">` : initials}
+        ${va.photo_url
+          ? `<img src="${va.photo_url}" alt="${va.first_name}" onerror="this.outerHTML='<div style=width:64px;height:64px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:800>${va.initials||'?'}</div>'">`
+          : (va.initials || '?')}
       </div>
       <div class="detail-header-info">
         <h2>${va.first_name} ${va.last_name}
@@ -451,34 +365,67 @@ function renderDetail(va, skills, tools, work, edu, voice) {
         <p class="bio-text">${va.bio || '<em style="color:var(--muted)">No bio provided</em>'}</p>
       </div>
 
-      ${va.highlight_best_at || va.highlight_result || va.highlight_differentiator ? `
+      <!-- VOICE RECORDINGS — always visible, admin can add/delete -->
       <div class="section-card">
-        <div class="section-title">🌟 Client Highlights</div>
-        ${va.highlight_best_at ? `<div style="margin-bottom:.75rem"><div style="font-size:.7rem;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.3rem">Best At</div><p style="font-size:.85rem;line-height:1.6">${va.highlight_best_at}</p></div>` : ''}
-        ${va.highlight_result ? `<div style="margin-bottom:.75rem"><div style="font-size:.7rem;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.3rem">A Real Result</div><p style="font-size:.85rem;line-height:1.6">${va.highlight_result}</p></div>` : ''}
-        ${va.highlight_differentiator ? `<div><div style="font-size:.7rem;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.3rem">What Makes Me Different</div><p style="font-size:.85rem;line-height:1.6">${va.highlight_differentiator}</p></div>` : ''}
-      </div>` : ''}
-
-      ${voice.length ? `
-      <div class="section-card">
-        <div class="section-title">🎙️ Voice Recordings</div>
-        <div class="audio-wrap">
-          ${voice.map(v => `<div class="audio-item"><div class="audio-label">${v.label}${v.duration ? ' · ' + v.duration : ''}</div><audio controls src="${v.audio_url}"></audio></div>`).join('')}
+        <div class="section-title" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem">
+          <span>🎙️ Voice Recordings</span>
+          <button onclick="showAddRecording('${va.id}')"
+            style="background:var(--gold);color:var(--black);border:none;padding:.25rem .75rem;border-radius:6px;font-size:.68rem;font-weight:700;cursor:pointer;text-transform:none;letter-spacing:0">
+            + Add Recording
+          </button>
         </div>
-      </div>` : ''}
+        <div id="voiceList_${va.id}">
+          ${voice.length ? `<div class="audio-wrap">
+            ${voice.map(v => `
+              <div class="audio-item" id="recording_${v.id}">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.35rem">
+                  <div class="audio-label" style="margin:0">${v.label}${v.duration ? ' · ' + v.duration : ''}</div>
+                  <button onclick="deleteRecording('${v.id}','${va.id}')"
+                    style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:.85rem;padding:.1rem .4rem;border-radius:4px"
+                    title="Delete">✕</button>
+                </div>
+                <audio controls src="${v.audio_url}" style="width:100%;height:36px"></audio>
+              </div>`).join('')}
+          </div>` : '<p style="color:var(--muted);font-size:.82rem;padding:.1rem 0">No recordings yet — click <strong style="color:var(--gold)">+ Add Recording</strong> above.</p>'}
+        </div>
+        <div id="addRecordingForm_${va.id}" style="display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)">
+          <div style="margin-bottom:.6rem">
+            <label style="display:block;font-size:.7rem;color:var(--muted);margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.5px">Label</label>
+            <input type="text" id="recLabel_${va.id}" placeholder="e.g. Introduction, Sample Call"
+              style="width:100%;background:#0F0F0F;border:1px solid var(--border);border-radius:7px;color:var(--text);padding:.55rem .8rem;font-size:.82rem;outline:none;font-family:inherit"
+              onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'"/>
+          </div>
+          <div style="margin-bottom:.75rem">
+            <label style="display:block;font-size:.7rem;color:var(--muted);margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.5px">Audio File (MP3 / WAV / M4A)</label>
+            <label style="cursor:pointer;display:inline-block">
+              <input type="file" accept="audio/*" id="recFile_${va.id}" style="display:none" onchange="previewRecordingFile('${va.id}')"/>
+              <span id="recFileLabel_${va.id}" class="file-link" style="cursor:pointer;font-size:.78rem">📁 Choose file</span>
+            </label>
+          </div>
+          <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">
+            <button onclick="uploadRecording('${va.id}')"
+              style="background:var(--gold);color:var(--black);border:none;padding:.5rem 1.1rem;border-radius:7px;font-weight:700;font-size:.8rem;cursor:pointer">Upload</button>
+            <button onclick="cancelAddRecording('${va.id}')"
+              style="background:none;border:1px solid var(--border);color:var(--muted);padding:.5rem 1rem;border-radius:7px;font-size:.8rem;cursor:pointer">Cancel</button>
+            <span id="recUploadStatus_${va.id}" style="font-size:.78rem;color:var(--muted)"></span>
+          </div>
+        </div>
+      </div>
 
       ${skills.length ? `
       <div class="section-card">
-        <div class="section-title">⚡ Skills <span style="color:var(--muted);font-weight:400;font-size:.7rem;text-transform:none;letter-spacing:0">(edit to override self-assessment)</span></div>
+        <div class="section-title">⚡ Skills
+          <span style="color:var(--muted);font-weight:400;font-size:.7rem;text-transform:none;letter-spacing:0">(edit rating to override self-assessment)</span>
+        </div>
         ${skills.map(s => `
           <div class="skill-item">
             <div class="skill-name">${s.skill_name}</div>
             <div class="skill-bar-wrap"><div class="skill-bar" style="width:${s.level_pct || 50}%"></div></div>
-            <select class="skill-rating-edit" data-skill-id="${s.id}" onchange="updateSkillRating(this)">
-              <option value="Expert" ${(s.final_rating||s.va_self_rating)==='Expert'?'selected':''}>Expert</option>
-              <option value="Advanced" ${(s.final_rating||s.va_self_rating)==='Advanced'?'selected':''}>Advanced</option>
-              <option value="Intermediate" ${(s.final_rating||s.va_self_rating)==='Intermediate'?'selected':''}>Intermediate</option>
-              <option value="Beginner" ${(s.final_rating||s.va_self_rating)==='Beginner'?'selected':''}>Beginner</option>
+            <select class="skill-rating-edit" data-skill-id="${s.id}" data-va-id="${va.id}" onchange="updateSkillRating(this)">
+              <option value="Expert" ${(s.final_rating||s.va_self_rating) === 'Expert' ? 'selected' : ''}>Expert</option>
+              <option value="Advanced" ${(s.final_rating||s.va_self_rating) === 'Advanced' ? 'selected' : ''}>Advanced</option>
+              <option value="Intermediate" ${(s.final_rating||s.va_self_rating) === 'Intermediate' ? 'selected' : ''}>Intermediate</option>
+              <option value="Beginner" ${(s.final_rating||s.va_self_rating) === 'Beginner' ? 'selected' : ''}>Beginner</option>
             </select>
           </div>`).join('')}
       </div>` : ''}
@@ -486,25 +433,40 @@ function renderDetail(va, skills, tools, work, edu, voice) {
       ${tools.length ? `
       <div class="section-card">
         <div class="section-title">🔧 Tools & CRMs</div>
-        ${primaryTools.length ? `<div style="margin-bottom:.5rem;font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Primary</div><div class="tools-wrap" style="margin-bottom:.75rem">${primaryTools.map(t => `<span class="tool-tag primary">${t.tool_name}</span>`).join('')}</div>` : ''}
-        ${secondaryTools.length ? `<div style="margin-bottom:.5rem;font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Secondary</div><div class="tools-wrap">${secondaryTools.map(t => `<span class="tool-tag">${t.tool_name}</span>`).join('')}</div>` : ''}
+        ${primaryTools.length ? `<div style="margin-bottom:.5rem"><span style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Primary</span></div>
+        <div class="tools-wrap" style="margin-bottom:.75rem">${primaryTools.map(t => `<span class="tool-tag primary">${t.tool_name}</span>`).join('')}</div>` : ''}
+        ${secondaryTools.length ? `<div style="margin-bottom:.5rem"><span style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Secondary</span></div>
+        <div class="tools-wrap">${secondaryTools.map(t => `<span class="tool-tag">${t.tool_name}</span>`).join('')}</div>` : ''}
       </div>` : ''}
 
       ${work.length ? `
       <div class="section-card">
         <div class="section-title">💼 Work History</div>
-        ${work.map(w => `<div class="work-item"><div class="work-role">${w.role}</div><div class="work-company">${w.company||''}</div><div class="work-period">${w.period||''}</div>${w.description?`<div class="work-desc">${w.description}</div>`:''}</div>`).join('')}
+        ${work.map(w => `
+          <div class="work-item">
+            <div class="work-role">${w.role}</div>
+            <div class="work-company">${w.company || ''}</div>
+            <div class="work-period">${w.period || ''}</div>
+            ${w.description ? `<div class="work-desc">${w.description}</div>` : ''}
+          </div>`).join('')}
       </div>` : ''}
 
       ${edu.length ? `
       <div class="section-card">
         <div class="section-title">🎓 Education & Certs</div>
-        ${edu.map(e => `<div class="edu-item"><div class="edu-icon">${e.icon||'🎓'}</div><div class="edu-info"><div class="edu-degree">${e.degree_name}</div><div class="edu-school">${e.school||''} ${e.year?'· '+e.year:''}</div></div></div>`).join('')}
+        ${edu.map(e => `
+          <div class="edu-item">
+            <div class="edu-icon">${e.icon || '🎓'}</div>
+            <div class="edu-info">
+              <div class="edu-degree">${e.degree_name}</div>
+              <div class="edu-school">${e.school || ''} ${e.year ? '· ' + e.year : ''}</div>
+            </div>
+          </div>`).join('')}
       </div>` : ''}
 
       <div class="section-card">
-        <div class="section-title">🔐 Admin Notes <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:.7rem">(private)</span></div>
-        <textarea class="notes-area" id="adminNotes_${va.id}" placeholder="Interview impressions, concerns, follow-up reminders...">${va.admin_notes || ''}</textarea>
+        <div class="section-title">🔐 Admin Notes <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:.7rem">(private, never shown to clients)</span></div>
+        <textarea class="notes-area" id="adminNotes_${va.id}" placeholder="Add private notes about this VA...">${va.admin_notes || ''}</textarea>
         <div style="display:flex;align-items:center">
           <button class="save-notes-btn" onclick="saveNotes('${va.id}')">Save Notes</button>
           <span class="notes-saved" id="notesSaved_${va.id}">✅ Saved</span>
@@ -514,23 +476,11 @@ function renderDetail(va, skills, tools, work, edu, voice) {
       <div class="section-card">
         <div class="section-title">🏅 Assign Badge</div>
         <div style="display:flex;gap:.5rem;flex-wrap:wrap">
-          ${['Top Rated','Rising Star','Elite','New'].map(b => {
-            const active = va.badge === b
-            return `<button onclick="setBadge('${va.id}','${b}')" id="badge_${va.id}_${b.replace(' ','_')}" style="background:${active?'var(--gold)':'#0F0F0F'};color:${active?'var(--black)':'var(--muted)'};border:1px solid ${active?'var(--gold)':'var(--border)'};padding:.45rem .9rem;border-radius:7px;cursor:pointer;font-size:.8rem;font-weight:700;transition:all .2s">${b}</button>`
-          }).join('')}
+          ${['Top Rated','Rising Star','Elite','New'].map(b => `
+            <button onclick="setBadge('${va.id}','${b}')"
+              style="background:${va.badge === b ? 'var(--gold)' : '#0F0F0F'};color:${va.badge === b ? 'var(--black)' : 'var(--muted)'};border:1px solid ${va.badge === b ? 'var(--gold)' : 'var(--border)'};padding:.45rem .9rem;border-radius:7px;cursor:pointer;font-size:.8rem;font-weight:700;transition:all .2s"
+              id="badge_${va.id}_${b.replace(' ','_')}">${b}</button>`).join('')}
         </div>
-      </div>
-
-      <div class="section-card">
-        <div class="section-title">🔗 Assign to Client</div>
-        <div style="font-size:.82rem;color:var(--muted);margin-bottom:.75rem">Assign this VA to a paying client. Their dashboard will update automatically.</div>
-        <select id="clientSelect_${va.id}" style="width:100%;background:#0F0F0F;border:1px solid var(--border);border-radius:8px;color:var(--text);padding:.6rem .9rem;font-size:.85rem;margin-bottom:.75rem;outline:none;cursor:pointer">
-          <option value="">Loading clients…</option>
-        </select>
-        <button id="assignBtn_${va.id}" data-va-id="${va.id}" onclick="assignVAToClient(this)" style="background:var(--info);color:#fff;border:none;padding:.55rem 1.1rem;border-radius:7px;font-weight:700;font-size:.82rem;cursor:pointer;transition:opacity .2s">
-          🔗 Assign VA
-        </button>
-        <span id="assignStatus_${va.id}" style="font-size:.78rem;margin-left:.75rem;color:var(--success);opacity:0;transition:opacity .3s"></span>
       </div>
 
     </div>
@@ -547,7 +497,6 @@ function renderActionBtns(va) {
   return btns.join('')
 }
 
-// ── STATUS UPDATE ─────────────────────────────────────────────────
 window.setStatus = async function(id, status) {
   const { error } = await supabase.from('vas').update({ status }).eq('id', id)
   if (error) { showToast('Failed: ' + error.message, 'error'); return }
@@ -562,7 +511,29 @@ window.setStatus = async function(id, status) {
   showToast('Status updated to ' + status, 'success')
 }
 
-// ── SKILL RATING ──────────────────────────────────────────────────
+window.uploadPhoto = async function(vaId, input) {
+  const file = input.files[0]
+  if (!file) return
+  const status = document.getElementById('photoUploadStatus_' + vaId)
+  const btn = document.getElementById('uploadPhotoBtn_' + vaId)
+  status.textContent = 'Uploading…'
+  const ext = file.name.split('.').pop()
+  const path = `photos/${vaId}/profile.${ext}`
+  const { error: upErr } = await supabase.storage.from('va-files').upload(path, file, { upsert: true })
+  if (upErr) { status.textContent = 'Upload failed: ' + upErr.message; return }
+  const { data: { publicUrl } } = supabase.storage.from('va-files').getPublicUrl(path)
+  const { error: dbErr } = await supabase.from('vas').update({ photo_url: publicUrl }).eq('id', vaId)
+  if (dbErr) { status.textContent = 'Save failed: ' + dbErr.message; return }
+  const va = allVAs.find(v => v.id === vaId)
+  if (va) va.photo_url = publicUrl
+  status.textContent = '✅ Photo updated!'
+  if (btn) btn.textContent = '📤 Replace Photo'
+  const avatarEl = document.querySelector('.detail-avatar')
+  if (avatarEl) avatarEl.innerHTML = `<img src="${publicUrl}" alt="photo" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`
+  const rowAvatar = document.querySelector(`#row_${vaId} .va-avatar`)
+  if (rowAvatar) rowAvatar.innerHTML = `<img src="${publicUrl}" alt="photo" style="width:40px;height:40px;border-radius:50%;object-fit:cover">`
+}
+
 window.updateSkillRating = async function(select) {
   const skillId = select.dataset.skillId
   const rating = select.value
@@ -575,7 +546,6 @@ window.updateSkillRating = async function(select) {
   showToast('Skill rating updated', 'success')
 }
 
-// ── ADMIN NOTES ───────────────────────────────────────────────────
 window.saveNotes = async function(id) {
   const notes = document.getElementById('adminNotes_' + id).value
   const { error } = await supabase.from('vas').update({ admin_notes: notes }).eq('id', id)
@@ -586,7 +556,6 @@ window.saveNotes = async function(id) {
   if (saved) { saved.style.opacity = 1; setTimeout(() => saved.style.opacity = 0, 2000) }
 }
 
-// ── BADGE ─────────────────────────────────────────────────────────
 window.setBadge = async function(id, badge) {
   const { error } = await supabase.from('vas').update({ badge }).eq('id', id)
   if (error) { showToast('Failed to set badge', 'error'); return }
@@ -603,38 +572,50 @@ window.setBadge = async function(id, badge) {
   showToast('Badge set to ' + badge, 'success')
 }
 
-// ── PHOTO UPLOAD ──────────────────────────────────────────────────
-window.uploadPhoto = async function(vaId, input) {
-  const file = input.files[0]
-  if (!file) return
-  const statusEl = document.getElementById('photoUploadStatus_' + vaId)
-  const btnEl = document.getElementById('uploadPhotoBtn_' + vaId)
-  if (statusEl) statusEl.textContent = '⏳ Uploading...'
-  const ext = file.name.split('.').pop().toLowerCase()
-  const { error: uploadError } = await supabase.storage
-    .from('va-photos')
-    .upload(vaId + '.' + ext, file, { upsert: true, contentType: file.type })
-  if (uploadError) {
-    if (statusEl) statusEl.textContent = '❌ ' + uploadError.message
-    showToast('Upload failed: ' + uploadError.message, 'error')
-    return
-  }
-  const { data: urlData } = supabase.storage.from('va-photos').getPublicUrl(vaId + '.' + ext)
-  const photoUrl = urlData.publicUrl
-  const { error: dbError } = await supabase.from('vas').update({ photo_url: photoUrl }).eq('id', vaId)
-  if (dbError) { if (statusEl) statusEl.textContent = '❌ DB update failed'; return }
-  const va = allVAs.find(v => v.id === vaId)
-  if (va) va.photo_url = photoUrl
-  const listAvatar = document.querySelector('#row_' + vaId + ' .va-avatar')
-  if (listAvatar) listAvatar.innerHTML = `<img src="${photoUrl}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`
-  const detailAvatar = document.querySelector('.detail-avatar')
-  if (detailAvatar) detailAvatar.innerHTML = `<img src="${photoUrl}" alt="">`
-  if (statusEl) statusEl.textContent = '✅ Photo saved!'
-  if (btnEl) btnEl.textContent = '📤 Replace Photo'
-  showToast('Photo uploaded!', 'success')
+// ── VOICE RECORDINGS ─────────────────────────────────────────────
+window.showAddRecording = function(vaId) {
+  document.getElementById('addRecordingForm_' + vaId).style.display = 'block'
+  setTimeout(() => document.getElementById('recLabel_' + vaId).focus(), 50)
+}
+window.cancelAddRecording = function(vaId) {
+  document.getElementById('addRecordingForm_' + vaId).style.display = 'none'
+  document.getElementById('recLabel_' + vaId).value = ''
+  document.getElementById('recFile_' + vaId).value = ''
+  document.getElementById('recFileLabel_' + vaId).textContent = '📁 Choose file'
+  document.getElementById('recUploadStatus_' + vaId).textContent = ''
+}
+window.previewRecordingFile = function(vaId) {
+  const file = document.getElementById('recFile_' + vaId).files[0]
+  if (file) document.getElementById('recFileLabel_' + vaId).textContent = '🎵 ' + file.name
+}
+window.uploadRecording = async function(vaId) {
+  const file = document.getElementById('recFile_' + vaId).files[0]
+  const label = document.getElementById('recLabel_' + vaId).value.trim() || 'Recording'
+  const status = document.getElementById('recUploadStatus_' + vaId)
+  if (!file) { status.textContent = 'Please choose a file first.'; return }
+  status.style.color = 'var(--muted)'
+  status.textContent = 'Uploading…'
+  const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_')
+  const path = `voice/${vaId}/${Date.now()}_${safeName}`
+  const { error: upErr } = await supabase.storage.from('va-files').upload(path, file, { upsert: false })
+  if (upErr) { status.style.color = 'var(--error)'; status.textContent = 'Upload failed: ' + upErr.message; return }
+  const { data: { publicUrl } } = supabase.storage.from('va-files').getPublicUrl(path)
+  const { error: dbErr } = await supabase.from('va_voice_recordings').insert({
+    va_id: vaId, label, audio_url: publicUrl, display_order: 0
+  })
+  if (dbErr) { status.style.color = 'var(--error)'; status.textContent = 'Save failed: ' + dbErr.message; return }
+  status.style.color = 'var(--success)'
+  status.textContent = '✅ Uploaded!'
+  setTimeout(() => window.selectVA(vaId), 1200)
+}
+window.deleteRecording = async function(recordingId, vaId) {
+  if (!confirm('Delete this voice recording?')) return
+  const { error } = await supabase.from('va_voice_recordings').delete().eq('id', recordingId)
+  if (error) { showToast('Delete failed: ' + error.message, 'error'); return }
+  showToast('Recording deleted', 'success')
+  window.selectVA(vaId)
 }
 
-// ── TOAST & UTILS ─────────────────────────────────────────────────
 function showToast(msg, type = 'success') {
   const t = document.getElementById('toast')
   t.textContent = (type === 'success' ? '✅ ' : '❌ ') + msg
@@ -644,7 +625,8 @@ function showToast(msg, type = 'success') {
 
 function formatDate(iso) {
   if (!iso) return '—'
-  return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+  const d = new Date(iso)
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
 }
 </script>
 </body>
