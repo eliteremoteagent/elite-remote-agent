@@ -1,0 +1,8 @@
+{
+  "redirects": [
+    { "source": "/apply", "destination": "/apply.html", "permanent": false },
+    { "source": "/admin", "destination": "/admin.html", "permanent": false },
+    { "source": "/dashboard", "destination": "/dashboard.html", "permanent": false },
+    { "source": "/vas", "destination": "/vas.html", "permanent": false }
+  ]
+}
