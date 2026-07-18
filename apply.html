@@ -6,915 +6,463 @@
 <title>Apply as a VA — Elite Remote Agent</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
-  :root {
-    --gold: #D4AF37;
-    --gold-light: #F0CC55;
-    --black: #0A0A0A;
-    --dark: #111111;
-    --card: #1A1A1A;
-    --border: #2A2A2A;
-    --text: #E8E8E8;
-    --muted: #888;
-    --error: #FF4444;
-    --success: #22C55E;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--black); color: var(--text); font-family: 'Manrope', sans-serif; min-height: 100vh; }
-
-  /* NAV */
-  nav { background: var(--dark); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; }
-  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--gold); letter-spacing: 2px; text-decoration: none; }
-  .nav-logo span { color: var(--text); }
-  .nav-link { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color .2s; }
-  .nav-link:hover { color: var(--gold); }
-
-  /* HERO */
-  .hero { background: linear-gradient(135deg, #0A0A0A 0%, #1a1400 100%); padding: 3rem 2rem 2rem; text-align: center; border-bottom: 1px solid var(--border); }
-  .hero-badge { display: inline-block; background: rgba(212,175,55,.15); border: 1px solid var(--gold); color: var(--gold); font-size: .7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: .35rem .8rem; border-radius: 20px; margin-bottom: 1rem; }
-  .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1; color: var(--text); margin-bottom: .75rem; }
-  .hero h1 span { color: var(--gold); }
-  .hero p { color: var(--muted); font-size: .95rem; max-width: 520px; margin: 0 auto 1.5rem; }
-  .hero-stats { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
-  .hero-stat { text-align: center; }
-  .hero-stat strong { display: block; font-size: 1.3rem; font-weight: 800; color: var(--gold); }
-  .hero-stat span { font-size: .75rem; color: var(--muted); }
-
-  /* PROGRESS */
-  .progress-wrap { max-width: 700px; margin: 2rem auto 0; padding: 0 1.5rem; }
-  .steps-bar { display: flex; align-items: center; gap: 0; }
-  .step-item { display: flex; align-items: center; flex: 1; }
-  .step-dot { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--border); background: var(--dark); color: var(--muted); font-size: .75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all .3s; position: relative; z-index: 1; }
-  .step-dot.active { border-color: var(--gold); background: var(--gold); color: var(--black); }
-  .step-dot.done { border-color: var(--success); background: var(--success); color: #fff; }
-  .step-line { flex: 1; height: 2px; background: var(--border); margin: 0 4px; transition: background .3s; }
-  .step-line.done { background: var(--success); }
-  .step-labels { display: flex; justify-content: space-between; margin-top: .5rem; }
-  .step-label { font-size: .65rem; color: var(--muted); text-align: center; width: 32px; }
-  .step-label.active { color: var(--gold); }
-
-  /* FORM CONTAINER */
-  .form-wrap { max-width: 700px; margin: 2rem auto 4rem; padding: 0 1.5rem; }
-  .form-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; }
-  .form-card h2 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--text); margin-bottom: .25rem; }
-  .form-card h2 span { color: var(--gold); }
-  .form-card .subtitle { color: var(--muted); font-size: .85rem; margin-bottom: 1.75rem; }
-
-  /* FORM ELEMENTS */
-  .field-group { margin-bottom: 1.25rem; }
-  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .field-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
-  label { display: block; font-size: .8rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: .4rem; }
-  label span.req { color: var(--gold); margin-left: 2px; }
-  input, select, textarea { width: 100%; background: #0F0F0F; border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: 'Manrope', sans-serif; font-size: .9rem; padding: .7rem 1rem; transition: border-color .2s; outline: none; }
-  input:focus, select:focus, textarea:focus { border-color: var(--gold); }
-  select option { background: #1a1a1a; }
-  textarea { resize: vertical; min-height: 100px; }
-  input[type="file"] { padding: .5rem; cursor: pointer; }
-  input[type="file"]::file-selector-button { background: var(--gold); color: var(--black); border: none; padding: .4rem .9rem; border-radius: 6px; font-weight: 700; font-size: .8rem; cursor: pointer; margin-right: .75rem; }
-
-  /* FILE UPLOAD ZONES */
-  .upload-zone { border: 2px dashed var(--border); border-radius: 10px; padding: 1.5rem; text-align: center; transition: border-color .2s; cursor: pointer; position: relative; }
-  .upload-zone:hover, .upload-zone.dragover { border-color: var(--gold); }
-  .upload-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-  .upload-zone .upload-icon { font-size: 2rem; margin-bottom: .5rem; }
-  .upload-zone p { font-size: .85rem; color: var(--muted); }
-  .upload-zone p strong { color: var(--gold); }
-  .upload-zone .file-preview { margin-top: .75rem; font-size: .8rem; color: var(--success); font-weight: 600; }
-
-  /* DYNAMIC SECTIONS */
-  .dynamic-section { border: 1px solid var(--border); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; position: relative; background: #0F0F0F; }
-  .dynamic-section .remove-btn { position: absolute; top: .75rem; right: .75rem; background: none; border: 1px solid #333; color: var(--muted); width: 24px; height: 24px; border-radius: 50%; cursor: pointer; font-size: .8rem; display: flex; align-items: center; justify-content: center; transition: all .2s; }
-  .dynamic-section .remove-btn:hover { border-color: var(--error); color: var(--error); }
-  .add-btn { background: none; border: 1px dashed var(--gold); color: var(--gold); padding: .6rem 1.2rem; border-radius: 8px; cursor: pointer; font-size: .8rem; font-weight: 600; width: 100%; transition: all .2s; margin-top: .5rem; }
-  .add-btn:hover { background: rgba(212,175,55,.08); }
-
-  /* SKILLS */
-  .skill-row { display: grid; grid-template-columns: 1fr auto auto; gap: .75rem; align-items: end; margin-bottom: .75rem; }
-  .rating-select { width: 130px; }
-
-  /* TOOLS */
-  .tools-grid { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .5rem; }
-  .tool-chip { background: #0F0F0F; border: 1px solid var(--border); border-radius: 6px; padding: .35rem .75rem; font-size: .8rem; display: flex; align-items: center; gap: .4rem; cursor: pointer; transition: all .2s; }
-  .tool-chip:hover { border-color: var(--gold); }
-  .tool-chip.selected { border-color: var(--gold); background: rgba(212,175,55,.1); color: var(--gold); }
-  .tool-chip .chip-x { color: var(--muted); font-size: .7rem; }
-  .tool-input-row { display: flex; gap: .5rem; margin-top: .75rem; }
-  .tool-input-row input { flex: 1; }
-  .tool-input-row button { background: var(--gold); color: var(--black); border: none; padding: .6rem 1rem; border-radius: 8px; font-weight: 700; font-size: .8rem; cursor: pointer; white-space: nowrap; }
-
-  /* NAVIGATION BUTTONS */
-  .form-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
-  .btn-back { background: none; border: 1px solid var(--border); color: var(--muted); padding: .7rem 1.5rem; border-radius: 8px; cursor: pointer; font-size: .9rem; font-weight: 600; transition: all .2s; }
-  .btn-back:hover { border-color: var(--muted); color: var(--text); }
-  .btn-next { background: var(--gold); color: var(--black); border: none; padding: .75rem 2rem; border-radius: 8px; cursor: pointer; font-size: .95rem; font-weight: 800; transition: all .2s; display: flex; align-items: center; gap: .5rem; }
-  .btn-next:hover { background: var(--gold-light); }
-  .btn-next:disabled { opacity: .5; cursor: not-allowed; }
-  .btn-submit { background: var(--gold); color: var(--black); border: none; padding: .75rem 2.5rem; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 800; width: 100%; margin-top: 1.5rem; transition: all .2s; }
-  .btn-submit:hover { background: var(--gold-light); }
-  .btn-submit:disabled { opacity: .5; cursor: not-allowed; }
-
-  /* STEP INDICATOR TEXT */
-  .step-counter { font-size: .8rem; color: var(--muted); }
-  .step-counter strong { color: var(--gold); }
-
-  /* SUCCESS */
-  .success-screen { text-align: center; padding: 3rem 2rem; }
-  .success-icon { font-size: 4rem; margin-bottom: 1rem; }
-  .success-screen h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--gold); margin-bottom: .75rem; }
-  .success-screen p { color: var(--muted); font-size: .95rem; line-height: 1.6; max-width: 420px; margin: 0 auto 1.5rem; }
-  .success-screen .next-steps { background: #0F0F0F; border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; text-align: left; max-width: 420px; margin: 0 auto; }
-  .success-screen .next-steps h3 { font-size: .8rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: .75rem; }
-  .next-step-item { display: flex; gap: .75rem; align-items: flex-start; margin-bottom: .6rem; font-size: .85rem; color: var(--muted); }
-  .next-step-item .step-num { background: var(--gold); color: var(--black); width: 20px; height: 20px; border-radius: 50%; font-size: .7rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
-
-  /* ERROR */
-  .error-msg { background: rgba(255,68,68,.1); border: 1px solid rgba(255,68,68,.3); color: var(--error); padding: .75rem 1rem; border-radius: 8px; font-size: .85rem; margin-top: 1rem; }
-  .field-error { color: var(--error); font-size: .75rem; margin-top: .25rem; }
-
-  /* LOADING */
-  .loading-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.85); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 999; }
-  .spinner { width: 48px; height: 48px; border: 3px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin .8s linear infinite; margin-bottom: 1rem; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .loading-overlay p { color: var(--gold); font-weight: 600; font-size: .95rem; }
-  .loading-overlay small { color: var(--muted); font-size: .8rem; margin-top: .25rem; }
-  .hidden { display: none !important; }
-
-  @media (max-width: 600px) {
-    .field-row, .field-row-3 { grid-template-columns: 1fr; }
-    .skill-row { grid-template-columns: 1fr; }
-    .rating-select { width: 100%; }
-  }
+:root {
+--gold: #D4AF37;
+--gold-light: #F0CC55;
+--black: #0A0A0A;
+--dark: #111111;
+--card: #1A1A1A;
+--border: #2A2A2A;
+--text: #E8E8E8;
+--muted: #888;
+--error: #FF4444;
+--success: #22C55E;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--black); color: var(--text); font-family: 'Manrope', sans-serif; min-height: 100vh; }
+nav { background: var(--dark); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--gold); letter-spacing: 2px; text-decoration: none; }
+.nav-logo span { color: var(--text); }
+.nav-link { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color .2s; }
+.nav-link:hover { color: var(--gold); }
+.hero { background: linear-gradient(135deg, #0A0A0A 0%, #1a1400 100%); padding: 3rem 2rem 2rem; text-align: center; border-bottom: 1px solid var(--border); }
+.hero-badge { display: inline-block; background: rgba(212,175,55,.15); border: 1px solid var(--gold); color: var(--gold); font-size: .7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: .35rem .8rem; border-radius: 20px; margin-bottom: 1rem; }
+.hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1; color: var(--text); margin-bottom: .75rem; }
+.hero h1 span { color: var(--gold); }
+.hero p { color: var(--muted); font-size: .95rem; max-width: 520px; margin: 0 auto 1.5rem; }
+.hero-stats { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
+.hero-stat { text-align: center; }
+.hero-stat strong { display: block; font-size: 1.3rem; font-weight: 800; color: var(--gold); }
+.hero-stat span { font-size: .75rem; color: var(--muted); }
+.progress-wrap { max-width: 700px; margin: 2rem auto 0; padding: 0 1.5rem; }
+.steps-bar { display: flex; align-items: center; gap: 0; }
+.step-item { display: flex; align-items: center; flex: 1; }
+.step-dot { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--border); background: var(--dark); color: var(--muted); font-size: .75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all .3s; position: relative; z-index: 1; }
+.step-dot.active { border-color: var(--gold); background: var(--gold); color: var(--black); }
+.step-dot.done { border-color: var(--success); background: var(--success); color: #fff; }
+.step-line { flex: 1; height: 2px; background: var(--border); margin: 0 4px; transition: background .3s; }
+.step-line.done { background: var(--success); }
+.step-labels { display: flex; justify-content: space-between; margin-top: .5rem; }
+.step-label { font-size: .65rem; color: var(--muted); text-align: center; width: 32px; }
+.step-label.active { color: var(--gold); }
+.form-wrap { max-width: 700px; margin: 2rem auto 4rem; padding: 0 1.5rem; }
+.form-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; }
+.form-card h2 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--text); margin-bottom: .25rem; }
+.form-card h2 span { color: var(--gold); }
+.form-card .subtitle { color: var(--muted); font-size: .85rem; margin-bottom: 1.75rem; }
+.field-group { margin-bottom: 1.25rem; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.field-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+label { display: block; font-size: .8rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: .4rem; }
+label span.req { color: var(--gold); margin-left: 2px; }
+input, select, textarea { width: 100%; background: #0F0F0F; border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: 'Manrope', sans-serif; font-size: .9rem; padding: .7rem 1rem; transition: border-color .2s; outline: none; }
+input:focus, select:focus, textarea:focus { border-color: var(--gold); }
+select option { background: #1a1a1a; }
+textarea { resize: vertical; min-height: 100px; }
+input[type="file"] { padding: .5rem; cursor: pointer; }
+input[type="file"]::file-selector-button { background: var(--gold); color: var(--black); border: none; padding: .4rem .9rem; border-radius: 6px; font-weight: 700; font-size: .8rem; cursor: pointer; margin-right: .75rem; }
+.upload-zone { border: 2px dashed var(--border); border-radius: 10px; padding: 1.5rem; text-align: center; transition: border-color .2s; cursor: pointer; position: relative; }
+.upload-zone:hover, .upload-zone.dragover { border-color: var(--gold); }
+.upload-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+.upload-zone .upload-icon { font-size: 2rem; margin-bottom: .5rem; }
+.upload-zone p { font-size: .85rem; color: var(--muted); }
+.upload-zone p strong { color: var(--gold); }
+.upload-zone .file-preview { margin-top: .75rem; font-size: .8rem; color: var(--success); font-weight: 600; }
+.dynamic-section { border: 1px solid var(--border); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; position: relative; background: #0F0F0F; }
+.dynamic-section .remove-btn { position: absolute; top: .75rem; right: .75rem; background: none; border: 1px solid #333; color: var(--muted); width: 24px; height: 24px; border-radius: 50%; cursor: pointer; font-size: .8rem; display: flex; align-items: center; justify-content: center; transition: all .2s; }
+.dynamic-section .remove-btn:hover { border-color: var(--error); color: var(--error); }
+.add-btn { background: none; border: 1px dashed var(--gold); color: var(--gold); padding: .6rem 1.2rem; border-radius: 8px; cursor: pointer; font-size: .8rem; font-weight: 600; width: 100%; transition: all .2s; margin-top: .5rem; }
+.add-btn:hover { background: rgba(212,175,55,.08); }
+.skill-row { display: grid; grid-template-columns: 1fr auto auto; gap: .75rem; align-items: end; margin-bottom: .75rem; }
+.rating-select { width: 130px; }
+.tools-grid { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .5rem; }
+.tool-chip { background: #0F0F0F; border: 1px solid var(--border); border-radius: 6px; padding: .35rem .75rem; font-size: .8rem; display: flex; align-items: center; gap: .4rem; cursor: pointer; transition: all .2s; }
+.tool-chip:hover { border-color: var(--gold); }
+.tool-chip.selected { border-color: var(--gold); background: rgba(212,175,55,.1); color: var(--gold); }
+.tool-chip .chip-x { color: var(--muted); font-size: .7rem; }
+.tool-input-row { display: flex; gap: .5rem; margin-top: .75rem; }
+.tool-input-row input { flex: 1; }
+.tool-input-row button { background: var(--gold); color: var(--black); border: none; padding: .6rem 1rem; border-radius: 8px; font-weight: 700; font-size: .8rem; cursor: pointer; white-space: nowrap; }
+.form-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.btn-back { background: none; border: 1px solid var(--border); color: var(--muted); padding: .7rem 1.5rem; border-radius: 8px; cursor: pointer; font-size: .9rem; font-weight: 600; transition: all .2s; }
+.btn-back:hover { border-color: var(--muted); color: var(--text); }
+.btn-next { background: var(--gold); color: var(--black); border: none; padding: .75rem 2rem; border-radius: 8px; cursor: pointer; font-size: .95rem; font-weight: 800; transition: all .2s; display: flex; align-items: center; gap: .5rem; }
+.btn-next:hover { background: var(--gold-light); }
+.btn-next:disabled { opacity: .5; cursor: not-allowed; }
+.btn-submit { background: var(--gold); color: var(--black); border: none; padding: .75rem 2.5rem; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 800; width: 100%; margin-top: 1.5rem; transition: all .2s; }
+.btn-submit:hover { background: var(--gold-light); }
+.btn-submit:disabled { opacity: .5; cursor: not-allowed; }
+.step-counter { font-size: .8rem; color: var(--muted); }
+.step-counter strong { color: var(--gold); }
+.success-screen { text-align: center; padding: 3rem 2rem; }
+.success-icon { font-size: 4rem; margin-bottom: 1rem; }
+.success-screen h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--gold); margin-bottom: .75rem; }
+.success-screen p { color: var(--muted); font-size: .95rem; line-height: 1.6; max-width: 420px; margin: 0 auto 1.5rem; }
+.success-screen .next-steps { background: #0F0F0F; border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; text-align: left; max-width: 420px; margin: 0 auto; }
+.success-screen .next-steps h3 { font-size: .8rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: .75rem; }
+.next-step-item { display: flex; gap: .75rem; align-items: flex-start; margin-bottom: .6rem; font-size: .85rem; color: var(--muted); }
+.next-step-item .step-num { background: var(--gold); color: var(--black); width: 20px; height: 20px; border-radius: 50%; font-size: .7rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.error-msg { background: rgba(255,68,68,.1); border: 1px solid rgba(255,68,68,.3); color: var(--error); padding: .75rem 1rem; border-radius: 8px; font-size: .85rem; margin-top: 1rem; }
+.field-error { color: var(--error); font-size: .75rem; margin-top: .25rem; }
+.loading-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.85); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 999; }
+.spinner { width: 48px; height: 48px; border: 3px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin .8s linear infinite; margin-bottom: 1rem; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-overlay p { color: var(--gold); font-weight: 600; font-size: .95rem; }
+.loading-overlay small { color: var(--muted); font-size: .8rem; margin-top: .25rem; }
+.hidden { display: none !important; }
+.voice-required-banner { background: rgba(212,175,55,.12); border: 2px solid var(--gold); border-radius: 10px; padding: .85rem 1.1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: .75rem; }
+.voice-required-banner .vr-icon { font-size: 1.5rem; flex-shrink: 0; }
+.voice-required-banner p { font-size: .85rem; color: var(--text); font-weight: 600; margin: 0; }
+.voice-required-banner p span { color: var(--gold); }
+@media (max-width: 600px) {
+.field-row, .field-row-3 { grid-template-columns: 1fr; }
+.skill-row { grid-template-columns: 1fr; }
+.rating-select { width: 100%; }
+}
 </style>
 </head>
 <body>
-
-<!-- NAV -->
 <nav>
-  <a href="index.html" class="nav-logo">ELITE <span>REMOTE AGENT</span></a>
-  <a href="vas.html" class="nav-link">← Browse VAs</a>
+<a href="index.html" class="nav-logo">ELITE <span>REMOTE AGENT</span></a>
+<a href="vas.html" class="nav-link">← Browse VAs</a>
 </nav>
-
-<!-- HERO -->
 <div class="hero">
-  <div class="hero-badge">✦ VA Application</div>
-  <h1>JOIN THE <span>ELITE</span> ROSTER</h1>
-  <p>Pre-screened, trained, and placed with top real estate agents and business owners across the US.</p>
-  <div class="hero-stats">
-    <div class="hero-stat"><strong>$6–$12</strong><span>per hour</span></div>
-    <div class="hero-stat"><strong>48HR</strong><span>avg placement</span></div>
-    <div class="hero-stat"><strong>500+</strong><span>VAs placed</span></div>
-    <div class="hero-stat"><strong>4.9★</strong><span>avg client rating</span></div>
-  </div>
+<div class="hero-badge">✦ VA Application</div>
+<h1>JOIN THE <span>ELITE</span> ROSTER</h1>
+<p>Pre-screened, trained, and placed with top real estate agents and business owners across the US.</p>
+<div class="hero-stats">
+<div class="hero-stat"><strong>$6–$12</strong><span>per hour</span></div>
+<div class="hero-stat"><strong>48HR</strong><span>avg placement</span></div>
+<div class="hero-stat"><strong>500+</strong><span>VAs placed</span></div>
+<div class="hero-stat"><strong>4.9★</strong><span>avg client rating</span></div>
 </div>
-
-<!-- PROGRESS BAR -->
+</div>
 <div class="progress-wrap">
-  <div class="steps-bar" id="stepsBar">
-    <div class="step-item">
-      <div class="step-dot active" id="dot1">1</div>
-      <div class="step-line" id="line1"></div>
-    </div>
-    <div class="step-item">
-      <div class="step-dot" id="dot2">2</div>
-      <div class="step-line" id="line2"></div>
-    </div>
-    <div class="step-item">
-      <div class="step-dot" id="dot3">3</div>
-      <div class="step-line" id="line3"></div>
-    </div>
-    <div class="step-item">
-      <div class="step-dot" id="dot4">4</div>
-      <div class="step-line" id="line4"></div>
-    </div>
-    <div class="step-item">
-      <div class="step-dot" id="dot5">5</div>
-    </div>
-  </div>
-  <div class="step-labels">
-    <div class="step-label active" id="label1">Info</div>
-    <div class="step-label" id="label2">Skills</div>
-    <div class="step-label" id="label3">Work</div>
-    <div class="step-label" id="label4">Edu</div>
-    <div class="step-label" id="label5">Files</div>
-  </div>
+<div class="steps-bar" id="stepsBar">
+<div class="step-item"><div class="step-dot active" id="dot1">1</div><div class="step-line" id="line1"></div></div>
+<div class="step-item"><div class="step-dot" id="dot2">2</div><div class="step-line" id="line2"></div></div>
+<div class="step-item"><div class="step-dot" id="dot3">3</div><div class="step-line" id="line3"></div></div>
+<div class="step-item"><div class="step-dot" id="dot4">4</div><div class="step-line" id="line4"></div></div>
+<div class="step-item"><div class="step-dot" id="dot5">5</div></div>
 </div>
-
-<!-- FORM -->
+<div class="step-labels">
+<div class="step-label active" id="label1">Info</div>
+<div class="step-label" id="label2">Skills</div>
+<div class="step-label" id="label3">Work</div>
+<div class="step-label" id="label4">Edu</div>
+<div class="step-label" id="label5">Files</div>
+</div>
+</div>
 <div class="form-wrap">
-  <div class="form-card">
-
-    <!-- ═══ STEP 1: BASIC INFO ═══ -->
-    <div id="step1">
-      <h2>BASIC <span>INFO</span></h2>
-      <p class="subtitle">Step 1 of 5 · Tell us about yourself</p>
-
-      <div class="field-row">
-        <div class="field-group">
-          <label>First Name <span class="req">*</span></label>
-          <input type="text" id="firstName" placeholder="Maria" required/>
-        </div>
-        <div class="field-group">
-          <label>Last Name <span class="req">*</span></label>
-          <input type="text" id="lastName" placeholder="Santos" required/>
-        </div>
-      </div>
-
-      <div class="field-row">
-        <div class="field-group">
-          <label>Email <span class="req">*</span></label>
-          <input type="email" id="email" placeholder="maria@email.com" required/>
-        </div>
-        <div class="field-group">
-          <label>Phone / WhatsApp <span class="req">*</span></label>
-          <input type="tel" id="phone" placeholder="+63 912 345 6789" required/>
-        </div>
-      </div>
-
-      <div class="field-row">
-        <div class="field-group">
-          <label>Category <span class="req">*</span></label>
-          <select id="category">
-            <option value="">Select category</option>
-            <option value="real_estate">Real Estate</option>
-            <option value="business">Business / Admin</option>
-            <option value="general">General (Both)</option>
-          </select>
-        </div>
-        <div class="field-group">
-          <label>Role / Title <span class="req">*</span></label>
-          <input type="text" id="role" placeholder="Transaction Coordinator"/>
-        </div>
-      </div>
-
-      <div class="field-row-3">
-        <div class="field-group">
-          <label>Years Experience <span class="req">*</span></label>
-          <input type="number" id="yearsExp" placeholder="3" min="0" max="30"/>
-        </div>
-        <div class="field-group">
-          <label>Hourly Rate (USD) <span class="req">*</span></label>
-          <input type="number" id="hourlyRate" placeholder="8" min="3" max="30" step="0.5"/>
-        </div>
-        <div class="field-group">
-          <label>English Level <span class="req">*</span></label>
-          <select id="englishLevel">
-            <option value="">Select</option>
-            <option value="Native-level">Native-level</option>
-            <option value="Fluent">Fluent</option>
-            <option value="Conversational">Conversational</option>
-            <option value="Basic">Basic</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="field-row">
-        <div class="field-group">
-          <label>Timezone</label>
-          <input type="text" id="timezone" placeholder="PST (UTC-8)"/>
-        </div>
-        <div class="field-group">
-          <label>Availability</label>
-          <input type="text" id="availability" placeholder="Full-time · 40hrs/wk"/>
-        </div>
-      </div>
-
-      <div class="field-row">
-        <div class="field-group">
-          <label>Education Summary</label>
-          <input type="text" id="educationSummary" placeholder="BS Business Administration"/>
-        </div>
-        <div class="field-group">
-          <label>Available Start Date</label>
-          <input type="text" id="startDate" placeholder="Available Now"/>
-        </div>
-      </div>
-
-      <div class="field-group">
-        <label>Bio / About You <span class="req">*</span></label>
-        <textarea id="bio" rows="4" placeholder="Tell clients about your experience, specialties, and what makes you a great hire. Be specific about your real estate or business background..."></textarea>
-      </div>
-
-      <div class="form-nav">
-        <span class="step-counter">Step <strong>1</strong> of 5</span>
-        <button class="btn-next" onclick="goToStep(2)">Next: Skills & Tools →</button>
-      </div>
-    </div>
-
-    <!-- ═══ STEP 2: SKILLS & TOOLS ═══ -->
-    <div id="step2" class="hidden">
-      <h2>SKILLS &amp; <span>TOOLS</span></h2>
-      <p class="subtitle">Step 2 of 5 · Add up to 8 skills and your CRM/tool experience</p>
-
-      <div class="field-group">
-        <label>Your Skills <span class="req">*</span> <span style="color:var(--muted);font-size:.75rem;text-transform:none;letter-spacing:0">(add 3–8 skills)</span></label>
-        <div id="skillsList">
-          <!-- skills added dynamically -->
-        </div>
-        <button class="add-btn" onclick="addSkill()">+ Add Skill</button>
-      </div>
-
-      <div class="field-group" style="margin-top:1.75rem">
-        <label>Primary Tools / CRMs <span class="req">*</span></label>
-        <p style="font-size:.8rem;color:var(--muted);margin-bottom:.75rem">Click to select tools you know well, or type to add your own</p>
-        <div class="tools-grid" id="primaryToolsGrid">
-          <!-- Preset chips -->
-        </div>
-        <div class="tool-input-row">
-          <input type="text" id="primaryToolInput" placeholder="Add a tool not listed..."/>
-          <button onclick="addCustomTool('primary')">+ Add</button>
-        </div>
-      </div>
-
-      <div class="field-group" style="margin-top:1.25rem">
-        <label>Secondary Tools</label>
-        <p style="font-size:.8rem;color:var(--muted);margin-bottom:.75rem">Tools you've used but aren't your primary stack</p>
-        <div class="tools-grid" id="secondaryToolsGrid"></div>
-        <div class="tool-input-row">
-          <input type="text" id="secondaryToolInput" placeholder="Add a secondary tool..."/>
-          <button onclick="addCustomTool('secondary')">+ Add</button>
-        </div>
-      </div>
-
-      <div class="form-nav">
-        <button class="btn-back" onclick="goToStep(1)">← Back</button>
-        <button class="btn-next" onclick="goToStep(3)">Next: Work History →</button>
-      </div>
-    </div>
-
-    <!-- ═══ STEP 3: WORK HISTORY ═══ -->
-    <div id="step3" class="hidden">
-      <h2>WORK <span>HISTORY</span></h2>
-      <p class="subtitle">Step 3 of 5 · Add your relevant work experience (up to 4 jobs)</p>
-
-      <div id="workHistoryList">
-        <!-- added dynamically -->
-      </div>
-      <button class="add-btn" id="addWorkBtn" onclick="addWorkHistory()">+ Add Position</button>
-
-      <div class="form-nav">
-        <button class="btn-back" onclick="goToStep(2)">← Back</button>
-        <button class="btn-next" onclick="goToStep(4)">Next: Education →</button>
-      </div>
-    </div>
-
-    <!-- ═══ STEP 4: EDUCATION ═══ -->
-    <div id="step4" class="hidden">
-      <h2>EDUCATION &amp; <span>CERTS</span></h2>
-      <p class="subtitle">Step 4 of 5 · Add degrees, certifications, and training</p>
-
-      <div id="educationList">
-        <!-- added dynamically -->
-      </div>
-      <button class="add-btn" id="addEduBtn" onclick="addEducation()">+ Add Degree / Certification</button>
-
-      <div class="form-nav">
-        <button class="btn-back" onclick="goToStep(3)">← Back</button>
-        <button class="btn-next" onclick="goToStep(5)">Next: Upload Files →</button>
-      </div>
-    </div>
-
-    <!-- ═══ STEP 5: FILES ═══ -->
-    <div id="step5" class="hidden">
-      <h2>UPLOAD <span>FILES</span></h2>
-      <p class="subtitle">Step 5 of 5 · Resume, profile photo, and voice recording are all required</p>
-
-      <!-- Photo -->
-      <div class="field-group">
-        <label>Profile Photo <span class="req">*</span></label>
-        <p style="font-size:.8rem;color:var(--muted);margin-bottom:.75rem">Professional headshot. JPG or PNG, max 5MB.</p>
-        <div class="upload-zone" id="photoZone">
-          <input type="file" id="photoFile" accept="image/jpeg,image/png,image/webp" onchange="previewFile('photoZone','photoPreview',this)"/>
-          <div class="upload-icon">📸</div>
-          <p><strong>Click to upload</strong> or drag and drop</p>
-          <p>JPG, PNG, WEBP · Max 5MB</p>
-          <div class="file-preview hidden" id="photoPreview"></div>
-        </div>
-      </div>
-
-      <!-- Resume -->
-      <div class="field-group" style="margin-top:1.25rem">
-        <label>Resume <span class="req">*</span></label>
-        <p style="font-size:.8rem;color:var(--muted);margin-bottom:.75rem">PDF format only. Max 10MB.</p>
-        <div class="upload-zone" id="resumeZone">
-          <input type="file" id="resumeFile" accept="application/pdf" onchange="previewFile('resumeZone','resumePreview',this)"/>
-          <div class="upload-icon">📄</div>
-          <p><strong>Click to upload</strong> your resume</p>
-          <p>PDF only · Max 10MB</p>
-          <div class="file-preview hidden" id="resumePreview"></div>
-        </div>
-      </div>
-
-      <!-- Voice Recording -->
-      <div class="field-group" style="margin-top:1.25rem">
-        <label>🎙️ Voice Introduction <span class="req">*</span></label>
-
-        <!-- Script Template -->
-        <div style="background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.3);border-radius:10px;padding:1.25rem;margin-bottom:1rem">
-          <p style="font-size:.75rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:.75rem">📝 What to Say (60–90 seconds)</p>
-          <p style="font-size:.82rem;color:var(--text);line-height:1.8;font-style:italic">"Hi, my name is [Your Name]. I'm a [Your Role] based in the Philippines with [X] years of experience. I specialize in [your top 2–3 skills], and I'm fluent in English. I have experience with tools like [CRM / tools you use]. I'm [full-time / part-time] available and excited to work with US clients through Elite Remote Agent. I'm reliable, detail-oriented, and ready to hit the ground running — I'd love the opportunity to work with your team. Thank you!"</p>
-        </div>
-
-        <!-- Option 1: Vocaroo -->
-        <div style="background:#0F0F0F;border:1px solid var(--gold);border-radius:10px;padding:1.25rem;margin-bottom:.75rem">
-          <p style="font-size:.75rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:.6rem">🌟 Option 1 — Vocaroo (Free · No Account Needed · Easiest)</p>
-          <ol style="font-size:.82rem;color:var(--muted);padding-left:1.25rem;line-height:2;margin-bottom:.85rem">
-            <li>Go to <a href="https://vocaroo.com" target="_blank" style="color:var(--gold)">vocaroo.com</a> — opens in a new tab</li>
-            <li>Press the <strong style="color:var(--text)">red mic button</strong>, read your intro above, then press stop</li>
-            <li>Click <strong style="color:var(--text)">"Copy Link"</strong> and paste it below</li>
-          </ol>
-          <input type="url" id="voiceUrl" placeholder="https://vocaroo.com/..." style="border-color:rgba(212,175,55,.4)"/>
-        </div>
-
-        <!-- Option 2: File Upload -->
-        <div style="background:#0F0F0F;border:1px solid var(--border);border-radius:10px;padding:1.25rem">
-          <p style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem">📱 Option 2 — Upload a File (Phone or Computer)</p>
-          <p style="font-size:.8rem;color:var(--muted);margin-bottom:.75rem">Record a voice memo on your phone, then upload it here. MP3, WAV, or M4A — max 25MB.</p>
-          <div class="upload-zone" id="voiceZone">
-            <input type="file" id="voiceFile" accept="audio/mpeg,audio/wav,audio/mp3,audio/m4a,audio/*" onchange="previewFile('voiceZone','voicePreview',this)"/>
-            <div class="upload-icon">📤</div>
-            <p><strong>Click to upload</strong> your voice recording</p>
-            <p>MP3, WAV, M4A · Max 25MB</p>
-            <div class="file-preview hidden" id="voicePreview"></div>
-          </div>
-        </div>
-
-        <p style="font-size:.75rem;color:var(--muted);margin-top:.6rem;text-align:center">* Vocaroo link OR file upload — one is required</p>
-      </div>
-
-      <div id="submitError" class="error-msg hidden"></div>
-
-      <button class="btn-submit" id="submitBtn" onclick="submitApplication()">
-        🚀 Submit My Application
-      </button>
-
-      <p style="text-align:center;font-size:.75rem;color:var(--muted);margin-top:1rem">Your application will be reviewed within 3–5 business days. You'll receive an email once a decision has been made.</p>
-
-      <div class="form-nav" style="border-top:none;padding-top:.5rem;margin-top:.5rem">
-        <button class="btn-back" onclick="goToStep(4)">← Back</button>
-        <span></span>
-      </div>
-    </div>
-
-    <!-- ═══ SUCCESS ═══ -->
-    <div id="stepSuccess" class="hidden">
-      <div class="success-screen">
-        <div class="success-icon">🎉</div>
-        <h2>APPLICATION SUBMITTED!</h2>
-        <p>Your application has been received and is under review. We typically respond within 3–5 business days.</p>
-        <div class="next-steps">
-          <h3>What Happens Next</h3>
-          <div class="next-step-item"><div class="step-num">1</div><span>Our team reviews your profile, resume, and voice recording</span></div>
-          <div class="next-step-item"><div class="step-num">2</div><span>If approved, your profile goes live and clients can browse you</span></div>
-          <div class="next-step-item"><div class="step-num">3</div><span>A client sends an interview or hire request — you get notified</span></div>
-          <div class="next-step-item"><div class="step-num">4</div><span>Complete onboarding, start earning $6–$12/hr US clients</span></div>
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /form-card -->
-</div><!-- /form-wrap -->
-
-<!-- LOADING OVERLAY -->
-<div class="loading-overlay hidden" id="loadingOverlay">
-  <div class="spinner"></div>
-  <p id="loadingMsg">Submitting your application...</p>
-  <small id="loadingSubMsg">Uploading files, please don't close this page</small>
+<div class="form-card">
+<div id="step1">
+<h2>BASIC <span>INFO</span></h2>
+<p class="subtitle">Step 1 of 5 · Tell us about yourself</p>
+<div class="field-row">
+<div class="field-group"><label>First Name <span class="req">*</span></label><input type="text" id="firstName" placeholder="Maria" required/></div>
+<div class="field-group"><label>Last Name <span class="req">*</span></label><input type="text" id="lastName" placeholder="Santos" required/></div>
 </div>
-
+<div class="field-row">
+<div class="field-group"><label>Email <span class="req">*</span></label><input type="email" id="email" placeholder="maria@email.com" required/></div>
+<div class="field-group"><label>Phone / WhatsApp <span class="req">*</span></label><input type="tel" id="phone" placeholder="+63 912 345 6789" required/></div>
+</div>
+<div class="field-row">
+<div class="field-group"><label>Category <span class="req">*</span></label><select id="category"><option value="">Select category</option><option value="real_estate">Real Estate</option><option value="business">Business / Admin</option><option value="general">General (Both)</option></select></div>
+<div class="field-group"><label>Role / Title <span class="req">*</span></label><input type="text" id="role" placeholder="Transaction Coordinator"/></div>
+</div>
+<div class="field-row-3">
+<div class="field-group"><label>Years Experience <span class="req">*</span></label><input type="number" id="yearsExp" placeholder="3" min="0" max="30"/></div>
+<div class="field-group"><label>Hourly Rate (USD) <span class="req">*</span></label><input type="number" id="hourlyRate" placeholder="8" min="3" max="30" step="0.5"/></div>
+<div class="field-group"><label>English Level <span class="req">*</span></label><select id="englishLevel"><option value="">Select</option><option value="Native-level">Native-level</option><option value="Fluent">Fluent</option><option value="Conversational">Conversational</option><option value="Basic">Basic</option></select></div>
+</div>
+<div class="field-row">
+<div class="field-group"><label>Timezone</label><input type="text" id="timezone" placeholder="PST (UTC-8)"/></div>
+<div class="field-group"><label>Availability</label><input type="text" id="availability" placeholder="Full-time · 40hrs/wk"/></div>
+</div>
+<div class="field-row">
+<div class="field-group"><label>Education Summary</label><input type="text" id="educationSummary" placeholder="BS Business Administration"/></div>
+<div class="field-group"><label>Available Start Date</label><input type="text" id="startDate" placeholder="Available Now"/></div>
+</div>
+<div class="field-group"><label>Bio / About You <span class="req">*</span></label><textarea id="bio" rows="4" placeholder="Tell clients about your experience, specialties, and what makes you a great hire..."></textarea></div>
+<div class="form-nav"><span class="step-counter">Step <strong>1</strong> of 5</span><button class="btn-next" onclick="goToStep(2)">Next: Skills &amp; Tools →</button></div>
+</div>
+<div id="step2" class="hidden">
+<h2>SKILLS &amp; <span>TOOLS</span></h2>
+<p class="subtitle">Step 2 of 5 · Add up to 8 skills and your CRM/tool experience</p>
+<div class="field-group"><label>Your Skills <span class="req">*</span> <span style="color:var(--muted);font-size:.75rem;text-transform:none;letter-spacing:0">(add 3–8 skills)</span></label><div id="skillsList"></div><button class="add-btn" onclick="addSkill()">+ Add Skill</button></div>
+<div class="field-group" style="margin-top:1.75rem"><label>Primary Tools / CRMs <span class="req">*</span></label><p style="font-size:.8rem;color:var(--muted);margin-bottom:.75rem">Click to select tools you know well, or type to add your own</p><div class="tools-grid" id="primaryToolsGrid"></div><div class="tool-input-row"><input type="text" id="primaryToolInput" placeholder="Add a tool not listed..."/><button onclick="addCustomTool('primary')">+ Add</button></div></div>
+<div class="field-group" style="margin-top:1.25rem"><label>Secondary Tools</label><p style="font-size:.8rem;color:var(--muted);margin-bottom:.75rem">Tools you've used but aren't your primary stack</p><div class="tools-grid" id="secondaryToolsGrid"></div><div class="tool-input-row"><input type="text" id="secondaryToolInput" placeholder="Add a secondary tool..."/><button onclick="addCustomTool('secondary')">+ Add</button></div></div>
+<div class="form-nav"><button class="btn-back" onclick="goToStep(1)">← Back</button><button class="btn-next" onclick="goToStep(3)">Next: Work History →</button></div>
+</div>
+<div id="step3" class="hidden">
+<h2>WORK <span>HISTORY</span></h2>
+<p class="subtitle">Step 3 of 5 · Add your relevant work experience (up to 4 jobs)</p>
+<div id="workHistoryList"></div>
+<button class="add-btn" id="addWorkBtn" onclick="addWorkHistory()">+ Add Position</button>
+<div class="form-nav"><button class="btn-back" onclick="goToStep(2)">← Back</button><button class="btn-next" onclick="goToStep(4)">Next: Education →</button></div>
+</div>
+<div id="step4" class="hidden">
+<h2>EDUCATION &amp; <span>CERTS</span></h2>
+<p class="subtitle">Step 4 of 5 · Add degrees, certifications, and training</p>
+<div id="educationList"></div>
+<button class="add-btn" id="addEduBtn" onclick="addEducation()">+ Add Degree / Certification</button>
+<div class="form-nav"><button class="btn-back" onclick="goToStep(3)">← Back</button><button class="btn-next" onclick="goToStep(5)">Next: Upload Files →</button></div>
+</div>
+<div id="step5" class="hidden">
+<h2>UPLOAD <span>FILES</span></h2>
+<p class="subtitle">Step 5 of 5 · Resume, profile photo, and voice recording are all required</p>
+<div class="field-group">
+<label>Profile Photo <span class="req">*</span></label>
+<p style="font-size:.8rem;color:var(--muted);margin-bottom:.75rem">Professional headshot. JPG or PNG, max 5MB.</p>
+<div class="upload-zone" id="photoZone"><input type="file" id="photoFile" accept="image/jpeg,image/png,image/webp" onchange="previewFile('photoZone','photoPreview',this)"/><div class="upload-icon">📸</div><p><strong>Click to upload</strong> or drag and drop</p><p>JPG, PNG, WEBP · Max 5MB</p><div class="file-preview hidden" id="photoPreview"></div></div>
+</div>
+<div class="field-group" style="margin-top:1.25rem">
+<label>Resume <span class="req">*</span></label>
+<p style="font-size:.8rem;color:var(--muted);margin-bottom:.75rem">PDF format only. Max 10MB.</p>
+<div class="upload-zone" id="resumeZone"><input type="file" id="resumeFile" accept="application/pdf" onchange="previewFile('resumeZone','resumePreview',this)"/><div class="upload-icon">📄</div><p><strong>Click to upload</strong> your resume</p><p>PDF only · Max 10MB</p><div class="file-preview hidden" id="resumePreview"></div></div>
+</div>
+<div class="field-group" style="margin-top:1.25rem">
+<label>🎙️ Voice Introduction <span class="req">*</span></label>
+<div class="voice-required-banner"><div class="vr-icon">🎙️</div><p><span>Voice recording is required</span> — applications without one will not be reviewed. It only takes 60–90 seconds!</p></div>
+<div style="background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.3);border-radius:10px;padding:1.25rem;margin-bottom:1rem">
+<p style="font-size:.75rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:.75rem">📝 What to Say (60–90 seconds)</p>
+<p style="font-size:.82rem;color:var(--text);line-height:1.8;font-style:italic">"Hi, my name is [Your Name]. I'm a [Your Role] based in the Philippines with [X] years of experience. I specialize in [your top 2–3 skills], and I'm fluent in English. I have experience with tools like [CRM / tools you use]. I'm [full-time / part-time] available and excited to work with US clients through Elite Remote Agent. I'm reliable, detail-oriented, and ready to hit the ground running — I'd love the opportunity to work with your team. Thank you!"</p>
+</div>
+<div style="background:#0F0F0F;border:1px solid var(--gold);border-radius:10px;padding:1.25rem;margin-bottom:.75rem">
+<p style="font-size:.75rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:.6rem">🌟 Option 1 — Vocaroo (Free · No Account Needed · Easiest)</p>
+<ol style="font-size:.82rem;color:var(--muted);padding-left:1.25rem;line-height:2;margin-bottom:.85rem">
+<li>Go to <a href="https://vocaroo.com" target="_blank" style="color:var(--gold)">vocaroo.com</a> — opens in a new tab</li>
+<li>Press the <strong style="color:var(--text)">red mic button</strong>, read your intro above, then press stop</li>
+<li>Click <strong style="color:var(--text)">"Copy Link"</strong> and paste it below</li>
+</ol>
+<input type="url" id="voiceUrl" placeholder="https://vocaroo.com/..." style="border-color:rgba(212,175,55,.4)" oninput="onVoiceUrlInput(this)"/>
+<div id="voiceUrlStatus" style="font-size:.75rem;margin-top:.4rem;display:none"></div>
+</div>
+<div style="background:#0F0F0F;border:1px solid var(--border);border-radius:10px;padding:1.25rem">
+<p style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem">📱 Option 2 — Upload a File (Phone or Computer)</p>
+<p style="font-size:.8rem;color:var(--muted);margin-bottom:.75rem">Record a voice memo on your phone, then upload it here. MP3, WAV, or M4A — max 25MB.</p>
+<div class="upload-zone" id="voiceZone"><input type="file" id="voiceFile" accept="audio/mpeg,audio/wav,audio/mp3,audio/m4a,audio/*" onchange="previewFile('voiceZone','voicePreview',this)"/><div class="upload-icon">📤</div><p><strong>Click to upload</strong> your voice recording</p><p>MP3, WAV, M4A · Max 25MB</p><div class="file-preview hidden" id="voicePreview"></div></div>
+</div>
+<p style="font-size:.75rem;color:var(--muted);margin-top:.6rem;text-align:center">* Vocaroo link OR file upload — one is required to submit</p>
+</div>
+<div id="submitError" class="error-msg hidden"></div>
+<button class="btn-submit" id="submitBtn" onclick="submitApplication()">🚀 Submit My Application</button>
+<p style="text-align:center;font-size:.75rem;color:var(--muted);margin-top:1rem">Your application will be reviewed within 3–5 business days. You'll receive an email once a decision has been made.</p>
+<div class="form-nav" style="border-top:none;padding-top:.5rem;margin-top:.5rem"><button class="btn-back" onclick="goToStep(4)">← Back</button><span></span></div>
+</div>
+<div id="stepSuccess" class="hidden">
+<div class="success-screen">
+<div class="success-icon">🎉</div>
+<h2>APPLICATION SUBMITTED!</h2>
+<p>Your application has been received and is under review. We typically respond within 3–5 business days.</p>
+<div class="next-steps">
+<h3>What Happens Next</h3>
+<div class="next-step-item"><div class="step-num">1</div><span>Our team reviews your profile, resume, and voice recording</span></div>
+<div class="next-step-item"><div class="step-num">2</div><span>If approved, your profile goes live and clients can browse you</span></div>
+<div class="next-step-item"><div class="step-num">3</div><span>A client sends an interview or hire request — you get notified</span></div>
+<div class="next-step-item"><div class="step-num">4</div><span>Complete onboarding, start earning $6–$12/hr US clients</span></div>
+</div>
+</div>
+</div>
+</div></div>
+<div class="loading-overlay hidden" id="loadingOverlay"><div class="spinner"></div><p id="loadingMsg">Submitting your application...</p><small id="loadingSubMsg">Uploading files, please don't close this page</small></div>
 <script type="module">
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
-
 const SUPABASE_URL = 'https://wcmvtfclkybgdwjybyzb.supabase.co'
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndjbXZ0ZmNsa3liZ2R3anlieXpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMzExOTIsImV4cCI6MjA5NDgwNzE5Mn0.zI0tjF7dN0DT30Mkd1nEDyMdXlYPzTmKH3BxvNea1Fs'
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-
-// ── PRESET TOOLS ──────────────────────────────────────────────────
-const PRESET_PRIMARY_TOOLS = [
-  'Follow Up Boss','KVCore','Dotloop','Skyslope','Mojo Dialer',
-  'REDX','Canva','Google Workspace','Slack','Zoom',
-  'Trello','Asana','HubSpot','GoHighLevel'
-]
-const PRESET_SECONDARY_TOOLS = [
-  'Loom','Notion','Monday.com','Zapier','ClickUp',
-  'DocuSign','Authentisign','BombBomb','Mailchimp'
-]
-
+const PRESET_PRIMARY_TOOLS = ['Follow Up Boss','KVCore','Dotloop','Skyslope','Mojo Dialer','REDX','Canva','Google Workspace','Slack','Zoom','Trello','Asana','HubSpot','GoHighLevel']
+const PRESET_SECONDARY_TOOLS = ['Loom','Notion','Monday.com','Zapier','ClickUp','DocuSign','Authentisign','BombBomb','Mailchimp']
 let primaryToolsSelected = []
 let secondaryToolsSelected = []
 let currentStep = 1
-
-// ── INIT ──────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
-  renderPresetTools('primaryToolsGrid', PRESET_PRIMARY_TOOLS, 'primary')
-  renderPresetTools('secondaryToolsGrid', PRESET_SECONDARY_TOOLS, 'secondary')
-  addSkill()        // Start with one skill row
-  addWorkHistory()  // Start with one work entry
-  addEducation()    // Start with one education entry
+renderPresetTools('primaryToolsGrid', PRESET_PRIMARY_TOOLS, 'primary')
+renderPresetTools('secondaryToolsGrid', PRESET_SECONDARY_TOOLS, 'secondary')
+addSkill(); addWorkHistory(); addEducation()
 })
-
-// ── STEP NAVIGATION ───────────────────────────────────────────────
 window.goToStep = function(n) {
-  if (n > currentStep && !validateStep(currentStep)) return
-  document.getElementById('step' + currentStep).classList.add('hidden')
-  currentStep = n
-  document.getElementById('step' + n).classList.remove('hidden')
-  updateProgressBar(n)
-  window.scrollTo({top: 0, behavior: 'smooth'})
+if (n > currentStep && !validateStep(currentStep)) return
+document.getElementById('step' + currentStep).classList.add('hidden')
+currentStep = n
+document.getElementById('step' + n).classList.remove('hidden')
+updateProgressBar(n)
+window.scrollTo({top: 0, behavior: 'smooth'})
 }
-
 function updateProgressBar(active) {
-  for (let i = 1; i <= 5; i++) {
-    const dot = document.getElementById('dot' + i)
-    const label = document.getElementById('label' + i)
-    dot.className = 'step-dot'
-    label.className = 'step-label'
-    if (i < active) { dot.classList.add('done'); dot.textContent = '✓' }
-    else if (i === active) { dot.classList.add('active'); dot.textContent = i; label.classList.add('active') }
-    else { dot.textContent = i }
-    if (i < 5) {
-      const line = document.getElementById('line' + i)
-      line.className = 'step-line' + (i < active ? ' done' : '')
-    }
-  }
+for (let i = 1; i <= 5; i++) {
+const dot = document.getElementById('dot' + i)
+const label = document.getElementById('label' + i)
+dot.className = 'step-dot'; label.className = 'step-label'
+if (i < active) { dot.classList.add('done'); dot.textContent = '✓' }
+else if (i === active) { dot.classList.add('active'); dot.textContent = i; label.classList.add('active') }
+else { dot.textContent = i }
+if (i < 5) { const line = document.getElementById('line' + i); line.className = 'step-line' + (i < active ? ' done' : '') }
 }
-
-// ── VALIDATION ────────────────────────────────────────────────────
+}
 function validateStep(n) {
-  if (n === 1) {
-    const required = ['firstName','lastName','email','phone','category','role','yearsExp','hourlyRate','englishLevel','bio']
-    for (const id of required) {
-      const el = document.getElementById(id)
-      if (!el.value.trim()) {
-        el.focus()
-        el.style.borderColor = 'var(--error)'
-        setTimeout(() => el.style.borderColor = '', 2000)
-        alert('Please fill in all required fields before continuing.')
-        return false
-      }
-    }
-  }
-  if (n === 2) {
-    const skills = document.querySelectorAll('.skill-name-input')
-    const filled = [...skills].filter(s => s.value.trim()).length
-    if (filled < 1) {
-      alert('Please add at least 1 skill.')
-      return false
-    }
-    if (primaryToolsSelected.length === 0) {
-      alert('Please add at least 1 primary tool or CRM.')
-      return false
-    }
-  }
-  return true
+if (n === 1) {
+const required = ['firstName','lastName','email','phone','category','role','yearsExp','hourlyRate','englishLevel','bio']
+for (const id of required) {
+const el = document.getElementById(id)
+if (!el.value.trim()) { el.focus(); el.style.borderColor = 'var(--error)'; setTimeout(() => el.style.borderColor = '', 2000); alert('Please fill in all required fields before continuing.'); return false }
 }
-
-// ── SKILLS ────────────────────────────────────────────────────────
+}
+if (n === 2) {
+const skills = document.querySelectorAll('.skill-name-input')
+if ([...skills].filter(s => s.value.trim()).length < 1) { alert('Please add at least 1 skill.'); return false }
+if (primaryToolsSelected.length === 0) { alert('Please add at least 1 primary tool or CRM.'); return false }
+}
+return true
+}
+window.onVoiceUrlInput = function(input) {
+const statusEl = document.getElementById('voiceUrlStatus')
+const val = input.value.trim()
+if (!val) { statusEl.style.display = 'none'; input.style.borderColor = 'rgba(212,175,55,.4)'; return }
+statusEl.style.display = 'block'
+if (val.startsWith('https://vocaroo.com/') && val.length > 25) { statusEl.textContent = '✅ Valid Vocaroo link!'; statusEl.style.color = 'var(--success)'; input.style.borderColor = 'var(--success)' }
+else if (val.startsWith('http')) { statusEl.textContent = '⚠️ Make sure this is a direct link to your recording'; statusEl.style.color = 'var(--gold)'; input.style.borderColor = 'var(--gold)' }
+else { statusEl.textContent = '❌ Please enter a valid URL starting with https://'; statusEl.style.color = 'var(--error)'; input.style.borderColor = 'var(--error)' }
+}
 window.addSkill = function() {
-  const list = document.getElementById('skillsList')
-  if (list.querySelectorAll('.skill-row').length >= 8) return
-  const idx = Date.now()
-  const div = document.createElement('div')
-  div.className = 'skill-row'
-  div.id = 'skill_' + idx
-  div.innerHTML = `
-    <div class="field-group" style="margin:0">
-      <input type="text" class="skill-name-input" placeholder="e.g. Follow Up Boss, Canva, Cold Calling"/>
-    </div>
-    <div class="field-group" style="margin:0">
-      <select class="rating-select">
-        <option value="Expert">Expert</option>
-        <option value="Advanced" selected>Advanced</option>
-        <option value="Intermediate">Intermediate</option>
-        <option value="Beginner">Beginner</option>
-      </select>
-    </div>
-    <button style="background:none;border:1px solid #333;color:#888;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:.9rem;flex-shrink:0;margin-bottom:1.25rem" onclick="document.getElementById('skill_${idx}').remove()">✕</button>
-  `
-  list.appendChild(div)
+const list = document.getElementById('skillsList')
+if (list.querySelectorAll('.skill-row').length >= 8) return
+const idx = Date.now()
+const div = document.createElement('div'); div.className = 'skill-row'; div.id = 'skill_' + idx
+div.innerHTML = `<div class="field-group" style="margin:0"><input type="text" class="skill-name-input" placeholder="e.g. Follow Up Boss, Canva, Cold Calling"/></div><div class="field-group" style="margin:0"><select class="rating-select"><option value="Expert">Expert</option><option value="Advanced" selected>Advanced</option><option value="Intermediate">Intermediate</option><option value="Beginner">Beginner</option></select></div><button style="background:none;border:1px solid #333;color:#888;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:.9rem;flex-shrink:0;margin-bottom:1.25rem" onclick="document.getElementById('skill_${idx}').remove()">✕</button>`
+list.appendChild(div)
 }
-
-// ── TOOLS ─────────────────────────────────────────────────────────
 function renderPresetTools(gridId, tools, type) {
-  const grid = document.getElementById(gridId)
-  tools.forEach(tool => {
-    const chip = document.createElement('div')
-    chip.className = 'tool-chip'
-    chip.dataset.tool = tool
-    chip.dataset.type = type
-    chip.textContent = tool
-    chip.onclick = () => toggleTool(chip, tool, type)
-    grid.appendChild(chip)
-  })
+const grid = document.getElementById(gridId)
+tools.forEach(tool => { const chip = document.createElement('div'); chip.className = 'tool-chip'; chip.dataset.tool = tool; chip.textContent = tool; chip.onclick = () => toggleTool(chip, tool, type); grid.appendChild(chip) })
 }
-
 function toggleTool(chip, tool, type) {
-  const arr = type === 'primary' ? primaryToolsSelected : secondaryToolsSelected
-  const idx = arr.indexOf(tool)
-  if (idx === -1) {
-    arr.push(tool)
-    chip.classList.add('selected')
-  } else {
-    arr.splice(idx, 1)
-    chip.classList.remove('selected')
-  }
+const arr = type === 'primary' ? primaryToolsSelected : secondaryToolsSelected
+const idx = arr.indexOf(tool)
+if (idx === -1) { arr.push(tool); chip.classList.add('selected') } else { arr.splice(idx, 1); chip.classList.remove('selected') }
 }
-
 window.addCustomTool = function(type) {
-  const inputId = type === 'primary' ? 'primaryToolInput' : 'secondaryToolInput'
-  const gridId = type === 'primary' ? 'primaryToolsGrid' : 'secondaryToolsGrid'
-  const arr = type === 'primary' ? primaryToolsSelected : secondaryToolsSelected
-  const input = document.getElementById(inputId)
-  const val = input.value.trim()
-  if (!val) return
-  if (arr.includes(val)) { input.value = ''; return }
-  arr.push(val)
-  const grid = document.getElementById(gridId)
-  const chip = document.createElement('div')
-  chip.className = 'tool-chip selected'
-  chip.dataset.tool = val
-  chip.innerHTML = val + ' <span class="chip-x" onclick="removeTool(this,\'' + type + '\',\'' + val.replace(/'/g, "\\'") + '\')">✕</span>'
-  grid.appendChild(chip)
-  input.value = ''
+const input = document.getElementById(type === 'primary' ? 'primaryToolInput' : 'secondaryToolInput')
+const arr = type === 'primary' ? primaryToolsSelected : secondaryToolsSelected
+const val = input.value.trim(); if (!val || arr.includes(val)) { input.value = ''; return }
+arr.push(val)
+const grid = document.getElementById(type === 'primary' ? 'primaryToolsGrid' : 'secondaryToolsGrid')
+const chip = document.createElement('div'); chip.className = 'tool-chip selected'
+chip.innerHTML = val + ` <span class="chip-x" onclick="removeTool(this,'${type}','${val.replace(/'/g,"\\'")}')">✕</span>`
+grid.appendChild(chip); input.value = ''
 }
-
 window.removeTool = function(el, type, tool) {
-  const arr = type === 'primary' ? primaryToolsSelected : secondaryToolsSelected
-  const idx = arr.indexOf(tool)
-  if (idx !== -1) arr.splice(idx, 1)
-  el.closest('.tool-chip').remove()
+const arr = type === 'primary' ? primaryToolsSelected : secondaryToolsSelected
+const idx = arr.indexOf(tool); if (idx !== -1) arr.splice(idx, 1); el.closest('.tool-chip').remove()
 }
-
-// ── WORK HISTORY ──────────────────────────────────────────────────
 window.addWorkHistory = function() {
-  const list = document.getElementById('workHistoryList')
-  if (list.querySelectorAll('.dynamic-section').length >= 4) return
-  const idx = Date.now()
-  const div = document.createElement('div')
-  div.className = 'dynamic-section'
-  div.id = 'work_' + idx
-  div.innerHTML = `
-    <button class="remove-btn" onclick="document.getElementById('work_${idx}').remove()">✕</button>
-    <div class="field-row" style="margin-bottom:.75rem">
-      <div class="field-group" style="margin:0">
-        <label>Job Title</label>
-        <input type="text" class="work-role" placeholder="Transaction Coordinator"/>
-      </div>
-      <div class="field-group" style="margin:0">
-        <label>Company / Team</label>
-        <input type="text" class="work-company" placeholder="Top Producing Team — Phoenix, AZ"/>
-      </div>
-    </div>
-    <div class="field-group" style="margin-bottom:.75rem">
-      <label>Period</label>
-      <input type="text" class="work-period" placeholder="2022–Present"/>
-    </div>
-    <div class="field-group" style="margin:0">
-      <label>What did you do?</label>
-      <textarea class="work-desc" rows="2" placeholder="Describe your key responsibilities and achievements..."></textarea>
-    </div>
-  `
-  list.appendChild(div)
-  if (list.querySelectorAll('.dynamic-section').length >= 4) {
-    document.getElementById('addWorkBtn').style.display = 'none'
-  }
+const list = document.getElementById('workHistoryList')
+if (list.querySelectorAll('.dynamic-section').length >= 4) return
+const idx = Date.now(); const div = document.createElement('div'); div.className = 'dynamic-section'; div.id = 'work_' + idx
+div.innerHTML = `<button class="remove-btn" onclick="document.getElementById('work_${idx}').remove()">✕</button><div class="field-row" style="margin-bottom:.75rem"><div class="field-group" style="margin:0"><label>Job Title</label><input type="text" class="work-role" placeholder="Transaction Coordinator"/></div><div class="field-group" style="margin:0"><label>Company / Team</label><input type="text" class="work-company" placeholder="Top Producing Team — Phoenix, AZ"/></div></div><div class="field-group" style="margin-bottom:.75rem"><label>Period</label><input type="text" class="work-period" placeholder="2022–Present"/></div><div class="field-group" style="margin:0"><label>What did you do?</label><textarea class="work-desc" rows="2" placeholder="Describe your key responsibilities and achievements..."></textarea></div>`
+list.appendChild(div)
+if (list.querySelectorAll('.dynamic-section').length >= 4) document.getElementById('addWorkBtn').style.display = 'none'
 }
-
-// ── EDUCATION ─────────────────────────────────────────────────────
 window.addEducation = function() {
-  const list = document.getElementById('educationList')
-  if (list.querySelectorAll('.dynamic-section').length >= 5) return
-  const idx = Date.now()
-  const div = document.createElement('div')
-  div.className = 'dynamic-section'
-  div.id = 'edu_' + idx
-  div.innerHTML = `
-    <button class="remove-btn" onclick="document.getElementById('edu_${idx}').remove()">✕</button>
-    <div class="field-row" style="margin-bottom:.75rem">
-      <div class="field-group" style="margin:0">
-        <label>Degree / Certification</label>
-        <input type="text" class="edu-degree" placeholder="BS Business Administration"/>
-      </div>
-      <div class="field-group" style="margin:0">
-        <label>School / Provider</label>
-        <input type="text" class="edu-school" placeholder="University of the Philippines"/>
-      </div>
-    </div>
-    <div class="field-row" style="margin:0">
-      <div class="field-group" style="margin:0">
-        <label>Year</label>
-        <input type="text" class="edu-year" placeholder="2020"/>
-      </div>
-      <div class="field-group" style="margin:0">
-        <label>Type</label>
-        <select class="edu-icon">
-          <option value="🎓">🎓 Degree</option>
-          <option value="📜">📜 Certificate</option>
-          <option value="🏆">🏆 Award / Honor</option>
-          <option value="📋">📋 Training</option>
-        </select>
-      </div>
-    </div>
-  `
-  list.appendChild(div)
-  if (list.querySelectorAll('.dynamic-section').length >= 5) {
-    document.getElementById('addEduBtn').style.display = 'none'
-  }
+const list = document.getElementById('educationList')
+if (list.querySelectorAll('.dynamic-section').length >= 5) return
+const idx = Date.now(); const div = document.createElement('div'); div.className = 'dynamic-section'; div.id = 'edu_' + idx
+div.innerHTML = `<button class="remove-btn" onclick="document.getElementById('edu_${idx}').remove()">✕</button><div class="field-row" style="margin-bottom:.75rem"><div class="field-group" style="margin:0"><label>Degree / Certification</label><input type="text" class="edu-degree" placeholder="BS Business Administration"/></div><div class="field-group" style="margin:0"><label>School / Provider</label><input type="text" class="edu-school" placeholder="University of the Philippines"/></div></div><div class="field-row" style="margin:0"><div class="field-group" style="margin:0"><label>Year</label><input type="text" class="edu-year" placeholder="2020"/></div><div class="field-group" style="margin:0"><label>Type</label><select class="edu-icon"><option value="🎓">🎓 Degree</option><option value="📜">📜 Certificate</option><option value="🏆">🏆 Award / Honor</option><option value="📋">📋 Training</option></select></div></div>`
+list.appendChild(div)
+if (list.querySelectorAll('.dynamic-section').length >= 5) document.getElementById('addEduBtn').style.display = 'none'
 }
-
-// ── FILE PREVIEW ──────────────────────────────────────────────────
 window.previewFile = function(zoneId, previewId, input) {
-  const preview = document.getElementById(previewId)
-  const zone = document.getElementById(zoneId)
-  if (input.files && input.files[0]) {
-    const f = input.files[0]
-    preview.textContent = '✅ ' + f.name + ' (' + (f.size / 1024 / 1024).toFixed(1) + 'MB)'
-    preview.classList.remove('hidden')
-    zone.style.borderColor = 'var(--success)'
-  }
+const preview = document.getElementById(previewId); const zone = document.getElementById(zoneId)
+if (input.files && input.files[0]) { const f = input.files[0]; preview.textContent = '✅ ' + f.name + ' (' + (f.size/1024/1024).toFixed(1) + 'MB)'; preview.classList.remove('hidden'); zone.style.borderColor = 'var(--success)' }
 }
-
-// ── UPLOAD FILE ───────────────────────────────────────────────────
 async function uploadFile(bucket, file, folder) {
-  const ext = file.name.split('.').pop()
-  const path = folder + '/' + Date.now() + '_' + Math.random().toString(36).slice(2) + '.' + ext
-  const { data, error } = await supabase.storage.from(bucket).upload(path, file, {
-    cacheControl: '3600',
-    upsert: false
-  })
-  if (error) throw new Error('Upload failed: ' + error.message)
-  const { data: urlData } = supabase.storage.from(bucket).getPublicUrl(path)
-  return urlData.publicUrl
+const ext = file.name.split('.').pop()
+const path = folder + '/' + Date.now() + '_' + Math.random().toString(36).slice(2) + '.' + ext
+const { error } = await supabase.storage.from(bucket).upload(path, file, { cacheControl: '3600', upsert: false })
+if (error) throw new Error('Upload failed: ' + error.message)
+const { data: urlData } = supabase.storage.from(bucket).getPublicUrl(path)
+return urlData.publicUrl
 }
-
-// ── SUBMIT ────────────────────────────────────────────────────────
 window.submitApplication = async function() {
-  // Validate files
-  const photoFile = document.getElementById('photoFile').files[0]
-  const resumeFile = document.getElementById('resumeFile').files[0]
-  const voiceFile = document.getElementById('voiceFile').files[0]
-  const voiceUrlInput = document.getElementById('voiceUrl').value.trim()
-  const errEl = document.getElementById('submitError')
-  errEl.classList.add('hidden')
-
-  if (!photoFile) { showError('Please upload a profile photo.'); return }
-  if (!resumeFile) { showError('Please upload your resume (PDF).'); return }
-  if (!voiceFile && !voiceUrlInput) { showError('Please provide a voice recording — paste a Vocaroo link or upload a file.'); return }
-
-  // Show loading
-  const overlay = document.getElementById('loadingOverlay')
-  overlay.classList.remove('hidden')
-  document.getElementById('submitBtn').disabled = true
-
-  try {
-    // Upload files
-    setLoadingMsg('Uploading profile photo...', 'This may take a moment')
-    const photoUrl = await uploadFile('va-photos', photoFile, 'profiles')
-
-    setLoadingMsg('Uploading resume...', 'Almost there...')
-    const resumeUrl = await uploadFile('va-resumes', resumeFile, 'resumes')
-
-    let voiceUrl
-    if (voiceUrlInput) {
-      voiceUrl = voiceUrlInput
-    } else {
-      setLoadingMsg('Uploading voice recording...', 'Large files take a few seconds...')
-      voiceUrl = await uploadFile('va-voices', voiceFile, 'recordings')
-    }
-
-    // Build initials
-    const firstName = document.getElementById('firstName').value.trim()
-    const lastName = document.getElementById('lastName').value.trim()
-    const initials = (firstName[0] + lastName[0]).toUpperCase()
-
-    // Random profile color
-    const colors = ['#1B4F8A','#B8860B','#1a5c3a','#6B2D8B','#8B2D2D','#2D5A8B']
-    const profileColor = colors[Math.floor(Math.random() * colors.length)]
-
-    setLoadingMsg('Saving your application...', 'Writing to database')
-
-    // Insert main VA record
-    const { data: vaData, error: vaError } = await supabase
-      .from('vas')
-      .insert({
-        status: 'pending',
-        first_name: firstName,
-        last_name: lastName,
-        email: document.getElementById('email').value.trim(),
-        phone: document.getElementById('phone').value.trim(),
-        category: document.getElementById('category').value,
-        role: document.getElementById('role').value.trim(),
-        years_experience: parseInt(document.getElementById('yearsExp').value) || 0,
-        hourly_rate: parseFloat(document.getElementById('hourlyRate').value) || 0,
-        timezone: document.getElementById('timezone').value.trim(),
-        availability: document.getElementById('availability').value.trim(),
-        english_level: document.getElementById('englishLevel').value,
-        education_summary: document.getElementById('educationSummary').value.trim(),
-        bio: document.getElementById('bio').value.trim(),
-        start_date: document.getElementById('startDate').value.trim() || 'Available Now',
-        initials: initials,
-        profile_color: profileColor,
-        photo_url: photoUrl,
-        resume_url: resumeUrl,
-        badge: 'New'
-      })
-      .select('id')
-      .single()
-
-    if (vaError) throw new Error('Failed to save profile: ' + vaError.message)
-    const vaId = vaData.id
-
-    // Insert skills
-    const skillRows = document.querySelectorAll('.skill-row')
-    const skills = []
-    skillRows.forEach(row => {
-      const name = row.querySelector('.skill-name-input').value.trim()
-      const rating = row.querySelector('.rating-select').value
-      if (name) {
-        const pct = { Expert: 95, Advanced: 78, Intermediate: 55, Beginner: 30 }[rating] || 70
-        skills.push({ va_id: vaId, skill_name: name, va_self_rating: rating, final_rating: rating, level_pct: pct })
-      }
-    })
-    if (skills.length) await supabase.from('va_skills').insert(skills)
-
-    // Insert tools
-    const tools = []
-    primaryToolsSelected.forEach(t => tools.push({ va_id: vaId, tool_name: t, tool_type: 'primary' }))
-    secondaryToolsSelected.forEach(t => tools.push({ va_id: vaId, tool_name: t, tool_type: 'secondary' }))
-    if (tools.length) await supabase.from('va_tools').insert(tools)
-
-    // Insert work history
-    const workSections = document.querySelectorAll('#workHistoryList .dynamic-section')
-    const workItems = []
-    let wOrder = 0
-    workSections.forEach(sec => {
-      const role = sec.querySelector('.work-role').value.trim()
-      if (role) {
-        workItems.push({
-          va_id: vaId,
-          role: role,
-          company: sec.querySelector('.work-company').value.trim(),
-          period: sec.querySelector('.work-period').value.trim(),
-          description: sec.querySelector('.work-desc').value.trim(),
-          display_order: wOrder++
-        })
-      }
-    })
-    if (workItems.length) await supabase.from('va_work_history').insert(workItems)
-
-    // Insert education
-    const eduSections = document.querySelectorAll('#educationList .dynamic-section')
-    const eduItems = []
-    let eOrder = 0
-    eduSections.forEach(sec => {
-      const degree = sec.querySelector('.edu-degree').value.trim()
-      if (degree) {
-        eduItems.push({
-          va_id: vaId,
-          degree_name: degree,
-          school: sec.querySelector('.edu-school').value.trim(),
-          year: sec.querySelector('.edu-year').value.trim(),
-          icon: sec.querySelector('.edu-icon').value,
-          display_order: eOrder++
-        })
-      }
-    })
-    if (eduItems.length) await supabase.from('va_education').insert(eduItems)
-
-    // Insert voice recording
-    await supabase.from('va_voice_recordings').insert({
-      va_id: vaId,
-      label: '60-Second Introduction',
-      audio_url: voiceUrl,
-      duration: '',
-      display_order: 0
-    })
-
-    // Success!
-    overlay.classList.add('hidden')
-    document.getElementById('step5').classList.add('hidden')
-    document.getElementById('stepSuccess').classList.remove('hidden')
-    updateProgressBar(6)
-    window.scrollTo({top: 0, behavior: 'smooth'})
-
-  } catch (err) {
-    overlay.classList.add('hidden')
-    document.getElementById('submitBtn').disabled = false
-    showError('Something went wrong: ' + err.message + '. Please try again or email admin@divinegrowth-va.com')
-    console.error(err)
-  }
+const photoFile = document.getElementById('photoFile').files[0]
+const resumeFile = document.getElementById('resumeFile').files[0]
+const voiceFile = document.getElementById('voiceFile').files[0]
+const voiceUrlInput = document.getElementById('voiceUrl').value.trim()
+document.getElementById('submitError').classList.add('hidden')
+if (!photoFile) { showError('Please upload a profile photo.'); return }
+if (!resumeFile) { showError('Please upload your resume (PDF).'); return }
+if (!voiceFile && !voiceUrlInput) {
+showError('⚠️ Voice recording is required — please paste your Vocaroo link or upload an audio file. Applications without a voice recording will not be reviewed.')
+document.getElementById('voiceUrl').scrollIntoView({behavior: 'smooth', block: 'center'})
+return
 }
-
-function setLoadingMsg(msg, sub) {
-  document.getElementById('loadingMsg').textContent = msg
-  document.getElementById('loadingSubMsg').textContent = sub
+if (voiceUrlInput && !voiceUrlInput.startsWith('http')) {
+showError('Please enter a valid URL for your voice recording (should start with https://).')
+return
 }
-
-function showError(msg) {
-  const el = document.getElementById('submitError')
-  el.textContent = msg
-  el.classList.remove('hidden')
-  el.scrollIntoView({behavior: 'smooth', block: 'center'})
+const overlay = document.getElementById('loadingOverlay')
+overlay.classList.remove('hidden')
+document.getElementById('submitBtn').disabled = true
+try {
+setLoadingMsg('Uploading profile photo...', 'This may take a moment')
+const photoUrl = await uploadFile('va-photos', photoFile, 'profiles')
+setLoadingMsg('Uploading resume...', 'Almost there...')
+const resumeUrl = await uploadFile('va-resumes', resumeFile, 'resumes')
+let voiceUrl
+if (voiceUrlInput) { voiceUrl = voiceUrlInput }
+else { setLoadingMsg('Uploading voice recording...', 'Large files take a few seconds...'); voiceUrl = await uploadFile('va-voices', voiceFile, 'recordings') }
+const firstName = document.getElementById('firstName').value.trim()
+const lastName = document.getElementById('lastName').value.trim()
+const initials = (firstName[0] + lastName[0]).toUpperCase()
+const colors = ['#1B4F8A','#B8860B','#1a5c3a','#6B2D8B','#8B2D2D','#2D5A8B']
+const profileColor = colors[Math.floor(Math.random() * colors.length)]
+setLoadingMsg('Saving your application...', 'Writing to database')
+const { data: vaData, error: vaError } = await supabase.from('vas').insert({
+status: 'pending', first_name: firstName, last_name: lastName,
+email: document.getElementById('email').value.trim(), phone: document.getElementById('phone').value.trim(),
+category: document.getElementById('category').value, role: document.getElementById('role').value.trim(),
+years_experience: parseInt(document.getElementById('yearsExp').value) || 0,
+hourly_rate: parseFloat(document.getElementById('hourlyRate').value) || 0,
+timezone: document.getElementById('timezone').value.trim(), availability: document.getElementById('availability').value.trim(),
+english_level: document.getElementById('englishLevel').value, education_summary: document.getElementById('educationSummary').value.trim(),
+bio: document.getElementById('bio').value.trim(), start_date: document.getElementById('startDate').value.trim() || 'Available Now',
+initials, profile_color: profileColor, photo_url: photoUrl, resume_url: resumeUrl, badge: 'New'
+}).select('id').single()
+if (vaError) throw new Error('Failed to save profile: ' + vaError.message)
+const vaId = vaData.id
+const skillRows = document.querySelectorAll('.skill-row')
+const skills = []
+skillRows.forEach(row => { const name = row.querySelector('.skill-name-input').value.trim(); const rating = row.querySelector('.rating-select').value; if (name) { const pct = {Expert:95,Advanced:78,Intermediate:55,Beginner:30}[rating]||70; skills.push({va_id:vaId,skill_name:name,va_self_rating:rating,final_rating:rating,level_pct:pct}) } })
+if (skills.length) await supabase.from('va_skills').insert(skills)
+const tools = []
+primaryToolsSelected.forEach(t => tools.push({va_id:vaId,tool_name:t,tool_type:'primary'}))
+secondaryToolsSelected.forEach(t => tools.push({va_id:vaId,tool_name:t,tool_type:'secondary'}))
+if (tools.length) await supabase.from('va_tools').insert(tools)
+const workSections = document.querySelectorAll('#workHistoryList .dynamic-section')
+const workItems = []; let wOrder = 0
+workSections.forEach(sec => { const role = sec.querySelector('.work-role').value.trim(); if (role) workItems.push({va_id:vaId,role,company:sec.querySelector('.work-company').value.trim(),period:sec.querySelector('.work-period').value.trim(),description:sec.querySelector('.work-desc').value.trim(),display_order:wOrder++}) })
+if (workItems.length) await supabase.from('va_work_history').insert(workItems)
+const eduSections = document.querySelectorAll('#educationList .dynamic-section')
+const eduItems = []; let eOrder = 0
+eduSections.forEach(sec => { const degree = sec.querySelector('.edu-degree').value.trim(); if (degree) eduItems.push({va_id:vaId,degree_name:degree,school:sec.querySelector('.edu-school').value.trim(),year:sec.querySelector('.edu-year').value.trim(),icon:sec.querySelector('.edu-icon').value,display_order:eOrder++}) })
+if (eduItems.length) await supabase.from('va_education').insert(eduItems)
+setLoadingMsg('Saving voice recording...', 'Almost done!')
+const { error: voiceRecordingError } = await supabase.from('va_voice_recordings').insert({va_id:vaId,label:'60-Second Introduction',audio_url:voiceUrl,duration:'',display_order:0})
+if (voiceRecordingError) throw new Error('Failed to save voice recording: ' + voiceRecordingError.message)
+overlay.classList.add('hidden')
+document.getElementById('step5').classList.add('hidden')
+document.getElementById('stepSuccess').classList.remove('hidden')
+updateProgressBar(6)
+window.scrollTo({top: 0, behavior: 'smooth'})
+} catch (err) {
+document.getElementById('loadingOverlay').classList.add('hidden')
+document.getElementById('submitBtn').disabled = false
+showError('Something went wrong: ' + err.message + '. Please try again or email admin@divinegrowth-va.com')
+console.error(err)
 }
+}
+function setLoadingMsg(msg, sub) { document.getElementById('loadingMsg').textContent = msg; document.getElementById('loadingSubMsg').textContent = sub }
+function showError(msg) { const el = document.getElementById('submitError'); el.textContent = msg; el.classList.remove('hidden'); el.scrollIntoView({behavior:'smooth',block:'center'}) }
 </script>
 </body>
 </html>
