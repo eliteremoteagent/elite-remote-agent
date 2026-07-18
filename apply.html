@@ -294,29 +294,6 @@
         <textarea id="bio" rows="4" placeholder="Tell clients about your experience, specialties, and what makes you a great hire. Be specific about your real estate or business background..."></textarea>
       </div>
 
-      <div style="margin-top:1.75rem;padding:1.5rem;background:#0F0F0F;border:1px solid var(--border);border-radius:10px">
-        <div style="font-size:.75rem;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:2px;margin-bottom:.25rem">✦ Your 3 Client Highlights</div>
-        <p style="font-size:.8rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.55">These appear at the very top of your profile — the first thing every client reads. Be specific. Specific beats impressive every time.</p>
-
-        <div class="field-group">
-          <label>What are you best at? <span class="req">*</span></label>
-          <p style="font-size:.75rem;color:var(--muted);margin-bottom:.5rem">Be specific — not just "admin work." Name the exact role, tools, and what you actually do day-to-day.</p>
-          <textarea id="highlightBestAt" rows="3" placeholder="e.g. I specialize in transaction coordination. I've processed 200+ real estate closings using Dotloop and Skyslope, managing everything from contract to close — without the agent having to chase a single document."></textarea>
-        </div>
-
-        <div class="field-group">
-          <label>Describe one real result you got for a client <span class="req">*</span></label>
-          <p style="font-size:.75rem;color:var(--muted);margin-bottom:.5rem">A specific outcome with a number if possible. What actually changed because of your work?</p>
-          <textarea id="highlightResult" rows="3" placeholder="e.g. I took over follow-up for a Phoenix team doing 8 deals/month. Within 60 days their lead response time dropped from 4 hours to 12 minutes — and they closed 3 deals from leads that had previously gone cold."></textarea>
-        </div>
-
-        <div class="field-group" style="margin-bottom:0">
-          <label>What makes you different from other VAs? <span class="req">*</span></label>
-          <p style="font-size:.75rem;color:var(--muted);margin-bottom:.5rem">Your honest differentiator — bilingual, agent background, niche specialization, US client experience, etc.</p>
-          <textarea id="highlightDifferentiator" rows="3" placeholder="e.g. I'm a licensed real estate agent in the Philippines with a US real estate certificate. I understand the full transaction from both sides — I don't just follow checklists, I anticipate problems before they happen."></textarea>
-        </div>
-      </div>
-
       <div class="form-nav">
         <span class="step-counter">Step <strong>1</strong> of 5</span>
         <button class="btn-next" onclick="goToStep(2)">Next: Skills & Tools →</button>
@@ -429,18 +406,39 @@
 
       <!-- Voice Recording -->
       <div class="field-group" style="margin-top:1.25rem">
-        <label>Voice Recording <span class="req">*</span></label>
-        <p style="font-size:.8rem;color:var(--muted);margin-bottom:.75rem">Record a 60–90 second introduction. Speak clearly. MP3, WAV, or M4A. Max 25MB.</p>
-        <div class="upload-zone" id="voiceZone">
-          <input type="file" id="voiceFile" accept="audio/mpeg,audio/wav,audio/mp3,audio/m4a,audio/*" onchange="previewFile('voiceZone','voicePreview',this)"/>
-          <div class="upload-icon">🎙️</div>
-          <p><strong>Click to upload</strong> your voice recording</p>
-          <p>MP3, WAV, M4A · Max 25MB</p>
-          <div class="file-preview hidden" id="voicePreview"></div>
+        <label>🎙️ Voice Introduction <span class="req">*</span></label>
+
+        <!-- Script Template -->
+        <div style="background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.3);border-radius:10px;padding:1.25rem;margin-bottom:1rem">
+          <p style="font-size:.75rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:.75rem">📝 What to Say (60–90 seconds)</p>
+          <p style="font-size:.82rem;color:var(--text);line-height:1.8;font-style:italic">"Hi, my name is [Your Name]. I'm a [Your Role] based in the Philippines with [X] years of experience. I specialize in [your top 2–3 skills], and I'm fluent in English. I have experience with tools like [CRM / tools you use]. I'm [full-time / part-time] available and excited to work with US clients through Elite Remote Agent. I'm reliable, detail-oriented, and ready to hit the ground running — I'd love the opportunity to work with your team. Thank you!"</p>
         </div>
-        <div style="background:#0F0F0F;border:1px solid var(--border);border-radius:8px;padding:1rem;margin-top:.75rem">
-          <p style="font-size:.8rem;color:var(--muted)"><strong style="color:var(--gold)">💡 Recording tips:</strong> Say your name, role, years of experience, the tools you know, and why you'd be a great hire. Keep it under 90 seconds. Record in a quiet room.</p>
+
+        <!-- Option 1: Vocaroo -->
+        <div style="background:#0F0F0F;border:1px solid var(--gold);border-radius:10px;padding:1.25rem;margin-bottom:.75rem">
+          <p style="font-size:.75rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:.6rem">🌟 Option 1 — Vocaroo (Free · No Account Needed · Easiest)</p>
+          <ol style="font-size:.82rem;color:var(--muted);padding-left:1.25rem;line-height:2;margin-bottom:.85rem">
+            <li>Go to <a href="https://vocaroo.com" target="_blank" style="color:var(--gold)">vocaroo.com</a> — opens in a new tab</li>
+            <li>Press the <strong style="color:var(--text)">red mic button</strong>, read your intro above, then press stop</li>
+            <li>Click <strong style="color:var(--text)">"Copy Link"</strong> and paste it below</li>
+          </ol>
+          <input type="url" id="voiceUrl" placeholder="https://vocaroo.com/..." style="border-color:rgba(212,175,55,.4)"/>
         </div>
+
+        <!-- Option 2: File Upload -->
+        <div style="background:#0F0F0F;border:1px solid var(--border);border-radius:10px;padding:1.25rem">
+          <p style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem">📱 Option 2 — Upload a File (Phone or Computer)</p>
+          <p style="font-size:.8rem;color:var(--muted);margin-bottom:.75rem">Record a voice memo on your phone, then upload it here. MP3, WAV, or M4A — max 25MB.</p>
+          <div class="upload-zone" id="voiceZone">
+            <input type="file" id="voiceFile" accept="audio/mpeg,audio/wav,audio/mp3,audio/m4a,audio/*" onchange="previewFile('voiceZone','voicePreview',this)"/>
+            <div class="upload-icon">📤</div>
+            <p><strong>Click to upload</strong> your voice recording</p>
+            <p>MP3, WAV, M4A · Max 25MB</p>
+            <div class="file-preview hidden" id="voicePreview"></div>
+          </div>
+        </div>
+
+        <p style="font-size:.75rem;color:var(--muted);margin-top:.6rem;text-align:center">* Vocaroo link OR file upload — one is required</p>
       </div>
 
       <div id="submitError" class="error-msg hidden"></div>
@@ -543,7 +541,7 @@ function updateProgressBar(active) {
 // ── VALIDATION ────────────────────────────────────────────────────
 function validateStep(n) {
   if (n === 1) {
-    const required = ['firstName','lastName','email','phone','category','role','yearsExp','hourlyRate','englishLevel','bio','highlightBestAt','highlightResult','highlightDifferentiator']
+    const required = ['firstName','lastName','email','phone','category','role','yearsExp','hourlyRate','englishLevel','bio']
     for (const id of required) {
       const el = document.getElementById(id)
       if (!el.value.trim()) {
@@ -754,12 +752,13 @@ window.submitApplication = async function() {
   const photoFile = document.getElementById('photoFile').files[0]
   const resumeFile = document.getElementById('resumeFile').files[0]
   const voiceFile = document.getElementById('voiceFile').files[0]
+  const voiceUrlInput = document.getElementById('voiceUrl').value.trim()
   const errEl = document.getElementById('submitError')
   errEl.classList.add('hidden')
 
   if (!photoFile) { showError('Please upload a profile photo.'); return }
   if (!resumeFile) { showError('Please upload your resume (PDF).'); return }
-  if (!voiceFile) { showError('Please upload your voice recording.'); return }
+  if (!voiceFile && !voiceUrlInput) { showError('Please provide a voice recording — paste a Vocaroo link or upload a file.'); return }
 
   // Show loading
   const overlay = document.getElementById('loadingOverlay')
@@ -774,8 +773,13 @@ window.submitApplication = async function() {
     setLoadingMsg('Uploading resume...', 'Almost there...')
     const resumeUrl = await uploadFile('va-resumes', resumeFile, 'resumes')
 
-    setLoadingMsg('Uploading voice recording...', 'Large files take a few seconds...')
-    const voiceUrl = await uploadFile('va-voices', voiceFile, 'recordings')
+    let voiceUrl
+    if (voiceUrlInput) {
+      voiceUrl = voiceUrlInput
+    } else {
+      setLoadingMsg('Uploading voice recording...', 'Large files take a few seconds...')
+      voiceUrl = await uploadFile('va-voices', voiceFile, 'recordings')
+    }
 
     // Build initials
     const firstName = document.getElementById('firstName').value.trim()
@@ -811,10 +815,7 @@ window.submitApplication = async function() {
         profile_color: profileColor,
         photo_url: photoUrl,
         resume_url: resumeUrl,
-        badge: 'New',
-        highlight_best_at: document.getElementById('highlightBestAt').value.trim(),
-        highlight_result: document.getElementById('highlightResult').value.trim(),
-        highlight_differentiator: document.getElementById('highlightDifferentiator').value.trim()
+        badge: 'New'
       })
       .select('id')
       .single()
