@@ -181,7 +181,7 @@ footer { border-top: 1px solid var(--border); padding: 2rem; display: flex; just
   </div>
   <div class="nav-cta">
     <a href="dashboard.html" class="btn-outline">Log In</a>
-    <a href="checkout.html" class="btn-gold">Start Free →</a>
+    <a href="checkout.html" class="btn-gold">Interview/Hire Today →</a>
   </div>
 </nav>
 
@@ -360,30 +360,11 @@ function renderProfile(va) {
     <div class="hire-bar">
       <div class="cta-text">
         <h3>Ready to hire ${fullName.split(' ')[0] || 'this VA'}?</h3>
-        <p>Start your free trial — no placement fees, no contracts.</p>
+        <p>No placement fees, no contracts. Interview and hire today.</p>
       </div>
-      <a href="checkout.html" class="btn-hire">Hire Now — Start Free</a>
+      <a href="checkout.html" class="btn-hire">Interview/Hire Today</a>
       <a href="contact.html" class="btn-contact">Ask a Question</a>
     </div>
-
-    ${(va.highlight_best_at || va.highlight_result || va.highlight_differentiator) ? `
-    <div style="margin-bottom:1.5rem">
-      <div style="font-size:.62rem;font-weight:800;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:.9rem">✦ Why Clients Hire ${fullName.split(' ')[0]}</div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem">
-        ${va.highlight_best_at ? `<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.5rem">
-          <div style="font-size:.62rem;font-weight:800;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:.6rem">🎯 What I'm Best At</div>
-          <div style="font-size:.88rem;line-height:1.7;color:var(--text)">${va.highlight_best_at}</div>
-        </div>` : ''}
-        ${va.highlight_result ? `<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.5rem">
-          <div style="font-size:.62rem;font-weight:800;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:.6rem">📈 A Real Result I Got</div>
-          <div style="font-size:.88rem;line-height:1.7;color:var(--text)">${va.highlight_result}</div>
-        </div>` : ''}
-        ${va.highlight_differentiator ? `<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.5rem">
-          <div style="font-size:.62rem;font-weight:800;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:.6rem">⚡ What Makes Me Different</div>
-          <div style="font-size:.88rem;line-height:1.7;color:var(--text)">${va.highlight_differentiator}</div>
-        </div>` : ''}
-      </div>
-    </div>` : ''}
 
     <div class="profile-cols">
       <div class="main-col">
@@ -412,7 +393,7 @@ function renderProfile(va) {
         <div class="sidebar-section" style="background:rgba(212,175,55,.05);border-color:rgba(212,175,55,.2)">
           <div class="sidebar-title" style="color:var(--gold)">Zero Fees</div>
           <p style="font-size:.8rem;color:var(--muted);line-height:1.6">No placement fees. No contracts. Just a flat monthly subscription. Hire as many VAs as you need.</p>
-          <a href="checkout.html" class="btn-gold" style="display:block;text-align:center;margin-top:1rem;border-radius:8px;padding:.65rem 1rem">Start Free Trial →</a>
+          <a href="checkout.html" class="btn-gold" style="display:block;text-align:center;margin-top:1rem;border-radius:8px;padding:.65rem 1rem">Interview/Hire Today →</a>
         </div>
       </div>
     </div>
@@ -448,7 +429,7 @@ async function loadProfile() {
   const { data, error } = await supabase
     .from('vas')
     .select(`
-      *, highlight_best_at, highlight_result, highlight_differentiator,
+      *,
       va_skills ( skill_name, va_self_rating, final_rating, level_pct ),
       va_tools ( tool_name, tool_type ),
       va_work_history ( role, company, period, description, display_order ),
