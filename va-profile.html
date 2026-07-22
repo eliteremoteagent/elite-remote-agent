@@ -328,11 +328,11 @@ function renderProfile(va) {
       </div>`
     : ''
 
-  // Resume
+  // Resume — gated behind checkout (members only)
   const resumeHtml = resumeUrl
-    ? `<a href="${resumeUrl}" target="_blank" rel="noopener" class="resume-btn">
-        <div class="icon">📄</div>
-        <div class="text"><p>Download Resume</p><small>PDF · Opens in new tab</small></div>
+    ? `<a href="checkout.html" class="resume-btn">
+        <div class="icon">🔒</div>
+        <div class="text"><p>Download Resume</p><small>Members only · Sign up to view</small></div>
       </a>`
     : ''
 
