@@ -117,7 +117,11 @@ textarea.fi{resize:vertical;min-height:90px;line-height:1.6;}
 .btn-submit.blue:hover{filter:brightness(1.1);box-shadow:0 8px 25px rgba(52,152,219,0.3);}
 .secure-note{display:flex;align-items:center;justify-content:center;gap:0.4rem;font-size:0.68rem;color:rgba(255,255,255,0.2);margin-top:0.75rem;}
 
-/* CALENDAR SLOTS */
+/* CALENDAR EMBED PLACEHOLDER */
+.cal-placeholder{background:rgba(255,255,255,0.02);border:1.5px dashed var(--border2);border-radius:12px;padding:2.5rem;text-align:center;margin-bottom:1rem;}
+.cal-icon{font-size:2.5rem;margin-bottom:0.75rem;}
+.cal-title{font-weight:700;font-size:0.9rem;margin-bottom:0.4rem;}
+.cal-desc{font-size:0.75rem;color:rgba(255,255,255,0.35);line-height:1.6;margin-bottom:1.25rem;}
 .cal-options{display:flex;flex-direction:column;gap:0.5rem;}
 .cal-slot{display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1rem;background:var(--dark2);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all 0.2s;}
 .cal-slot:hover{border-color:var(--gold);background:rgba(212,168,67,0.04);}
@@ -250,7 +254,7 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;align
     <!-- LEFT — INFO -->
     <div class="info-col">
       <h2 class="info-title">What Happens On<br/>a <span>Demo Call?</span></h2>
-      <p class="info-sub">A demo call is a free 20-minute conversation where we show you the platform live, understand your business, and tell you exactly which VA role will make the biggest difference for you.</p>
+      <p class="info-sub">A demo call is a free 20-minute conversation where we show you the platform live, understand your business, and tell you exactly which VA role would make the biggest difference for you.</p>
 
       <div class="info-items">
         <div class="info-item">
@@ -302,7 +306,15 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;align
           </div>
           <div class="cl-arrow">→</div>
         </a>
-        <a class="cl-item" href="https://www.instagram.com/EliteRemoteAgent" target="_blank" rel="noopener">
+        <a class="cl-item" href="tel:+16233989095">
+          <div class="cl-icon green">📞</div>
+          <div>
+            <div class="cl-label">Call or Text</div>
+            <div class="cl-value">(623) 398-9095</div>
+          </div>
+          <div class="cl-arrow">→</div>
+        </a>
+        <a class="cl-item" href="#" onclick="fire('💬 Opening Instagram DM...')">
           <div class="cl-icon blue">📱</div>
           <div>
             <div class="cl-label">Instagram DM</div>
@@ -310,7 +322,7 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;align
           </div>
           <div class="cl-arrow">→</div>
         </a>
-        <div class="cl-item">
+        <div class="cl-item" onclick="fire('⏰ Response time: within 1 business day')">
           <div class="cl-icon gold">⏰</div>
           <div>
             <div class="cl-label">Response Time</div>
@@ -332,58 +344,8 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;align
           <!-- DEMO FORM -->
           <div class="form-content active" id="form-demo">
             <div id="demo-form-wrap">
-              <div style="font-size:0.68rem;font-weight:800;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:1.25rem;">Your Information</div>
-              <div class="form-row">
-                <div><label class="fl">First Name *</label><input class="fi" type="text" id="demo-fname" placeholder="Sarah"/></div>
-                <div><label class="fl">Last Name *</label><input class="fi" type="text" id="demo-lname" placeholder="Johnson"/></div>
-              </div>
-              <label class="fl">Email Address *</label>
-              <input class="fi" type="email" id="demo-email" placeholder="sarah@realty.com"/>
-              <label class="fl">Phone Number *</label>
-              <input class="fi" type="tel" id="demo-phone" placeholder="(602) 555-0100"/>
-              <label class="fl">I Am A *</label>
-              <select class="fi" id="demo-type">
-                <option value="">Select your role</option>
-                <option>Solo Real Estate Agent</option>
-                <option>Real Estate Team Leader</option>
-                <option>Real Estate Broker/Owner</option>
-                <option>Med Spa / Healthcare Owner</option>
-                <option>Law Firm / Legal</option>
-                <option>Insurance Agency Owner</option>
-                <option>Mortgage / Lending</option>
-                <option>E-Commerce Business Owner</option>
-                <option>Other Business Owner</option>
-              </select>
-              <label class="fl">What's Your Biggest Challenge Right Now? *</label>
-              <select class="fi" id="demo-challenge">
-                <option value="">Select your biggest pain point</option>
-                <option>Leads going cold — nobody following up</option>
-                <option>Transactions falling through without coordination</option>
-                <option>No time to market myself or my business</option>
-                <option>Admin work eating all my time</option>
-                <option>Can't afford US-based staff</option>
-                <option>Bad experience with unvetted VAs before</option>
-                <option>Need to scale but don't know where to start</option>
-              </select>
-              <label class="fl">CRM You Currently Use</label>
-              <select class="fi" id="demo-crm">
-                <option value="">Select your CRM</option>
-                <option>Follow Up Boss</option>
-                <option>KVCore</option>
-                <option>Chime</option>
-                <option>HubSpot</option>
-                <option>Go High Level</option>
-                <option>Salesforce</option>
-                <option>LionDesk</option>
-                <option>Other / None</option>
-              </select>
-
-              <div style="font-size:0.68rem;font-weight:800;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:1rem;margin-top:0.25rem;">Pick Your Demo Time</div>
-              <!-- Dynamic slots injected by JS -->
-              <div id="demo-slots" class="cal-options" style="margin-bottom:1.25rem;"></div>
-              <div id="selected-slot" style="display:none;background:rgba(212,168,67,0.08);border:1px solid rgba(212,168,67,0.2);border-radius:8px;padding:0.6rem 0.875rem;font-size:0.78rem;color:var(--gold);font-weight:700;margin-bottom:1rem;">✓ Selected: <span id="slot-text"></span></div>
-              <button class="btn-submit" onclick="submitDemo()">🎯 Book My Free Demo →</button>
-              <div class="secure-note">🔒 No spam. No obligations. Cancel or reschedule anytime.</div>
+              <iframe src="https://api.leadconnectorhq.com/widget/booking/46wLPqrZ0Lba1wghzHvM" style="width:100%;min-height:850px;border:none;overflow:hidden;border-radius:10px;" scrolling="no" id="46wLPqrZ0Lba1wghzHvM_1"></iframe>
+              <script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
             </div>
             <div class="success-card" id="demo-success">
               <div class="success-icon">🎉</div>
@@ -406,7 +368,7 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;align
               <label class="fl">Email Address *</label>
               <input class="fi" type="email" id="msg-email" placeholder="sarah@realty.com"/>
               <label class="fl">Phone (Optional)</label>
-              <input class="fi" type="tel" id="msg-phone" placeholder="(602) 555-0100"/>
+              <input class="fi" type="tel" id="msg-phone" placeholder="(623) 398-9095"/>
               <label class="fl">I Am A</label>
               <select class="fi" id="msg-type">
                 <option value="">Select your role</option>
@@ -503,8 +465,8 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;align
     <a class="foot-link" href="checkout.html">Pricing</a>
     <a class="foot-link" href="apply.html">For VAs</a>
     <a class="foot-link" href="dashboard.html">Client Login</a>
-    <a class="foot-link" href="privacy.html">Privacy Policy</a>
-    <a class="foot-link" href="tos.html">Terms</a>
+    <a class="foot-link" href="#">Privacy Policy</a>
+    <a class="foot-link" href="#">Terms</a>
   </div>
   <div class="foot-copy">© 2026 Elite Remote Agent. All rights reserved.</div>
 </footer>
@@ -527,57 +489,6 @@ function switchTab(tab){
   document.querySelectorAll('.form-content').forEach(c=>c.classList.remove('active'));
   document.getElementById('tab-'+tab).classList.add('active');
   document.getElementById('form-'+tab).classList.add('active');
-}
-
-let selectedSlotText = '';
-function selectSlot(el, text){
-  document.querySelectorAll('.cal-slot').forEach(s=>{
-    s.style.borderColor='';
-    s.style.background='';
-  });
-  el.style.borderColor='var(--gold)';
-  el.style.background='rgba(212,168,67,0.06)';
-  selectedSlotText = text;
-  document.getElementById('selected-slot').style.display='block';
-  document.getElementById('slot-text').textContent=text;
-}
-
-// Generate dynamic demo slots — always shows upcoming weekdays
-function generateDemoSlots(){
-  const TIMES=['10:00 AM MST','2:00 PM MST','11:00 AM MST','3:00 PM MST','9:00 AM MST'];
-  const DAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const SHORT=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const slots=[];
-  const d=new Date();
-  d.setDate(d.getDate()+1);
-  while(slots.length<5){
-    const dow=d.getDay();
-    if(dow!==0&&dow!==6){
-      const time=TIMES[slots.length];
-      const key=`${SHORT[dow]} ${MONTHS[d.getMonth()]} ${d.getDate()} — ${time}`;
-      const label=`${DAYS[dow]}, ${MONTHS[d.getMonth()]} ${d.getDate()}`;
-      slots.push({time,date:label,key});
-    }
-    d.setDate(d.getDate()+1);
-  }
-  const c=document.getElementById('demo-slots');
-  if(!c)return;
-  c.innerHTML=slots.map(s=>`<div class="cal-slot" onclick="selectSlot(this,'${s.key}')"><div><div class="cs-time">${s.time}</div><div class="cs-date">${s.date}</div></div><div class="cs-avail">Available</div></div>`).join('');
-}
-generateDemoSlots();
-
-function submitDemo(){
-  const fname=document.getElementById('demo-fname').value;
-  const email=document.getElementById('demo-email').value;
-  const type=document.getElementById('demo-type').value;
-  const challenge=document.getElementById('demo-challenge').value;
-  if(!fname||!email||!type||!challenge){
-    fire('⚠️ Please fill in all required fields');return;
-  }
-  document.getElementById('demo-form-wrap').style.display='none';
-  document.getElementById('demo-success').classList.add('show');
-  fire('🎉 Demo booked! Check your email for the Zoom link.');
 }
 
 function submitMessage(){
