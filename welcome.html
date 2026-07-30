@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>You're In! — Elite Remote Agent</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --black:#050810;--dark:#0C1020;--dark2:#131828;--card:#0F1525;
+  --gold:#D4A843;--gold2:#F0C060;--gold-dim:rgba(212,168,67,0.1);
+  --white:#FFFFFF;--muted:#8892A4;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
+  --green:#2ECC71;--red:#E74C3C;--blue:#3498DB;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Manrope',sans-serif;background:var(--black);color:var(--white);min-height:100vh;overflow-x:hidden;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--black);}
+::-webkit-scrollbar-thumb{background:rgba(212,168,67,0.2);border-radius:2px;}
+
+nav{padding:1.1rem 3rem;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border);background:rgba(5,8,16,0.85);}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:3px;color:var(--gold);text-decoration:none;}
+.logo small{display:block;font-family:'Manrope',sans-serif;font-size:0.45rem;letter-spacing:4px;color:rgba(255,255,255,0.3);text-transform:uppercase;text-align:center;}
+
+.wrap{max-width:640px;margin:0 auto;padding:4.5rem 1.5rem 5rem;text-align:center;position:relative;}
+.glow{position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(212,168,67,0.08) 0%,transparent 65%);pointer-events:none;z-index:0;}
+.content{position:relative;z-index:1;}
+
+.check-icon{width:76px;height:76px;border-radius:50%;background:rgba(46,204,113,0.1);border:1.5px solid rgba(46,204,113,0.3);display:flex;align-items:center;justify-content:center;font-size:2.2rem;margin:0 auto 1.5rem;animation:pop 0.5s cubic-bezier(0.34,1.56,0.64,1);}
+@keyframes pop{from{transform:scale(0);}to{transform:scale(1);}}
+
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,6vw,3.2rem);letter-spacing:2px;line-height:1.05;margin-bottom:0.875rem;}
+h1 span{color:var(--gold);}
+.sub{color:rgba(255,255,255,0.5);font-size:0.95rem;max-width:460px;margin:0 auto 2.5rem;line-height:1.75;}
+
+.email-card{background:linear-gradient(135deg,rgba(212,168,67,0.08),rgba(212,168,67,0.02));border:1px solid rgba(212,168,67,0.2);border-radius:16px;padding:1.75rem 2rem;margin-bottom:2rem;text-align:left;}
+.ec-title{font-size:0.68rem;font-weight:800;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.5rem;}
+.ec-text{font-size:0.88rem;color:rgba(255,255,255,0.7);line-height:1.7;}
+.ec-text strong{color:var(--white);}
+
+.next-steps{display:flex;flex-direction:column;gap:0.6rem;margin-bottom:2.5rem;text-align:left;}
+.ns-item{display:flex;gap:0.875rem;align-items:flex-start;padding:0.875rem 1rem;background:var(--card);border:1px solid var(--border);border-radius:12px;}
+.ns-num{width:26px;height:26px;border-radius:50%;background:var(--gold-dim);border:1px solid rgba(212,168,67,0.25);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:800;color:var(--gold);flex-shrink:0;}
+.ns-text{font-size:0.82rem;color:rgba(255,255,255,0.6);line-height:1.55;padding-top:2px;}
+.ns-text strong{color:rgba(255,255,255,0.85);}
+
+.btn-row{display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem;}
+.btn{padding:0.9rem 2rem;border-radius:10px;font-family:'Manrope',sans-serif;font-size:0.88rem;font-weight:800;cursor:pointer;border:none;transition:all 0.25s;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;}
+.btn.gold{background:var(--gold);color:var(--black);}
+.btn.gold:hover{background:var(--gold2);transform:translateY(-1px);}
+.btn.outline{background:transparent;border:1.5px solid var(--border2);color:rgba(255,255,255,0.65);}
+.btn.outline:hover{border-color:var(--gold);color:var(--gold);}
+
+.help-note{font-size:0.78rem;color:rgba(255,255,255,0.35);line-height:1.8;}
+.help-note a{color:var(--gold);text-decoration:none;font-weight:700;}
+.help-note a:hover{text-decoration:underline;}
+
+@media(max-width:600px){
+  nav{padding:1rem 1.5rem;}
+  .wrap{padding:3rem 1.25rem 4rem;}
+  .btn-row{flex-direction:column;}
+  .btn{width:100%;justify-content:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">Elite Remote Agent<small>Pre-Screened. Trained. Ready.</small></a>
+</nav>
+
+<div class="wrap">
+  <div class="glow"></div>
+  <div class="content">
+    <div class="check-icon">✅</div>
+    <h1>You're <span>In!</span></h1>
+    <p class="sub">Your payment went through and your Elite Remote Agent subscription is active. We're setting up your account right now.</p>
+
+    <div class="email-card">
+      <div class="ec-title">📧 Check Your Email Next</div>
+      <div class="ec-text">Within the next few minutes, you'll receive an email with a <strong>secure link to set your password</strong> and log into your dashboard. If you don't see it shortly, check your <strong>spam or promotions folder</strong>.</div>
+    </div>
+
+    <div class="next-steps">
+      <div class="ns-item"><div class="ns-num">1</div><div class="ns-text"><strong>Open the email</strong> from Elite Remote Agent and set your password.</div></div>
+      <div class="ns-item"><div class="ns-num">2</div><div class="ns-text"><strong>Log into your dashboard</strong> to start browsing pre-screened VAs by role, CRM, and rate.</div></div>
+      <div class="ns-item"><div class="ns-num">3</div><div class="ns-text"><strong>Hire your first VA</strong> — most clients have someone onboarded within 24–48 hours.</div></div>
+    </div>
+
+    <div class="btn-row">
+      <a href="dashboard.html" class="btn gold">Go to Dashboard →</a>
+      <a href="how-it-works.html" class="btn outline">How It Works</a>
+    </div>
+
+    <p class="help-note">Didn't get the email within 10 minutes, or need help? Email us at <a href="mailto:hello@eliteremoteagent.com">hello@eliteremoteagent.com</a> or call/text <a href="tel:+16233989095">(623) 398-9095</a> and we'll get you set up manually.</p>
+  </div>
+</div>
+
+</body>
+</html>
