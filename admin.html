@@ -13,7 +13,12 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: var(--black); color: var(--text); font-family: 'Manrope', sans-serif; min-height: 100vh; }
-#passwordGate { position: fixed; inset: 0; background: var(--black); display: flex; align-items: center; justify-content: center; z-index: 9999; }
+
+/* ── PASSWORD GATE ── */
+#passwordGate {
+  position: fixed; inset: 0; background: var(--black);
+  display: flex; align-items: center; justify-content: center; z-index: 9999;
+}
 .gate-box { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 2.5rem; width: 360px; text-align: center; }
 .gate-box h1 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--gold); margin-bottom: .25rem; }
 .gate-box p { color: var(--muted); font-size: .85rem; margin-bottom: 1.5rem; }
@@ -22,13 +27,19 @@ body { background: var(--black); color: var(--text); font-family: 'Manrope', san
 .gate-btn { width: 100%; background: var(--gold); color: var(--black); border: none; padding: .8rem; border-radius: 8px; font-weight: 800; font-size: 1rem; cursor: pointer; }
 .gate-btn:hover { background: var(--gold-light); }
 .gate-error { color: var(--error); font-size: .8rem; margin-top: .75rem; }
+
+/* ── LAYOUT ── */
 #appShell { display: none; min-height: 100vh; }
+
+/* TOP NAV */
 .topnav { background: var(--dark); border-bottom: 1px solid var(--border); padding: 0 1.5rem; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
 .topnav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--gold); letter-spacing: 2px; }
 .topnav-logo span { color: var(--muted); font-size: .75rem; font-family: 'Manrope', sans-serif; font-weight: 400; letter-spacing: 0; margin-left: .5rem; }
 .topnav-actions { display: flex; gap: .75rem; align-items: center; }
 .topnav-actions a { color: var(--muted); font-size: .8rem; text-decoration: none; padding: .4rem .8rem; border: 1px solid var(--border); border-radius: 6px; transition: all .2s; }
 .topnav-actions a:hover { color: var(--gold); border-color: var(--gold); }
+
+/* STATS BAR */
 .stats-bar { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); border-bottom: 1px solid var(--border); }
 .stat-cell { background: var(--dark); padding: .9rem 1.25rem; text-align: center; cursor: pointer; transition: background .2s; }
 .stat-cell:hover { background: #1a1a1a; }
@@ -40,12 +51,17 @@ body { background: var(--black); color: var(--text); font-family: 'Manrope', san
 .stat-num.inactive { color: var(--muted); }
 .stat-num.all { color: var(--gold); }
 .stat-label { font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+/* MAIN SPLIT */
 .split { display: grid; grid-template-columns: 340px 1fr; min-height: calc(100vh - 112px); }
+
+/* LEFT: LIST PANEL */
 .list-panel { border-right: 1px solid var(--border); overflow-y: auto; }
 .list-search { padding: .75rem 1rem; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--dark); z-index: 10; }
 .list-search input { width: 100%; background: #0F0F0F; border: 1px solid var(--border); border-radius: 8px; color: var(--text); padding: .55rem .9rem; font-size: .85rem; outline: none; }
 .list-search input:focus { border-color: var(--gold); }
 .list-count { padding: .5rem 1rem; font-size: .75rem; color: var(--muted); border-bottom: 1px solid var(--border); background: var(--dark); }
+
 .va-row { padding: .9rem 1rem; border-bottom: 1px solid var(--border); cursor: pointer; transition: background .15s; display: flex; gap: .75rem; align-items: flex-start; }
 .va-row:hover { background: #1a1a1a; }
 .va-row.selected { background: rgba(212,175,55,.07); border-left: 3px solid var(--gold); }
@@ -61,10 +77,14 @@ body { background: var(--black); color: var(--text); font-family: 'Manrope', san
 .status-badge.inactive { background: rgba(136,136,136,.15); color: var(--muted); }
 .status-badge.archived { background: rgba(255,68,68,.1); color: var(--error); }
 .va-row-date { font-size: .7rem; color: var(--muted); }
+
+/* RIGHT: DETAIL PANEL */
 .detail-panel { overflow-y: auto; padding: 0; }
 .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--muted); text-align: center; padding: 3rem; }
 .empty-state .icon { font-size: 3rem; margin-bottom: 1rem; opacity: .4; }
 .empty-state p { font-size: .9rem; }
+
+/* DETAIL HEADER */
 .detail-header { padding: 1.5rem; border-bottom: 1px solid var(--border); display: flex; gap: 1.25rem; align-items: flex-start; background: var(--dark); position: sticky; top: 0; z-index: 10; }
 .detail-avatar { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 800; color: #fff; flex-shrink: 0; overflow: hidden; }
 .detail-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
@@ -76,59 +96,82 @@ body { background: var(--black); color: var(--text); font-family: 'Manrope', san
 .action-btns { display: flex; gap: .5rem; flex-wrap: wrap; }
 .btn-approve { background: var(--success); color: #fff; border: none; padding: .55rem 1.1rem; border-radius: 7px; font-weight: 700; font-size: .82rem; cursor: pointer; transition: opacity .2s; }
 .btn-approve:hover { opacity: .85; }
-.btn-archive { background: none; border: 1px solid var(--error); color: var(--error); padding: .55rem 1rem; border-radius: 7px; font-weight: 700; font-size: .82rem; cursor: pointer; }
+.btn-archive { background: none; border: 1px solid var(--error); color: var(--error); padding: .55rem 1rem; border-radius: 7px; font-weight: 700; font-size: .82rem; cursor: pointer; transition: all .2s; }
 .btn-archive:hover { background: rgba(255,68,68,.1); }
-.btn-hired { background: var(--info); color: #fff; border: none; padding: .55rem 1rem; border-radius: 7px; font-weight: 700; font-size: .82rem; cursor: pointer; }
+.btn-hired { background: var(--info); color: #fff; border: none; padding: .55rem 1rem; border-radius: 7px; font-weight: 700; font-size: .82rem; cursor: pointer; transition: opacity .2s; }
 .btn-hired:hover { opacity: .85; }
-.btn-inactive { background: none; border: 1px solid var(--border); color: var(--muted); padding: .55rem 1rem; border-radius: 7px; font-weight: 700; font-size: .82rem; cursor: pointer; }
+.btn-inactive { background: none; border: 1px solid var(--border); color: var(--muted); padding: .55rem 1rem; border-radius: 7px; font-weight: 700; font-size: .82rem; cursor: pointer; transition: all .2s; }
 .btn-inactive:hover { border-color: var(--muted); color: var(--text); }
 .btn-pending { background: none; border: 1px solid var(--warn); color: var(--warn); padding: .55rem 1rem; border-radius: 7px; font-weight: 700; font-size: .82rem; cursor: pointer; }
+
+/* DETAIL BODY */
 .detail-body { padding: 1.5rem; display: grid; gap: 1.25rem; }
 .section-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; }
 .section-title { font-size: .7rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 1rem; display: flex; align-items: center; gap: .5rem; }
 .info-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: .75rem; }
 .info-item label { display: block; font-size: .68rem; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: .2rem; }
 .info-item span { font-size: .88rem; font-weight: 600; }
+
+/* BIO */
 .bio-text { font-size: .88rem; color: var(--text); line-height: 1.65; }
+
+/* FILES */
 .file-links { display: flex; gap: .75rem; flex-wrap: wrap; }
 .file-link { display: flex; align-items: center; gap: .5rem; background: #0F0F0F; border: 1px solid var(--border); border-radius: 8px; padding: .55rem 1rem; font-size: .82rem; color: var(--gold); text-decoration: none; transition: border-color .2s; }
 .file-link:hover { border-color: var(--gold); }
+
+/* SKILLS */
 .skill-item { display: flex; align-items: center; gap: .75rem; margin-bottom: .65rem; }
 .skill-name { flex: 1; font-size: .85rem; font-weight: 600; }
 .skill-bar-wrap { width: 120px; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
 .skill-bar { height: 100%; background: var(--gold); border-radius: 3px; }
 .skill-rating-edit { background: #0F0F0F; border: 1px solid var(--border); color: var(--text); border-radius: 6px; padding: .25rem .5rem; font-size: .75rem; cursor: pointer; }
 .skill-rating-edit:focus { border-color: var(--gold); outline: none; }
+
+/* TOOLS */
 .tools-wrap { display: flex; flex-wrap: wrap; gap: .4rem; }
 .tool-tag { background: #0F0F0F; border: 1px solid var(--border); border-radius: 6px; padding: .25rem .6rem; font-size: .78rem; }
 .tool-tag.primary { border-color: rgba(212,175,55,.4); color: var(--gold); }
+
+/* WORK HISTORY */
 .work-item { padding: .75rem 0; border-bottom: 1px solid var(--border); }
 .work-item:last-child { border-bottom: none; }
 .work-item .work-role { font-weight: 700; font-size: .88rem; }
 .work-item .work-company { color: var(--muted); font-size: .8rem; margin-top: .15rem; }
 .work-item .work-period { color: var(--gold); font-size: .75rem; margin-top: .1rem; }
 .work-item .work-desc { color: var(--muted); font-size: .82rem; margin-top: .4rem; line-height: 1.5; }
+
+/* EDUCATION */
 .edu-item { display: flex; gap: .75rem; align-items: flex-start; padding: .5rem 0; }
 .edu-icon { font-size: 1.2rem; }
 .edu-info .edu-degree { font-weight: 700; font-size: .85rem; }
 .edu-info .edu-school { color: var(--muted); font-size: .78rem; }
+
+/* AUDIO PLAYER */
 .audio-wrap { display: flex; flex-direction: column; gap: .75rem; }
 .audio-item { background: #0F0F0F; border: 1px solid var(--border); border-radius: 8px; padding: .75rem 1rem; }
 .audio-label { font-size: .78rem; color: var(--muted); margin-bottom: .4rem; }
 audio { width: 100%; height: 36px; }
+
+/* ADMIN NOTES */
 .notes-area { width: 100%; background: #0F0F0F; border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: 'Manrope', sans-serif; font-size: .85rem; padding: .75rem 1rem; resize: vertical; min-height: 80px; outline: none; }
 .notes-area:focus { border-color: var(--gold); }
 .save-notes-btn { margin-top: .5rem; background: var(--gold); color: var(--black); border: none; padding: .5rem 1.25rem; border-radius: 7px; font-weight: 700; font-size: .82rem; cursor: pointer; }
 .save-notes-btn:hover { background: var(--gold-light); }
 .notes-saved { color: var(--success); font-size: .78rem; margin-left: .75rem; opacity: 0; transition: opacity .3s; }
+
+/* TOAST */
 .toast { position: fixed; bottom: 1.5rem; right: 1.5rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: .75rem 1.25rem; font-size: .85rem; font-weight: 600; z-index: 9999; display: flex; align-items: center; gap: .5rem; transform: translateY(80px); opacity: 0; transition: all .3s; pointer-events: none; }
 .toast.show { transform: translateY(0); opacity: 1; }
 .toast.success { border-color: var(--success); color: var(--success); }
 .toast.error { border-color: var(--error); color: var(--error); }
+
+/* LOADING */
 .loading-row { padding: 2rem; text-align: center; color: var(--muted); font-size: .85rem; }
 .spinner-sm { display: inline-block; width: 16px; height: 16px; border: 2px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin .7s linear infinite; margin-right: .5rem; vertical-align: middle; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .hidden { display: none !important; }
+
 @media (max-width: 800px) {
   .split { grid-template-columns: 1fr; }
   .detail-panel { display: none; }
@@ -138,6 +181,7 @@ audio { width: 100%; height: 36px; }
 </head>
 <body>
 
+<!-- PASSWORD GATE -->
 <div id="passwordGate">
   <div class="gate-box">
     <h1>ERA ADMIN</h1>
@@ -148,7 +192,10 @@ audio { width: 100%; height: 36px; }
   </div>
 </div>
 
+<!-- APP SHELL -->
 <div id="appShell">
+
+  <!-- TOP NAV -->
   <div class="topnav">
     <div class="topnav-logo">ERA ADMIN <span>· VA Management</span></div>
     <div class="topnav-actions">
@@ -158,6 +205,7 @@ audio { width: 100%; height: 36px; }
     </div>
   </div>
 
+  <!-- STATS BAR -->
   <div class="stats-bar">
     <div class="stat-cell active" id="tab_all" onclick="filterByStatus('all')">
       <span class="stat-num all" id="count_all">–</span>
@@ -181,7 +229,10 @@ audio { width: 100%; height: 36px; }
     </div>
   </div>
 
+  <!-- SPLIT LAYOUT -->
   <div class="split">
+
+    <!-- LEFT: LIST -->
     <div class="list-panel">
       <div class="list-search">
         <input type="text" id="searchInput" placeholder="🔍  Search by name, role, email..." oninput="filterList()"/>
@@ -189,15 +240,19 @@ audio { width: 100%; height: 36px; }
       <div class="list-count" id="listCount">Loading...</div>
       <div id="vaList"><div class="loading-row"><span class="spinner-sm"></span>Loading applications...</div></div>
     </div>
+
+    <!-- RIGHT: DETAIL -->
     <div class="detail-panel" id="detailPanel">
       <div class="empty-state">
         <div class="icon">👈</div>
         <p>Select a VA from the list to review their application</p>
       </div>
     </div>
+
   </div>
 </div>
 
+<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script type="module">
@@ -207,6 +262,8 @@ const SUPABASE_URL = 'https://wcmvtfclkybgdwjybyzb.supabase.co'
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndjbXZ0ZmNsa3liZ2R3anlieXpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMzExOTIsImV4cCI6MjA5NDgwNzE5Mn0.zI0tjF7dN0DT30Mkd1nEDyMdXlYPzTmKH3BxvNea1Fs'
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
+// ── SIMPLE PASSWORD GATE ──────────────────────────────────────────
+// Change this password to whatever you want
 const ADMIN_PASSWORD = 'ERA2025admin'
 
 window.checkPw = function() {
@@ -228,10 +285,19 @@ window.logout = function() {
 }
 document.getElementById('pwInput').addEventListener('keydown', e => { if (e.key === 'Enter') window.checkPw() })
 
-let allVAs = [], filteredVAs = [], currentFilter = 'all', selectedVAId = null
+// ── STATE ─────────────────────────────────────────────────────────
+let allVAs = []
+let filteredVAs = []
+let currentFilter = 'all'
+let selectedVAId = null
 
+// ── LOAD DATA ─────────────────────────────────────────────────────
 async function loadAll() {
-  const { data, error } = await supabase.from('vas').select('*').order('created_at', { ascending: false })
+  const { data, error } = await supabase
+    .from('vas')
+    .select('*')
+    .order('created_at', { ascending: false })
+
   if (error) { showToast('Failed to load VAs: ' + error.message, 'error'); return }
   allVAs = data || []
   updateCounts()
@@ -239,8 +305,9 @@ async function loadAll() {
 }
 
 function updateCounts() {
+  const statuses = ['pending','approved','hired','inactive']
   document.getElementById('count_all').textContent = allVAs.length
-  ;['pending','approved','hired','inactive'].forEach(s => {
+  statuses.forEach(s => {
     document.getElementById('count_' + s).textContent = allVAs.filter(v => v.status === s).length
   })
 }
@@ -255,22 +322,28 @@ window.filterByStatus = function(status) {
 
 window.filterList = function() {
   const q = document.getElementById('searchInput').value.toLowerCase()
-  const shown = q ? filteredVAs.filter(v =>
-    (v.first_name + ' ' + v.last_name).toLowerCase().includes(q) ||
-    (v.role || '').toLowerCase().includes(q) ||
-    (v.email || '').toLowerCase().includes(q) ||
-    (v.category || '').toLowerCase().includes(q)) : filteredVAs
+  const shown = q
+    ? filteredVAs.filter(v =>
+        (v.first_name + ' ' + v.last_name).toLowerCase().includes(q) ||
+        (v.role || '').toLowerCase().includes(q) ||
+        (v.email || '').toLowerCase().includes(q) ||
+        (v.category || '').toLowerCase().includes(q))
+    : filteredVAs
   renderList(shown)
 }
 
 function renderList(vas) {
   const container = document.getElementById('vaList')
   document.getElementById('listCount').textContent = vas.length + ' VA' + (vas.length !== 1 ? 's' : '')
-  if (!vas.length) { container.innerHTML = '<div class="loading-row" style="color:var(--muted)">No VAs found</div>'; return }
+  if (!vas.length) {
+    container.innerHTML = '<div class="loading-row" style="color:var(--muted)">No VAs found</div>'
+    return
+  }
   container.innerHTML = vas.map(v => `
     <div class="va-row ${selectedVAId === v.id ? 'selected' : ''}" id="row_${v.id}" onclick="selectVA('${v.id}')">
       <div class="va-avatar" style="background:${v.profile_color || '#1B4F8A'}">
-        ${v.photo_url ? `<img src="${v.photo_url}" alt="${v.first_name}" style="width:40px;height:40px;border-radius:50%;object-fit:cover" onerror="this.parentElement.textContent='${(v.initials||'?').replace(/'/g,"\\'")}'">`
+        ${v.photo_url
+          ? `<img src="${v.photo_url}" alt="${v.first_name}" onerror="this.parentElement.textContent='${(v.initials||'?').replace(/'/g,"\\'")}'">`
           : (v.initials || '?')}
       </div>
       <div class="va-row-info">
@@ -284,31 +357,39 @@ function renderList(vas) {
     </div>`).join('')
 }
 
+// ── SELECT VA ─────────────────────────────────────────────────────
 window.selectVA = async function(id) {
   selectedVAId = id
   document.querySelectorAll('.va-row').forEach(r => r.classList.remove('selected'))
   const row = document.getElementById('row_' + id)
   if (row) row.classList.add('selected')
+
   const panel = document.getElementById('detailPanel')
   panel.innerHTML = '<div class="loading-row"><span class="spinner-sm"></span>Loading profile...</div>'
+
   const va = allVAs.find(v => v.id === id)
   if (!va) return
-  const [skills, tools, work, edu, voice] = await Promise.all([
+
+  // Fetch related data in parallel
+  const [skills, tools, work, edu, voice, assignedClient] = await Promise.all([
     supabase.from('va_skills').select('*').eq('va_id', id).order('level_pct', { ascending: false }),
     supabase.from('va_tools').select('*').eq('va_id', id),
     supabase.from('va_work_history').select('*').eq('va_id', id).order('display_order'),
     supabase.from('va_education').select('*').eq('va_id', id).order('display_order'),
-    supabase.from('va_voice_recordings').select('*').eq('va_id', id).order('display_order')
+    supabase.from('va_voice_recordings').select('*').eq('va_id', id).order('display_order'),
+    supabase.from('clients').select('email').eq('va_id', id).maybeSingle()
   ])
-  renderDetail(va, skills.data || [], tools.data || [], work.data || [], edu.data || [], voice.data || [])
+
+  renderDetail(va, skills.data || [], tools.data || [], work.data || [], edu.data || [], voice.data || [], assignedClient.data || null)
 }
 
-function renderDetail(va, skills, tools, work, edu, voice) {
+function renderDetail(va, skills, tools, work, edu, voice, assignedClient) {
   const panel = document.getElementById('detailPanel')
   const primaryTools = tools.filter(t => t.tool_type === 'primary')
   const secondaryTools = tools.filter(t => t.tool_type === 'secondary')
 
   panel.innerHTML = `
+    <!-- HEADER -->
     <div class="detail-header">
       <div class="detail-avatar" style="background:${va.profile_color || '#1B4F8A'}">
         ${va.photo_url
@@ -328,11 +409,15 @@ function renderDetail(va, skills, tools, work, edu, voice) {
           <span>📂 ${va.category || '—'}</span>
         </div>
       </div>
-      <div class="action-btns" id="actionBtns_${va.id}">${renderActionBtns(va)}</div>
+      <div class="action-btns" id="actionBtns_${va.id}">
+        ${renderActionBtns(va)}
+      </div>
     </div>
 
+    <!-- BODY -->
     <div class="detail-body">
 
+      <!-- CONTACT & INFO -->
       <div class="section-card">
         <div class="section-title">📋 Contact & Info</div>
         <div class="info-grid">
@@ -345,75 +430,35 @@ function renderDetail(va, skills, tools, work, edu, voice) {
         </div>
       </div>
 
+      <!-- FILES -->
       <div class="section-card">
         <div class="section-title">📁 Files</div>
-        <div class="file-links" style="margin-bottom:.75rem">
-          ${va.photo_url ? `<a class="file-link" href="${va.photo_url}" target="_blank">🖼️ Profile Photo</a>` : '<span style="color:var(--muted);font-size:.82rem">No photo yet</span>'}
+        <div class="file-links">
+          ${va.photo_url ? `<a class="file-link" href="${va.photo_url}" target="_blank">🖼️ Profile Photo</a>` : '<span style="color:var(--muted);font-size:.82rem">No photo</span>'}
           ${va.resume_url ? `<a class="file-link" href="${va.resume_url}" target="_blank">📄 Resume PDF</a>` : '<span style="color:var(--muted);font-size:.82rem">No resume</span>'}
-        </div>
-        <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
-          <label style="cursor:pointer">
-            <input type="file" accept="image/*" style="display:none" onchange="uploadPhoto('${va.id}', this)">
-            <span class="file-link" style="cursor:pointer" id="uploadPhotoBtn_${va.id}">📤 ${va.photo_url ? 'Replace Photo' : 'Upload Photo'}</span>
-          </label>
-          <span id="photoUploadStatus_${va.id}" style="font-size:.78rem;color:var(--muted)"></span>
         </div>
       </div>
 
+      <!-- BIO -->
       <div class="section-card">
         <div class="section-title">💬 Bio</div>
         <p class="bio-text">${va.bio || '<em style="color:var(--muted)">No bio provided</em>'}</p>
       </div>
 
-      <!-- VOICE RECORDINGS — always visible, admin can add/delete -->
+      <!-- VOICE RECORDINGS -->
+      ${voice.length ? `
       <div class="section-card">
-        <div class="section-title" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem">
-          <span>🎙️ Voice Recordings</span>
-          <button onclick="showAddRecording('${va.id}')"
-            style="background:var(--gold);color:var(--black);border:none;padding:.25rem .75rem;border-radius:6px;font-size:.68rem;font-weight:700;cursor:pointer;text-transform:none;letter-spacing:0">
-            + Add Recording
-          </button>
+        <div class="section-title">🎙️ Voice Recordings</div>
+        <div class="audio-wrap">
+          ${voice.map(v => `
+            <div class="audio-item">
+              <div class="audio-label">${v.label}${v.duration ? ' · ' + v.duration : ''}</div>
+              <audio controls src="${v.audio_url}"></audio>
+            </div>`).join('')}
         </div>
-        <div id="voiceList_${va.id}">
-          ${voice.length ? `<div class="audio-wrap">
-            ${voice.map(v => `
-              <div class="audio-item" id="recording_${v.id}">
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.35rem">
-                  <div class="audio-label" style="margin:0">${v.label}${v.duration ? ' · ' + v.duration : ''}</div>
-                  <button onclick="deleteRecording('${v.id}','${va.id}')"
-                    style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:.85rem;padding:.1rem .4rem;border-radius:4px"
-                    title="Delete">✕</button>
-                </div>
-                ${(v.audio_url || '').match(/voca\.ro|vocaroo\.com/)
-                  ? `<a href="${v.audio_url}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.4rem;background:#0F0F0F;border:1px solid var(--border);border-radius:8px;padding:.5rem 1rem;color:var(--gold);text-decoration:none;font-size:.82rem;margin-top:.15rem">🎤 Listen on Vocaroo ↗</a>`
-                  : `<audio controls src="${v.audio_url}" style="width:100%;height:36px"></audio>`}
-              </div>`).join('')}
-          </div>` : '<p style="color:var(--muted);font-size:.82rem;padding:.1rem 0">No recordings yet — click <strong style="color:var(--gold)">+ Add Recording</strong> above.</p>'}
-        </div>
-        <div id="addRecordingForm_${va.id}" style="display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)">
-          <div style="margin-bottom:.6rem">
-            <label style="display:block;font-size:.7rem;color:var(--muted);margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.5px">Label</label>
-            <input type="text" id="recLabel_${va.id}" placeholder="e.g. Introduction, Sample Call"
-              style="width:100%;background:#0F0F0F;border:1px solid var(--border);border-radius:7px;color:var(--text);padding:.55rem .8rem;font-size:.82rem;outline:none;font-family:inherit"
-              onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'"/>
-          </div>
-          <div style="margin-bottom:.75rem">
-            <label style="display:block;font-size:.7rem;color:var(--muted);margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.5px">Audio File (MP3 / WAV / M4A)</label>
-            <label style="cursor:pointer;display:inline-block">
-              <input type="file" accept="audio/*" id="recFile_${va.id}" style="display:none" onchange="previewRecordingFile('${va.id}')"/>
-              <span id="recFileLabel_${va.id}" class="file-link" style="cursor:pointer;font-size:.78rem">📁 Choose file</span>
-            </label>
-          </div>
-          <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">
-            <button onclick="uploadRecording('${va.id}')"
-              style="background:var(--gold);color:var(--black);border:none;padding:.5rem 1.1rem;border-radius:7px;font-weight:700;font-size:.8rem;cursor:pointer">Upload</button>
-            <button onclick="cancelAddRecording('${va.id}')"
-              style="background:none;border:1px solid var(--border);color:var(--muted);padding:.5rem 1rem;border-radius:7px;font-size:.8rem;cursor:pointer">Cancel</button>
-            <span id="recUploadStatus_${va.id}" style="font-size:.78rem;color:var(--muted)"></span>
-          </div>
-        </div>
-      </div>
+      </div>` : ''}
 
+      <!-- SKILLS -->
       ${skills.length ? `
       <div class="section-card">
         <div class="section-title">⚡ Skills
@@ -432,15 +477,21 @@ function renderDetail(va, skills, tools, work, edu, voice) {
           </div>`).join('')}
       </div>` : ''}
 
+      <!-- TOOLS -->
       ${tools.length ? `
       <div class="section-card">
         <div class="section-title">🔧 Tools & CRMs</div>
         ${primaryTools.length ? `<div style="margin-bottom:.5rem"><span style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Primary</span></div>
-        <div class="tools-wrap" style="margin-bottom:.75rem">${primaryTools.map(t => `<span class="tool-tag primary">${t.tool_name}</span>`).join('')}</div>` : ''}
+        <div class="tools-wrap" style="margin-bottom:.75rem">
+          ${primaryTools.map(t => `<span class="tool-tag primary">${t.tool_name}</span>`).join('')}
+        </div>` : ''}
         ${secondaryTools.length ? `<div style="margin-bottom:.5rem"><span style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Secondary</span></div>
-        <div class="tools-wrap">${secondaryTools.map(t => `<span class="tool-tag">${t.tool_name}</span>`).join('')}</div>` : ''}
+        <div class="tools-wrap">
+          ${secondaryTools.map(t => `<span class="tool-tag">${t.tool_name}</span>`).join('')}
+        </div>` : ''}
       </div>` : ''}
 
+      <!-- WORK HISTORY -->
       ${work.length ? `
       <div class="section-card">
         <div class="section-title">💼 Work History</div>
@@ -453,6 +504,7 @@ function renderDetail(va, skills, tools, work, edu, voice) {
           </div>`).join('')}
       </div>` : ''}
 
+      <!-- EDUCATION -->
       ${edu.length ? `
       <div class="section-card">
         <div class="section-title">🎓 Education & Certs</div>
@@ -466,15 +518,32 @@ function renderDetail(va, skills, tools, work, edu, voice) {
           </div>`).join('')}
       </div>` : ''}
 
+      <!-- ASSIGN TO CLIENT -->
+      <div class="section-card">
+        <div class="section-title">🔗 Assign to Client</div>
+        ${assignedClient && assignedClient.email ? `
+          <div style="font-size:.85rem;margin-bottom:.75rem;color:var(--text)">Currently assigned to <strong style="color:var(--gold)">${assignedClient.email}</strong></div>
+        ` : `
+          <div style="font-size:.82rem;color:var(--muted);margin-bottom:.75rem">Not yet assigned to a paying client.</div>
+        `}
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <input type="email" id="assignEmail_${va.id}" placeholder="client@email.com" style="flex:1;min-width:200px;background:#0F0F0F;border:1px solid var(--border);border-radius:8px;color:var(--text);padding:.55rem .9rem;font-size:.85rem;outline:none;"/>
+          <button class="save-notes-btn" onclick="assignToClient('${va.id}')">Assign &amp; Notify</button>
+        </div>
+        <div style="font-size:.72rem;color:var(--muted);margin-top:.5rem">Client must have already completed checkout (looked up by the email on their Stripe payment).</div>
+      </div>
+
+      <!-- ADMIN NOTES -->
       <div class="section-card">
         <div class="section-title">🔐 Admin Notes <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:.7rem">(private, never shown to clients)</span></div>
-        <textarea class="notes-area" id="adminNotes_${va.id}" placeholder="Add private notes about this VA...">${va.admin_notes || ''}</textarea>
+        <textarea class="notes-area" id="adminNotes_${va.id}" placeholder="Add private notes about this VA — interview impressions, concerns, follow-up reminders...">${va.admin_notes || ''}</textarea>
         <div style="display:flex;align-items:center">
           <button class="save-notes-btn" onclick="saveNotes('${va.id}')">Save Notes</button>
           <span class="notes-saved" id="notesSaved_${va.id}">✅ Saved</span>
         </div>
       </div>
 
+      <!-- BADGE ASSIGN -->
       <div class="section-card">
         <div class="section-title">🏅 Assign Badge</div>
         <div style="display:flex;gap:.5rem;flex-wrap:wrap">
@@ -485,7 +554,7 @@ function renderDetail(va, skills, tools, work, edu, voice) {
         </div>
       </div>
 
-    </div>
+    </div><!-- /detail-body -->
   `
 }
 
@@ -499,6 +568,7 @@ function renderActionBtns(va) {
   return btns.join('')
 }
 
+// ── STATUS UPDATE ─────────────────────────────────────────────────
 window.setStatus = async function(id, status) {
   const { error } = await supabase.from('vas').update({ status }).eq('id', id)
   if (error) { showToast('Failed: ' + error.message, 'error'); return }
@@ -506,48 +576,30 @@ window.setStatus = async function(id, status) {
   if (va) va.status = status
   updateCounts()
   renderList(filteredVAs)
+  // Update action buttons in detail panel
   const btnsEl = document.getElementById('actionBtns_' + id)
   if (btnsEl) btnsEl.innerHTML = renderActionBtns(va)
-  const badge = document.querySelector('#detailPanel .status-badge')
+  // Update badge in detail header
+  const badge = document.querySelector(`#detailPanel .status-badge`)
   if (badge) { badge.textContent = status; badge.className = 'status-badge ' + status }
   showToast('Status updated to ' + status, 'success')
 }
 
-window.uploadPhoto = async function(vaId, input) {
-  const file = input.files[0]
-  if (!file) return
-  const status = document.getElementById('photoUploadStatus_' + vaId)
-  const btn = document.getElementById('uploadPhotoBtn_' + vaId)
-  status.textContent = 'Uploading…'
-  const ext = file.name.split('.').pop()
-  const path = `photos/${vaId}/profile.${ext}`
-  const { error: upErr } = await supabase.storage.from('va-files').upload(path, file, { upsert: true })
-  if (upErr) { status.textContent = 'Upload failed: ' + upErr.message; return }
-  const { data: { publicUrl } } = supabase.storage.from('va-files').getPublicUrl(path)
-  const { error: dbErr } = await supabase.from('vas').update({ photo_url: publicUrl }).eq('id', vaId)
-  if (dbErr) { status.textContent = 'Save failed: ' + dbErr.message; return }
-  const va = allVAs.find(v => v.id === vaId)
-  if (va) va.photo_url = publicUrl
-  status.textContent = '✅ Photo updated!'
-  if (btn) btn.textContent = '📤 Replace Photo'
-  const avatarEl = document.querySelector('.detail-avatar')
-  if (avatarEl) avatarEl.innerHTML = `<img src="${publicUrl}" alt="photo" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`
-  const rowAvatar = document.querySelector(`#row_${vaId} .va-avatar`)
-  if (rowAvatar) rowAvatar.innerHTML = `<img src="${publicUrl}" alt="photo" style="width:40px;height:40px;border-radius:50%;object-fit:cover">`
-}
-
+// ── SKILL RATING ──────────────────────────────────────────────────
 window.updateSkillRating = async function(select) {
   const skillId = select.dataset.skillId
   const rating = select.value
   const pct = { Expert: 95, Advanced: 78, Intermediate: 55, Beginner: 30 }[rating]
   const { error } = await supabase.from('va_skills').update({ admin_rating: rating, final_rating: rating, level_pct: pct }).eq('id', skillId)
   if (error) { showToast('Failed to update skill', 'error'); return }
+  // Update bar
   const row = select.closest('.skill-item')
   const bar = row ? row.querySelector('.skill-bar') : null
   if (bar) bar.style.width = pct + '%'
   showToast('Skill rating updated', 'success')
 }
 
+// ── ADMIN NOTES ───────────────────────────────────────────────────
 window.saveNotes = async function(id) {
   const notes = document.getElementById('adminNotes_' + id).value
   const { error } = await supabase.from('vas').update({ admin_notes: notes }).eq('id', id)
@@ -558,11 +610,13 @@ window.saveNotes = async function(id) {
   if (saved) { saved.style.opacity = 1; setTimeout(() => saved.style.opacity = 0, 2000) }
 }
 
+// ── BADGE ─────────────────────────────────────────────────────────
 window.setBadge = async function(id, badge) {
   const { error } = await supabase.from('vas').update({ badge }).eq('id', id)
   if (error) { showToast('Failed to set badge', 'error'); return }
   const va = allVAs.find(v => v.id === id)
   if (va) va.badge = badge
+  // Update badge buttons
   ;['Top Rated','Rising Star','Elite','New'].forEach(b => {
     const btn = document.getElementById('badge_' + id + '_' + b.replace(' ','_'))
     if (!btn) return
@@ -574,50 +628,57 @@ window.setBadge = async function(id, badge) {
   showToast('Badge set to ' + badge, 'success')
 }
 
-// ── VOICE RECORDINGS ─────────────────────────────────────────────
-window.showAddRecording = function(vaId) {
-  document.getElementById('addRecordingForm_' + vaId).style.display = 'block'
-  setTimeout(() => document.getElementById('recLabel_' + vaId).focus(), 50)
-}
-window.cancelAddRecording = function(vaId) {
-  document.getElementById('addRecordingForm_' + vaId).style.display = 'none'
-  document.getElementById('recLabel_' + vaId).value = ''
-  document.getElementById('recFile_' + vaId).value = ''
-  document.getElementById('recFileLabel_' + vaId).textContent = '📁 Choose file'
-  document.getElementById('recUploadStatus_' + vaId).textContent = ''
-}
-window.previewRecordingFile = function(vaId) {
-  const file = document.getElementById('recFile_' + vaId).files[0]
-  if (file) document.getElementById('recFileLabel_' + vaId).textContent = '🎵 ' + file.name
-}
-window.uploadRecording = async function(vaId) {
-  const file = document.getElementById('recFile_' + vaId).files[0]
-  const label = document.getElementById('recLabel_' + vaId).value.trim() || 'Recording'
-  const status = document.getElementById('recUploadStatus_' + vaId)
-  if (!file) { status.textContent = 'Please choose a file first.'; return }
-  status.style.color = 'var(--muted)'
-  status.textContent = 'Uploading…'
-  const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_')
-  const path = `voice/${vaId}/${Date.now()}_${safeName}`
-  const { error: upErr } = await supabase.storage.from('va-files').upload(path, file, { upsert: false })
-  if (upErr) { status.style.color = 'var(--error)'; status.textContent = 'Upload failed: ' + upErr.message; return }
-  const { data: { publicUrl } } = supabase.storage.from('va-files').getPublicUrl(path)
-  const { error: dbErr } = await supabase.from('va_voice_recordings').insert({
-    va_id: vaId, label, audio_url: publicUrl, display_order: 0
-  })
-  if (dbErr) { status.style.color = 'var(--error)'; status.textContent = 'Save failed: ' + dbErr.message; return }
-  status.style.color = 'var(--success)'
-  status.textContent = '✅ Uploaded!'
-  setTimeout(() => window.selectVA(vaId), 1200)
-}
-window.deleteRecording = async function(recordingId, vaId) {
-  if (!confirm('Delete this voice recording?')) return
-  const { error } = await supabase.from('va_voice_recordings').delete().eq('id', recordingId)
-  if (error) { showToast('Delete failed: ' + error.message, 'error'); return }
-  showToast('Recording deleted', 'success')
+// ── ASSIGN TO CLIENT ──────────────────────────────────────────────
+window.assignToClient = async function(vaId) {
+  const input = document.getElementById('assignEmail_' + vaId)
+  const email = (input.value || '').trim().toLowerCase()
+  if (!email) { showToast('Enter the client\\'s email first', 'error'); return }
+
+  const { data: client, error: findErr } = await supabase
+    .from('clients')
+    .select('id, email, va_id')
+    .eq('email', email)
+    .maybeSingle()
+
+  if (findErr) { showToast('Lookup failed: ' + findErr.message, 'error'); return }
+  if (!client) { showToast('No client found with that email — have they completed checkout?', 'error'); return }
+
+  const { error: updErr } = await supabase.from('clients').update({ va_id: vaId }).eq('id', client.id)
+  if (updErr) { showToast('Failed to assign: ' + updErr.message, 'error'); return }
+
+  const va = allVAs.find(v => v.id === vaId)
+  const vaName = va ? `${va.first_name} ${va.last_name}` : 'Your VA'
+  const vaRole = va ? (va.role || va.category || '') : ''
+  const clientName = email.split('@')[0].replace(/[._]/g, ' ').replace(/\\b\\w/g, c => c.toUpperCase())
+
+  try {
+    await fetch(`${SUPABASE_URL}/functions/v1/send-email`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'apikey': SUPABASE_ANON_KEY
+      },
+      body: JSON.stringify({
+        type: 'va_assigned',
+        to: email,
+        data: { client_name: clientName, va_name: vaName, va_role: vaRole }
+      })
+    })
+  } catch (e) {
+    console.error('send-email call failed', e)
+  }
+
+  // Mark VA as hired for internal tracking (client can still view it regardless of status)
+  if (va && va.status !== 'hired') {
+    await window.setStatus(vaId, 'hired')
+  }
+
+  showToast(`Assigned to ${email} and notified`, 'success')
   window.selectVA(vaId)
 }
 
+// ── TOAST ─────────────────────────────────────────────────────────
 function showToast(msg, type = 'success') {
   const t = document.getElementById('toast')
   t.textContent = (type === 'success' ? '✅ ' : '❌ ') + msg
@@ -625,6 +686,7 @@ function showToast(msg, type = 'success') {
   setTimeout(() => t.className = 'toast', 3000)
 }
 
+// ── UTILS ─────────────────────────────────────────────────────────
 function formatDate(iso) {
   if (!iso) return '—'
   const d = new Date(iso)

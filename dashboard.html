@@ -10,1160 +10,429 @@
 :root{
   --black:#050810;--dark:#0C1020;--dark2:#131828;--card:#0F1525;
   --gold:#D4A843;--gold2:#F0C060;--gold-dim:rgba(212,168,67,0.1);
-  --white:#FFFFFF;--muted:#8892A4;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
-  --green:#2ECC71;--green-dim:rgba(46,204,113,0.1);
-  --red:#E74C3C;--red-dim:rgba(231,76,60,0.1);
-  --blue:#3498DB;--blue-dim:rgba(52,152,219,0.1);
-  --purple:#9B59B6;--sidebar:230px;
+  --white:#FFFFFF;--muted:#8892A4;--border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.14);
+  --green:#2ECC71;--red:#E74C3C;--blue:#3498DB;
 }
 html{scroll-behavior:smooth;}
-body{font-family:'Manrope',sans-serif;background:var(--dark);color:var(--white);min-height:100vh;}
+body{font-family:'Manrope',sans-serif;background:var(--black);color:var(--white);min-height:100vh;}
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:var(--black);}
 ::-webkit-scrollbar-thumb{background:rgba(212,168,67,0.2);border-radius:2px;}
 
-/* ── LOGIN ── */
-.login-wrap{min-height:100vh;display:flex;background:var(--black);position:relative;overflow:hidden;}
-.login-wrap::before{content:'';position:absolute;top:-200px;left:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(212,168,67,0.05) 0%,transparent 65%);pointer-events:none;}
-.login-wrap::after{content:'';position:absolute;bottom:-200px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(52,152,219,0.04) 0%,transparent 65%);pointer-events:none;}
-.login-left{flex:1;display:flex;align-items:center;justify-content:center;padding:3rem;position:relative;z-index:1;}
-.login-right{width:480px;background:var(--card);border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;padding:3rem;position:relative;}
-.login-brand{margin-bottom:3rem;}
-.lb-logo{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--gold);letter-spacing:3px;line-height:1;margin-bottom:0.25rem;}
-.lb-sub{font-size:0.65rem;color:rgba(255,255,255,0.3);letter-spacing:4px;text-transform:uppercase;}
-.login-pitch h2{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:1px;line-height:1.1;margin-bottom:1rem;max-width:380px;}
-.login-pitch h2 span{color:var(--gold);}
-.login-pitch p{color:rgba(255,255,255,0.4);font-size:0.85rem;line-height:1.75;max-width:360px;margin-bottom:2rem;}
-.login-features{display:flex;flex-direction:column;gap:0.6rem;}
-.lf-item{display:flex;align-items:center;gap:0.6rem;font-size:0.8rem;color:rgba(255,255,255,0.55);}
-.lf-check{color:var(--green);font-weight:800;font-size:0.9rem;}
-.login-form-wrap{width:100%;}
-.login-form-title{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:1px;margin-bottom:0.25rem;}
-.login-form-sub{font-size:0.75rem;color:rgba(255,255,255,0.35);margin-bottom:2rem;}
-.fl{display:block;font-size:0.68rem;font-weight:700;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.35rem;}
-.fi{width:100%;padding:0.75rem 1rem;background:rgba(255,255,255,0.04);border:1.5px solid var(--border2);border-radius:10px;font-family:'Manrope',sans-serif;font-size:0.85rem;color:var(--white);outline:none;transition:all 0.2s;margin-bottom:1rem;}
-.fi:focus{border-color:var(--gold);background:rgba(212,168,67,0.03);}
-.fi::placeholder{color:rgba(255,255,255,0.18);}
-.login-opts{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;}
-.remember{display:flex;align-items:center;gap:0.4rem;cursor:pointer;}
-.remember-box{width:16px;height:16px;border-radius:4px;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
-.remember-box.checked{background:var(--gold);border-color:var(--gold);color:var(--black);}
-.remember-label{font-size:0.72rem;color:rgba(255,255,255,0.4);}
-.forgot{font-size:0.72rem;color:var(--gold);cursor:pointer;transition:opacity 0.2s;}
-.forgot:hover{opacity:0.7;}
-.btn-login{width:100%;padding:0.875rem;border-radius:10px;background:var(--gold);color:var(--black);font-family:'Manrope',sans-serif;font-weight:800;font-size:0.9rem;cursor:pointer;border:none;transition:all 0.2s;margin-bottom:1rem;}
-.btn-login:hover{background:var(--gold2);transform:translateY(-1px);box-shadow:0 8px 25px rgba(212,168,67,0.3);}
-.login-divider{display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;}
-.ld-line{flex:1;height:1px;background:var(--border);}
-.ld-text{font-size:0.68rem;color:rgba(255,255,255,0.2);}
-.btn-demo{width:100%;padding:0.75rem;border-radius:10px;background:transparent;border:1.5px solid var(--border2);color:rgba(255,255,255,0.5);font-family:'Manrope',sans-serif;font-weight:600;font-size:0.82rem;cursor:pointer;transition:all 0.2s;}
-.btn-demo:hover{border-color:var(--gold);color:var(--gold);}
-.login-signup{text-align:center;font-size:0.72rem;color:rgba(255,255,255,0.3);margin-top:1.25rem;}
-.login-signup span{color:var(--gold);cursor:pointer;font-weight:700;}
-.login-hint{font-size:0.65rem;color:rgba(255,255,255,0.18);text-align:center;margin-top:0.75rem;}
-.login-error{background:var(--red-dim);border:1px solid rgba(231,76,60,0.2);border-radius:8px;padding:0.6rem 0.875rem;font-size:0.75rem;color:var(--red);margin-bottom:1rem;display:none;}
+nav{padding:1.1rem 2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:rgba(5,8,16,0.9);position:sticky;top:0;z-index:50;}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:3px;color:var(--gold);text-decoration:none;}
+.logo small{display:block;font-family:'Manrope',sans-serif;font-size:.5rem;letter-spacing:3px;color:var(--muted);text-transform:uppercase;font-weight:600;}
+.nav-right{display:flex;align-items:center;gap:1rem;}
+.nav-email{font-size:.82rem;color:var(--muted);}
+.btn-logout{background:none;border:1px solid var(--border2);color:var(--muted);padding:.5rem 1rem;border-radius:8px;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .2s;}
+.btn-logout:hover{border-color:var(--gold);color:var(--gold);}
 
-/* ── PLAN BADGE ── */
-.plan-badge{display:inline-flex;align-items:center;gap:0.3rem;padding:0.2rem 0.6rem;border-radius:20px;font-size:0.65rem;font-weight:800;letter-spacing:0.5px;}
-.plan-badge.starter{background:var(--gold-dim);color:var(--gold);border:1px solid rgba(212,168,67,0.2);}
-.plan-badge.growth{background:rgba(155,89,182,0.1);color:var(--purple);border:1px solid rgba(155,89,182,0.2);}
-.plan-badge.elite{background:var(--blue-dim);color:var(--blue);border:1px solid rgba(52,152,219,0.2);}
+/* ── AUTH SCREENS ── */
+.auth-wrap{min-height:calc(100vh - 70px);display:flex;align-items:center;justify-content:center;padding:2rem;position:relative;overflow:hidden;}
+.auth-wrap::before{content:'';position:absolute;top:-150px;left:50%;transform:translateX(-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(212,168,67,0.07) 0%,transparent 65%);pointer-events:none;}
+.auth-box{position:relative;z-index:1;width:100%;max-width:400px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2.5rem 2.25rem;}
+.auth-box h1{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:1px;margin-bottom:.35rem;}
+.auth-box h1 span{color:var(--gold);}
+.auth-sub{color:var(--muted);font-size:.85rem;margin-bottom:1.75rem;line-height:1.6;}
+.field{margin-bottom:1rem;}
+.field label{display:block;font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.4rem;}
+.field input{width:100%;background:var(--dark);border:1px solid var(--border2);border-radius:9px;color:var(--white);padding:.75rem .9rem;font-size:.9rem;font-family:'Manrope',sans-serif;outline:none;transition:border-color .2s;}
+.field input:focus{border-color:var(--gold);}
+.auth-btn{width:100%;background:var(--gold);color:var(--black);border:none;padding:.85rem;border-radius:9px;font-weight:800;font-size:.92rem;cursor:pointer;transition:background .2s;margin-top:.5rem;}
+.auth-btn:hover{background:var(--gold2);}
+.auth-btn:disabled{opacity:.55;cursor:not-allowed;}
+.auth-err{background:rgba(231,76,60,0.08);border:1px solid rgba(231,76,60,0.25);color:#f1948a;font-size:.8rem;padding:.65rem .85rem;border-radius:8px;margin-bottom:1rem;display:none;}
+.auth-msg{background:rgba(46,204,113,0.08);border:1px solid rgba(46,204,113,0.25);color:#7dcea0;font-size:.8rem;padding:.65rem .85rem;border-radius:8px;margin-bottom:1rem;display:none;}
+.auth-links{display:flex;justify-content:space-between;margin-top:1.1rem;font-size:.78rem;}
+.auth-links a{color:var(--muted);text-decoration:none;cursor:pointer;}
+.auth-links a:hover{color:var(--gold);}
 
-/* ── APP LAYOUT ── */
-.app{display:none;min-height:100vh;}
-.app.show{display:flex;}
-.sidebar{width:var(--sidebar);background:var(--black);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:50;transition:transform 0.3s;}
-.sb-top{padding:1.25rem;border-bottom:1px solid var(--border);}
-.sb-logo{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--gold);letter-spacing:2px;line-height:1;margin-bottom:1rem;}
-.sb-user{display:flex;align-items:center;gap:0.6rem;}
-.sb-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.78rem;color:var(--black);flex-shrink:0;}
-.sb-name{font-size:0.82rem;font-weight:700;}
-.sb-plan{margin-top:2px;}
-.sb-nav{flex:1;padding:0.75rem;overflow-y:auto;}
-.sb-section{font-size:0.56rem;font-weight:800;color:rgba(255,255,255,0.2);letter-spacing:2px;text-transform:uppercase;padding:0.6rem 0.5rem 0.25rem;}
-.sb-item{display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.75rem;border-radius:8px;cursor:pointer;transition:all 0.2s;margin-bottom:0.1rem;position:relative;}
-.sb-item:hover{background:rgba(255,255,255,0.04);}
-.sb-item.active{background:var(--gold-dim);border:1px solid rgba(212,168,67,0.12);}
-.sb-item.locked{opacity:0.4;cursor:not-allowed;}
-.sb-icon{font-size:0.95rem;width:20px;text-align:center;flex-shrink:0;}
-.sb-label{font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.5);}
-.sb-item.active .sb-label{color:var(--gold);}
-.sb-item:hover:not(.locked) .sb-label{color:var(--white);}
-.sb-lock{margin-left:auto;font-size:0.65rem;}
-.sb-new{margin-left:auto;background:var(--green);color:white;font-size:0.55rem;font-weight:800;padding:0.1rem 0.4rem;border-radius:10px;}
-.sb-bottom{padding:1rem;border-top:1px solid var(--border);}
-.sb-upgrade{background:linear-gradient(135deg,rgba(212,168,67,0.12),rgba(212,168,67,0.06));border:1px solid rgba(212,168,67,0.2);border-radius:10px;padding:0.875rem;margin-bottom:0.75rem;cursor:pointer;transition:all 0.2s;}
-.sb-upgrade:hover{border-color:var(--gold);}
-.su-label{font-size:0.6rem;font-weight:800;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:0.2rem;}
-.su-text{font-size:0.72rem;color:rgba(255,255,255,0.45);line-height:1.4;}
-.sb-logout{font-size:0.72rem;color:rgba(255,255,255,0.25);cursor:pointer;display:flex;align-items:center;gap:0.4rem;transition:color 0.2s;}
-.sb-logout:hover{color:var(--red);}
+/* ── DASHBOARD ── */
+.dash-wrap{max-width:820px;margin:0 auto;padding:2.5rem 1.5rem 4rem;display:none;}
+.dash-header{margin-bottom:1.75rem;}
+.dash-header h1{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:1px;}
+.dash-header h1 span{color:var(--gold);}
+.plan-row{display:flex;align-items:center;gap:.6rem;margin-top:.5rem;}
+.plan-badge{font-size:.7rem;font-weight:800;padding:.25rem .7rem;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;background:var(--gold-dim);color:var(--gold);border:1px solid rgba(212,168,67,0.3);}
+.plan-price{font-size:.82rem;color:var(--muted);}
 
-/* ── MAIN ── */
-.main{margin-left:var(--sidebar);flex:1;display:flex;flex-direction:column;min-height:100vh;}
-.topbar{background:var(--black);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:40;}
-.tb-title{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:1px;}
-.tb-right{display:flex;align-items:center;gap:0.75rem;}
-.tb-search{display:flex;align-items:center;gap:0.4rem;background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:8px;padding:0.4rem 0.75rem;}
-.tb-search input{background:transparent;border:none;outline:none;font-family:'Manrope',sans-serif;font-size:0.75rem;color:var(--white);width:160px;}
-.tb-search input::placeholder{color:rgba(255,255,255,0.2);}
-.tb-notif{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;font-size:0.85rem;}
-.notif-dot{position:absolute;top:5px;right:5px;width:6px;height:6px;border-radius:50%;background:var(--red);border:1.5px solid var(--black);}
-.tb-user{display:flex;align-items:center;gap:0.5rem;cursor:pointer;padding:0.35rem 0.75rem;border-radius:8px;transition:background 0.2s;}
-.tb-user:hover{background:rgba(255,255,255,0.04);}
-.tb-av{width:28px;height:28px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.62rem;color:var(--black);}
-.tb-name{font-size:0.75rem;font-weight:600;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.75rem;margin-bottom:1.25rem;}
+.card-title{font-size:.72rem;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:1.1rem;}
 
-/* ── PAGES ── */
-.page{display:none;padding:2rem;flex:1;}
-.page.active{display:block;}
+/* matching state */
+.match-state{text-align:center;padding:2rem 1rem;}
+.match-state .icon{font-size:2.4rem;margin-bottom:.75rem;}
+.match-state p{color:var(--muted);font-size:.9rem;max-width:420px;margin:0 auto;line-height:1.7;}
 
-/* ── WELCOME BANNER ── */
-.welcome-banner{background:linear-gradient(135deg,var(--dark2),var(--card));border:1px solid var(--border);border-radius:16px;padding:1.75rem;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;position:relative;overflow:hidden;}
-.wb-glow{position:absolute;right:-50px;top:-50px;width:200px;height:200px;background:radial-gradient(circle,rgba(212,168,67,0.06) 0%,transparent 65%);pointer-events:none;}
-.wb-left{}
-.wb-greeting{font-size:0.72rem;color:rgba(255,255,255,0.35);margin-bottom:0.25rem;}
-.wb-title{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:1px;margin-bottom:0.4rem;}
-.wb-title span{color:var(--gold);}
-.wb-sub{font-size:0.8rem;color:rgba(255,255,255,0.45);line-height:1.6;max-width:420px;}
-.wb-actions{display:flex;gap:0.6rem;flex-wrap:wrap;}
-.btn-wb{padding:0.6rem 1.25rem;border-radius:8px;font-family:'Manrope',sans-serif;font-weight:700;font-size:0.8rem;cursor:pointer;border:none;transition:all 0.2s;}
-.btn-wb.gold{background:var(--gold);color:var(--black);}
-.btn-wb.outline{background:transparent;border:1.5px solid var(--border2);color:rgba(255,255,255,0.6);}
-.btn-wb:hover{transform:translateY(-1px);filter:brightness(1.1);}
+/* va profile */
+.va-header{display:flex;gap:1.25rem;align-items:flex-start;margin-bottom:1.5rem;}
+.va-avatar{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:800;color:#fff;flex-shrink:0;overflow:hidden;}
+.va-avatar img{width:100%;height:100%;object-fit:cover;}
+.va-header-info h2{font-size:1.25rem;font-weight:800;}
+.va-header-info .role{color:var(--gold);font-size:.85rem;margin-top:.1rem;font-weight:600;}
+.va-meta-row{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.6rem;font-size:.78rem;color:var(--muted);}
 
-/* ── STATS ── */
-.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem;}
-.sc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.25rem;transition:all 0.2s;position:relative;overflow:hidden;}
-.sc:hover{border-color:rgba(212,168,67,0.15);transform:translateY(-2px);}
-.sc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
-.sc.g::before{background:linear-gradient(90deg,var(--gold),var(--gold2));}
-.sc.gr::before{background:linear-gradient(90deg,var(--green),#27AE60);}
-.sc.bl::before{background:linear-gradient(90deg,var(--blue),#2980B9);}
-.sc.pu::before{background:linear-gradient(90deg,var(--purple),#8E44AD);}
-.sc-icon{font-size:1.3rem;margin-bottom:0.6rem;}
-.sc-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:1px;line-height:1;margin-bottom:2px;}
-.sc.g .sc-num{color:var(--gold);}
-.sc.gr .sc-num{color:var(--green);}
-.sc.bl .sc-num{color:var(--blue);}
-.sc.pu .sc-num{color:var(--purple);}
-.sc-label{font-size:0.7rem;color:rgba(255,255,255,0.38);font-weight:600;}
+.contact-row{display:flex;gap:1.5rem;flex-wrap:wrap;padding:1rem 1.2rem;background:var(--dark);border-radius:10px;margin-bottom:1.25rem;}
+.contact-item label{display:block;font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.2rem;}
+.contact-item span, .contact-item a{font-size:.85rem;font-weight:700;color:var(--white);text-decoration:none;}
+.contact-item a:hover{color:var(--gold);}
 
-/* ── VA CARDS ── */
-.va-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.1rem;}
-.vac{background:var(--card);border:1.5px solid var(--border);border-radius:14px;overflow:hidden;transition:all 0.25s;cursor:pointer;}
-.vac:hover{border-color:rgba(212,168,67,0.3);transform:translateY(-3px);box-shadow:0 12px 35px rgba(0,0,0,0.3);}
-.vac-top{padding:1.1rem 1.1rem 0;display:flex;gap:0.75rem;align-items:flex-start;}
-.vac-av{width:48px;height:48px;border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;color:white;flex-shrink:0;}
-.vac-name{font-weight:700;font-size:0.88rem;}
-.vac-role{font-size:0.68rem;color:rgba(255,255,255,0.4);margin-top:2px;}
-.vac-status{font-size:0.62rem;font-weight:700;margin-top:4px;display:flex;align-items:center;gap:3px;}
-.vac-dot{width:5px;height:5px;border-radius:50%;background:currentColor;}
-.vac-status.avail{color:var(--green);}
-.vac-status.hired{color:var(--gold);}
-.vac-body{padding:0.875rem 1.1rem;}
-.vac-stars{color:var(--gold);font-size:0.75rem;margin-bottom:0.5rem;}
-.vac-bio{font-size:0.75rem;color:rgba(255,255,255,0.4);line-height:1.55;margin-bottom:0.6rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-.tags{display:flex;flex-wrap:wrap;gap:0.3rem;}
-.tag{font-size:0.62rem;font-weight:600;padding:0.18rem 0.5rem;border-radius:4px;background:var(--gold-dim);color:var(--gold);border:1px solid rgba(212,168,67,0.15);}
-.tag.gr{background:var(--green-dim);color:var(--green);border-color:rgba(46,204,113,0.15);}
-.vac-foot{padding:0.75rem 1.1rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
-.vac-rate{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;}
-.vac-rate sub{font-size:0.58rem;font-family:'Manrope',sans-serif;font-weight:400;color:var(--muted);}
-.cta-row{display:flex;gap:0.35rem;}
-.btn-xs{padding:0.35rem 0.75rem;border-radius:6px;font-family:'Manrope',sans-serif;font-size:0.7rem;font-weight:700;cursor:pointer;border:none;transition:all 0.2s;}
-.btn-xs.out{background:transparent;border:1.5px solid var(--border2);color:rgba(255,255,255,0.55);}
-.btn-xs.gold{background:var(--gold);color:var(--black);}
-.btn-xs:hover{opacity:0.85;transform:translateY(-1px);}
+.bio-text{font-size:.87rem;color:rgba(255,255,255,0.7);line-height:1.7;margin-bottom:1.25rem;}
 
-/* ── SECTION HEADER ── */
-.sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
-.sec-title{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:1px;}
-.sec-link{color:var(--gold);font-size:0.75rem;font-weight:700;cursor:pointer;border:none;background:transparent;transition:opacity 0.2s;}
-.sec-link:hover{opacity:0.7;}
-.btn-sm{padding:0.38rem 0.875rem;border-radius:6px;font-family:'Manrope',sans-serif;font-size:0.73rem;font-weight:700;cursor:pointer;border:none;transition:all 0.2s;}
-.btn-sm.gold{background:var(--gold);color:var(--black);}
-.btn-sm.outline{background:transparent;border:1.5px solid var(--border2);color:rgba(255,255,255,0.55);}
-.btn-sm:hover{filter:brightness(1.1);transform:translateY(-1px);}
+.skill-item{display:flex;align-items:center;gap:.75rem;margin-bottom:.6rem;}
+.skill-name{flex:1;font-size:.83rem;font-weight:600;}
+.skill-bar-wrap{width:130px;height:6px;background:var(--border);border-radius:3px;overflow:hidden;}
+.skill-bar{height:100%;background:var(--gold);border-radius:3px;}
 
-/* ── HIRED VA CARD ── */
-.hired-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-bottom:1.5rem;}
-.hired-card{background:var(--card);border:1.5px solid rgba(212,168,67,0.2);border-radius:14px;padding:1.25rem;transition:all 0.2s;}
-.hired-card:hover{border-color:var(--gold);transform:translateY(-2px);}
-.hc-top{display:flex;gap:0.75rem;align-items:flex-start;margin-bottom:1rem;}
-.hc-av{width:44px;height:44px;border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;color:white;flex-shrink:0;}
-.hc-name{font-weight:700;font-size:0.88rem;}
-.hc-role{font-size:0.68rem;color:rgba(255,255,255,0.4);margin-top:2px;}
-.hc-since{font-size:0.62rem;color:var(--gold);margin-top:3px;font-weight:700;}
-.hc-stats{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-bottom:0.875rem;}
-.hcs{background:rgba(255,255,255,0.03);border-radius:6px;padding:0.5rem;}
-.hcs-val{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--gold);letter-spacing:1px;}
-.hcs-label{font-size:0.6rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.5px;}
-.hc-actions{display:flex;gap:0.4rem;}
-.hc-btn{flex:1;padding:0.45rem;border-radius:6px;font-family:'Manrope',sans-serif;font-size:0.72rem;font-weight:700;cursor:pointer;border:none;transition:all 0.2s;text-align:center;}
-.hc-btn.msg{background:var(--blue-dim);color:var(--blue);}
-.hc-btn.kpi{background:var(--gold-dim);color:var(--gold);}
-.hc-btn.rep{background:var(--red-dim);color:var(--red);}
-.hc-btn:hover{filter:brightness(1.2);}
+.tools-wrap{display:flex;flex-wrap:wrap;gap:.4rem;}
+.tool-tag{background:var(--dark);border:1px solid var(--border2);border-radius:6px;padding:.3rem .65rem;font-size:.78rem;}
+.tool-tag.primary{border-color:rgba(212,168,67,0.4);color:var(--gold);}
 
-/* ── LOCKED SECTION ── */
-.locked-section{background:rgba(255,255,255,0.02);border:1px dashed var(--border2);border-radius:14px;padding:2.5rem;text-align:center;position:relative;overflow:hidden;}
-.ls-icon{font-size:2rem;margin-bottom:0.75rem;opacity:0.4;}
-.ls-title{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:1px;color:rgba(255,255,255,0.3);margin-bottom:0.4rem;}
-.ls-sub{font-size:0.78rem;color:rgba(255,255,255,0.2);line-height:1.6;max-width:320px;margin:0 auto 1.25rem;}
-.btn-upgrade{padding:0.6rem 1.5rem;border-radius:8px;background:var(--gold);color:var(--black);font-family:'Manrope',sans-serif;font-weight:800;font-size:0.82rem;cursor:pointer;border:none;transition:all 0.2s;}
-.btn-upgrade:hover{background:var(--gold2);transform:translateY(-1px);}
+.work-item{padding:.8rem 0;border-bottom:1px solid var(--border);}
+.work-item:last-child{border-bottom:none;}
+.work-item .work-role{font-weight:700;font-size:.87rem;}
+.work-item .work-company{color:var(--muted);font-size:.8rem;margin-top:.1rem;}
+.work-item .work-period{color:var(--gold);font-size:.75rem;margin-top:.1rem;}
 
-/* ── FILTERS ── */
-.filter-row{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.25rem;align-items:center;}
-.filter-search{display:flex;align-items:center;gap:0.4rem;background:rgba(255,255,255,0.03);border:1px solid var(--border2);border-radius:8px;padding:0.45rem 0.75rem;flex:1;min-width:180px;}
-.filter-search input{background:transparent;border:none;outline:none;font-family:'Manrope',sans-serif;font-size:0.78rem;color:var(--white);width:100%;}
-.filter-search input::placeholder{color:rgba(255,255,255,0.2);}
-.fpill{padding:0.32rem 0.75rem;border-radius:20px;font-size:0.7rem;font-weight:700;cursor:pointer;border:1.5px solid var(--border2);color:rgba(255,255,255,0.4);background:transparent;transition:all 0.2s;}
-.fpill.on{border-color:var(--gold);color:var(--gold);background:var(--gold-dim);}
-.fselect{padding:0.42rem 0.75rem;border:1.5px solid var(--border2);border-radius:8px;background:rgba(255,255,255,0.03);font-family:'Manrope',sans-serif;font-size:0.75rem;color:rgba(255,255,255,0.5);cursor:pointer;outline:none;}
-.fselect:focus{border-color:var(--gold);}
+.edu-item{display:flex;gap:.75rem;padding:.5rem 0;}
+.edu-info .edu-degree{font-weight:700;font-size:.85rem;}
+.edu-info .edu-school{color:var(--muted);font-size:.78rem;}
 
-/* ── TRAINING ── */
-.train-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;}
-.tc{background:var(--card);border:1.5px solid var(--border);border-radius:12px;overflow:hidden;transition:all 0.2s;cursor:pointer;}
-.tc:hover{border-color:rgba(212,168,67,0.25);transform:translateY(-2px);}
-.tc-thumb{height:110px;background:linear-gradient(135deg,var(--dark),var(--dark2));display:flex;align-items:center;justify-content:center;position:relative;}
-.tc-icon{font-size:2rem;}
-.tc-bdg{position:absolute;top:0.5rem;left:0.5rem;font-size:0.6rem;font-weight:800;padding:0.18rem 0.5rem;border-radius:4px;text-transform:uppercase;}
-.tc-bdg.req{background:var(--red);color:white;}
-.tc-bdg.new{background:var(--gold);color:var(--black);}
-.tc-bdg.pop{background:var(--green);color:white;}
-.tc-info{padding:0.875rem;}
-.tc-title{font-weight:700;font-size:0.82rem;margin-bottom:3px;}
-.tc-meta{font-size:0.68rem;color:rgba(255,255,255,0.35);display:flex;gap:0.6rem;}
-.prog-bar{height:4px;background:var(--border2);border-radius:2px;overflow:hidden;margin-top:0.6rem;}
-.prog-fill{height:100%;background:var(--gold);border-radius:2px;}
-.prog-lbl{font-size:0.65rem;color:rgba(255,255,255,0.3);display:flex;justify-content:space-between;margin-top:3px;}
+.audio-item{background:var(--dark);border:1px solid var(--border);border-radius:9px;padding:.75rem 1rem;margin-bottom:.6rem;}
+.audio-label{font-size:.76rem;color:var(--muted);margin-bottom:.4rem;}
+audio{width:100%;height:34px;}
 
-/* ── KPI ── */
-.kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:1rem;margin-bottom:1.5rem;}
-.kc{background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:1.1rem;}
-.kc-title{font-size:0.65rem;font-weight:700;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.5rem;}
-.kc-val{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--gold);letter-spacing:1px;}
-.kc-change{font-size:0.68rem;font-weight:700;margin-top:3px;}
-.kc-change.up{color:var(--green);}
-.kc-change.dn{color:var(--red);}
+.account-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.9rem;}
+.account-item label{display:block;font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.25rem;}
+.account-item span{font-size:.88rem;font-weight:700;}
+.help-note{font-size:.8rem;color:var(--muted);margin-top:1.1rem;line-height:1.7;}
+.help-note a{color:var(--gold);text-decoration:none;font-weight:700;}
 
-/* ── BILLING ── */
-.billing-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1rem;}
-.bc-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.25rem;}
-.bc-plan-name{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:1px;margin-bottom:3px;}
-.bc-price{font-size:0.8rem;color:rgba(255,255,255,0.4);}
-.bc-items{display:flex;flex-direction:column;gap:0;}
-.bc-item{display:flex;justify-content:space-between;align-items:center;padding:0.6rem 0;border-bottom:1px solid var(--border);font-size:0.8rem;}
-.bc-item:last-child{border-bottom:none;}
-.bc-key{color:rgba(255,255,255,0.4);}
-.bc-val{font-weight:700;}
-.bc-actions{display:flex;gap:0.6rem;margin-top:1.25rem;flex-wrap:wrap;}
-.btn-bc{padding:0.5rem 1.1rem;border-radius:8px;font-family:'Manrope',sans-serif;font-size:0.75rem;font-weight:700;cursor:pointer;border:none;transition:all 0.2s;}
-.btn-bc.gold{background:var(--gold);color:var(--black);}
-.btn-bc.outline{background:transparent;border:1.5px solid var(--border2);color:rgba(255,255,255,0.55);}
-.btn-bc.red{background:var(--red-dim);color:var(--red);border:1px solid rgba(231,76,60,0.2);}
-.btn-bc:hover{filter:brightness(1.1);transform:translateY(-1px);}
-.invoice-row{display:flex;justify-content:space-between;align-items:center;padding:0.6rem 0;border-bottom:1px solid var(--border);font-size:0.78rem;}
-.invoice-row:last-child{border-bottom:none;}
-.inv-date{color:rgba(255,255,255,0.4);}
-.inv-amt{font-weight:700;color:var(--white);}
-.inv-status{font-size:0.65rem;font-weight:700;padding:0.18rem 0.5rem;border-radius:10px;background:var(--green-dim);color:var(--green);}
-.inv-dl{color:var(--gold);font-size:0.72rem;cursor:pointer;font-weight:600;}
+.section-divider{height:1px;background:var(--border);margin:1.4rem 0;}
 
-/* ── MODAL ── */
-.modal-overlay{position:fixed;inset:0;background:rgba(5,8,16,0.85);backdrop-filter:blur(6px);z-index:200;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity 0.3s;}
-.modal-overlay.open{opacity:1;pointer-events:all;}
-.modal{background:var(--card);border:1px solid var(--border);border-radius:20px;width:100%;max-width:660px;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,0.5);}
-.mod-head{background:linear-gradient(135deg,var(--dark),var(--dark2));padding:1.75rem 2rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;}
-.mh-tag{font-size:0.6rem;font-weight:800;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.3rem;}
-.mh-title{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:1px;}
-.mh-sub{font-size:0.72rem;color:rgba(255,255,255,0.35);margin-top:2px;}
-.mod-close{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,0.07);border:none;color:rgba(255,255,255,0.4);cursor:pointer;font-size:0.95rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0;}
-.mod-close:hover{background:rgba(255,255,255,0.12);color:var(--white);}
-.mod-body{padding:1.75rem 2rem;}
-.mod-foot{padding:1.1rem 2rem;border-top:1px solid var(--border);display:flex;gap:0.6rem;justify-content:flex-end;}
-.btn-mod{padding:0.6rem 1.4rem;border-radius:8px;font-family:'Manrope',sans-serif;font-weight:700;font-size:0.8rem;cursor:pointer;border:none;transition:all 0.2s;}
-.btn-mod.outline{background:transparent;border:1.5px solid var(--border2);color:rgba(255,255,255,0.55);}
-.btn-mod.gold{background:var(--gold);color:var(--black);}
-.btn-mod.green{background:var(--green);color:white;}
-.btn-mod:hover{filter:brightness(1.1);transform:translateY(-1px);}
-.va-detail{display:flex;gap:1rem;align-items:flex-start;margin-bottom:1.25rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border);}
-.va-detail-av{width:60px;height:60px;border-radius:50%;border:2.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;font-weight:700;color:white;flex-shrink:0;}
-.vd-name{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:1px;}
-.vd-role{font-size:0.75rem;color:rgba(255,255,255,0.4);margin-top:2px;}
-.vd-badges{display:flex;gap:0.35rem;flex-wrap:wrap;margin-top:0.5rem;}
-.vd-badge{padding:0.18rem 0.55rem;border-radius:12px;font-size:0.62rem;font-weight:700;background:var(--gold-dim);color:var(--gold);border:1px solid rgba(212,168,67,0.15);}
-.info-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.6rem;margin-bottom:1rem;}
-.ig-item{background:rgba(255,255,255,0.03);border-radius:8px;padding:0.6rem;}
-.ig-label{font-size:0.58rem;color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;}
-.ig-val{font-size:0.8rem;font-weight:700;}
-.voice-player{background:var(--dark2);border-radius:10px;padding:0.875rem;display:flex;align-items:center;gap:0.875rem;margin-bottom:0.875rem;}
-.play-btn{width:36px;height:36px;background:var(--gold);border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--black);font-size:0.85rem;flex-shrink:0;transition:transform 0.2s;}
-.play-btn:hover{transform:scale(1.1);}
-.waveform{flex:1;height:26px;background:rgba(255,255,255,0.04);border-radius:5px;display:flex;align-items:center;padding:0 0.4rem;gap:2px;overflow:hidden;}
-.wb{width:3px;border-radius:2px;background:rgba(212,168,67,0.4);}
-.vp-label{font-size:0.72rem;color:rgba(255,255,255,0.6);}
-.vp-dur{font-size:0.7rem;color:var(--gold);font-weight:700;}
+.loading-box{text-align:center;padding:3rem 1rem;color:var(--muted);font-size:.88rem;}
+.spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 1rem;}
+@keyframes spin{to{transform:rotate(360deg);}}
 
-/* ── TOAST ── */
-.toast{position:fixed;bottom:2rem;right:2rem;background:var(--dark2);border:1px solid rgba(212,168,67,0.25);color:white;padding:0.875rem 1.25rem;border-radius:10px;font-size:0.8rem;font-weight:600;z-index:999;transform:translateX(160%);transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);display:flex;align-items:center;gap:0.5rem;max-width:300px;box-shadow:0 8px 30px rgba(0,0,0,0.4);}
-.toast.show{transform:translateX(0);}
-.tdot{width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0;}
-
-/* ── RESPONSIVE ── */
-@media(max-width:900px){
-  .login-left{display:none;}
-  .login-right{width:100%;}
-  .stat-grid{grid-template-columns:1fr 1fr;}
-  .sidebar{transform:translateX(-100%);}
-  .sidebar.open{transform:translateX(0);}
-  .main{margin-left:0;}
-  .page{padding:1.25rem;}
-  .info-grid-3{grid-template-columns:1fr 1fr;}
+@media(max-width:600px){
+  nav{padding:1rem 1.25rem;}
+  .auth-box{padding:2rem 1.5rem;}
+  .dash-wrap{padding:2rem 1rem 3rem;}
+  .va-header{flex-direction:column;}
 }
-
-/* ── FORGOT PASSWORD MODAL ── */
-.fp-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;align-items:center;justify-content:center;}
-.fp-overlay.active{display:flex;}
-.fp-box{background:var(--dark2);border:1px solid var(--border2);border-radius:16px;padding:2.2rem 2rem;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,0.6);}
-.fp-box h3{font-size:1.2rem;font-weight:700;margin-bottom:.4rem;}
-.fp-box p{font-size:.78rem;color:var(--muted);margin-bottom:1.4rem;line-height:1.5;}
-.fp-input{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border2);border-radius:8px;padding:.75rem 1rem;color:#fff;font-size:.85rem;outline:none;margin-bottom:1rem;}
-.fp-input:focus{border-color:var(--gold);}
-.fp-btns{display:flex;gap:.7rem;}
-.fp-send{flex:1;background:var(--gold);color:#000;border:none;border-radius:8px;padding:.7rem;font-weight:700;font-size:.85rem;cursor:pointer;}
-.fp-send:hover{opacity:.88;}
-.fp-cancel{background:rgba(255,255,255,0.07);color:var(--muted);border:none;border-radius:8px;padding:.7rem 1.1rem;font-size:.85rem;cursor:pointer;}
-.fp-cancel:hover{background:rgba(255,255,255,0.12);}
-.fp-msg{font-size:.78rem;margin-top:.9rem;padding:.7rem;border-radius:8px;display:none;}
-.fp-msg.ok{background:rgba(46,204,113,0.12);color:var(--green);}
-.fp-msg.err{background:rgba(231,76,60,0.12);color:var(--red);}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 </head>
 <body>
 
-<div class="toast" id="toast"><div class="tdot"></div><span id="tmsg"></span></div>
-
-<!-- ── LOGIN ── -->
-<div class="login-wrap" id="loginScreen">
-  <div class="login-left">
-    <div>
-      <div class="login-brand">
-        <div class="lb-logo">Elite Remote Agent</div>
-        <div class="lb-sub">Client Portal</div>
-      </div>
-      <div class="login-pitch">
-        <h2>Your VA Team Is <span>Waiting</span> For You</h2>
-        <p>Log in to browse pre-screened VAs, manage your hired team, track KPIs, access training resources, and scale your business without the overhead.</p>
-        <div class="login-features">
-          <div class="lf-item"><span class="lf-check">✓</span>Browse and hire unlimited VAs</div>
-          <div class="lf-item"><span class="lf-check">✓</span>Listen to voice recordings and review resumes</div>
-          <div class="lf-item"><span class="lf-check">✓</span>Track your VA team's KPIs in real time</div>
-          <div class="lf-item"><span class="lf-check">✓</span>Access training library and SOP templates</div>
-          <div class="lf-item"><span class="lf-check">✓</span>Message your VAs directly in the platform</div>
-        </div>
-      </div>
-    </div>
+<nav>
+  <a class="logo" href="index.html">Elite Remote Agent<small>Pre-Screened. Trained. Ready.</small></a>
+  <div class="nav-right" id="navRight" style="display:none;">
+    <span class="nav-email" id="navEmail"></span>
+    <button class="btn-logout" onclick="doLogout()">Log Out</button>
   </div>
-  <div class="login-right">
-    <div class="login-form-wrap">
-      <div class="login-form-title">Welcome Back</div>
-      <div class="login-form-sub">Sign in to your Elite Remote Agent account</div>
-      <div class="login-error" id="loginError">Invalid email or password. Please try again.</div>
-      <label class="fl">Email Address</label>
-      <input class="fi" type="email" id="loginEmail" placeholder="sarah@realty.com"/>
-      <label class="fl">Password</label>
-      <input class="fi" type="password" id="loginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/>
-      <div class="login-opts">
-        <div class="remember" onclick="toggleRemember()">
-          <div class="remember-box" id="rememberBox"></div>
-          <span class="remember-label">Remember me</span>
-        </div>
-        <span class="forgot" onclick="showForgotPassword()">Forgot password?</span>
-      </div>
-      <button class="btn-login" onclick="doLogin()">Sign In →</button>
-      <div class="login-divider"><div class="ld-line"></div><div class="ld-text">OR TRY A DEMO</div><div class="ld-line"></div></div>
-      <button class="btn-demo" onclick="loginAsDemo('growth')">👤 Demo — Growth Plan Client</button>
-      <div style="display:flex;gap:0.5rem;margin-top:0.5rem;">
-        <button class="btn-demo" style="flex:1;" onclick="loginAsDemo('starter')">Starter Demo</button>
-        <button class="btn-demo" style="flex:1;" onclick="loginAsDemo('elite')">Elite Demo</button>
-      </div>
-      <div class="login-signup">Don't have an account? <span onclick="window.location.href='checkout.html'">Subscribe Now →</span></div>
-      <div class="login-hint">client@demo.com / demo123</div>
+</nav>
+
+<!-- LOGIN -->
+<div class="auth-wrap" id="loginScreen">
+  <div class="auth-box">
+    <h1>Client <span>Log In</span></h1>
+    <p class="auth-sub">Access your Elite Remote Agent dashboard.</p>
+    <div class="auth-err" id="loginErr"></div>
+    <div class="auth-msg" id="loginMsg"></div>
+    <div class="field">
+      <label>Email</label>
+      <input type="email" id="loginEmail" placeholder="you@company.com" onkeydown="if(event.key==='Enter')doLogin()"/>
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="loginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/>
+    </div>
+    <button class="auth-btn" id="loginBtn" onclick="doLogin()">Sign In →</button>
+    <div class="auth-links">
+      <a onclick="doForgotPassword()">Forgot password?</a>
+      <a href="checkout.html">Not a client yet?</a>
     </div>
   </div>
 </div>
 
-<!-- ── APP ── -->
-<div class="app" id="appScreen">
-  <!-- SIDEBAR -->
-  <div class="sidebar" id="sidebar">
-    <div class="sb-top">
-      <div class="sb-logo">Elite Remote Agent</div>
-      <div class="sb-user">
-        <div class="sb-av" id="sb-av">SK</div>
-        <div>
-          <div class="sb-name" id="sb-name">Sarah K.</div>
-          <div class="sb-plan" id="sb-plan"></div>
-        </div>
-      </div>
+<!-- SET PASSWORD (invite / recovery flow) -->
+<div class="auth-wrap" id="setPwScreen" style="display:none;">
+  <div class="auth-box">
+    <h1>Set Your <span>Password</span></h1>
+    <p class="auth-sub">Welcome! Create a password to secure your account and access your dashboard.</p>
+    <div class="auth-err" id="setPwErr"></div>
+    <div class="field">
+      <label>New Password</label>
+      <input type="password" id="newPass" placeholder="At least 8 characters" onkeydown="if(event.key==='Enter')doSetPassword()"/>
     </div>
-    <div class="sb-nav" id="sbNav">
-      <!-- Dynamically populated based on plan -->
+    <div class="field">
+      <label>Confirm Password</label>
+      <input type="password" id="newPass2" placeholder="Re-enter password" onkeydown="if(event.key==='Enter')doSetPassword()"/>
     </div>
-    <div class="sb-bottom">
-      <div class="sb-upgrade" id="sbUpgrade" onclick="nav('billing')" style="display:none;">
-        <div class="su-label">⚡ Upgrade Plan</div>
-        <div class="su-text">Unlock more features and tools</div>
-      </div>
-      <div class="sb-logout" onclick="doLogout()">🚪 Sign Out</div>
-    </div>
-  </div>
-
-  <!-- MAIN -->
-  <div class="main">
-    <div class="topbar">
-      <div class="tb-title" id="pageTitle">Dashboard</div>
-      <div class="tb-right">
-        <div class="tb-search"><span style="color:rgba(255,255,255,0.2);">🔍</span><input placeholder="Search VAs, tools..." id="searchInput"/></div>
-        <div class="tb-notif">🔔<div class="notif-dot"></div></div>
-        <div class="tb-user" onclick="nav('billing')">
-          <div class="tb-av" id="tb-av">SK</div>
-          <div class="tb-name" id="tb-name">Sarah K.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- DASHBOARD -->
-    <div class="page active" id="page-dashboard">
-      <div class="welcome-banner">
-        <div class="wb-glow"></div>
-        <div class="wb-left">
-          <div class="wb-greeting" id="wb-greeting">Good morning</div>
-          <div class="wb-title">Ready to <span>Scale?</span></div>
-          <div class="wb-sub" id="wb-sub">You have 3 active VAs working for you right now. Your team saved you an estimated 47 hours this week.</div>
-        </div>
-        <div class="wb-actions">
-          <button class="btn-wb gold" onclick="nav('browse')">+ Hire a VA</button>
-          <button class="btn-wb outline" onclick="nav('my-vas')">Manage My Team</button>
-        </div>
-      </div>
-      <div class="stat-grid" id="dashStats"></div>
-      <div class="sec-head"><div class="sec-title">My Hired VAs</div><button class="sec-link" onclick="nav('my-vas')">View All →</button></div>
-      <div class="hired-grid" id="dashHiredVAs"></div>
-      <div class="sec-head" style="margin-top:1.5rem;"><div class="sec-title">Recommended For You</div><button class="sec-link" onclick="nav('browse')">Browse All VAs →</button></div>
-      <div class="va-grid" id="dashRecommended"></div>
-    </div>
-
-    <!-- BROWSE -->
-    <div class="page" id="page-browse">
-      <div class="filter-row">
-        <div class="filter-search"><span style="color:rgba(255,255,255,0.2);">🔍</span><input placeholder="Search by name, role, CRM..."/></div>
-        <select class="fselect"><option>All Specialties</option><option>Transaction Coord.</option><option>ISA / Caller</option><option>Marketing</option><option>Admin</option><option>Social Media</option><option>CRM Specialist</option></select>
-        <select class="fselect"><option>Any Rate</option><option>Under $7/hr</option><option>$7–$9/hr</option><option>$9+/hr</option></select>
-        <button class="fpill on" onclick="this.classList.toggle('on')">All</button>
-        <button class="fpill" onclick="this.classList.toggle('on')">Available</button>
-        <button class="fpill" onclick="this.classList.toggle('on')">Real Estate</button>
-        <button class="fpill" onclick="this.classList.toggle('on')">Business</button>
-      </div>
-      <div class="va-grid" id="browseVAs"></div>
-    </div>
-
-    <!-- MY VAs -->
-    <div class="page" id="page-my-vas">
-      <div class="sec-head">
-        <div class="sec-title">My VA Team</div>
-        <button class="btn-sm gold" onclick="nav('browse')">+ Hire Another VA</button>
-      </div>
-      <div class="hired-grid" id="myVAsList"></div>
-    </div>
-
-    <!-- TRAINING -->
-    <div class="page" id="page-training">
-      <div id="trainingContent"></div>
-    </div>
-
-    <!-- KPIs -->
-    <div class="page" id="page-kpis">
-      <div id="kpiContent"></div>
-    </div>
-
-    <!-- SOPs -->
-    <div class="page" id="page-sops">
-      <div id="sopContent"></div>
-    </div>
-
-    <!-- BILLING -->
-    <div class="page" id="page-billing">
-      <div class="sec-head"><div class="sec-title">Subscription & Billing</div></div>
-      <div class="billing-card">
-        <div class="bc-header">
-          <div>
-            <div class="bc-plan-name" id="bil-plan-name">Growth Plan</div>
-            <div class="bc-price" id="bil-plan-price">$247/month · Billed monthly</div>
-          </div>
-          <div id="bil-plan-badge"></div>
-        </div>
-        <div class="bc-items">
-          <div class="bc-item"><span class="bc-key">Status</span><span class="bc-val" style="color:var(--green);">✓ Active</span></div>
-          <div class="bc-item"><span class="bc-key">Next Billing Date</span><span class="bc-val" id="bil-next-date">June 1, 2026</span></div>
-          <div class="bc-item"><span class="bc-key">Payment Method</span><span class="bc-val">Visa ending in 4242</span></div>
-          <div class="bc-item"><span class="bc-key">Member Since</span><span class="bc-val" id="bil-since">January 15, 2026</span></div>
-          <div class="bc-item"><span class="bc-key">VAs Available</span><span class="bc-val" style="color:var(--gold);">Unlimited</span></div>
-        </div>
-        <div class="bc-actions">
-          <button class="btn-bc gold" onclick="fire('⚡ Upgrade options loading...')">⚡ Upgrade Plan</button>
-          <button class="btn-bc outline" onclick="fire('💳 Payment method update opened!')">Update Payment</button>
-          <button class="btn-bc outline" onclick="fire('📅 Switched to annual — saving 2 months free!')">Switch to Annual</button>
-          <button class="btn-bc red" onclick="fire('⚠️ Cancellation confirmation sent to your email.')">Cancel Subscription</button>
-        </div>
-      </div>
-      <div class="sec-head"><div class="sec-title">Invoice History</div></div>
-      <div class="billing-card">
-        <div id="invoiceList"></div>
-      </div>
-    </div>
-
-    <!-- SETTINGS -->
-    <div class="page" id="page-settings">
-      <div class="sec-head"><div class="sec-title">Account Settings</div></div>
-      <div class="billing-card">
-        <div style="font-size:0.68rem;font-weight:800;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:1rem;">Profile Information</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1rem;">
-          <div><label class="fl">First Name</label><input class="fi" type="text" id="settingsFirstName" style="margin-bottom:0;"/></div>
-          <div><label class="fl">Last Name</label><input class="fi" type="text" id="settingsLastName" style="margin-bottom:0;"/></div>
-          <div><label class="fl">Email</label><input class="fi" type="email" id="settingsEmail" style="margin-bottom:0;"/></div>
-          <div><label class="fl">Phone</label><input class="fi" type="tel" id="settingsPhone" style="margin-bottom:0;"/></div>
-        </div>
-        <button class="btn-sm gold" onclick="fire('✅ Profile updated successfully!')">Save Changes</button>
-      </div>
-      <div class="billing-card" style="margin-top:1rem;">
-        <div style="font-size:0.68rem;font-weight:800;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:1rem;">Notifications</div>
-        <div class="bc-items">
-          <div class="bc-item"><span class="bc-key">New VA available in my specialty</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
-          <div class="bc-item"><span class="bc-key">VA sends me a message</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
-          <div class="bc-item"><span class="bc-key">Monthly platform updates</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
-          <div class="bc-item"><span class="bc-key">Billing receipts</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
-        </div>
-      </div>
-    </div>
-
+    <button class="auth-btn" id="setPwBtn" onclick="doSetPassword()">Set Password & Continue →</button>
   </div>
 </div>
 
-<!-- VA DETAIL MODAL -->
-<div class="modal-overlay" id="vaModal">
-  <div class="modal">
-    <div class="mod-head">
-      <div>
-        <div class="mh-tag">VA Profile</div>
-        <div class="mh-title" id="mod-va-name">VA Name</div>
-        <div class="mh-sub" id="mod-va-sub">Role · Location</div>
-      </div>
-      <button class="mod-close" onclick="closeModal('vaModal')">✕</button>
+<!-- DASHBOARD -->
+<div class="dash-wrap" id="dashWrap">
+  <div class="dash-header">
+    <h1>Welcome <span id="welcomeName">Back</span></h1>
+    <div class="plan-row">
+      <span class="plan-badge" id="planBadge">—</span>
+      <span class="plan-price" id="planPrice"></span>
     </div>
-    <div class="mod-body">
-      <div class="va-detail">
-        <div class="va-detail-av" id="mod-av" style="background:#1B4F8A;">MS</div>
-        <div>
-          <div class="vd-name" id="mod-name">Maria Santos</div>
-          <div class="vd-role" id="mod-role">Transaction Coordinator</div>
-          <div class="vd-badges" id="mod-badges"></div>
-        </div>
-      </div>
-      <div class="info-grid-3">
-        <div class="ig-item"><div class="ig-label">Experience</div><div class="ig-val" id="mod-exp">6 yrs</div></div>
-        <div class="ig-item"><div class="ig-label">Rate</div><div class="ig-val" id="mod-rate" style="color:var(--gold);">$8/hr</div></div>
-        <div class="ig-item"><div class="ig-label">Timezone</div><div class="ig-val" id="mod-tz">EST+1</div></div>
-        <div class="ig-item"><div class="ig-label">Availability</div><div class="ig-val" id="mod-avail" style="color:var(--green);">Available</div></div>
-        <div class="ig-item"><div class="ig-label">Rating</div><div class="ig-val" style="color:var(--gold);" id="mod-rating">★ 4.9</div></div>
-        <div class="ig-item"><div class="ig-label">Jobs Done</div><div class="ig-val" id="mod-jobs">47</div></div>
-      </div>
-      <div style="margin-bottom:1rem;">
-        <div style="font-size:0.62rem;font-weight:800;color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.5rem;">Voice Introduction</div>
-        <div class="voice-player">
-          <button class="play-btn" onclick="fire('▶️ Playing voice introduction...')">▶</button>
-          <div class="waveform" id="waveform"></div>
-          <span class="vp-dur">1:00</span>
-        </div>
-      </div>
-      <div style="margin-bottom:1rem;">
-        <div style="font-size:0.62rem;font-weight:800;color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.5rem;">CRM & Tools</div>
-        <div class="tags" id="mod-tags"></div>
-      </div>
-      <div>
-        <div style="font-size:0.62rem;font-weight:800;color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.4rem;">About</div>
-        <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);line-height:1.7;" id="mod-bio">Bio goes here.</p>
-      </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">👤 Your Assigned VA</div>
+    <div id="vaContent"><div class="loading-box"><div class="spinner"></div>Loading your dashboard…</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⚙️ Account</div>
+    <div class="account-grid">
+      <div class="account-item"><label>Email</label><span id="acctEmail">—</span></div>
+      <div class="account-item"><label>Plan</label><span id="acctPlan">—</span></div>
+      <div class="account-item"><label>Status</label><span id="acctStatus">—</span></div>
     </div>
-    <div class="mod-foot">
-      <button class="btn-mod outline" onclick="closeModal('vaModal')">Close</button>
-      <button class="btn-mod outline" onclick="fire('📄 Resume downloading...')">Download Resume</button>
-      <button class="btn-mod outline" onclick="fire('📨 Interview request sent!')">Request Interview</button>
-      <button class="btn-mod gold" onclick="hireVA()">✓ Hire Now</button>
-    </div>
+    <p class="help-note">Need to update billing, change plans, or cancel? Email <a href="mailto:hello@eliteremoteagent.com">hello@eliteremoteagent.com</a> or call/text <a href="tel:+16233989095">(623) 398-9095</a> and we'll take care of it.</p>
   </div>
 </div>
 
-<script>
-// ── SUPABASE ──
-const SUPABASE_URL = 'https://wcmvtfclkybgdwjybyzb.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndjbXZ0ZmNsa3liZ2R3anlieXpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY3NTkwOTIsImV4cCI6MjA2MjMzNTA5Mn0.gkFv5tBpDvSGWA5VHc_OVVQ4cF8OWpV-1mILONjxmBY';
-let _supabase = null;
-function getSupabase(){
-  if(!_supabase && window.supabase){
-    _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  }
-  return _supabase;
-}
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
-// ── HANDLE PASSWORD RESET REDIRECT ──
-(function(){
-  const hash = window.location.hash;
-  if(hash.includes('type=recovery') || hash.includes('access_token')){
-    // User arrived via password reset email link — show a reset form
-    document.addEventListener('DOMContentLoaded', function(){
-      const params = new URLSearchParams(hash.replace('#','?').replace(/^\?/,''));
-      const access = params.get('access_token');
-      if(access) showPasswordUpdateForm(access);
-    });
-  }
-})();
+const SUPABASE_URL = 'https://wcmvtfclkybgdwjybyzb.supabase.co'
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndjbXZ0ZmNsa3liZ2R3anlieXpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMzExOTIsImV4cCI6MjA5NDgwNzE5Mn0.zI0tjF7dN0DT30Mkd1nEDyMdXlYPzTmKH3BxvNea1Fs'
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
-function showPasswordUpdateForm(token){
-  // Build a simple "choose new password" overlay
-  const ov = document.createElement('div');
-  ov.id = 'pwResetOv';
-  ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:99999;display:flex;align-items:center;justify-content:center;';
-  ov.innerHTML = `
-    <div style="background:#131828;border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:2.2rem 2rem;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,0.7);">
-      <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:.4rem;color:#fff;">Set new password</h3>
-      <p style="font-size:.78rem;color:#8892A4;margin-bottom:1.4rem;">Choose a strong password for your account.</p>
-      <input id="newPwInput" type="password" placeholder="New password (min 8 chars)"
-        style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:.75rem 1rem;color:#fff;font-size:.85rem;outline:none;margin-bottom:.8rem;"
-        onkeydown="if(event.key==='Enter')submitNewPassword('${token}')"/>
-      <button onclick="submitNewPassword('${token}')"
-        style="width:100%;background:#D4A843;color:#000;border:none;border-radius:8px;padding:.7rem;font-weight:700;font-size:.85rem;cursor:pointer;">
-        Update Password
-      </button>
-      <div id="pwResetMsg" style="font-size:.78rem;margin-top:.9rem;display:none;padding:.7rem;border-radius:8px;"></div>
-    </div>`;
-  document.body.appendChild(ov);
-}
-
-async function submitNewPassword(token){
-  const pw = document.getElementById('newPwInput').value.trim();
-  const msg = document.getElementById('pwResetMsg');
-  if(pw.length < 8){
-    msg.style.display='block';
-    msg.style.background='rgba(231,76,60,0.12)';
-    msg.style.color='#E74C3C';
-    msg.textContent='Password must be at least 8 characters.';
-    return;
-  }
-  const sb = getSupabase();
-  if(!sb){ msg.style.display='block'; msg.textContent='Service unavailable. Refresh and try again.'; return; }
-  // Set the session from recovery token first
-  const { error: sessionError } = await sb.auth.setSession({ access_token: token, refresh_token: token });
-  const { error } = await sb.auth.updateUser({ password: pw });
-  if(error){
-    msg.style.display='block';
-    msg.style.background='rgba(231,76,60,0.12)';
-    msg.style.color='#E74C3C';
-    msg.textContent = error.message || 'Update failed. Please request a new reset link.';
-  } else {
-    msg.style.display='block';
-    msg.style.background='rgba(46,204,113,0.12)';
-    msg.style.color='#2ECC71';
-    msg.textContent='Password updated! Signing you in…';
-    setTimeout(()=>{
-      document.getElementById('pwResetOv').remove();
-      window.location.hash = '';
-    }, 1800);
-  }
-}
-
-// ── DATA ──
 const PLANS = {
-  starter:{ name:'Starter', price:'$97/mo', color:'starter', nav:['dashboard','browse','my-vas','billing','settings'], locked:['training','kpis','sops'] },
-  growth:{ name:'Growth', price:'$247/mo', color:'growth', nav:['dashboard','browse','my-vas','training','kpis','sops','billing','settings'], locked:[] },
-  elite:{ name:'Elite Team', price:'$597/mo', color:'elite', nav:['dashboard','browse','my-vas','training','kpis','sops','billing','settings'], locked:[] }
-};
-const NAV_ITEMS = [
-  {id:'dashboard',icon:'📊',label:'Dashboard',section:'Main'},
-  {id:'browse',icon:'🔍',label:'Browse VAs',section:null},
-  {id:'my-vas',icon:'👥',label:'My VA Team',section:null},
-  {id:'training',icon:'📚',label:'Training Library',section:'Tools'},
-  {id:'kpis',icon:'📈',label:'KPI Dashboard',section:null},
-  {id:'sops',icon:'📋',label:'SOPs & Templates',section:null},
-  {id:'billing',icon:'💳',label:'Billing',section:'Account'},
-  {id:'settings',icon:'⚙️',label:'Settings',section:null},
-];
-const DEMO_USERS = {
-  starter:{ name:'Alex M.', initials:'AM', plan:'starter', email:'alex@realty.com' },
-  growth:{ name:'Sarah K.', initials:'SK', plan:'growth', email:'sarah@realty.com' },
-  elite:{ name:'Tom R.', initials:'TR', plan:'elite', email:'tom@realty.com' }
-};
-const VAs = [
-  {id:1,initials:'MS',color:'#1B4F8A',name:'Maria Santos',role:'Transaction Coordinator',status:'avail',rating:4.9,reviews:47,rate:'$8',exp:'6 yrs',tz:'EST+1',jobs:47,bio:'6+ years in US real estate ops. Expert in Dotloop, Skyslope, and full transaction management from contract to close.',tags:['Follow Up Boss','Dotloop','Skyslope','MLS']},
-  {id:2,initials:'JR',color:'#2D5A3D',name:'Juan Reyes',role:'ISA / Lead Qualifier',status:'avail',rating:4.8,reviews:33,rate:'$7',exp:'4 yrs',tz:'CST',jobs:33,bio:'3,000+ cold calls/mo. LPMAMA trained. Never miss a lead again — your database will finally be worked.',tags:['Mojo Dialer','REDX','Follow Up Boss','Cold Calling']},
-  {id:3,initials:'AC',color:'#7B3F00',name:'Ana Cruz',role:'Marketing Coordinator',status:'avail',rating:5.0,reviews:62,rate:'$9',exp:'7 yrs',tz:'PST+3',jobs:62,bio:'MLS pro, Canva master, listing presentation builder. Your brand will finally look like a top producer.',tags:['Canva Pro','MLS','Social Media','BombBomb']},
-  {id:4,initials:'CM',color:'#6B3A7D',name:'Carlo Mendoza',role:'CRM Specialist',status:'avail',rating:4.7,reviews:28,rate:'$8',exp:'5 yrs',tz:'EST+1',jobs:28,bio:'Builds FUB automations, smart lists, and follow-up sequences. Stop letting leads go cold.',tags:['Follow Up Boss','Go High Level','Zapier','HubSpot']},
-  {id:5,initials:'RT',color:'#2D5A3D',name:'Ramon Torres',role:'Executive Admin VA',status:'hired',rating:4.9,reviews:51,rate:'$7',exp:'8 yrs',tz:'EST+1',jobs:51,bio:'Calendar, inbox, vendors, reporting. Stop drowning in admin. Get back to what makes you money.',tags:['Google Workspace','Notion','Slack','Asana']},
-  {id:6,initials:'LF',color:'#1B4F8A',name:'Liza Flores',role:'Social Media VA',status:'avail',rating:4.6,reviews:19,rate:'$6',exp:'3 yrs',tz:'CST',jobs:19,bio:'Reels, TikTok, GMB. Consistent content so you can focus on closings, not Instagram.',tags:['Canva Pro','Later','Buffer','Video Editing']},
-];
-const HIRED_VAs = [
-  {initials:'RT',color:'#2D5A3D',name:'Ramon Torres',role:'Executive Admin',since:'Feb 2026',hoursWeek:'32',tasksWeek:'24',rating:'4.9'},
-  {initials:'MS',color:'#1B4F8A',name:'Maria Santos',role:'Transaction Coord.',since:'Jan 2026',hoursWeek:'40',tasksWeek:'38',rating:'4.9'},
-  {initials:'JR',color:'#7B3F00',name:'Juan Reyes',role:'ISA / Caller',since:'Mar 2026',hoursWeek:'38',tasksWeek:'312',rating:'4.8'},
-];
-
-// ── STATE ──
-let currentUser = null;
-let currentPlan = 'growth';
-let currentPage = 'dashboard';
-
-// ── TOAST ──
-function fire(msg){
-  const t=document.getElementById('toast');
-  document.getElementById('tmsg').textContent=msg;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),3500);
+  starter: { name: 'Starter', price: '$49/mo + $149 setup' },
+  growth:  { name: 'Growth',  price: '$247/mo' },
+  elite:   { name: 'Elite',   price: '$597/mo' },
 }
 
-// ── LOGIN ──
-async function doLogin(){
-  const e=document.getElementById('loginEmail').value.trim();
-  const p=document.getElementById('loginPass').value;
-  const err=document.getElementById('loginError');
-  if(!e||!p){err.style.display='block';err.textContent='Please enter your email and password.';return;}
-  // Demo shortcut
-  if(e==='client@demo.com'&&p==='demo123'){loginAsDemo('growth');return;}
-  // Real Supabase auth
-  err.style.display='none';
-  const btn = document.querySelector('.btn-login');
-  if(btn){ btn.textContent='Signing in…'; btn.disabled=true; }
-  const sb = getSupabase();
-  if(!sb){
-    err.style.display='block';
-    err.textContent='Authentication service unavailable. Please refresh.';
-    if(btn){ btn.textContent='Sign In →'; btn.disabled=false; }
-    return;
+// Detect invite/recovery flow from URL (hash-based or PKCE code-based) before Supabase consumes it
+const rawHash = window.location.hash ? window.location.hash.substring(1) : ''
+const hashParams = new URLSearchParams(rawHash)
+const queryParams = new URLSearchParams(window.location.search)
+const linkType = hashParams.get('type') || queryParams.get('type')
+const hasCode = queryParams.get('code')
+let isInviteFlow = linkType === 'invite' || linkType === 'recovery' || linkType === 'magiclink' || !!hasCode
+
+function cleanUrl() {
+  history.replaceState({}, document.title, window.location.pathname)
+}
+
+window.doLogin = async function () {
+  const email = document.getElementById('loginEmail').value.trim()
+  const pass = document.getElementById('loginPass').value
+  const err = document.getElementById('loginErr')
+  const msg = document.getElementById('loginMsg')
+  err.style.display = 'none'
+  msg.style.display = 'none'
+  if (!email || !pass) { err.textContent = 'Please enter your email and password.'; err.style.display = 'block'; return }
+  document.getElementById('loginBtn').disabled = true
+  const { error } = await supabase.auth.signInWithPassword({ email, password: pass })
+  document.getElementById('loginBtn').disabled = false
+  if (error) { err.textContent = error.message; err.style.display = 'block'; return }
+  showDashboard()
+}
+
+window.doForgotPassword = async function () {
+  const email = document.getElementById('loginEmail').value.trim()
+  const err = document.getElementById('loginErr')
+  const msg = document.getElementById('loginMsg')
+  err.style.display = 'none'
+  if (!email) { err.textContent = 'Enter your email above first, then click "Forgot password?"'; err.style.display = 'block'; return }
+  const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin + '/dashboard.html' })
+  if (error) { err.textContent = error.message; err.style.display = 'block'; return }
+  msg.textContent = '📧 Password reset email sent! Check your inbox.'
+  msg.style.display = 'block'
+}
+
+window.doSetPassword = async function () {
+  const p1 = document.getElementById('newPass').value
+  const p2 = document.getElementById('newPass2').value
+  const err = document.getElementById('setPwErr')
+  err.style.display = 'none'
+  if (!p1 || p1.length < 8) { err.textContent = 'Password must be at least 8 characters.'; err.style.display = 'block'; return }
+  if (p1 !== p2) { err.textContent = 'Passwords do not match.'; err.style.display = 'block'; return }
+  document.getElementById('setPwBtn').disabled = true
+  const { error } = await supabase.auth.updateUser({ password: p1 })
+  document.getElementById('setPwBtn').disabled = false
+  if (error) { err.textContent = error.message; err.style.display = 'block'; return }
+  isInviteFlow = false
+  cleanUrl()
+  showDashboard()
+}
+
+window.doLogout = async function () {
+  await supabase.auth.signOut()
+  location.reload()
+}
+
+function showScreen(id) {
+  ['loginScreen', 'setPwScreen', 'dashWrap'].forEach(s => {
+    document.getElementById(s).style.display = (s === id) ? (id === 'dashWrap' ? 'block' : 'flex') : 'none'
+  })
+  document.getElementById('navRight').style.display = (id === 'dashWrap') ? 'flex' : 'none'
+}
+
+async function showDashboard() {
+  const { data: { session } } = await supabase.auth.getSession()
+  if (!session) { showScreen('loginScreen'); return }
+  showScreen('dashWrap')
+  document.getElementById('navEmail').textContent = session.user.email
+  document.getElementById('welcomeName').textContent = session.user.email.split('@')[0]
+
+  const { data: client, error: clientErr } = await supabase
+    .from('clients')
+    .select('*')
+    .eq('user_id', session.user.id)
+    .maybeSingle()
+
+  document.getElementById('acctEmail').textContent = session.user.email
+
+  if (clientErr || !client) {
+    document.getElementById('planBadge').textContent = '—'
+    document.getElementById('acctPlan').textContent = 'Setting up…'
+    document.getElementById('acctStatus').textContent = 'Pending'
+    document.getElementById('vaContent').innerHTML = `<div class="match-state"><div class="icon">⏳</div><p>We're still finalizing your account. This can take a few minutes after checkout — refresh shortly, or contact <a href="mailto:hello@eliteremoteagent.com" style="color:var(--gold)">hello@eliteremoteagent.com</a> if this persists.</p></div>`
+    return
   }
-  const { data, error } = await sb.auth.signInWithPassword({ email: e, password: p });
-  if(btn){ btn.textContent='Sign In →'; btn.disabled=false; }
-  if(error){
-    err.style.display='block';
-    err.textContent = error.message || 'Invalid email or password.';
-    return;
+
+  const planInfo = PLANS[client.plan] || PLANS[(client.plan || '').split('_')[0]] || { name: client.plan || 'Client', price: '' }
+  document.getElementById('planBadge').textContent = planInfo.name
+  document.getElementById('planPrice').textContent = planInfo.price
+  document.getElementById('acctPlan').textContent = planInfo.name
+  document.getElementById('acctStatus').textContent = client.status || 'active'
+
+  if (!client.va_id) {
+    document.getElementById('vaContent').innerHTML = `<div class="match-state"><div class="icon">🔍</div><p>We're hand-matching you with your dedicated VA based on your plan and needs. You'll get an email as soon as they're assigned — usually within 24–48 hours.</p></div>`
+    return
   }
-  // Success — load real client data from Supabase (or fall back to demo)
-  loginAsDemo('growth');
-}
 
-function loginAsDemo(plan){
-  const user=DEMO_USERS[plan];
-  currentUser=user;
-  currentPlan=plan;
-  document.getElementById('loginScreen').style.display='none';
-  document.getElementById('appScreen').classList.add('show');
-  buildSidebar(plan);
-  buildDashboard(plan);
-  setUserInfo(user);
-  const hour=new Date().getHours();
-  const greet=hour<12?'Good morning':hour<17?'Good afternoon':'Good evening';
-  document.getElementById('wb-greeting').textContent=greet+', '+user.name.split(' ')[0]+'!';
-  fire('👋 Welcome back, '+user.name.split(' ')[0]+'!');
-}
+  const [vaRes, skillsRes, toolsRes, workRes, eduRes, voiceRes] = await Promise.all([
+    supabase.from('vas').select('*').eq('id', client.va_id).maybeSingle(),
+    supabase.from('va_skills').select('*').eq('va_id', client.va_id).order('level_pct', { ascending: false }),
+    supabase.from('va_tools').select('*').eq('va_id', client.va_id),
+    supabase.from('va_work_history').select('*').eq('va_id', client.va_id).order('display_order'),
+    supabase.from('va_education').select('*').eq('va_id', client.va_id).order('display_order'),
+    supabase.from('va_voice_recordings').select('*').eq('va_id', client.va_id).order('display_order'),
+  ])
 
-
-function showForgotPassword(){
-  const emailVal = document.getElementById('loginEmail').value.trim();
-  if(emailVal) document.getElementById('fpEmail').value = emailVal;
-  document.getElementById('fpOverlay').classList.add('active');
-  document.getElementById('fpMsg').style.display='none';
-  document.getElementById('fpMsg').textContent='';
-  setTimeout(()=>document.getElementById('fpEmail').focus(), 100);
-}
-
-function closeForgotPassword(){
-  document.getElementById('fpOverlay').classList.remove('active');
-}
-
-async function sendPasswordReset(){
-  const email = document.getElementById('fpEmail').value.trim();
-  const msg = document.getElementById('fpMsg');
-  msg.style.display='none';
-  if(!email){ 
-    msg.className='fp-msg err'; msg.style.display='block';
-    msg.textContent='Please enter your email address.'; return;
+  if (!vaRes.data) {
+    document.getElementById('vaContent').innerHTML = `<div class="match-state"><div class="icon">🔍</div><p>Your VA match is being finalized. Check back shortly!</p></div>`
+    return
   }
-  const sb = getSupabase();
-  if(!sb){
-    msg.className='fp-msg err'; msg.style.display='block';
-    msg.textContent='Service unavailable. Please refresh.'; return;
-  }
-  const btn = document.querySelector('.fp-send');
-  if(btn){ btn.textContent='Sending…'; btn.disabled=true; }
-  const { error } = await sb.auth.resetPasswordForEmail(email, {
-    redirectTo: 'https://eliteremoteagent.com/dashboard.html'
-  });
-  if(btn){ btn.textContent='Send Reset Link'; btn.disabled=false; }
-  if(error){
-    msg.className='fp-msg err'; msg.style.display='block';
-    msg.textContent = error.message || 'Failed to send. Please try again.';
-  } else {
-    msg.className='fp-msg ok'; msg.style.display='block';
-    msg.textContent='✓ Reset link sent! Check your inbox (and spam folder).';
-    setTimeout(()=>closeForgotPassword(), 3500);
-  }
+
+  renderVA(vaRes.data, skillsRes.data || [], toolsRes.data || [], workRes.data || [], eduRes.data || [], voiceRes.data || [])
 }
 
-async function doLogout(){
-  document.getElementById('appScreen').classList.remove('show');
-  document.getElementById('loginScreen').style.display='flex';
-  document.getElementById('loginEmail').value='';
-  document.getElementById('loginPass').value='';
-  fire('👋 Signed out successfully');
-  const sb = getSupabase();
-  if(sb) await sb.auth.signOut();
-}
+function renderVA(va, skills, tools, work, edu, voice) {
+  const primaryTools = tools.filter(t => t.tool_type === 'primary')
+  const secondaryTools = tools.filter(t => t.tool_type === 'secondary')
 
-function toggleRemember(){
-  document.getElementById('rememberBox').classList.toggle('checked');
-}
-
-function setUserInfo(user){
-  ['sb-av','tb-av'].forEach(id=>document.getElementById(id).textContent=user.initials);
-  ['sb-name','tb-name'].forEach(id=>document.getElementById(id).textContent=user.name);
-  const plan=PLANS[user.plan];
-  document.getElementById('sb-plan').innerHTML=`<span class="plan-badge ${user.plan}">${plan.name}</span>`;
-  // billing page
-  document.getElementById('bil-plan-name').textContent=plan.name+' Plan';
-  document.getElementById('bil-plan-price').textContent=plan.price+' · Billed monthly';
-  document.getElementById('bil-plan-badge').innerHTML=`<span class="plan-badge ${user.plan}">${plan.name}</span>`;
-  // settings
-  const parts=user.name.split(' ');
-  document.getElementById('settingsFirstName').value=parts[0]||'';
-  document.getElementById('settingsLastName').value=parts[1]||'';
-  document.getElementById('settingsEmail').value=user.email;
-  document.getElementById('settingsPhone').value='(602) 555-0100';
-  // invoices
-  buildInvoices(plan.price);
-}
-
-// ── SIDEBAR ── 
-function buildSidebar(plan){
-  const planData=PLANS[plan];
-  const nav=document.getElementById('sbNav');
-  nav.innerHTML='';
-  let lastSection='';
-  NAV_ITEMS.forEach(item=>{
-    if(item.section&&item.section!==lastSection){
-      nav.innerHTML+=`<div class="sb-section">${item.section}</div>`;
-      lastSection=item.section;
-    }
-    const locked=planData.locked.includes(item.id);
-    const lockIcon=locked?'<span class="sb-lock">🔒</span>':'';
-    nav.innerHTML+=`<div class="sb-item${locked?' locked':''}" onclick="${locked?`showUpgrade('${item.label}')`:`nav('${item.id}')`}" id="nav-${item.id}">
-      <div class="sb-icon">${item.icon}</div>
-      <div class="sb-label">${item.label}</div>
-      ${lockIcon}
-    </div>`;
-  });
-  // show upgrade banner for non-elite
-  if(plan!=='elite') document.getElementById('sbUpgrade').style.display='block';
-}
-
-// ── NAVIGATION ──
-function nav(page){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));
-  const pageEl=document.getElementById('page-'+page);
-  if(pageEl) pageEl.classList.add('active');
-  const navEl=document.getElementById('nav-'+page);
-  if(navEl) navEl.classList.add('active');
-  const titles={dashboard:'Dashboard',browse:'Browse VAs',
-    'my-vas':'My VA Team',training:'Training Library',
-    kpis:'KPI Dashboard',sops:'SOPs & Templates',
-    billing:'Billing',settings:'Settings'};
-  document.getElementById('pageTitle').textContent=titles[page]||page;
-  currentPage=page;
-  if(page==='browse') buildBrowse();
-  if(page==='my-vas') buildMyVAs();
-  if(page==='training') buildTraining();
-  if(page==='kpis') buildKPIs();
-  if(page==='sops') buildSOPs();
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function showUpgrade(feature){
-  fire('⚡ Upgrade your plan to unlock '+feature+'!');
-}
-
-// ── DASHBOARD ──
-function buildDashboard(plan){
-  const stats=[
-    {icon:'👥',num:'3',label:'Active VAs',cls:'gr'},
-    {icon:'⭐',num:'4.9',label:'Avg VA Rating',cls:'g'},
-    {icon:'⏰',num:'47hrs',label:'Time Saved This Week',cls:'bl'},
-    {icon:'💰',num:'$3,200',label:'Est. Monthly Savings',cls:'pu'},
-  ];
-  document.getElementById('dashStats').innerHTML=stats.map(s=>`
-    <div class="sc ${s.cls}">
-      <div class="sc-icon">${s.icon}</div>
-      <div class="sc-num">${s.num}</div>
-      <div class="sc-label">${s.label}</div>
-    </div>`).join('');
-
-  document.getElementById('dashHiredVAs').innerHTML=HIRED_VAs.map(v=>`
-    <div class="hired-card">
-      <div class="hc-top">
-        <div class="hc-av" style="background:${v.color}">${v.initials}</div>
-        <div>
-          <div class="hc-name">${v.name}</div>
-          <div class="hc-role">${v.role}</div>
-          <div class="hc-since">Hired ${v.since}</div>
-        </div>
+  document.getElementById('vaContent').innerHTML = `
+    <div class="va-header">
+      <div class="va-avatar" style="background:${va.profile_color || '#1B4F8A'}">
+        ${va.photo_url ? `<img src="${va.photo_url}" alt="${va.first_name}">` : (va.initials || (va.first_name || '?')[0])}
       </div>
-      <div class="hc-stats">
-        <div class="hcs"><div class="hcs-val">${v.hoursWeek}</div><div class="hcs-label">Hrs This Week</div></div>
-        <div class="hcs"><div class="hcs-val">${v.tasksWeek}</div><div class="hcs-label">Tasks Done</div></div>
-      </div>
-      <div class="hc-actions">
-        <div class="hc-btn msg" onclick="fire('💬 Opening message thread...')">💬 Message</div>
-        <div class="hc-btn kpi" onclick="nav('kpis')">📊 KPIs</div>
-        <div class="hc-btn rep" onclick="fire('🔄 Replacement request submitted!')">🔄 Replace</div>
-      </div>
-    </div>`).join('');
-
-  document.getElementById('dashRecommended').innerHTML=VAs.filter(v=>v.status==='avail').slice(0,3).map(v=>vaCard(v)).join('');
-}
-
-// ── VA CARD HTML ──
-function vaCard(v){
-  return `<div class="vac" onclick="openVAModal(${v.id})">
-    <div class="vac-top">
-      <div class="vac-av" style="background:${v.color}">${v.initials}</div>
-      <div>
-        <div class="vac-name">${v.name}</div>
-        <div class="vac-role">${v.role}</div>
-        <div class="vac-status ${v.status==='avail'?'avail':'hired'}">
-          <div class="vac-dot"></div>${v.status==='avail'?'Available':'Hired'}
+      <div class="va-header-info">
+        <h2>${va.first_name} ${va.last_name}</h2>
+        <div class="role">${va.role || va.category || ''}</div>
+        <div class="va-meta-row">
+          <span>📅 ${va.years_experience || 0} yrs exp</span>
+          <span>🌍 ${va.timezone || '—'}</span>
+          <span>🗣️ ${va.english_level || '—'}</span>
         </div>
       </div>
     </div>
-    <div class="vac-body">
-      <div class="vac-stars">${'★'.repeat(Math.floor(v.rating))} ${v.rating} (${v.reviews})</div>
-      <div class="vac-bio">${v.bio}</div>
-      <div class="tags">${v.tags.slice(0,3).map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+
+    <div class="contact-row">
+      <div class="contact-item"><label>Email</label><a href="mailto:${va.email}">${va.email}</a></div>
+      ${va.phone ? `<div class="contact-item"><label>Phone</label><a href="tel:${va.phone}">${va.phone}</a></div>` : ''}
+      <div class="contact-item"><label>Availability</label><span>${va.availability || 'Available Now'}</span></div>
     </div>
-    <div class="vac-foot">
-      <div class="vac-rate">${v.rate}<sub>/hr</sub></div>
-      <div class="cta-row">
-        <button class="btn-xs out" onclick="event.stopPropagation();fire('📨 Interview request sent!')">Interview</button>
-        <button class="btn-xs gold" onclick="event.stopPropagation();openVAModal(${v.id})">View Profile</button>
-      </div>
-    </div>
-  </div>`;
-}
 
-// ── BROWSE ──
-function buildBrowse(){
-  document.getElementById('browseVAs').innerHTML=VAs.map(v=>vaCard(v)).join('');
-}
+    ${va.bio ? `<p class="bio-text">${va.bio}</p>` : ''}
 
-// ── MY VAs ──
-function buildMyVAs(){
-  document.getElementById('myVAsList').innerHTML=HIRED_VAs.map(v=>`
-    <div class="hired-card">
-      <div class="hc-top">
-        <div class="hc-av" style="background:${v.color}">${v.initials}</div>
-        <div>
-          <div class="hc-name">${v.name}</div>
-          <div class="hc-role">${v.role}</div>
-          <div class="hc-since">Hired ${v.since}</div>
-        </div>
-      </div>
-      <div class="hc-stats">
-        <div class="hcs"><div class="hcs-val">${v.hoursWeek}</div><div class="hcs-label">Hrs/Week</div></div>
-        <div class="hcs"><div class="hcs-val">${v.rating}★</div><div class="hcs-label">Rating</div></div>
-      </div>
-      <div class="hc-actions">
-        <div class="hc-btn msg" onclick="fire('💬 Opening message thread...')">💬 Message</div>
-        <div class="hc-btn kpi" onclick="nav('kpis')">📊 KPIs</div>
-        <div class="hc-btn rep" onclick="fire('🔄 Replacement request submitted!')">🔄 Replace</div>
-      </div>
-    </div>`).join('');
-}
-
-// ── TRAINING ──
-function buildTraining(){
-  const plan=PLANS[currentPlan];
-  const locked=plan.locked.includes('training');
-  if(locked){
-    document.getElementById('trainingContent').innerHTML=`
-      <div class="locked-section">
-        <div class="ls-icon">📚</div>
-        <div class="ls-title">Training Library</div>
-        <div class="ls-sub">Upgrade to Growth or Elite to access the full training library, upload your own Loom videos, and share SOPs with your VA team.</div>
-        <button class="btn-upgrade" onclick="fire('⚡ Redirecting to upgrade...')">⚡ Upgrade to Unlock</button>
-      </div>`;return;
-  }
-  const modules=[
-    {icon:'🎯',title:'Follow Up Boss Mastery',type:'Video Series',dur:'2h 15m',badge:'req',prog:65},
-    {icon:'📋',title:'Transaction Coordinator SOPs',type:'Loom + Doc',dur:'45m',badge:'req',prog:100},
-    {icon:'📞',title:'ISA Cold Calling Scripts',type:'Role-play',dur:'1h 30m',badge:'pop',prog:30},
-    {icon:'🏡',title:'US Real Estate 101 for VAs',type:'Video Course',dur:'3h',badge:'req',prog:0},
-    {icon:'📊',title:'KPI Tracking & Reporting',type:'Template',dur:'30m',badge:'new',prog:0},
-    {icon:'🤝',title:'Client Communication Standards',type:'Loom + Quiz',dur:'45m',badge:'pop',prog:80},
-  ];
-  document.getElementById('trainingContent').innerHTML=`
-    <div class="sec-head"><div class="sec-title">Training Library</div><button class="btn-sm gold" onclick="fire('📹 Upload training opened!')">+ Upload Your Training</button></div>
-    <div class="train-grid">${modules.map(m=>`
-      <div class="tc" onclick="fire('▶️ Opening: ${m.title}')">
-        <div class="tc-thumb"><span class="tc-icon">${m.icon}</span>
-          <span class="tc-bdg ${m.badge}">${m.badge==='req'?'REQUIRED':m.badge==='new'?'NEW':'POPULAR'}</span>
-        </div>
-        <div class="tc-info">
-          <div class="tc-title">${m.title}</div>
-          <div class="tc-meta"><span>📁 ${m.type}</span><span>⏱ ${m.dur}</span></div>
-          <div class="prog-bar"><div class="prog-fill" style="width:${m.prog}%"></div></div>
-          <div class="prog-lbl"><span>${m.prog===100?'✅ Complete':m.prog>0?m.prog+'% done':'Not started'}</span><span>${m.prog}%</span></div>
-        </div>
-      </div>`).join('')}</div>`;
-}
-
-// ── KPIs ──
-function buildKPIs(){
-  const plan=PLANS[currentPlan];
-  const locked=plan.locked.includes('kpis');
-  if(locked){
-    document.getElementById('kpiContent').innerHTML=`
-      <div class="locked-section">
-        <div class="ls-icon">📈</div>
-        <div class="ls-title">KPI Dashboard</div>
-        <div class="ls-sub">Upgrade to Growth or Elite to track your VA team's KPIs, calls made, follow-ups completed, and weekly performance.</div>
-        <button class="btn-upgrade" onclick="fire('⚡ Redirecting to upgrade...')">⚡ Upgrade to Unlock</button>
-      </div>`;return;
-  }
-  const kpis=[
-    {title:'Leads Called (Week)',val:'342',change:'↑ +12%',dir:'up'},
-    {title:'Appts Booked',val:'28',change:'↑ +5',dir:'up'},
-    {title:'Avg Response Time',val:'4.2m',change:'↓ improved',dir:'up'},
-    {title:'Contracts Coordinated',val:'11',change:'↑ +3',dir:'up'},
-    {title:'Follow-Up Rate',val:'94%',change:'↑ +3%',dir:'up'},
-    {title:'Database Records Updated',val:'1,204',change:'This week',dir:'up'},
-  ];
-  document.getElementById('kpiContent').innerHTML=`
-    <div class="sec-head"><div class="sec-title">KPI Dashboard</div><button class="btn-sm outline" onclick="fire('📊 KPI report exported!')">📊 Export Report</button></div>
-    <div class="kpi-grid">${kpis.map(k=>`
-      <div class="kc">
-        <div class="kc-title">${k.title}</div>
-        <div class="kc-val">${k.val}</div>
-        <div class="kc-change ${k.dir}">${k.change}</div>
+    ${voice.length ? `
+    <div class="section-divider"></div>
+    <div class="card-title" style="margin-bottom:.8rem;">🎙️ Voice Sample${voice.length > 1 ? 's' : ''}</div>
+    ${voice.map(v => `
+      <div class="audio-item">
+        <div class="audio-label">${v.label}${v.duration ? ' · ' + v.duration : ''}</div>
+        <audio controls src="${v.audio_url}"></audio>
       </div>`).join('')}
-    </div>`;
-}
+    ` : ''}
 
-// ── SOPs ──
-function buildSOPs(){
-  const plan=PLANS[currentPlan];
-  const locked=plan.locked.includes('sops');
-  if(locked){
-    document.getElementById('sopContent').innerHTML=`
-      <div class="locked-section">
-        <div class="ls-icon">📋</div>
-        <div class="ls-title">SOPs & Templates</div>
-        <div class="ls-sub">Upgrade to Growth or Elite to access the full SOP library and share your own operating procedures directly with your VA team.</div>
-        <button class="btn-upgrade" onclick="fire('⚡ Redirecting to upgrade...')">⚡ Upgrade to Unlock</button>
-      </div>`;return;
-  }
-  const sops=[
-    {icon:'📋',title:'Listing Appointment Checklist',updated:'Updated 3 days ago',type:'Google Doc'},
-    {icon:'📞',title:'Daily Call Script — Expireds',updated:'Updated 1 week ago',type:'PDF'},
-    {icon:'🏡',title:'Transaction Timeline — Buyer',updated:'Updated 2 weeks ago',type:'Loom Video'},
-    {icon:'📧',title:'Email Templates — Follow Up',updated:'Updated 5 days ago',type:'Google Doc'},
-    {icon:'📊',title:'Weekly Reporting Template',updated:'Updated today',type:'Spreadsheet'},
-    {icon:'🤝',title:'New Client Onboarding Flow',updated:'Updated 1 month ago',type:'Notion'},
-  ];
-  document.getElementById('sopContent').innerHTML=`
-    <div class="sec-head">
-      <div class="sec-title">SOPs & Templates</div>
-      <button class="btn-sm gold" onclick="fire('📤 Upload SOP opened!')">+ Upload SOP</button>
+    ${skills.length ? `
+    <div class="section-divider"></div>
+    <div class="card-title" style="margin-bottom:.8rem;">⚡ Skills</div>
+    ${skills.map(s => `
+      <div class="skill-item">
+        <div class="skill-name">${s.skill_name}</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:${s.level_pct || 50}%"></div></div>
+      </div>`).join('')}
+    ` : ''}
+
+    ${tools.length ? `
+    <div class="section-divider"></div>
+    <div class="card-title" style="margin-bottom:.8rem;">🔧 Tools & CRMs</div>
+    <div class="tools-wrap">
+      ${primaryTools.map(t => `<span class="tool-tag primary">${t.tool_name}</span>`).join('')}
+      ${secondaryTools.map(t => `<span class="tool-tag">${t.tool_name}</span>`).join('')}
     </div>
-    <div class="va-grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr));">
-      ${sops.map(s=>`
-        <div class="vac" onclick="fire('📂 Opening: ${s.title}')">
-          <div class="vac-body" style="padding:1.25rem;">
-            <div style="font-size:1.75rem;margin-bottom:0.6rem;">${s.icon}</div>
-            <div class="vac-name">${s.title}</div>
-            <div class="vac-role" style="margin-top:4px;">${s.type} · ${s.updated}</div>
-          </div>
-        </div>`).join('')}
-    </div>`;
+    ` : ''}
+
+    ${work.length ? `
+    <div class="section-divider"></div>
+    <div class="card-title" style="margin-bottom:.8rem;">💼 Work History</div>
+    ${work.map(w => `
+      <div class="work-item">
+        <div class="work-role">${w.role}</div>
+        <div class="work-company">${w.company || ''}</div>
+        <div class="work-period">${w.period || ''}</div>
+      </div>`).join('')}
+    ` : ''}
+
+    ${edu.length ? `
+    <div class="section-divider"></div>
+    <div class="card-title" style="margin-bottom:.8rem;">🎓 Education & Certs</div>
+    ${edu.map(e => `
+      <div class="edu-item">
+        <div class="edu-icon">${e.icon || '🎓'}</div>
+        <div class="edu-info">
+          <div class="edu-degree">${e.degree_name}</div>
+          <div class="edu-school">${e.school || ''} ${e.year ? '· ' + e.year : ''}</div>
+        </div>
+      </div>`).join('')}
+    ` : ''}
+  `
 }
 
-// ── INVOICES ──
-function buildInvoices(price){
-  const months=['May 2026','Apr 2026','Mar 2026','Feb 2026','Jan 2026'];
-  document.getElementById('invoiceList').innerHTML=months.map((m,i)=>`
-    <div class="invoice-row">
-      <div class="inv-date">${m}</div>
-      <div class="inv-amt">${price}</div>
-      <div class="inv-status">Paid</div>
-      <div class="inv-dl" onclick="fire('📥 Invoice downloaded!')">Download</div>
-    </div>`).join('');
-}
+// ── BOOT ──
+;(async function boot() {
+  const { data: { session } } = await supabase.auth.getSession()
 
-// ── VA MODAL ──
-const WAVES=[10,18,26,20,28,14,22,30,16,24,12,28,20,18,26,14,30,22];
-function openVAModal(id){
-  const va=VAs.find(v=>v.id===id);
-  if(!va)return;
-  document.getElementById('mod-va-name').textContent=va.name;
-  document.getElementById('mod-va-sub').textContent=va.role+' · Philippines · '+va.tz;
-  document.getElementById('mod-av').textContent=va.initials;
-  document.getElementById('mod-av').style.background=va.color;
-  document.getElementById('mod-name').textContent=va.name;
-  document.getElementById('mod-role').textContent=va.role;
-  document.getElementById('mod-exp').textContent=va.exp;
-  document.getElementById('mod-rate').textContent=va.rate+'/hr';
-  document.getElementById('mod-tz').textContent=va.tz;
-  document.getElementById('mod-avail').textContent=va.status==='avail'?'Available':'Currently Hired';
-  document.getElementById('mod-rating').textContent='★ '+va.rating+' ('+va.reviews+' reviews)';
-  document.getElementById('mod-jobs').textContent=va.jobs;
-  document.getElementById('mod-bio').textContent=va.bio;
-  document.getElementById('mod-tags').innerHTML=va.tags.map(t=>`<span class="tag">${t}</span>`).join('');
-  document.getElementById('mod-badges').innerHTML=`
-    <span class="vd-badge">${va.exp} exp</span>
-    <span class="vd-badge">${va.rate}/hr</span>
-    <span class="vd-badge" style="background:var(--green-dim);color:var(--green);border-color:rgba(46,204,113,0.15);">${va.status==='avail'?'Available':'Hired'}</span>`;
-  document.getElementById('waveform').innerHTML=WAVES.map(h=>`<div class="wb" style="height:${h}px;"></div>`).join('');
-  document.getElementById('vaModal').classList.add('open');
-}
+  if (session && isInviteFlow) {
+    showScreen('setPwScreen')
+    return
+  }
+  if (session) {
+    showDashboard()
+    return
+  }
+  showScreen('loginScreen')
+})()
 
-function hireVA(){
-  fire('✅ Hire offer sent! Your VA will be onboarded within 24–48 hours.');
-  closeModal('vaModal');
-}
-
-function closeModal(id){
-  document.getElementById(id).classList.remove('open');
-}
-
-document.querySelectorAll('.modal-overlay').forEach(m=>{
-  m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');});
-});
-
-// ── TOGGLE ──
-document.querySelectorAll('.toggle').forEach(t=>{
-  t.addEventListener('click',function(){this.classList.toggle('on');});
-});
+supabase.auth.onAuthStateChange((event, session) => {
+  if (event === 'PASSWORD_RECOVERY') {
+    showScreen('setPwScreen')
+  }
+})
 </script>
 </body>
 </html>
