@@ -632,7 +632,7 @@ window.setBadge = async function(id, badge) {
 window.assignToClient = async function(vaId) {
   const input = document.getElementById('assignEmail_' + vaId)
   const email = (input.value || '').trim().toLowerCase()
-  if (!email) { showToast('Enter the client\\'s email first', 'error'); return }
+  if (!email) { showToast("Enter the client's email first", 'error'); return }
 
   const { data: client, error: findErr } = await supabase
     .from('clients')
@@ -649,7 +649,7 @@ window.assignToClient = async function(vaId) {
   const va = allVAs.find(v => v.id === vaId)
   const vaName = va ? `${va.first_name} ${va.last_name}` : 'Your VA'
   const vaRole = va ? (va.role || va.category || '') : ''
-  const clientName = email.split('@')[0].replace(/[._]/g, ' ').replace(/\\b\\w/g, c => c.toUpperCase())
+  const clientName = email.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
 
   try {
     await fetch(`${SUPABASE_URL}/functions/v1/send-email`, {
